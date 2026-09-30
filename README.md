@@ -85,3 +85,7 @@ Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET
 ## Review changes
 
 With the optional original `source.zip` download restored, run `python port/create-change-bundle.py` to regenerate port/uplink-browser.patch and source-changes.json against the exact downloaded source archive. This records every modified original source file and hashes; it is separate from authored build/support files. Asset preparation provenance is in prototype/assets/manifest.json and prototype/ASSET_PREPARATION.md.
+
+## GitHub Pages
+
+The owner requested GitHub Pages publication after cloud gameplay QA and Codex review. `.github/workflows/pages.yml` builds the pinned C++ toolchain, runs isolated and browser checks, and deploys the original game as the landing page only after tests pass. See [port/PAGES.md](port/PAGES.md) for packaging, verification and remaining limits. Original licences are unchanged.

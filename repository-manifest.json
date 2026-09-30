@@ -3,9 +3,14 @@
   "private_only": true,
   "files": [
     {
+      "path": ".github/workflows/pages.yml",
+      "bytes": 1799,
+      "sha256": "5d9efc9dcfb24401125005d9f969ac763b5eaf4819cc79d5740ae6895468359c"
+    },
+    {
       "path": ".gitignore",
-      "bytes": 654,
-      "sha256": "4fd5e6d1d6d9507731a4a9edc6788d9a1b43ec8412399bcaf97e02e248eb1784"
+      "bytes": 697,
+      "sha256": "71f07fe392c9bb93983a2ca412ca87f6a13a68804b158948b3b82f02c2c17ef4"
     },
     {
       "path": "CLOUD_SETUP.md",
@@ -14,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6477,
-      "sha256": "39c689a199505d238480e2f637abdc2209ea04f21c5a8da84aeb5b2e911a6d73"
+      "bytes": 6870,
+      "sha256": "49545edc27827f680df011e2d0c9e2728d3e44a1708e29d9e5c4e6761f0a3c3a"
     },
     {
       "path": "RIGHTS.md",
@@ -79,8 +84,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 910,
-      "sha256": "fba825bf8ead9103c3232242106d3e42204a4df49e338badbac484c13a3439ba"
+      "bytes": 1019,
+      "sha256": "e335682b012033d6071295e27b97dad306c350ccadd55aa92c6850e287d31d5b"
     },
     {
       "path": "port/BUILD_STATUS.md",
@@ -96,6 +101,11 @@
       "path": "port/MIGRATION.md",
       "bytes": 2859,
       "sha256": "2d592114490d4e5fee32e00d71704268d9df690663a8b3fb8675a404d26d1472"
+    },
+    {
+      "path": "port/PAGES.md",
+      "bytes": 2286,
+      "sha256": "bac06d8bddba9002b503bf5db5d4e3b840a98c4075ea985e3ccfe443ade4beaf"
     },
     {
       "path": "port/audio-notes.md",
@@ -183,6 +193,11 @@
       "sha256": "a675ceab899f5df44c8892a4abda445702f7313f63f0b0992be6f0e448b5ed10"
     },
     {
+      "path": "port/prepare-pages.py",
+      "bytes": 1935,
+      "sha256": "3a4e43c381e5a1a46fa8649f02b741bd8e89ecf020da24a65a980580bf472d43"
+    },
+    {
       "path": "port/prototype.cpp",
       "bytes": 4144,
       "sha256": "183e82d258449feff9aa53f3ce4d2f41dc05ee46c2d5c2261964a19e30b28027"
@@ -221,6 +236,11 @@
       "path": "port/tests/browser-lifecycle.cjs",
       "bytes": 3869,
       "sha256": "bec95307223d203450ad798da597d6f754a57834f9fb4007933d1f4bded7078e"
+    },
+    {
+      "path": "port/tests/browser-pages.cjs",
+      "bytes": 6395,
+      "sha256": "d850415187e9ca01e879cba5507fc403bdc4e0d1dc2af349893fe6d8205d4091"
     },
     {
       "path": "port/tests/browser-smoke.cjs",
@@ -4884,8 +4904,8 @@
     },
     {
       "path": "prototype/game.html",
-      "bytes": 2099,
-      "sha256": "fd46bfca69a429b16a15056cd9bcf1ae7cf617d01369ee08af2357df3775a3c4"
+      "bytes": 2096,
+      "sha256": "fd8acf226a5ceb4b36c8c45112b3b20b5a45756c7d6f7711b8f5f04637040c61"
     },
     {
       "path": "prototype/index.html",

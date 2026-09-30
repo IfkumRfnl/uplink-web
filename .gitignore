@@ -41,3 +41,6 @@ __pycache__/
 *.so
 *.a
 *.lib
+
+# Generated GitHub Pages artifact
+/_site/

@@ -15,7 +15,9 @@
     "test:browser-harness": "node port/tests/browser-harness.cjs",
     "serve": "python3 -m http.server 8000 --bind 127.0.0.1 --directory prototype",
     "test:browser-lifecycle": "node port/tests/browser-lifecycle.cjs",
-    "test:browser-storage": "node port/tests/browser-storage.cjs"
+    "test:browser-storage": "node port/tests/browser-storage.cjs",
+    "prepare:pages": "python3 port/prepare-pages.py",
+    "test:pages": "node port/tests/browser-pages.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

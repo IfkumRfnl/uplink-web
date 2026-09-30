@@ -234,8 +234,8 @@
     },
     {
       "path": "port/tests/browser-display.cjs",
-      "bytes": 8319,
-      "sha256": "a248a9f0ca9871ce700dd6db767bfe3a09bab509b49d9a23350a2d6db26db0f0"
+      "bytes": 8616,
+      "sha256": "773926fa3c0504f5b8d5e03f8498e7de38911282e36599062c100e17fcd8e797"
     },
     {
       "path": "port/tests/browser-harness.cjs",

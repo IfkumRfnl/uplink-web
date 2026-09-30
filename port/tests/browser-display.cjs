@@ -47,9 +47,12 @@ const {requestHandler} = require('./browser-smoke.cjs');
       }
       async function checkInput() {
         const g = await geometry(), box = await page.locator('#canvas').boundingBox();
+        await page.evaluate(() => {qaPointers = [];});
         await page.mouse.click(box.x + 200 * box.width / g.width,
           box.y + 200 * box.height / g.height);
-        await page.waitForTimeout(100); // SDL consumes queued DOM events on the next frame.
+        // Require fresh down/up events; a previous successful click cannot mask
+        // missing events after a resize. Wait for consumption instead of racing CI.
+        await page.waitForFunction(() => qaPointers.length >= 2);
         const mouse = await page.evaluate(() => qaPointers.at(-1));
         assert(mouse, 'The C++ SDL consumer must receive a pointer event');
         assert(Math.abs(mouse[0] - 200) <= 1 && Math.abs(mouse[1] - 200) <= 1,
@@ -142,6 +145,8 @@ const {requestHandler} = require('./browser-smoke.cjs');
         results.push({dpr,resolution:value,geometry:g});
         await page.locator('#display-control summary').click();
       }
+      assert.deepEqual(errors, []);
+      assert.equal(await page.evaluate(() => GLctx.getError()),0);
       results.push({dpr,checks:'saved resolution/scaling, real SDL input, fullscreen entry/exit, no page/GL errors'});
       await context.close();
     }

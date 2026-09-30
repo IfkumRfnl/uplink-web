@@ -1,0 +1,2 @@
+# Optional asset regeneration. Prepared assets are already included.
+Pillow==12.3.0

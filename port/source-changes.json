@@ -1,0 +1,52 @@
+[
+  {
+    "path": "lib/gucci/gucci.cpp",
+    "original_sha256": "723bb667945096e873aa4f43d206cee4be1a41bedd72b0fd094d80423014747c",
+    "modified_sha256": "d21d73d7202cd34687b8c6493f90a8379cecf16d500f67031dfeb69405040b53"
+  },
+  {
+    "path": "lib/gucci/gucci_sdl.cpp",
+    "original_sha256": "e0a7bdd08b43fcf106ddb5ad252ec06d9df66cf14faa56e6f9425ff015799824",
+    "modified_sha256": "5a66746e06ecc726ae93edbba46296cff4e41aef7bb9e6175731b6506de9b69e"
+  },
+  {
+    "path": "lib/gucci/image.cpp",
+    "original_sha256": "3e87bb47254d05377ab3a28b09569d501083a18885b1044f1156617c5b98ef81",
+    "modified_sha256": "b8cdbc7df6ffa3bad59008c32d16734bab0fa705beaf856eba08234e820299d2"
+  },
+  {
+    "path": "lib/redshirt/redshirt.cpp",
+    "original_sha256": "ffa60a4fdbfd85cffd13e578874c08dfd98194ddcf8518a2fd0baec338e69d9b",
+    "modified_sha256": "2a9fb8a7013498359b8108c118410052188b55928fe843dc0b3570b4e8d10432"
+  },
+  {
+    "path": "lib/soundgarden/soundgarden_sdlmixer.cpp",
+    "original_sha256": "1a92fae5d3b23c974ee3dae1c8760db694232b577c432a96efbaa5d991fc5d7c",
+    "modified_sha256": "502d6c7807f9446526c8904c9c28a6de060de93971b1b8eff43a32e65bc16723"
+  },
+  {
+    "path": "uplink/src/app/app.cpp",
+    "original_sha256": "778ecfa7b731d06eba985205819f27e1886030b4eb7497ff59a942686b1c197f",
+    "modified_sha256": "0e0f6713bbec27ef89208ef08986276cff2921c8b5e30a9a8b539f8cb8c353a8"
+  },
+  {
+    "path": "uplink/src/app/binreloc.cpp",
+    "original_sha256": "5da9af501e51299cc80bbf29fb6ade5c89e66f9258fda9e030e96254d18df6e0",
+    "modified_sha256": "1bd1b5e33dc432e582042d7b80b7d21441ed9fc1ee04747b85b90d403308a72b"
+  },
+  {
+    "path": "uplink/src/app/miscutils.cpp",
+    "original_sha256": "3a200d3b12e187089cc78f11a8e66d5f0bd82c0a40d1e94a0cd28567d7f9e150",
+    "modified_sha256": "24dd1dc5bf12344f38ecb623f8ae3cc95e1c8b31ed6674ea8aeb9fc3d59b5847"
+  },
+  {
+    "path": "uplink/src/app/opengl.cpp",
+    "original_sha256": "c67fe9d15e5bd45430a1300162b5e318cb6baf2853c1cf729bc5883c0f1f0f93",
+    "modified_sha256": "2920e18672758010d927de9cc469b5850c711da622f8fd67956518f5eb4fcfac"
+  },
+  {
+    "path": "uplink/src/options/options.cpp",
+    "original_sha256": "a7bc3b079d0c3df1494a27745453fa0ccf0b5b59dab7603961bbcc8bb74b010b",
+    "modified_sha256": "3cd703d2a52b6cf261a8990989e485e5682f8bac37d5f771cfdcd4f15ca16031"
+  }
+]

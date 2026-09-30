@@ -1,0 +1,33 @@
+NAME:       Uplink Blue
+AUTHOR:     Chris Delay
+COMMENT:    The standard blue Uplink theme
+
+
+; COLOURNAME                RED     GREEN   BLUE
+; ==============================================
+
+Background                  0.0     0.0     0.0
+DefaultText                 1.0     1.0     1.0
+DimmedText                  0.6     0.6     0.6
+MenuText                    1.0     1.0     1.0
+TitleText                   1.0     1.0     1.0
+TextBorder                  1.0     1.0     1.0
+
+ButtonNormalA               0.0     0.0     0.7
+ButtonNormalB               0.0     0.0	    0.4
+ButtonHighlightedA          0.5     0.5     1.0
+ButtonHighlightedB          0.2     0.2     0.9
+ButtonClickedA              0.7     0.7     1.0
+ButtonClickedB              0.5     0.5     1.0
+
+PanelBackgroundA            0.03    0.08    0.0
+PanelBackgroundB            0.03    0.08    0.48
+PanelBorder                 0.31    0.54    0.84
+PanelHighlightA             0.07    0.16    0.16
+PanelHighlightB             0.07    0.16    0.64
+PanelHighlightBorder        1.0     1.0     1.0
+
+DarkPanelA                  0.03    0.08    0.0
+DarkPanelB                  0.03    0.08    0.3
+
+PasswordBoxBackground       0.13    0.7     0.83

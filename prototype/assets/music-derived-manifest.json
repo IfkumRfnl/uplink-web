@@ -1,0 +1,71 @@
+[
+  {
+    "path": "music/a94final.ogg",
+    "source": "music/a94final.uni",
+    "duration": 189.846349,
+    "bytes": 3514644,
+    "sha256": "c2dbcd63222fc2cbff2c7599b6f7fc752a80f5cdcf10b7f18330b0095e1a4f5a",
+    "decoder": "bundled libmikmod 3.2.0-beta2 UN05",
+    "complete": true,
+    "private_use_only": true
+  },
+  {
+    "path": "music/bluevalley.ogg",
+    "source": "music/bluevalley.uni",
+    "duration": 720.933152,
+    "bytes": 14313954,
+    "sha256": "8f2531e7affba55bff35faa37a38b23352c7323a80c7fb7f9c68c186c4e43932",
+    "decoder": "bundled libmikmod 3.2.0-beta2 UN05",
+    "complete": true,
+    "private_use_only": true
+  },
+  {
+    "path": "music/myst2.ogg",
+    "source": "music/myst2.uni",
+    "duration": 445.54449,
+    "bytes": 8479146,
+    "sha256": "650e31dc9f4aceec0b334d6a54e8b9a0c4e67798e8d849842666fa5266f77211",
+    "decoder": "bundled libmikmod 3.2.0-beta2 UN05",
+    "complete": true,
+    "private_use_only": true
+  },
+  {
+    "path": "music/mystique.ogg",
+    "source": "music/mystique.uni",
+    "duration": 217.153016,
+    "bytes": 4258330,
+    "sha256": "d57222a953be4e15b497f0a3d338f03f5951a1782e5f218ff5bffca94875b459",
+    "decoder": "bundled libmikmod 3.2.0-beta2 UN05",
+    "complete": true,
+    "private_use_only": true
+  },
+  {
+    "path": "music/serenity.ogg",
+    "source": "music/serenity.uni",
+    "duration": 164.490159,
+    "bytes": 2696279,
+    "sha256": "0878e02d936cefb616970ed04aa73532944e13d69a31cad0200f8ed07f7c754f",
+    "decoder": "bundled libmikmod 3.2.0-beta2 UN05",
+    "complete": true,
+    "private_use_only": true
+  },
+  {
+    "path": "music/symphonic.ogg",
+    "source": "music/symphonic.uni",
+    "duration": 250.496871,
+    "bytes": 5190191,
+    "sha256": "4da22b317fc667d328fe3b4c27d5e45f6a8b5d388dde84b1cb9d543c9f67f4e5",
+    "decoder": "bundled libmikmod 3.2.0-beta2 UN05",
+    "complete": true,
+    "private_use_only": true
+  },
+  {
+    "path": "music/bluevalley.wav",
+    "source": "music/bluevalley.uni",
+    "duration": 45,
+    "complete": false,
+    "description": "PCM preview only",
+    "bytes": 7938044,
+    "sha256": "636d35971ed5a122c20f30ec63b6605302e4d946a8833c492c7e39ea3444c0cf"
+  }
+]

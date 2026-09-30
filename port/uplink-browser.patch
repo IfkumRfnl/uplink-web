@@ -1,0 +1,776 @@
+--- a/lib/gucci/gucci.cpp
++++ b/lib/gucci/gucci.cpp
+@@ -10,6 +10,12 @@
+ //#define USE_GLTT
+ 
+ #include <map>
++#ifdef __EMSCRIPTEN__
++#include <FTGLTextureFont.h>
++#include <emscripten.h>
++// Browser uses textured glyphs instead of glBitmap.
++#define FTGLBitmapFont FTGLTextureFont
++#endif
+ 
+ #include "gucci.h"
+ #include "gucci_internal.h"
+@@ -21,8 +27,12 @@
+ #include <FTGLBitmapFont.h>
+ //#include <FTGLPixmapFont.h>
+ #  else
++#ifdef __EMSCRIPTEN__
++#include <FTFace.h>
++#else
+ #include <ftgl/FTFace.h>
+ #include <ftgl/FTGLBitmapFont.h>
++#endif
+ //#include <ftgl/FTGLPixmapFont.h>
+ #  endif
+ 
+@@ -147,8 +157,25 @@
+ #ifdef USE_FTGL
+ 		FTGLBitmapFont *font = fonts[STYLE];
+ 		//FTGLPixmapFont *font = fonts[STYLE];
++#ifdef __EMSCRIPTEN__
++        GLint oldBinding, oldEnv;
++        glGetIntegerv(GL_TEXTURE_BINDING_2D, &oldBinding);
++        glGetTexEnviv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &oldEnv);
++        int oldTexture = EM_ASM_INT({ return GLImmediate.TexEnvJIT.getTexUnitType(0) === 0x0DE1 ? 1 : 0; });
++        glEnable(GL_TEXTURE_2D);
++        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
++        glPushMatrix();
++        glTranslatef(x, y, 0);
++        glScalef(1, -1, 1);
++        font->Render(text);
++        glPopMatrix();
++        glBindTexture(GL_TEXTURE_2D, oldBinding);
++        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, oldEnv);
++        if (!oldTexture) glDisable(GL_TEXTURE_2D);
++#else
+         glRasterPos2i(x, y);
+-		font->Render(text);
++        font->Render(text);
++#endif
+ #endif // USE_FTGL
+ 
+         }
+--- a/lib/gucci/gucci_sdl.cpp
++++ b/lib/gucci/gucci_sdl.cpp
+@@ -11,6 +11,9 @@
+ #include <iostream>
+ 
+ #include <SDL/SDL.h>
++#ifdef __EMSCRIPTEN__
++#include <emscripten/emscripten.h>
++#endif
+ #include <GL/gl.h>
+ #include <stdio.h>
+ #include <string.h>
+@@ -85,7 +88,7 @@
+     //exit(-1);
+     char message[] = "Could not initialize SDL: %s.";
+     char *errorMessage = NULL;
+-    char *sdlErrorMessage = SDL_GetError ();
++    const char *sdlErrorMessage = SDL_GetError ();
+ 	size_t sizeErrorMessage = sizeof ( message ) + strlen ( sdlErrorMessage ) + 1;
+     errorMessage = new char [ sizeErrorMessage ];
+ #ifdef WIN32
+@@ -179,7 +182,7 @@
+     //exit(-1);
+     char message[] = "Could not initialize SDL Video: %s.";
+     char *errorMessage = NULL;
+-    char *sdlErrorMessage = SDL_GetError ();
++    const char *sdlErrorMessage = SDL_GetError ();
+ 	size_t sizeErrorMessage = sizeof ( message ) + strlen ( sdlErrorMessage ) + 1;
+     errorMessage = new char [ sizeErrorMessage ];
+ #ifdef WIN32
+@@ -324,20 +327,16 @@
+   timerEvents.push_back(new Callback(millis, callback, value));
+ }
+ 
+-void GciMainLoop()
+-{
+-  finished = false;
+-
+-  unsigned lastFrameTime = _GciGetAccurateTime();
+-  unsigned frameRate = 35;
+-  unsigned framePeriod = 1000 / frameRate;
+-
+-  while (!finished) {
+-//     unsigned now = _GciGetAccurateTime();
+-//     unsigned frameDuration = now - lastFrameTime;
+-
+-//     if (frameDuration > framePeriod) {
+-//       lastFrameTime = now;
++// One complete iteration, shared by the native and browser schedulers.
++static void GciMainLoopIteration()
++{
++#ifdef __EMSCRIPTEN__
++  // Screen restoration can stop the loop between browser animation frames.
++  if (finished) {
++    emscripten_cancel_main_loop();
++    return;
++  }
++#endif
+     if (gciDisplayHandlerP)
+ 	(*gciDisplayHandlerP)();
+ 
+@@ -425,7 +424,23 @@
+ 	// 	    SDL_PushEvent(&event);
+ 	//     }
+ 	}
+-  }
++#ifdef __EMSCRIPTEN__
++  if (finished)
++    emscripten_cancel_main_loop();
++#endif
++}
++
++void GciMainLoop()
++{
++  finished = false;
++#ifdef __EMSCRIPTEN__
++  // Yield between frames so the browser can draw and deliver input. Simulating
++  // an infinite loop prevents RunUplink from immediately cleaning up the game.
++  emscripten_set_main_loop(GciMainLoopIteration, 0, 1);
++#else
++  while (!finished)
++    GciMainLoopIteration();
++#endif
+ }
+ 
+ void GciRestoreScreenSize()
+@@ -555,6 +570,18 @@
+ 		modes = SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_OPENGL);
+ 	}
+ 
++#ifdef __EMSCRIPTEN__
++	// Browser canvases have no fixed monitor-mode list. SDL may return either
++	// sentinel instead of an array; offer a useful canvas size in that case.
++	if (!modes || modes == (SDL_Rect **)-1) {
++		GciScreenMode *mode = new GciScreenMode;
++		mode->w = screen ? screen->w : 1024;
++		mode->h = screen ? screen->h : 768;
++		resolutions->PutData(mode);
++		return resolutions;
++	}
++#endif
++
+ 	for( unsigned i = 0; modes[i]; ++i ) {
+ 		// We don't need the really small resolutions
+ 		if (modes[i]->w >= 640 && modes[i]->h >= 480) {
+@@ -584,6 +611,12 @@
+ 		printf( "SDL Resolutions: not using HW flag.\n" );
+ 		modes = SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_OPENGL);
+ 	}
++
++#ifdef __EMSCRIPTEN__
++	// Preserve the requested canvas size when no concrete modes are supplied.
++	if (!modes || modes == (SDL_Rect **)-1)
++		return newMode;
++#endif
+ 
+ 	int curdeltaW = -1, curdeltaH = -1;
+ 	for( unsigned i = 0; modes[i]; ++i ) {
+--- a/lib/gucci/image.cpp
++++ b/lib/gucci/image.cpp
+@@ -10,15 +10,127 @@
+ #include <windows.h>
+ #endif
+ 
++#ifdef __EMSCRIPTEN__
++#define GL_GLEXT_PROTOTYPES
++#endif
+ #include <GL/gl.h>
++#ifdef __EMSCRIPTEN__
++#include <GL/glext.h>
++#endif
++#ifdef __EMSCRIPTEN__
++#include <stdint.h>
++#include <limits.h>
++#include <emscripten.h>
++typedef uint32_t uint32;
++#else
+ #include <GL/glu.h>
+-
+ #include "tiff.h"
+ #include "tiffio.h"
++#endif
+ 
+ #include "image.h"
+ 
+ #include "mmgr.h"
++
++#ifdef __EMSCRIPTEN__
++// Redshirt may return a filesystem-prefixed graphics path. Resolve only an
++// exact graphics/ component beneath the known converted-asset root. Archive
++// temp0.tif names have no asset identity; Redshirt must preserve the source path.
++static FILE *OpenBrowserImageFallback ( const char *filename )
++{
++    const size_t length = strlen(filename);
++    char *normalized = new char[length + 1];
++    for (size_t i = 0; i <= length; ++i)
++        normalized[i] = filename[i] == '\\' ? '/' : filename[i];
++    const char *graphics = NULL;
++    bool safe = true;
++    for (const char *part = normalized; *part;) {
++        const char *end = strchr(part, '/');
++        const size_t count = end ? (size_t)(end - part) : strlen(part);
++        if (count == 2 && part[0] == '.' && part[1] == '.') {
++            safe = false;
++            break;
++        }
++        if (!graphics && count == 8 && strncmp(part, "graphics", 8) == 0 && end)
++            graphics = part;
++        if (!end) break;
++        part = end + 1;
++    }
++    FILE *file = NULL;
++    if (safe && graphics && graphics[9]) {
++        const size_t pathSize = sizeof("/assets/rgba/") + strlen(graphics) + sizeof(".rgba");
++        char *path = new char[pathSize];
++        snprintf(path, pathSize, "/assets/rgba/%s.rgba", graphics);
++        file = fopen(path, "rb");
++        delete [] path;
++    }
++    delete [] normalized;
++    return file;
++}
++
++// WebGL has no glDrawPixels. Keep the source bottom-up and map its last
++// scanline to the top of the game's top-left-origin orthographic viewport.
++static void DrawBrowserImage ( int x, int y, int width, int height,
++                               const unsigned char *pixels, bool blend )
++{
++    if (width <= 0 || height <= 0) return;
++    GLint activeTexture, binding, unpackAlignment, textureEnv;
++    GLint srcRGB, dstRGB, srcAlpha, dstAlpha;
++    glGetIntegerv(GL_ACTIVE_TEXTURE, &activeTexture);
++    glActiveTexture(GL_TEXTURE0);
++    glGetIntegerv(GL_TEXTURE_BINDING_2D, &binding);
++    glGetIntegerv(GL_UNPACK_ALIGNMENT, &unpackAlignment);
++    glGetTexEnviv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &textureEnv);
++    // Emscripten's glIsEnabled does not expose emulated GL_TEXTURE_2D.
++    // Query the same emulation state used to generate its fixed-function shader.
++    const bool textureEnabled = EM_ASM_INT({
++        return GLImmediate.TexEnvJIT.getTexUnitType(0) === 0x0DE1;
++    }) != 0;
++    const GLboolean blendEnabled = glIsEnabled(GL_BLEND);
++    const GLboolean cullEnabled = glIsEnabled(GL_CULL_FACE);
++    glGetIntegerv(GL_BLEND_SRC_RGB, &srcRGB);
++    glGetIntegerv(GL_BLEND_DST_RGB, &dstRGB);
++    glGetIntegerv(GL_BLEND_SRC_ALPHA, &srcAlpha);
++    glGetIntegerv(GL_BLEND_DST_ALPHA, &dstAlpha);
++
++    GLuint texture;
++    glGenTextures(1, &texture);
++    glBindTexture(GL_TEXTURE_2D, texture);
++    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
++                 GL_RGBA, GL_UNSIGNED_BYTE, pixels);
++    glEnable(GL_TEXTURE_2D);
++    // REPLACE reproduces glDrawPixels without modifying the current GL color.
++    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
++    glDisable(GL_CULL_FACE);
++    if (blend) {
++        glEnable(GL_BLEND);
++        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
++    } else {
++        glDisable(GL_BLEND);
++    }
++    glBegin(GL_QUADS);
++    glTexCoord2f(0, 1); glVertex2i(x, y);
++    glTexCoord2f(0, 0); glVertex2i(x, y + height);
++    glTexCoord2f(1, 0); glVertex2i(x + width, y + height);
++    glTexCoord2f(1, 1); glVertex2i(x + width, y);
++    glEnd();
++
++    glBindTexture(GL_TEXTURE_2D, binding);
++    glDeleteTextures(1, &texture);
++    glPixelStorei(GL_UNPACK_ALIGNMENT, unpackAlignment);
++    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, textureEnv);
++    if (!textureEnabled) glDisable(GL_TEXTURE_2D);
++    if (cullEnabled) glEnable(GL_CULL_FACE);
++    glBlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
++    if (blendEnabled) glEnable(GL_BLEND); else glDisable(GL_BLEND);
++    glActiveTexture(activeTexture);
++}
++#endif
+ 
+ //////////////////////////////////////////////////////////////////////
+ // Construction/Destruction
+@@ -109,6 +221,47 @@
+ void Image::LoadTIF ( char *filename )
+ {
+ 
++#ifdef __EMSCRIPTEN__
++    if (!filename) { CreateErrorBitmap(); return; }
++    // Asset preparation writes <original filename>.rgba: LE u32 width/height,
++    // followed by tightly packed bottom-up RGBA bytes, matching libtiff output.
++    const size_t pathSize = strlen(filename) + sizeof(".rgba");
++    char *path = new char[pathSize];
++    snprintf(path, pathSize, "%s.rgba", filename);
++    FILE *file = fopen(path, "rb");
++    delete [] path;
++    if (!file) file = OpenBrowserImageFallback(filename);
++    unsigned char header[8];
++    uint32 w = 0, h = 0;
++    bool valid = file && fread(header, 1, sizeof(header), file) == sizeof(header);
++    if (valid) {
++        for (int i = 0; i < 4; ++i) {
++            w |= ((uint32)header[i]) << (8 * i);
++            h |= ((uint32)header[i + 4]) << (8 * i);
++        }
++        valid = w > 0 && h > 0 && w <= INT_MAX && h <= INT_MAX
++             && (uint64_t)w * h <= INT_MAX / 4;
++    }
++    unsigned char *raster = NULL;
++    if (valid) {
++        const size_t size = (size_t)w * h * 4;
++        raster = new unsigned char[size];
++        valid = fread(raster, 1, size, file) == size;
++    }
++    if (file) fclose(file);
++    if (!valid) {
++        delete [] raster;
++        printf("GUCCI Error - failed to load browser RGBA image %s\n", filename);
++        CreateErrorBitmap();
++        return;
++    }
++    delete [] rgb_pixels;
++    rgb_pixels = NULL;
++    delete [] pixels;
++    pixels = raster;
++    width = (int)w;
++    height = (int)h;
++#else
+     char emsg[1024];		
+ 	TIFFRGBAImage img;
+ 
+@@ -143,6 +296,7 @@
+ 
+     TIFFRGBAImageEnd(&img);
+ 	TIFFClose ( tif );
++#endif
+ 
+ }
+ 
+@@ -254,10 +408,39 @@
+ void Image::Scale ( int newwidth, int newheight )
+ {
+ 
++#ifdef __EMSCRIPTEN__
++    if (newwidth <= 0 || newheight <= 0 || width <= 0 || height <= 0 ||
++        (uint64_t)newwidth * newheight > INT_MAX / 4) return;
++#endif
+ 	if ( pixels ) {
+ 
+ 		unsigned char *newpixels = new unsigned char [newwidth * newheight * 4];
+ 
++#ifdef __EMSCRIPTEN__
++        // Pixel-center bilinear scaling, independent of unavailable GLU APIs.
++        for (int y = 0; y < newheight; ++y) {
++            float sy = (y + 0.5f) * height / newheight - 0.5f;
++            if (sy < 0) sy = 0;
++            if (sy > height - 1) sy = (float)(height - 1);
++            int y0 = (int)sy, y1 = y0 + 1 < height ? y0 + 1 : y0;
++            float fy = sy - y0;
++            for (int x = 0; x < newwidth; ++x) {
++                float sx = (x + 0.5f) * width / newwidth - 0.5f;
++                if (sx < 0) sx = 0;
++                if (sx > width - 1) sx = (float)(width - 1);
++                int x0 = (int)sx, x1 = x0 + 1 < width ? x0 + 1 : x0;
++                float fx = sx - x0;
++                for (int c = 0; c < 4; ++c) {
++                    float a = pixels[(y0 * width + x0) * 4 + c] * (1 - fx)
++                            + pixels[(y0 * width + x1) * 4 + c] * fx;
++                    float b = pixels[(y1 * width + x0) * 4 + c] * (1 - fx)
++                            + pixels[(y1 * width + x1) * 4 + c] * fx;
++                    newpixels[(y * newwidth + x) * 4 + c] =
++                        (unsigned char)(a * (1 - fy) + b * fy + 0.5f);
++                }
++            }
++        }
++#else
+ /*
+ 		for ( int x = 0; x < newwidth; ++x ) {
+ 			for ( int y = 0; y < newheight; ++y ) {
+@@ -273,6 +456,7 @@
+ */
+ 		int result = gluScaleImage ( GL_RGBA, width, height, GL_UNSIGNED_BYTE, pixels, newwidth, newheight, GL_UNSIGNED_BYTE, newpixels );
+ 		char *resultc = (char *) gluErrorString ( (GLenum) result );
++#endif
+ 
+ 		if ( rgb_pixels ) {
+ 			delete [] rgb_pixels;
+@@ -311,6 +495,9 @@
+ 
+ 	if ( pixels ) {
+ 
++#ifdef __EMSCRIPTEN__
++        DrawBrowserImage(x, y, width, height, pixels, false);
++#else
+ 		glPushAttrib ( GL_ALL_ATTRIB_BITS );
+ 		glDisable ( GL_BLEND );
+ 
+@@ -318,6 +505,7 @@
+ 		glDrawPixels ( width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels );
+ 
+ 		glPopAttrib ();
++#endif
+ 
+ 	}
+ 
+@@ -348,6 +536,9 @@
+ 
+ 	if ( pixels ) {
+ 
++#ifdef __EMSCRIPTEN__
++        DrawBrowserImage(x, y, width, height, pixels, true);
++#else
+ 		glPushAttrib ( GL_ALL_ATTRIB_BITS );
+ 
+ 		glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+@@ -357,6 +548,7 @@
+ 		glDrawPixels ( width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels );
+ 
+ 		glPopAttrib ();
++#endif
+ 
+ 	}
+ 
+--- a/lib/redshirt/redshirt.cpp
++++ b/lib/redshirt/redshirt.cpp
+@@ -455,6 +455,52 @@
+ 
+ }
+ 
++#ifdef __EMSCRIPTEN__
++// Preserve the original extracted TIFF while accompanying it with the matching
++// browser-converted pixels. Temporary names alone do not retain asset identity.
++static void RsCopyBrowserImageSidecar ( const char *original, const char *target )
++{
++    char destination[SIZE_RSFILENAME + sizeof(".rgba")];
++    snprintf(destination, sizeof(destination), "%s.rgba", target);
++    // A reused temp0.tif must never pick up the previous image's sidecar.
++    remove(destination);
++    char normalized[SIZE_RSFILENAME];
++    if (strlen(original) >= sizeof(normalized)) return;
++    strcpy(normalized, original);
++    for (char *p = normalized; *p; ++p) if (*p == '\\') *p = '/';
++    const char *graphics = NULL;
++    for (const char *part = normalized; *part;) {
++        const char *end = strchr(part, '/');
++        const size_t count = end ? (size_t)(end - part) : strlen(part);
++        if (count == 2 && part[0] == '.' && part[1] == '.') return;
++        if (!graphics && count == 8 && strncmp(part, "graphics", 8) == 0 && end)
++            graphics = part;
++        if (!end) break;
++        part = end + 1;
++    }
++    if (!graphics || !graphics[9]) return;
++    char source[SIZE_RSFILENAME + sizeof("/assets/rgba/") + sizeof(".rgba")];
++    snprintf(source, sizeof(source), "/assets/rgba/%s.rgba", graphics);
++    FILE *input = fopen(source, "rb");
++    if (!input) return;
++    FILE *output = fopen(destination, "wb");
++    if (!output) { fclose(input); return; }
++    char buffer[16384];
++    size_t count;
++    bool complete = true;
++    while ((count = fread(buffer, 1, sizeof(buffer), input)) > 0) {
++        if (fwrite(buffer, 1, count, output) != count) {
++            complete = false;
++            break;
++        }
++    }
++    if (ferror(input)) complete = false;
++    fclose(input);
++    if (fclose(output) != 0) complete = false;
++    if (!complete) remove(destination);
++}
++#endif
++
+ char *RsArchiveFileOpen ( char *filename )
+ {
+ 
+@@ -503,6 +549,9 @@
+ 		}
+ 		
+ 		if ( success ) {
++#ifdef __EMSCRIPTEN__
++            RsCopyBrowserImageSidecar(fullfilename, targetfilename);
++#endif
+ 			strcpy ( tempfilename, targetfilename );
+             //printf( "Found as %s.\n", targetfilename );
+ 			return tempfilename;
+--- a/lib/soundgarden/soundgarden_sdlmixer.cpp
++++ b/lib/soundgarden/soundgarden_sdlmixer.cpp
+@@ -21,6 +21,100 @@
+ #include "soundgarden.h"
+ 
+ #include "mmgr.h"
++
++
++#ifdef __EMSCRIPTEN__
++#include <emscripten.h>
++#include <string.h>
++
++// Music is rendered offline by the original bundled MikMod UN05 decoder.
++// Audio remains browser-native so original WAV effects can use SDL_mixer.
++EM_JS(void, SgBrowserPlayMusic, (const char *track, int volume), {
++  var state = Module['uplinkMusic'];
++  if (!state) {
++    state = Module['uplinkMusic'] = { audio: null, pending: false, failed: false };
++    state.tryPlay = function() {
++      var a = state.audio;
++      if (!a || !state.pending) return;
++      var promise = a.play();
++      if (promise && promise.then) promise.then(function() {
++        if (state.audio === a) state.pending = false;
++      }).catch(function(error) {
++        if (state.audio !== a) return;
++        // A blocked autoplay request stays pending until a real user gesture.
++        if (error.name === 'NotAllowedError') state.pending = true;
++        else if (error.name !== 'AbortError') {
++          state.failed = true; state.pending = false;
++          console.error('Uplink music playback failed:', error);
++        }
++      });
++    };
++    var unlock = function() {
++      if (typeof SDL !== 'undefined' && SDL.audioContext && SDL.audioContext.state === 'suspended')
++        SDL.audioContext.resume().catch(function() {});
++      state.tryPlay();
++    };
++    document.addEventListener('pointerdown', unlock, true);
++    document.addEventListener('keydown', unlock, true);
++    document.addEventListener('touchend', unlock, true);
++  }
++  if (state.audio) { state.audio.pause(); state.audio.removeAttribute('src'); state.audio.load(); }
++  var name = UTF8ToString(track);
++  var base = Module['uplinkMusicBaseURL'] || 'assets/music/';
++  var a = new Audio(new URL(base + name + '.ogg', document.baseURI).href);
++  a.loop = true; // Original Mix_PlayMusic(currentmod, -1) behavior.
++  a.volume = Math.max(0, Math.min(1, volume / 128));
++  a.preload = 'auto';
++  state.audio = a; state.pending = true; state.failed = false;
++  a.addEventListener('error', function() {
++    if (state.audio === a) {
++      state.failed = true; state.pending = false;
++      console.error('Uplink original music asset unavailable:', a.src, a.error);
++    }
++  });
++  state.tryPlay();
++});
++EM_JS(void, SgBrowserStopMusic, (), {
++  var s = Module['uplinkMusic'];
++  if (!s) return;
++  s.pending = false; s.failed = false;
++  var a = s.audio; s.audio = null;
++  if (a) { a.pause(); a.removeAttribute('src'); a.load(); }
++});
++EM_JS(void, SgBrowserMusicVolume, (int volume), {
++  var s = Module['uplinkMusic'];
++  if (s && s.audio) s.audio.volume = Math.max(0, Math.min(1, volume / 128));
++});
++EM_JS(int, SgBrowserMusicFinished, (), {
++  var s = Module['uplinkMusic'];
++  // Pending gesture/loading is not completion, avoiding playlist churn.
++  return !s || !s.audio || s.failed || s.audio.ended ? 1 : 0;
++});
++
++static const char *SgBrowserTrackName(const char *filename)
++{
++  if (!filename) return NULL;
++  static const char *names[] = { "a94final", "bluevalley", "myst2", "mystique", "serenity", "symphonic" };
++  static const unsigned char headers[][18] = {
++    {0x55,0x4e,0x30,0x35,0x09,0x16,0x00,0x00,0x00,0x21,0x00,0xbd,0x00,0x21,0x00,0x08,0x7d,0x0a},
++    {0x55,0x4e,0x30,0x35,0x10,0x5d,0x00,0x00,0x00,0x63,0x00,0xba,0x01,0x1f,0x00,0x06,0x7d,0x00},
++    {0x55,0x4e,0x30,0x35,0x0c,0x3b,0x00,0x00,0x00,0x36,0x00,0x26,0x01,0x26,0x00,0x06,0x80,0x01},
++    {0x55,0x4e,0x30,0x35,0x0a,0x1c,0x00,0x00,0x00,0x1a,0x00,0x6e,0x00,0x20,0x00,0x06,0x7d,0x00},
++    {0x55,0x4e,0x30,0x35,0x0e,0x18,0x00,0x00,0x00,0x0c,0x00,0x2d,0x00,0x24,0x00,0x06,0x8c,0x00},
++    {0x55,0x4e,0x30,0x35,0x04,0x19,0x00,0x00,0x00,0x19,0x00,0x4f,0x00,0x1f,0x00,0x06,0x7d,0x04}
++  };
++  // RsArchiveFileOpen can return temp0.uni, so inspect the real module bytes
++  // instead of guessing a track from the temporary filename.
++  FILE *file = fopen(filename, "rb");
++  if (!file) return NULL;
++  unsigned char header[18];
++  size_t count = fread(header, 1, sizeof(header), file); fclose(file);
++  if (count != sizeof(header)) return NULL;
++  for (int i=0; i<6; ++i)
++    if (memcmp(header, headers[i], sizeof(header)) == 0) return names[i];
++  return NULL;
++}
++#endif
+ 
+ static Mix_Music *currentmod = NULL;
+ static BTree <Mix_Chunk *> cache;					// Stores sounds already loaded
+@@ -213,6 +307,15 @@
+ 
+   SgStopMod ();
+ 
++#ifdef __EMSCRIPTEN__
++  const char *track = SgBrowserTrackName(fullfilename);
++  if (!track) {
++    printf("SoundGarden: unknown original UN05 music file: %s\n", fullfilename ? fullfilename : "(null)");
++    return;
++  }
++  SgBrowserPlayMusic(track, musicVol());
++  return;
++#else
+   currentmod=Mix_LoadMUS(fullfilename);
+ 
+   /* didn't work -> exit with errormsg. */
+@@ -235,6 +338,7 @@
+   }
+         
+   SgDebugPrintf ( "SoundGarden Playing Music : %s\n", fullfilename );
++#endif
+ 
+ }
+ 
+@@ -246,7 +350,11 @@
+   SgDebugPrintf ( "SoundGarden Music Volume: %d\n", newvolume );
+     
+   playerVolume = newvolume;
++#ifdef __EMSCRIPTEN__
++  SgBrowserMusicVolume(musicVol());
++#else
+   Mix_VolumeMusic( musicVol() );
++#endif
+ }
+ 
+ void SgStopMod ()
+@@ -254,11 +362,15 @@
+   if (!SgInitialised)
+     return;
+ 
++#ifdef __EMSCRIPTEN__
++  SgBrowserStopMusic();
++#else
+   if (currentmod) {
+     Mix_HaltMusic();
+     Mix_FreeMusic(currentmod);  /* and free the module */
+     currentmod = NULL;
+   }
++#endif
+ }
+ 
+ bool SgModFinished ()
+@@ -266,7 +378,11 @@
+   if (!SgInitialised)
+     return false;
+ 
++#ifdef __EMSCRIPTEN__
++  return SgBrowserMusicFinished() != 0;
++#else
+   return !currentmod || !Mix_PlayingMusic ();
++#endif
+ }
+ 
+ #endif
+--- a/uplink/src/app/app.cpp
++++ b/uplink/src/app/app.cpp
+@@ -3,6 +3,9 @@
+ // By Christopher Delay
+ 
+ #include "stdafx.h"
++#ifdef __EMSCRIPTEN__
++#include <emscripten.h>
++#endif
+ 
+ #ifdef WIN32
+ #include <direct.h>
+@@ -392,6 +395,9 @@
+ 		else {
+ 			printf ( "success\n" );
+ 			CopyGame ( username, filenamereal );
++#ifdef __EMSCRIPTEN__
++            EM_ASM({ Module["uplinkSaveCompleted"]().catch(function(e){console.error(e);}); });
++#endif
+ 		}
+ 
+ 	}
+@@ -428,6 +434,9 @@
+ 		printf ( "success\n" );
+ 		RemoveFile ( filenametmp );
+ 		RemoveFile ( filenamereal );
++#ifdef __EMSCRIPTEN__
++            EM_ASM({ Module["uplinkSaveCompleted"]().catch(function(e){console.error(e);}); });
++#endif
+ 	}
+ 
+ }
+--- a/uplink/src/app/binreloc.cpp
++++ b/uplink/src/app/binreloc.cpp
+@@ -36,7 +36,9 @@
+ char *
+ br_find_exe (BrFindExeError *error)
+ {
+-#ifdef BINRELOC_DISABLED
++#ifdef __EMSCRIPTEN__
++    return strdup("/uplink"); // Virtual executable beside packaged data archives.
++#elif defined(BINRELOC_DISABLED)
+ 	if (error)
+ 		*error = BR_FIND_EXE_DISABLED;
+ 	return NULL;
+--- a/uplink/src/app/miscutils.cpp
++++ b/uplink/src/app/miscutils.cpp
+@@ -470,7 +470,9 @@
+     unsigned *previousFramePtr = NULL;
+ 
+     
+-#ifdef WIN32
++#ifdef __EMSCRIPTEN__
++    framePtr = NULL; // Native x86 frame chaining is unavailable in WebAssembly.
++#elif defined(WIN32)
+ 	__asm { 
+ 		mov [framePtr], ebp
+ 	}
+--- a/uplink/src/app/opengl.cpp
++++ b/uplink/src/app/opengl.cpp
+@@ -236,6 +236,7 @@
+ 		glDisable(GL_TEXTURE_2D);
+ 		glDisable(GL_BLEND);
+ 		
++#ifndef __EMSCRIPTEN__ // WebGL pixel transfers are already identity.
+         glPixelTransferi(GL_MAP_COLOR, GL_FALSE);
+         glPixelTransferi(GL_RED_SCALE, 1);
+         glPixelTransferi(GL_RED_BIAS, 0);
+@@ -245,6 +246,7 @@
+         glPixelTransferi(GL_BLUE_BIAS, 0);
+         glPixelTransferi(GL_ALPHA_SCALE, 1);
+         glPixelTransferi(GL_ALPHA_BIAS, 0);
++#endif
+ 
+ 	GLuint texName;
+ 	glGenTextures( 1, &texName );
+--- a/uplink/src/options/options.cpp
++++ b/uplink/src/options/options.cpp
+@@ -2,6 +2,10 @@
+ // Options.cpp: implementation of the Options class.
+ //
+ //////////////////////////////////////////////////////////////////////
++
++#ifdef __EMSCRIPTEN__
++#include <emscripten.h>
++#endif
+ 
+ #include <strstream>
+ 
+@@ -519,6 +523,10 @@
+ 		fclose ( optionsfile );
+ 
+ 		RsEncryptFile ( filename );
++#ifdef __EMSCRIPTEN__
++        // Persist only after the completed options file has been encrypted.
++        EM_ASM({ Module["uplinkSaveCompleted"]().catch(function(e){console.error(e);}); });
++#endif
+ 
+ 	}
+ 	else {

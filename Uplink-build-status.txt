@@ -1,0 +1,31 @@
+UPLINK PRIVATE BROWSER PORT — BUILD STATUS
+30 September 2026
+
+Built, but browser execution is blocked and unverified.
+
+COMPLETED
+- Compiled 236 original C++/C gameplay and dependency units with Emscripten 6.0.10
+- Linked complete game JavaScript, WebAssembly and asset package
+- JavaScript syntax checks passed; WebAssembly module validation passed
+- Adapted original GUCCI event loop, image rendering, FTGL fonts and browser save persistence
+- Preserved original WAV effects; rendered all six original tracker music files through bundled MikMod for browser playback
+- Original authentication/startup source is byte-identical to the pinned source commit
+
+REPRODUCIBLE TESTS PASSED
+- Main-loop callback ordering, timers, native/browser scheduling and quit cancellation
+- Persistent-storage restore gating, serialized writes, failure recovery and queue counts
+- Original options save flush ordering; browser audio bridge and smoke-runner error cleanup
+- Original Image browser code: RGBA orientation/scaling, malformed input, fallback lookup, path validation and archive sidecar cleanup
+
+BROWSER BLOCKER
+The built-in cloud Chromium extension explicitly blocks the private localhost preview. A server was started on the same cloud desktop and its listening state verified. The browser still rejected the address. No browser security settings were weakened and no public hosting was used.
+
+After explicit user permission, local Playwright testing was attempted. Chromium failed before loading a page: process_singleton_posix.cc socket() failed: Operation not permitted. A retry with the available escalation mechanism produced the same environment error. The smoke-test script is saved for a preview-capable cloud environment.
+
+NOT YET VERIFIED
+Original login/tutorial/gameplay; actual rendering fidelity and performance; audio output/mixing; keyboard/mouse behavior; reload save persistence; compatibility with existing Steam saves; real network features. Dashed lines currently render solid with a diagnostic. The Windows Steam-authentication DLL cannot execute in a browser and is not emulated.
+
+DELIVERABLE
+The private repository now includes original source, nine Steam asset archives, prepared graphics/audio, authored build/support files, tests, source patches, rights notices and setup instructions. SDK binaries, native build artifacts, compiler caches and generated game bundles are excluded. A fresh clone successfully built both the full game and the technical harness using Emscripten 6.0.10. It is still an experimental workbench, not a runtime-verified playable release.
+
+Source basis: vb6mmorpg/uplink-source-code commit 013337cefbe4b69c1f75bf4289608875ee2ed404

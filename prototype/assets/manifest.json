@@ -1,0 +1,3228 @@
+{
+  "private_use_only": true,
+  "source_archive": "Uplink.zip",
+  "source_sha256": "39c1aa2b456e16f84d7354de7b416e5dc0e30c5331392b3160544ac6d3362b17",
+  "archive_load_order": [
+    "data.dat",
+    "graphics.dat",
+    "loading.dat",
+    "sounds.dat",
+    "music.dat",
+    "fonts.dat",
+    "patch.dat",
+    "patch2.dat",
+    "patch3.dat"
+  ],
+  "files": {
+    "data/agentaliases.txt": {
+      "archive": "data.dat",
+      "bytes": 518,
+      "sha256": "1b1147b4867b71f08e84b8acf09a00590d952ce4dc51684ad988ee412227dc3f"
+    },
+    "data/companya.txt": {
+      "archive": "data.dat",
+      "bytes": 1136,
+      "sha256": "53f5a02c52a302ebebf6370d8a51243a0a3a63a59698fe06f010e73926435884"
+    },
+    "data/companyb.txt": {
+      "archive": "data.dat",
+      "bytes": 173,
+      "sha256": "5ea607327514cadea55dc030e17eb90553127121ad4a393f95f6af7d29b3c333"
+    },
+    "data/fornames.txt": {
+      "archive": "data.dat",
+      "bytes": 186,
+      "sha256": "2da64cf893724ae0897a92d078e9c5d6b4ed6607ebc3d831e05ece8d996ded50"
+    },
+    "data/gatewaydefs.txt": {
+      "archive": "data.dat",
+      "bytes": 5087,
+      "sha256": "360840be305207ad463cdc14cc31c03b856a7ef0c39bd64f9f73845e4ea9ed04"
+    },
+    "data/surnames.txt": {
+      "archive": "data.dat",
+      "bytes": 1991,
+      "sha256": "401f20b75f1927333cadd9906a470acaad5a75ebcaaf8e836a288eccc903f67a"
+    },
+    "data/wordlist.txt": {
+      "archive": "data.dat",
+      "bytes": 24919,
+      "sha256": "8f7ebd497a33b0992733907758bc448062c188f527c79b62ed05b45d43174398"
+    },
+    "graphics/accessdenied.tif": {
+      "archive": "graphics.dat",
+      "bytes": 6260,
+      "sha256": "2739f95f9952cbe821d05c24d8e489cc6aea43336cd8dad3fa4119bb80cfca70",
+      "png": "graphics/accessdenied.png",
+      "rgba": "rgba/graphics/accessdenied.tif.rgba",
+      "width": 100,
+      "height": 20,
+      "mode": "RGB"
+    },
+    "graphics/accessgranted.tif": {
+      "archive": "graphics.dat",
+      "bytes": 6260,
+      "sha256": "b7fcbde9c3eb28c34a073a1d7365347a7036ec14a7d506f5fb86e9f58fd81ae2",
+      "png": "graphics/accessgranted.png",
+      "rgba": "rgba/graphics/accessgranted.tif.rgba",
+      "width": 100,
+      "height": 20,
+      "mode": "RGB"
+    },
+    "graphics/add.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "1b3e1638c16da885efebbb6cbcdf99328c60fd1227e8a4db11a8dedab43a68fd",
+      "png": "graphics/add.png",
+      "rgba": "rgba/graphics/add.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/add_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "2f94c88734178d453049c25a017758365700abd41c80767ecef7bc874b0362b8",
+      "png": "graphics/add_c.png",
+      "rgba": "rgba/graphics/add_c.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/add_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "e23fa09f65b27f93f97d5426cabb1e577985f77f05bcfa04e2f7c9b67e6d8896",
+      "png": "graphics/add_h.png",
+      "rgba": "rgba/graphics/add_h.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/analyser/localhost.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "3d9c1976d10bbadeeb415f163422f2a38eec4d148fd6b6e8793fadc748af98d8",
+      "png": "graphics/analyser/localhost.png",
+      "rgba": "rgba/graphics/analyser/localhost.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/analyser/localhost_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "af9c8d0df2bf41594ee02321969fcbd9a6e6c50ff92260f8bbb176b2bcc793bf",
+      "png": "graphics/analyser/localhost_c.png",
+      "rgba": "rgba/graphics/analyser/localhost_c.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/analyser/localhost_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "34bafd4369d74599b5fa06782290ccba9683a7cd4be9ca9781d6174e4fc11a3a",
+      "png": "graphics/analyser/localhost_h.png",
+      "rgba": "rgba/graphics/analyser/localhost_h.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/analyser/nonsecure.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "5822a66dd5c7e6ee58531e78479e49ad1f15f8a6da4ad01a78da1e761a8de3ed",
+      "png": "graphics/analyser/nonsecure.png",
+      "rgba": "rgba/graphics/analyser/nonsecure.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/analyser/nonsecure_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "478f16a2d1088269490ebde99bfdb68897de1dd0775f4a8385eef6b6880e29d5",
+      "png": "graphics/analyser/nonsecure_c.png",
+      "rgba": "rgba/graphics/analyser/nonsecure_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/analyser/nonsecure_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "de6dc718021aadaddabbdcfdec93a544094b3931b5e3852b1eb19483c22eafcb",
+      "png": "graphics/analyser/nonsecure_h.png",
+      "rgba": "rgba/graphics/analyser/nonsecure_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/analyser/remotehost.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "3d9c1976d10bbadeeb415f163422f2a38eec4d148fd6b6e8793fadc748af98d8",
+      "png": "graphics/analyser/remotehost.png",
+      "rgba": "rgba/graphics/analyser/remotehost.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/analyser/remotehost_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "af9c8d0df2bf41594ee02321969fcbd9a6e6c50ff92260f8bbb176b2bcc793bf",
+      "png": "graphics/analyser/remotehost_c.png",
+      "rgba": "rgba/graphics/analyser/remotehost_c.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/analyser/remotehost_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "34bafd4369d74599b5fa06782290ccba9683a7cd4be9ca9781d6174e4fc11a3a",
+      "png": "graphics/analyser/remotehost_h.png",
+      "rgba": "rgba/graphics/analyser/remotehost_h.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/analyser/secure.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "06f34f7a9007b6ba77b24f30db903d0703b06c520c70889a3ba2c2ecf8b80fb7",
+      "png": "graphics/analyser/secure.png",
+      "rgba": "rgba/graphics/analyser/secure.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/analyser/secure_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "ad50e61ac68136174fc2b81b77d2e30ea60d19b191ecb1551c89df92b3ee8bdf",
+      "png": "graphics/analyser/secure_c.png",
+      "rgba": "rgba/graphics/analyser/secure_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/analyser/secure_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "e4d8ff35e839c0db65bdb06389c475f35eb0058e1ceeabd856d23b690565f9eb",
+      "png": "graphics/analyser/secure_h.png",
+      "rgba": "rgba/graphics/analyser/secure_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/analyser/unknown.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "ffa757fbca9413e16c0994a0e622c588b66e99eca97d949a32abba8aa139d0bc",
+      "png": "graphics/analyser/unknown.png",
+      "rgba": "rgba/graphics/analyser/unknown.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/awards/award0.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "ec1f6d8babbccee3cb36a2e9e86bd9a4649f97dcd3c2b8077bffb35de4d866b6",
+      "png": "graphics/awards/award0.png",
+      "rgba": "rgba/graphics/awards/award0.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award1.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "86c8a2e30fe9cae4e8f5a55aaf51c508b261cb0c0cfe79be717b4799adfb6fe2",
+      "png": "graphics/awards/award1.png",
+      "rgba": "rgba/graphics/awards/award1.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award10.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "db9cc520a3f299a9fad7bec2fb6d765a7152be3d5836a6f160b4b3bafd1e6613",
+      "png": "graphics/awards/award10.png",
+      "rgba": "rgba/graphics/awards/award10.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award11.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "62b86fff002360b69a8432b6d0dbd62789f9a96190f14e18e265e399f9d3abdd",
+      "png": "graphics/awards/award11.png",
+      "rgba": "rgba/graphics/awards/award11.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award2.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "57debf4e800ead8cc6f9798ad219ec47ee79649d1b6ec92135763ff19034fd31",
+      "png": "graphics/awards/award2.png",
+      "rgba": "rgba/graphics/awards/award2.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award3.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "f78aeed2afbacb137b4a1005f332cb2c2d5b7275520cff30dbfc648b9cd84611",
+      "png": "graphics/awards/award3.png",
+      "rgba": "rgba/graphics/awards/award3.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award4.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "6170041ac1c1828195efe7a6e5992f6d123e5206eb00671a5b63b9af446cf144",
+      "png": "graphics/awards/award4.png",
+      "rgba": "rgba/graphics/awards/award4.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award5.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "dae824d6488630a3b0be92a334e0cefc5532ed5766a6401730bf0fc7f63ecd3b",
+      "png": "graphics/awards/award5.png",
+      "rgba": "rgba/graphics/awards/award5.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award6.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "ee66ace8d5984b70d1313a0d89ad384eda253e46624c9e3dfba031bc67a9f2f6",
+      "png": "graphics/awards/award6.png",
+      "rgba": "rgba/graphics/awards/award6.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award7.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "82bf15e2824686722ad13633aeff6ec4a5b8e9b1c9320a2d15a6760bcbf42575",
+      "png": "graphics/awards/award7.png",
+      "rgba": "rgba/graphics/awards/award7.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award8.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "d4df9095a46a781828373514eb776a9cfe402ed6a01094ffb2f19af9b6097186",
+      "png": "graphics/awards/award8.png",
+      "rgba": "rgba/graphics/awards/award8.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/award9.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "ff75822fcd3c6ced0ab89514afd071e2c649cec4e166f823322b2145f0d560f6",
+      "png": "graphics/awards/award9.png",
+      "rgba": "rgba/graphics/awards/award9.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/awards/template.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "e50a812c2cf7f7518fed4c2125be0bbca9bbc141a78a6e033a4d00f52187cd5b",
+      "png": "graphics/awards/template.png",
+      "rgba": "rgba/graphics/awards/template.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/back.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "605287876e70a1342a63ebe4300700beb8f779757e4c9538dbb363b54e2616f4",
+      "png": "graphics/back.png",
+      "rgba": "rgba/graphics/back.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/back_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "6c297b997ac0fa0ff5ca917a3ce4f4e09dc2e8ac99409ef80472453d8fe0e0c7",
+      "png": "graphics/back_c.png",
+      "rgba": "rgba/graphics/back_c.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/back_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "81a9f20a5874aeadff55617a8ee0141647d5177b81312fe881cc6ce5436ba018",
+      "png": "graphics/back_h.png",
+      "rgba": "rgba/graphics/back_h.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/close.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "605287876e70a1342a63ebe4300700beb8f779757e4c9538dbb363b54e2616f4",
+      "png": "graphics/close.png",
+      "rgba": "rgba/graphics/close.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/close_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "6c297b997ac0fa0ff5ca917a3ce4f4e09dc2e8ac99409ef80472453d8fe0e0c7",
+      "png": "graphics/close_c.png",
+      "rgba": "rgba/graphics/close_c.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/close_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "81a9f20a5874aeadff55617a8ee0141647d5177b81312fe881cc6ce5436ba018",
+      "png": "graphics/close_h.png",
+      "rgba": "rgba/graphics/close_h.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/dialler/eight.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "8df4edbb91b9971eda043b5355198f3e6858e65ce7cdaf96a4c03d47e1fe9db7",
+      "png": "graphics/dialler/eight.png",
+      "rgba": "rgba/graphics/dialler/eight.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/eight_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "e62bb7d742ad07b164051218acd2fca4907af1cab0fcce752824a12a2a781b9a",
+      "png": "graphics/dialler/eight_h.png",
+      "rgba": "rgba/graphics/dialler/eight_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/five.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "334ea9403548c3c1a33635bc46e76cb3cb938b774cff78f3ce4ff6c23e463e69",
+      "png": "graphics/dialler/five.png",
+      "rgba": "rgba/graphics/dialler/five.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/five_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "2d66776b4a674866dfb17bdc54500ccc5a942fb5e0ce80d7bfa42b97422ac949",
+      "png": "graphics/dialler/five_h.png",
+      "rgba": "rgba/graphics/dialler/five_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/four.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "4971d7173146c422ae71075001dfcbf176212990f72725be2c426e71c599ca80",
+      "png": "graphics/dialler/four.png",
+      "rgba": "rgba/graphics/dialler/four.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/four_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "717c480f9a1266498b28c9a689c53c09655e0d52dd7a1739b7fdad4d3bed6c54",
+      "png": "graphics/dialler/four_h.png",
+      "rgba": "rgba/graphics/dialler/four_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/nine.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "411c57f1b579ccccd56f88de831bc114904521aae811dd446f094ca65cf49f10",
+      "png": "graphics/dialler/nine.png",
+      "rgba": "rgba/graphics/dialler/nine.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/nine_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "790284fbeb5e87751a6306f613a1c7a2292b3a28255b504eca28820862a6af76",
+      "png": "graphics/dialler/nine_h.png",
+      "rgba": "rgba/graphics/dialler/nine_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/one.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "ec482c1b84191eb44c02007642b738cb93b99b45f6a71457c4790eba90820570",
+      "png": "graphics/dialler/one.png",
+      "rgba": "rgba/graphics/dialler/one.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/one_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "bde2ffd6418062b4abe7187e13be47ad1e5bbd5c5fc94586fb97459eee5e7557",
+      "png": "graphics/dialler/one_h.png",
+      "rgba": "rgba/graphics/dialler/one_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/seven.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "f691a1b93bc13691fee5edf6da545015c9a2363c3c36f04081adf4e228fffeab",
+      "png": "graphics/dialler/seven.png",
+      "rgba": "rgba/graphics/dialler/seven.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/seven_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "196d65212653767c7fe066475a3776bdd9c77ce13d2d340fd53ec6b5c3ee9744",
+      "png": "graphics/dialler/seven_h.png",
+      "rgba": "rgba/graphics/dialler/seven_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/six.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "b833dd4f569875e45ad169a03d5e20029b8e936af56a938b8af427b51dc2587f",
+      "png": "graphics/dialler/six.png",
+      "rgba": "rgba/graphics/dialler/six.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/six_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "309af5b45df02f862cd9e1c811a421747f1a475326d1559d197ee23c832d2885",
+      "png": "graphics/dialler/six_h.png",
+      "rgba": "rgba/graphics/dialler/six_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/three.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "703a4d43285458de310cdbfb5b258d4056abee2638e16c4ebaa7c31eeb5779b1",
+      "png": "graphics/dialler/three.png",
+      "rgba": "rgba/graphics/dialler/three.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/three_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "b3f3f6271625e1d174e478841ccee5e806366c93287e5c0bddf915880102e52d",
+      "png": "graphics/dialler/three_h.png",
+      "rgba": "rgba/graphics/dialler/three_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/two.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "b68afd21be0ab883f8fdb2f1799a8e997becc7910fa21608a29fd279b849d0ef",
+      "png": "graphics/dialler/two.png",
+      "rgba": "rgba/graphics/dialler/two.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/dialler/two_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 2792,
+      "sha256": "a1d53c556c68b8d85471abce9b8145dca6b3ae84c2b4ad6bd9e8586f9975945c",
+      "png": "graphics/dialler/two_h.png",
+      "rgba": "rgba/graphics/dialler/two_h.tif.rgba",
+      "width": 29,
+      "height": 29,
+      "mode": "RGB"
+    },
+    "graphics/down.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "9cc5b03708da40d2c78326ac50ac4cb4f2c4ad05c2a3a71814c7866293b25888",
+      "png": "graphics/down.png",
+      "rgba": "rgba/graphics/down.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/down_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "2789d1641ebfc17f91a7054767eb91ccb75e6477adb7d74593a0ffa9553d5bc4",
+      "png": "graphics/down_c.png",
+      "rgba": "rgba/graphics/down_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/down_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "28eadc439412551f106aba2796fbfe25dc1625b23e87e3f835f553fff90e76da",
+      "png": "graphics/down_h.png",
+      "rgba": "rgba/graphics/down_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/gateway/cpu.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "f3c54f488a0b4ab92eef03853f357e5c9f75e2a48300bf7ea604509383e7ac33",
+      "png": "graphics/gateway/cpu.png",
+      "rgba": "rgba/graphics/gateway/cpu.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway0.tif": {
+      "archive": "graphics.dat",
+      "bytes": 120436,
+      "sha256": "c61059962a5bb3b9116acee401054f9e443c295dd526df337eef36d684b51bac",
+      "png": "graphics/gateway/gateway0.png",
+      "rgba": "rgba/graphics/gateway/gateway0.tif.rgba",
+      "width": 200,
+      "height": 200,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway1.tif": {
+      "archive": "graphics.dat",
+      "bytes": 120436,
+      "sha256": "78408dfdc409c99e5c12bace794ed86fc06440cecfffd3c491eeed0fb3fa7e8f",
+      "png": "graphics/gateway/gateway1.png",
+      "rgba": "rgba/graphics/gateway/gateway1.tif.rgba",
+      "width": 200,
+      "height": 200,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway2.tif": {
+      "archive": "graphics.dat",
+      "bytes": 120436,
+      "sha256": "55e48529da3fe87b520a91c735a0646df509eff2dba7657ff0a45d0dab9b1fc2",
+      "png": "graphics/gateway/gateway2.png",
+      "rgba": "rgba/graphics/gateway/gateway2.tif.rgba",
+      "width": 200,
+      "height": 200,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway3.tif": {
+      "archive": "graphics.dat",
+      "bytes": 210436,
+      "sha256": "1a057a7eca3ffdc60cc83dd0adb19215b7c397af33c9050f5d029674eb8c336c",
+      "png": "graphics/gateway/gateway3.png",
+      "rgba": "rgba/graphics/gateway/gateway3.tif.rgba",
+      "width": 350,
+      "height": 200,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway4.tif": {
+      "archive": "graphics.dat",
+      "bytes": 207468,
+      "sha256": "9c4c5e85a3025127121e0c28b840e832d901d0b9c9ec48346e2963121cbf28bc",
+      "png": "graphics/gateway/gateway4.png",
+      "rgba": "rgba/graphics/gateway/gateway4.tif.rgba",
+      "width": 300,
+      "height": 230,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway5.tif": {
+      "archive": "graphics.dat",
+      "bytes": 262992,
+      "sha256": "1c51cae226973a2792ee626380ee4812fd1ba3d46aff8ae3ac417772ec8e7bf5",
+      "png": "graphics/gateway/gateway5.png",
+      "rgba": "rgba/graphics/gateway/gateway5.tif.rgba",
+      "width": 350,
+      "height": 250,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway6.tif": {
+      "archive": "graphics.dat",
+      "bytes": 360540,
+      "sha256": "4ad6866c27f54a39a5fb90615bcd7a344c21a91ab6134913cbd29082481e9336",
+      "png": "graphics/gateway/gateway6.png",
+      "rgba": "rgba/graphics/gateway/gateway6.tif.rgba",
+      "width": 400,
+      "height": 300,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway7.tif": {
+      "archive": "graphics.dat",
+      "bytes": 210436,
+      "sha256": "6691ee969f76eb1b0e992480bcf9bcffa9aa9f7c5d2319807afa678286451cbf",
+      "png": "graphics/gateway/gateway7.png",
+      "rgba": "rgba/graphics/gateway/gateway7.tif.rgba",
+      "width": 350,
+      "height": 200,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway8.tif": {
+      "archive": "graphics.dat",
+      "bytes": 270540,
+      "sha256": "06fc4166e3f616c5f89c01822304775d861e2848af7cf2179bcdba0b646f336f",
+      "png": "graphics/gateway/gateway8.png",
+      "rgba": "rgba/graphics/gateway/gateway8.tif.rgba",
+      "width": 300,
+      "height": 300,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway9.tif": {
+      "archive": "graphics.dat",
+      "bytes": 336516,
+      "sha256": "62c1dc2e1457562066390cfcfcbba7e4561f2a8c55ec6b2a7d5dccf746c89499",
+      "png": "graphics/gateway/gateway9.png",
+      "rgba": "rgba/graphics/gateway/gateway9.tif.rgba",
+      "width": 400,
+      "height": 280,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t0.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "b23b2d4361f268995ca7b82065cafd1fd587f69133f7f0364ce01d1bf58ba03b",
+      "png": "graphics/gateway/gateway_t0.png",
+      "rgba": "rgba/graphics/gateway/gateway_t0.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t1.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "54202f772b97e9bb9909edd24aa70bd314cef44f281502b69758c761eca9dfa0",
+      "png": "graphics/gateway/gateway_t1.png",
+      "rgba": "rgba/graphics/gateway/gateway_t1.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t2.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "d89202f7e40ba9fb93e951279b28915a05ef1a8e20761101739b8df577e0f5b5",
+      "png": "graphics/gateway/gateway_t2.png",
+      "rgba": "rgba/graphics/gateway/gateway_t2.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t3.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "c3f20a2fdb637de235ff11f3f59d06bb36508ee5a1c3dc49c5fe87d73a4493c8",
+      "png": "graphics/gateway/gateway_t3.png",
+      "rgba": "rgba/graphics/gateway/gateway_t3.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t4.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "d71903d4f11fb8a90f22a9922eb319a635054e3d149571e6a84871a4648ac18a",
+      "png": "graphics/gateway/gateway_t4.png",
+      "rgba": "rgba/graphics/gateway/gateway_t4.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t5.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "5918a54146ba16479e1c5cbe499b3465922f86f731d6cbff3bb04ab239e346cc",
+      "png": "graphics/gateway/gateway_t5.png",
+      "rgba": "rgba/graphics/gateway/gateway_t5.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t6.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "825b24b2f0a984c093798e320697633323be1823be7cf0ec9ab141af4ac4b9ed",
+      "png": "graphics/gateway/gateway_t6.png",
+      "rgba": "rgba/graphics/gateway/gateway_t6.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t7.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "1c1b10de5403ffcf245e6284afe9e236314f5b05011981124e8e44848004e3a0",
+      "png": "graphics/gateway/gateway_t7.png",
+      "rgba": "rgba/graphics/gateway/gateway_t7.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t8.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "6e043602e3b6c9a9f9bfbc8bdca7c3ff182720096d8e8e5267ce4884568907b1",
+      "png": "graphics/gateway/gateway_t8.png",
+      "rgba": "rgba/graphics/gateway/gateway_t8.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/gateway_t9.tif": {
+      "archive": "graphics.dat",
+      "bytes": 84380,
+      "sha256": "b85bc0fe8602669bcc403b32123ccfa01a4e4570eaa5235e82b54ba663519c16",
+      "png": "graphics/gateway/gateway_t9.png",
+      "rgba": "rgba/graphics/gateway/gateway_t9.tif.rgba",
+      "width": 200,
+      "height": 140,
+      "mode": "RGB"
+    },
+    "graphics/gateway/memory.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1018,
+      "sha256": "799cd3833e667deafbce6a63ca10b5fdbaf815a89bec5ef272f6b73187af6f77",
+      "png": "graphics/gateway/memory.png",
+      "rgba": "rgba/graphics/gateway/memory.tif.rgba",
+      "width": 10,
+      "height": 25,
+      "mode": "RGB"
+    },
+    "graphics/gateway/modem.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3260,
+      "sha256": "d4f7cefd6945bae338d3a456fc6d8da98289f112676f1ac13ab77d367adffaf7",
+      "png": "graphics/gateway/modem.png",
+      "rgba": "rgba/graphics/gateway/modem.tif.rgba",
+      "width": 50,
+      "height": 20,
+      "mode": "RGB"
+    },
+    "graphics/gateway/power.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3868,
+      "sha256": "bf93a97858ccf29a79b257a26fdcc63e00b6934697a241c98260afda1e52b18c",
+      "png": "graphics/gateway/power.png",
+      "rgba": "rgba/graphics/gateway/power.tif.rgba",
+      "width": 40,
+      "height": 30,
+      "mode": "RGB"
+    },
+    "graphics/gateway/security.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "6ecb4c00a70bed2f985ca1aeb4d96437165b0417f914c7d6b999ce0dd23f3015",
+      "png": "graphics/gateway/security.png",
+      "rgba": "rgba/graphics/gateway/security.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/hud/analyser.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "c4667c44d616d6bfd457d174efc8ba1acff4c26cf5234c2534fc947b33b97e21",
+      "png": "graphics/hud/analyser.png",
+      "rgba": "rgba/graphics/hud/analyser.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/analyser_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "64fc4a17dd9158e31ddc5488ba04b0a866e25a48c0a1cc8272c76d368184d49a",
+      "png": "graphics/hud/analyser_c.png",
+      "rgba": "rgba/graphics/hud/analyser_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/analyser_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "89f0283bcc5e95443aa8c2c26e40e9fb0fced18c82f16eebf6241558b427dd31",
+      "png": "graphics/hud/analyser_h.png",
+      "rgba": "rgba/graphics/hud/analyser_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/email.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "c8b30022d332d20ccfddad83cabd6974572e6e7b10e7a10b6335c3517c45af3f",
+      "png": "graphics/hud/email.png",
+      "rgba": "rgba/graphics/hud/email.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/email_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "02da509cc5a9bc3dadbd515505196d06f93500f8726a0a53a6ab069e32050bc0",
+      "png": "graphics/hud/email_c.png",
+      "rgba": "rgba/graphics/hud/email_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/email_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "6c3d90d5460d6005f5f1cfd9f67d49756601af229ef934cb0634926821d9dce2",
+      "png": "graphics/hud/email_h.png",
+      "rgba": "rgba/graphics/hud/email_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/finance.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "a0f17426edf8f3a9fb4e375192aafd7088ce489d38ee2a9d6c0f29522caadb6d",
+      "png": "graphics/hud/finance.png",
+      "rgba": "rgba/graphics/hud/finance.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/finance_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "4fec17d0e03e43f71a21899cf46d2d337733ae28eb9c4f5329c5c16355c11d6d",
+      "png": "graphics/hud/finance_c.png",
+      "rgba": "rgba/graphics/hud/finance_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/finance_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "7715c33e7cc9ffa14e920782153a092f4fda47dd6a5ae6b92e1987fe19b1b4ee",
+      "png": "graphics/hud/finance_h.png",
+      "rgba": "rgba/graphics/hud/finance_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/hardware.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "3462ea437d6f8ec6671f3a069093789e1c81517c5a5da8f3d076b9a9a7f9144d",
+      "png": "graphics/hud/hardware.png",
+      "rgba": "rgba/graphics/hud/hardware.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/hardware_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "afcbb90870f7fd0e5e1b432d50565cfe237a55160c410a71c1d51e1f6f9b1cbc",
+      "png": "graphics/hud/hardware_c.png",
+      "rgba": "rgba/graphics/hud/hardware_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/hardware_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "82e7208dcfb424600f576e4cbdca66c9f06c9760114d52a79d1c1ba9bc1269f0",
+      "png": "graphics/hud/hardware_h.png",
+      "rgba": "rgba/graphics/hud/hardware_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/memory.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "21f3c9c0c64739cd423e769288a77746c6b8b5aef045c8ff779cc181f000d6df",
+      "png": "graphics/hud/memory.png",
+      "rgba": "rgba/graphics/hud/memory.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/memory_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "7a7ef34c26e83c1b56e168e1c9428e6d95f15fc0baf73f01212e99eb3fe19f7a",
+      "png": "graphics/hud/memory_c.png",
+      "rgba": "rgba/graphics/hud/memory_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/memory_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "99027999aa96891d4bab49af2089f703fa37dbc584e8e638d474a9f44bbba277",
+      "png": "graphics/hud/memory_h.png",
+      "rgba": "rgba/graphics/hud/memory_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/mission.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "2d3a172a22b5a3cfc7f2da0c1ee845ae74112e9ce6cf5734c669364260ce4301",
+      "png": "graphics/hud/mission.png",
+      "rgba": "rgba/graphics/hud/mission.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/mission_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "6e9cf727902196096c33853c1ad383312a1f8b81437f449c3909210ef46896fd",
+      "png": "graphics/hud/mission_c.png",
+      "rgba": "rgba/graphics/hud/mission_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/mission_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "5042cfadf15e320651241217e43b78bd4ffdfb13b836880dcabca21585d09d46",
+      "png": "graphics/hud/mission_h.png",
+      "rgba": "rgba/graphics/hud/mission_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/newmail.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "bc42a0e9cbc0821a28a6a5cf5acfc7018a77348c609573d3fc3de370cd11509d",
+      "png": "graphics/hud/newmail.png",
+      "rgba": "rgba/graphics/hud/newmail.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/newmail_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "661ece22b2dbd1eb17420c15dbbdc67754d7ebec07e864bd5007c55ebb66f669",
+      "png": "graphics/hud/newmail_c.png",
+      "rgba": "rgba/graphics/hud/newmail_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/newmail_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "9fd2cefe753fe7de7eac08ed71ad984f62aa1323c12f677e5241656bef55a81b",
+      "png": "graphics/hud/newmail_h.png",
+      "rgba": "rgba/graphics/hud/newmail_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/software.tif": {
+      "archive": "graphics.dat",
+      "bytes": 8688,
+      "sha256": "00fb86f09a213e539a30fcbdb4693bb7ad5ccbaf57e5a6e90e26f162437e48e0",
+      "png": "graphics/hud/software.png",
+      "rgba": "rgba/graphics/hud/software.tif.rgba",
+      "width": 53,
+      "height": 53,
+      "mode": "RGB"
+    },
+    "graphics/hud/software_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 8688,
+      "sha256": "2be37afd7178fa0f42f0f38a663b674ed07a7a79517678562a0162b2c28904e8",
+      "png": "graphics/hud/software_c.png",
+      "rgba": "rgba/graphics/hud/software_c.tif.rgba",
+      "width": 53,
+      "height": 53,
+      "mode": "RGB"
+    },
+    "graphics/hud/software_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 8688,
+      "sha256": "594421a050fd00377131abbbf3dc79cc8d351f846ea87ca5368496d37ddee16e",
+      "png": "graphics/hud/software_h.png",
+      "rgba": "rgba/graphics/hud/software_h.tif.rgba",
+      "width": 53,
+      "height": 53,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed0.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "fb995139ed9226a39e8e7f61b4fb7b96df1a95c7b85dcc09ee544cc14ecd4b0b",
+      "png": "graphics/hud/speed0.png",
+      "rgba": "rgba/graphics/hud/speed0.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed0_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "e5c91e5721db36ae2676ab9019dd5dba167152c3cb31208370ad881c2e142100",
+      "png": "graphics/hud/speed0_c.png",
+      "rgba": "rgba/graphics/hud/speed0_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed0_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "2dbfdac42bc4aaa0031efdbe86a9217c062d6a715eb5369f50b3815d24ee6a18",
+      "png": "graphics/hud/speed0_h.png",
+      "rgba": "rgba/graphics/hud/speed0_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed1.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "964a4ddd8ce4b79eb77b0c2cad6ec1466f7b0ee8de2717d8ba67927a003f2314",
+      "png": "graphics/hud/speed1.png",
+      "rgba": "rgba/graphics/hud/speed1.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed1_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "2034383544434cdee37983467c8b6cc26d72f37f6a53a7576a8aa0a3b2a83c46",
+      "png": "graphics/hud/speed1_c.png",
+      "rgba": "rgba/graphics/hud/speed1_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed1_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "59149d87621d137c1e77f8a631e62b3685d090716a8fd6e5a92be620a43c18c8",
+      "png": "graphics/hud/speed1_h.png",
+      "rgba": "rgba/graphics/hud/speed1_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed2.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "22dcd02b8ac21ba566df416586a66abfe0d7b8c72c309e06c3363bb3f98bdf29",
+      "png": "graphics/hud/speed2.png",
+      "rgba": "rgba/graphics/hud/speed2.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed2_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "6cc439c3e36c6a5876710282fbd9e95a18dbbbbc9c0a244682132eb97d6caf3b",
+      "png": "graphics/hud/speed2_c.png",
+      "rgba": "rgba/graphics/hud/speed2_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed2_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "113bc22b5937986a674a756681da46c82785ed1f7ac5bcf83c9ee69799b565f9",
+      "png": "graphics/hud/speed2_h.png",
+      "rgba": "rgba/graphics/hud/speed2_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed3.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "e07c49e7ce5b974313aaa67b4069794ffea5f253ddf0447943d3401ebe8d0eb1",
+      "png": "graphics/hud/speed3.png",
+      "rgba": "rgba/graphics/hud/speed3.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed3_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "96cb8693fbc0420e6be23d79c268269764d714b65c2094c4e0bf884232228df7",
+      "png": "graphics/hud/speed3_c.png",
+      "rgba": "rgba/graphics/hud/speed3_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/speed3_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "8e7276cdf3142eb4d5aebb0d2229b7cc625845eabd824e120fc1ead26222e04f",
+      "png": "graphics/hud/speed3_h.png",
+      "rgba": "rgba/graphics/hud/speed3_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/hud/status.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "5cf9e508d16edca3916566c8a73724df9b4d1524bf5530f8e5eaac2e71e341dd",
+      "png": "graphics/hud/status.png",
+      "rgba": "rgba/graphics/hud/status.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/status_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "fbacebf85bbdbcb6d7c069ee0f7f6a5039d9978ec181e60da046a5ddcbd6185a",
+      "png": "graphics/hud/status_c.png",
+      "rgba": "rgba/graphics/hud/status_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/status_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1988,
+      "sha256": "d48ef686fe0d48dcdaeecfb05f76251d3ac6692f2ba75fba767cd8a77e6db770",
+      "png": "graphics/hud/status_h.png",
+      "rgba": "rgba/graphics/hud/status_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/link.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "b6e3b63be0655037bf1a6caf52453fe8e896ec33e9963be5a4bdf26ddec8b70e",
+      "png": "graphics/link.png",
+      "rgba": "rgba/graphics/link.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/link_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "572736b4bd9556723611f5063c0680f879c7bef7eb2d9d314aaa15fdce3b8893",
+      "png": "graphics/link_c.png",
+      "rgba": "rgba/graphics/link_c.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/link_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 760,
+      "sha256": "df124538d1547d37ce4946f5ba68592de0cafe2cb6eca4aa99a866cd59d79cee",
+      "png": "graphics/link_h.png",
+      "rgba": "rgba/graphics/link_h.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/exitgame.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "907c00f164adde74909dc9f9d49b4286af5e993edecb147544f62a2d5b902332",
+      "png": "graphics/mainmenu/exitgame.png",
+      "rgba": "rgba/graphics/mainmenu/exitgame.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/exitgame_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "3384500e4f29ec11d24d7ebb1bab08d4ed46946d41ebe07c48ff151ef316e306",
+      "png": "graphics/mainmenu/exitgame_c.png",
+      "rgba": "rgba/graphics/mainmenu/exitgame_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/exitgame_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "3fc4f0fc76b0729951e3087411b69e77212d32c11484b290e4318ab81e73dc95",
+      "png": "graphics/mainmenu/exitgame_h.png",
+      "rgba": "rgba/graphics/mainmenu/exitgame_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/gameoptions.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "0575f3804a7919545e100b29c3141a18a9f1883cdade889400ac041f0449ab27",
+      "png": "graphics/mainmenu/gameoptions.png",
+      "rgba": "rgba/graphics/mainmenu/gameoptions.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/gameoptions_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "551e73ee48914329ce0a9276957d2a040c6ee4c40fdbe676a5c4722d0b8a6da7",
+      "png": "graphics/mainmenu/gameoptions_c.png",
+      "rgba": "rgba/graphics/mainmenu/gameoptions_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/gameoptions_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "0a18e2066440d43535aa7e6179b65a331a9805f2add7387951c259b3c4698359",
+      "png": "graphics/mainmenu/gameoptions_h.png",
+      "rgba": "rgba/graphics/mainmenu/gameoptions_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/graphicsoptions.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "d7e83751bf0d9e71b6e24e09dd9afd38a1e208bcc566e2a022f821bcf71d9575",
+      "png": "graphics/mainmenu/graphicsoptions.png",
+      "rgba": "rgba/graphics/mainmenu/graphicsoptions.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/graphicsoptions_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "8b7c7c32fe402606a72201fbdaa2e96660dc55ee317073f4f8b5add2f52707a5",
+      "png": "graphics/mainmenu/graphicsoptions_c.png",
+      "rgba": "rgba/graphics/mainmenu/graphicsoptions_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/graphicsoptions_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "545360cc968832ffc2dfa65ffa1a4f75d3604719679da4d16cf36ef57df13a09",
+      "png": "graphics/mainmenu/graphicsoptions_h.png",
+      "rgba": "rgba/graphics/mainmenu/graphicsoptions_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/loadgame.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "04c6d8bcb5ca5b12b375f9c22413d8eaa36ebf7ae9a443c63bb532bab8db079f",
+      "png": "graphics/mainmenu/loadgame.png",
+      "rgba": "rgba/graphics/mainmenu/loadgame.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/loadgame_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "c31b0a1e16c1db6fd33413fba4369b0c32c009af3af1f4783f108b8941b61ed8",
+      "png": "graphics/mainmenu/loadgame_c.png",
+      "rgba": "rgba/graphics/mainmenu/loadgame_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/loadgame_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "603b89465bf36efb9e7259bb8b5e57dd9c3250dadf4a39aa94fabc55dd97d3a7",
+      "png": "graphics/mainmenu/loadgame_h.png",
+      "rgba": "rgba/graphics/mainmenu/loadgame_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/networkoptions.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "11d73ed509e1c16cd758f974fa534e155d47079bf8ee33acb95702bf4fcd5bee",
+      "png": "graphics/mainmenu/networkoptions.png",
+      "rgba": "rgba/graphics/mainmenu/networkoptions.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/networkoptions_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "dd82c54634af49683f3c00832e01224150b2ca969ca60c222bd219ec2f2ac339",
+      "png": "graphics/mainmenu/networkoptions_c.png",
+      "rgba": "rgba/graphics/mainmenu/networkoptions_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/networkoptions_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "af4f4ed5b7b59fefc6c9f190b08d2c9f099c119414ce412fe3ec811fa5bac888",
+      "png": "graphics/mainmenu/networkoptions_h.png",
+      "rgba": "rgba/graphics/mainmenu/networkoptions_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/newgame.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "14e7d192cff763b20569c9d5cae7b75d7e948ec96c2c72a4b80bc70b4ee7bcca",
+      "png": "graphics/mainmenu/newgame.png",
+      "rgba": "rgba/graphics/mainmenu/newgame.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/newgame_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "f09479619acef43d9963599bd12e508a067e35a9053c2ffc5add3d3e5a4d8edf",
+      "png": "graphics/mainmenu/newgame_c.png",
+      "rgba": "rgba/graphics/mainmenu/newgame_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/newgame_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "c64f507fa444797af25626e3ea5b8339c73a102f05f780ced67da793e51a74c7",
+      "png": "graphics/mainmenu/newgame_h.png",
+      "rgba": "rgba/graphics/mainmenu/newgame_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/optionno.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "8dad955c458bc329acfd95ba1dbf9e0adcb58eefee0992036654c4a851ebcbd7",
+      "png": "graphics/mainmenu/optionno.png",
+      "rgba": "rgba/graphics/mainmenu/optionno.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/options.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "52bf9da038e88720aa972b872adb35105694f8bafe9eb596a78994d8d6092634",
+      "png": "graphics/mainmenu/options.png",
+      "rgba": "rgba/graphics/mainmenu/options.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/options_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "3bea537ce923778c15bde3f58763e04e1e37501b738e362d6828133b3d0901a9",
+      "png": "graphics/mainmenu/options_c.png",
+      "rgba": "rgba/graphics/mainmenu/options_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/options_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "35d16435f4668f0f7b4da9e030c63f6f963d6cb343481dbcbb0a70ab63bcd8b2",
+      "png": "graphics/mainmenu/options_h.png",
+      "rgba": "rgba/graphics/mainmenu/options_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/optionyes.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "5eefff93f707bad298ff25c46587f110ba0996f91a54e4d69696efc0804b3c0d",
+      "png": "graphics/mainmenu/optionyes.png",
+      "rgba": "rgba/graphics/mainmenu/optionyes.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/pi.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "0b08c9521e313bde9f3c2040ec09472e5ec2e65bde483cd46f32a4d402d2052c",
+      "png": "graphics/mainmenu/pi.png",
+      "rgba": "rgba/graphics/mainmenu/pi.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/pi_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "f32110b3a24794b4e79804078d4234212dfa85512d91815de27c075b3cc6818a",
+      "png": "graphics/mainmenu/pi_c.png",
+      "rgba": "rgba/graphics/mainmenu/pi_c.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/pi_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "3f15df31d67f41a90d8e56bdaaa0ff2c744a4ea24440fd1baab328c0b046360d",
+      "png": "graphics/mainmenu/pi_h.png",
+      "rgba": "rgba/graphics/mainmenu/pi_h.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/soundoptions.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "0578c69e545bde95e6c928d607a43cbb60cb16e1d8c8490c9c9c01dfe106af99",
+      "png": "graphics/mainmenu/soundoptions.png",
+      "rgba": "rgba/graphics/mainmenu/soundoptions.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/soundoptions_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "768727b36c16a1c9721abbc396c76d3f40eb800f3bd00aab15b7f3477a3d1da1",
+      "png": "graphics/mainmenu/soundoptions_c.png",
+      "rgba": "rgba/graphics/mainmenu/soundoptions_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/soundoptions_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "bdac2e2d69d695d9ad2429de2fecaeb8365817ae158fb1699c628ef3389eb57a",
+      "png": "graphics/mainmenu/soundoptions_h.png",
+      "rgba": "rgba/graphics/mainmenu/soundoptions_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/team1.tif": {
+      "archive": "graphics.dat",
+      "bytes": 60340,
+      "sha256": "3a5e9589e51a5c0e8dd83cab14bf7de39c73108f7f64424280d220b5eead8861",
+      "png": "graphics/mainmenu/team1.png",
+      "rgba": "rgba/graphics/mainmenu/team1.tif.rgba",
+      "width": 200,
+      "height": 100,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/team2.tif": {
+      "archive": "graphics.dat",
+      "bytes": 60340,
+      "sha256": "001945d0f5e2ee7adb8e2fd191f0847bc65274a3a2031e9d1c199ef9f0a22f7f",
+      "png": "graphics/mainmenu/team2.png",
+      "rgba": "rgba/graphics/mainmenu/team2.tif.rgba",
+      "width": 200,
+      "height": 100,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/team3.tif": {
+      "archive": "graphics.dat",
+      "bytes": 60340,
+      "sha256": "bfb30838229741ade0b9651f240a915b088e021d0acb636b47f67eeadcf23a78",
+      "png": "graphics/mainmenu/team3.png",
+      "rgba": "rgba/graphics/mainmenu/team3.tif.rgba",
+      "width": 200,
+      "height": 100,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/team4.tif": {
+      "archive": "graphics.dat",
+      "bytes": 60340,
+      "sha256": "09566ca43ee3218dcd9cb050969b27d1aca567aa575051543ebe057b83fc27cb",
+      "png": "graphics/mainmenu/team4.png",
+      "rgba": "rgba/graphics/mainmenu/team4.tif.rgba",
+      "width": 200,
+      "height": 100,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/uplinklogo.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61500,
+      "sha256": "2d0108e173ed64589eb01eb292d834fea472d51664a2dd4ea4ad787cddce3f89",
+      "png": "graphics/mainmenu/uplinklogo.png",
+      "rgba": "rgba/graphics/mainmenu/uplinklogo.tif.rgba",
+      "width": 340,
+      "height": 60,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/version.tif": {
+      "archive": "graphics.dat",
+      "bytes": 12132,
+      "sha256": "996a902d1b3cd797414a9015be022841b0b57287e462f32dcac5261079af5648",
+      "png": "graphics/mainmenu/version.png",
+      "rgba": "rgba/graphics/mainmenu/version.tif.rgba",
+      "width": 330,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/menuscreenoption.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "93d38e26020f32670b46bdb4edffc60c204067d1ce6488861f84bcd5838e6219",
+      "png": "graphics/menuscreenoption.png",
+      "rgba": "rgba/graphics/menuscreenoption.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/menuscreenoption_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "1e4247a62859f2644c6ff48bce58d904415d5c2b92de3aa801f396607fc8b545",
+      "png": "graphics/menuscreenoption_c.png",
+      "rgba": "rgba/graphics/menuscreenoption_c.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/menuscreenoption_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1020,
+      "sha256": "54d8c51b1621699f202bcf6f12cd68f7e11547d79aa0e804f25798163d028d19",
+      "png": "graphics/menuscreenoption_h.png",
+      "rgba": "rgba/graphics/menuscreenoption_h.tif.rgba",
+      "width": 16,
+      "height": 16,
+      "mode": "RGB"
+    },
+    "graphics/passwordscreen.tif": {
+      "archive": "graphics.dat",
+      "bytes": 72948,
+      "sha256": "f97fb76adc2865b1dbeb858a51bd97bf95b3f0561a9fef1d280b5b774771d5af",
+      "png": "graphics/passwordscreen.png",
+      "rgba": "rgba/graphics/passwordscreen.tif.rgba",
+      "width": 220,
+      "height": 110,
+      "mode": "RGB"
+    },
+    "graphics/photos/fingers-placeholder.tif": {
+      "archive": "graphics.dat",
+      "bytes": 5076,
+      "sha256": "9a92c2c4aa00100e55c09d1ff8aa8ff4cab16cb538222fdebf7bd9c2d9f56b68",
+      "png": "graphics/photos/fingers-placeholder.png",
+      "rgba": "rgba/graphics/photos/fingers-placeholder.tif.rgba",
+      "width": 40,
+      "height": 40,
+      "mode": "RGB"
+    },
+    "graphics/photos/image0.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "21bdc8efe9dd4b9b7fe5a5bbfa4132e509083b4aa022eaf0566efcd675c67833",
+      "png": "graphics/photos/image0.png",
+      "rgba": "rgba/graphics/photos/image0.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/image1.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "f9717721bb1c10abe025c3f43c1d1a0fa075edcaef4ce6b458e96f2df582d338",
+      "png": "graphics/photos/image1.png",
+      "rgba": "rgba/graphics/photos/image1.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image10.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "411768b4dcaed2a49ea8f030ac663fdde09520b4c966b084602525f25cb73d2f",
+      "png": "graphics/photos/Image10.png",
+      "rgba": "rgba/graphics/photos/Image10.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image11.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "4f60f6f6a12fa5084ce4b3afcd619d80ff3645afea202a808d899f9918cdff13",
+      "png": "graphics/photos/Image11.png",
+      "rgba": "rgba/graphics/photos/Image11.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image12.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "5e6363de584c09e3921b1c8846d55dbf0755724d91471c49952be9ab84bfc195",
+      "png": "graphics/photos/Image12.png",
+      "rgba": "rgba/graphics/photos/Image12.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image13.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "7b1c831f01b00f70712bda0c1a690bbbac1859da690c1932dbac7f179e811d91",
+      "png": "graphics/photos/Image13.png",
+      "rgba": "rgba/graphics/photos/Image13.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image14.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "2ad8571c36fde3d37f7240ec3bbb8fee64f8867b30df4f868a5a9402f27c7eab",
+      "png": "graphics/photos/Image14.png",
+      "rgba": "rgba/graphics/photos/Image14.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image15.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "c3d1f46ef0dda9e9a4b3905644a10401716d92094b6a256b0650c7189d0a1724",
+      "png": "graphics/photos/Image15.png",
+      "rgba": "rgba/graphics/photos/Image15.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image16.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "415267610d798702a082699cb18ac3a8dda2aef631951f4be1b40f8e82594323",
+      "png": "graphics/photos/Image16.png",
+      "rgba": "rgba/graphics/photos/Image16.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image17.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "7d6bcd20bacaed717ec0222130ce1dd5c2f2e03781beec48941a46b751fac501",
+      "png": "graphics/photos/Image17.png",
+      "rgba": "rgba/graphics/photos/Image17.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image18.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "29c55a6a260e49761f7dd899f3ba9549f5d956e9a1fdfb73a052f8849b2c1830",
+      "png": "graphics/photos/Image18.png",
+      "rgba": "rgba/graphics/photos/Image18.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image19.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "4725f543aa6a3d721baaeb399fe83b86606dc870b65154a71c81bf5ed2ae7ab3",
+      "png": "graphics/photos/Image19.png",
+      "rgba": "rgba/graphics/photos/Image19.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/image2.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "ed7fc9db0327b14abf80e080b2c91485abe34d14aa0f59e2c4db731e50bfb5ac",
+      "png": "graphics/photos/image2.png",
+      "rgba": "rgba/graphics/photos/image2.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image20.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61836,
+      "sha256": "4884fd78fbeacd6caf4a911b3012cb9bfa2756f759a237a39b4262f0391879a9",
+      "png": "graphics/photos/Image20.png",
+      "rgba": "rgba/graphics/photos/Image20.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image3.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "aa3e71fdbfa9848d7af31bea4ec3e0a88be546329b738109095363b3e5ce4aa8",
+      "png": "graphics/photos/Image3.png",
+      "rgba": "rgba/graphics/photos/Image3.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image4.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "8f9e74de64cd1af4756269d1cdd415d919c7bfe210c94a20454a994097045b40",
+      "png": "graphics/photos/Image4.png",
+      "rgba": "rgba/graphics/photos/Image4.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image5.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "97de551aba3f7f204af448702d936ed721b6199813ae7aa361b3d20016d50d92",
+      "png": "graphics/photos/Image5.png",
+      "rgba": "rgba/graphics/photos/Image5.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image6.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "f4040401132e4b919ee30806a357152da5e275cbd6b0cdc09913e57d762bfeeb",
+      "png": "graphics/photos/Image6.png",
+      "rgba": "rgba/graphics/photos/Image6.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image7.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "7b9adddf9acec75f86764737ee356be7f2c7702c02ea1842dde01e9dde5218a3",
+      "png": "graphics/photos/Image7.png",
+      "rgba": "rgba/graphics/photos/Image7.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image8.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "f4da2a65f16968d423e6367068516a7e7437ee9525bd1c1c188fa71ec89bf16a",
+      "png": "graphics/photos/Image8.png",
+      "rgba": "rgba/graphics/photos/Image8.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/photos/Image9.tif": {
+      "archive": "graphics.dat",
+      "bytes": 61804,
+      "sha256": "cce4126c17d6a9689f20943c6896b60e3674d9ccd6f755dc37ae0c8ec76b34d1",
+      "png": "graphics/photos/Image9.png",
+      "rgba": "rgba/graphics/photos/Image9.tif.rgba",
+      "width": 128,
+      "height": 160,
+      "mode": "RGB"
+    },
+    "graphics/proceed.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3852,
+      "sha256": "ef40fcd2e06601fa315fb2f8530cbef4a379aece3f5eaed968e266d509f07032",
+      "png": "graphics/proceed.png",
+      "rgba": "rgba/graphics/proceed.tif.rgba",
+      "width": 80,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/proceed_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3852,
+      "sha256": "fc9c45578b9a7446bea363ef76c0e8522fcb36f1dc3ae6e1a6fac21bf2ecf0c0",
+      "png": "graphics/proceed_c.png",
+      "rgba": "rgba/graphics/proceed_c.tif.rgba",
+      "width": 80,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/proceed_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3852,
+      "sha256": "9c35bdf45578714ba8304ad3866b6526828404396a7626221250b906b030b126",
+      "png": "graphics/proceed_h.png",
+      "rgba": "rgba/graphics/proceed_h.tif.rgba",
+      "width": 80,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/audiooff.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1032,
+      "sha256": "02816ba7979b15bcaa50740aa8b7e08387344f38b1a50b9338fae75048ecdd7e",
+      "png": "graphics/software/audiooff.png",
+      "rgba": "rgba/graphics/software/audiooff.tif.rgba",
+      "width": 20,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/software/audiooff_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1032,
+      "sha256": "d5b3bbfeede54431cd3113f28d0c92378d6f69c5a6a7af6b9d18d4ef9bab8b57",
+      "png": "graphics/software/audiooff_c.png",
+      "rgba": "rgba/graphics/software/audiooff_c.tif.rgba",
+      "width": 20,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/software/audiooff_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1032,
+      "sha256": "541dd92932917f8e79f0a6afe7f5dbff143c01c7b1e32ad234a66a574324154c",
+      "png": "graphics/software/audiooff_h.png",
+      "rgba": "rgba/graphics/software/audiooff_h.tif.rgba",
+      "width": 20,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/software/audioon.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1032,
+      "sha256": "406ef2627188db5e7f317daab2f16cf0803f8b62c9ab3b4c0063d3732bc9c8d4",
+      "png": "graphics/software/audioon.png",
+      "rgba": "rgba/graphics/software/audioon.tif.rgba",
+      "width": 20,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/software/audioon_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1032,
+      "sha256": "b58c2f422af5842ad5d7c107cf3e581ab600aa43e7576c9f05de6715ad7ab7d9",
+      "png": "graphics/software/audioon_c.png",
+      "rgba": "rgba/graphics/software/audioon_c.tif.rgba",
+      "width": 20,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/software/audioon_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1032,
+      "sha256": "5645d0cda6ebb1650f83f320d55a4f2cd7d62cc403899c437df4ca778a40123e",
+      "png": "graphics/software/audioon_h.png",
+      "rgba": "rgba/graphics/software/audioon_h.tif.rgba",
+      "width": 20,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/software/cpy.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1152,
+      "sha256": "ab6946ba403c28b2d2178f53a0a1f0237b0b79cf6a9988a6f825fb0919dcf23a",
+      "png": "graphics/software/cpy.png",
+      "rgba": "rgba/graphics/software/cpy.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/dec.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1152,
+      "sha256": "14e0a2c839b754be5c6b17c8a65ddb28f99930113654c64ea30c51a299bdb2c7",
+      "png": "graphics/software/dec.png",
+      "rgba": "rgba/graphics/software/dec.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/del.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1152,
+      "sha256": "4648d2240c64cd3723524a16005bb0ba8ec5db7c0ddd8e239b6056022c042b3d",
+      "png": "graphics/software/del.png",
+      "rgba": "rgba/graphics/software/del.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/enc.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1152,
+      "sha256": "0ff8746513c862261b521301941b5035bbbee25a99ef54cc10a0676d1543e985",
+      "png": "graphics/software/enc.png",
+      "rgba": "rgba/graphics/software/enc.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/go.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1152,
+      "sha256": "e928fc3f6b1f207809939d5ae22abd4ccba9aaf30e1142bc47ccb2f7cf7f06fc",
+      "png": "graphics/software/go.png",
+      "rgba": "rgba/graphics/software/go.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/greenlight.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "da3cc861058d9bc0bc497c42f3f20b7e98b7bb2c30f0cc43fa92c400aa5ea219",
+      "png": "graphics/software/greenlight.png",
+      "rgba": "rgba/graphics/software/greenlight.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/greylight.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "d2f3db1729507f9413e765c244928c4281e56bd2159a942f14a00967c3b7a2d5",
+      "png": "graphics/software/greylight.png",
+      "rgba": "rgba/graphics/software/greylight.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/log.tif": {
+      "archive": "graphics.dat",
+      "bytes": 1152,
+      "sha256": "888417f3fd462972cd0900e186e1a56ac3817279e81171d61fb3c53413290a4f",
+      "png": "graphics/software/log.png",
+      "rgba": "rgba/graphics/software/log.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/pause.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "ae53b991aa9b04e010886aa237c81532290850fd800871b9aac35421b5aee5eb",
+      "png": "graphics/software/pause.png",
+      "rgba": "rgba/graphics/software/pause.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/pause_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "7648d8604b60fa34369ac5a3280ebd5944cde0831bee60d3a2de8d035f0ab5b8",
+      "png": "graphics/software/pause_c.png",
+      "rgba": "rgba/graphics/software/pause_c.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/pause_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "9ecc0aa12086054d58deaa7051f77f4d9639f82ca09852e519de97f874cb30f1",
+      "png": "graphics/software/pause_h.png",
+      "rgba": "rgba/graphics/software/pause_h.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/play.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "964a4ddd8ce4b79eb77b0c2cad6ec1466f7b0ee8de2717d8ba67927a003f2314",
+      "png": "graphics/software/play.png",
+      "rgba": "rgba/graphics/software/play.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/play_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "2034383544434cdee37983467c8b6cc26d72f37f6a53a7576a8aa0a3b2a83c46",
+      "png": "graphics/software/play_c.png",
+      "rgba": "rgba/graphics/software/play_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/play_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "59149d87621d137c1e77f8a631e62b3685d090716a8fd6e5a92be620a43c18c8",
+      "png": "graphics/software/play_h.png",
+      "rgba": "rgba/graphics/software/play_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/software/proxy.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "913e34bed2a069ebe1c6ce21bc4d3c3987cc6d44290979a75c140dfe107d94a6",
+      "png": "graphics/software/proxy.png",
+      "rgba": "rgba/graphics/software/proxy.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/proxybypass.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "afe059972cbdf24e9736b37328016a530160d5ea467679c39f0bd646b71d762b",
+      "png": "graphics/software/proxybypass.png",
+      "rgba": "rgba/graphics/software/proxybypass.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/software/redlight.tif": {
+      "archive": "graphics.dat",
+      "bytes": 684,
+      "sha256": "248d64823778241d9cdf3d849e514eb691c3a145810cb4d41425e9be9adc6219",
+      "png": "graphics/software/redlight.png",
+      "rgba": "rgba/graphics/software/redlight.tif.rgba",
+      "width": 12,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/start/gateway.tif": {
+      "archive": "graphics.dat",
+      "bytes": 15676,
+      "sha256": "d1839b90312e24514921ac4449b40d01f795c4a54360560b8e89a885cfab18a3",
+      "png": "graphics/start/gateway.png",
+      "rgba": "rgba/graphics/start/gateway.tif.rgba",
+      "width": 64,
+      "height": 80,
+      "mode": "RGB"
+    },
+    "graphics/start/localhost_linux.tif": {
+      "archive": "graphics.dat",
+      "bytes": 15484,
+      "sha256": "c7eb252cf7d5d11584f6e39a3fe09f00f837dfcb51f1b9dcf1a8f0eecf65c83e",
+      "png": "graphics/start/localhost_linux.png",
+      "rgba": "rgba/graphics/start/localhost_linux.tif.rgba",
+      "width": 64,
+      "height": 79,
+      "mode": "RGB"
+    },
+    "graphics/start/localhost_win32.tif": {
+      "archive": "graphics.dat",
+      "bytes": 15484,
+      "sha256": "20cf103fd3c9b57881057db89d6c435f592ac474a8acc335ed0511c2a9cf392f",
+      "png": "graphics/start/localhost_win32.png",
+      "rgba": "rgba/graphics/start/localhost_win32.tif.rgba",
+      "width": 64,
+      "height": 79,
+      "mode": "RGB"
+    },
+    "graphics/start/publicaccessserver.tif": {
+      "archive": "graphics.dat",
+      "bytes": 30340,
+      "sha256": "caecf750a877a6915bbe6b92ed74776a8bff62ccf1dccb089290b85e7046fe7a",
+      "png": "graphics/start/publicaccessserver.png",
+      "rgba": "rgba/graphics/start/publicaccessserver.tif.rgba",
+      "width": 100,
+      "height": 100,
+      "mode": "RGB"
+    },
+    "graphics/up.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "a122223084fc34f20943b24ea291407e934c16d09d91b4f14a8a68f14846ff95",
+      "png": "graphics/up.png",
+      "rgba": "rgba/graphics/up.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/cooling.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "141b2d12e2dcc8feb90168f1637f52382d77702cea2b8c3ae15220c37e63e792",
+      "png": "graphics/upgrades/cooling.png",
+      "rgba": "rgba/graphics/upgrades/cooling.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/cooling_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "dd7699ef4deee9f9bef753fb6084a7b0463be4f26fae52e94fa640d83fb5637b",
+      "png": "graphics/upgrades/cooling_c.png",
+      "rgba": "rgba/graphics/upgrades/cooling_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/cooling_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "f707d5b841e4a90596cb69465b86f269202d0ee6dd5d3a8dffd511af7a717c70",
+      "png": "graphics/upgrades/cooling_h.png",
+      "rgba": "rgba/graphics/upgrades/cooling_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/cpu.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "f3c54f488a0b4ab92eef03853f357e5c9f75e2a48300bf7ea604509383e7ac33",
+      "png": "graphics/upgrades/cpu.png",
+      "rgba": "rgba/graphics/upgrades/cpu.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/cpu_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "b9fab7bcd8753e5dfc51be45edf97bfdac6cf1b257aab3ce9f534987c3d90934",
+      "png": "graphics/upgrades/cpu_c.png",
+      "rgba": "rgba/graphics/upgrades/cpu_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/cpu_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "781d45c04c8e7d962ffa60197caf446f30ee1bf160258890fcc3afe93dcb0e60",
+      "png": "graphics/upgrades/cpu_h.png",
+      "rgba": "rgba/graphics/upgrades/cpu_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/exit.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "907c00f164adde74909dc9f9d49b4286af5e993edecb147544f62a2d5b902332",
+      "png": "graphics/upgrades/exit.png",
+      "rgba": "rgba/graphics/upgrades/exit.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/exit_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "3384500e4f29ec11d24d7ebb1bab08d4ed46946d41ebe07c48ff151ef316e306",
+      "png": "graphics/upgrades/exit_c.png",
+      "rgba": "rgba/graphics/upgrades/exit_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/exit_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3308,
+      "sha256": "3fc4f0fc76b0729951e3087411b69e77212d32c11484b290e4318ab81e73dc95",
+      "png": "graphics/upgrades/exit_h.png",
+      "rgba": "rgba/graphics/upgrades/exit_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/memory.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "f363bedd1608bebafa633193c3a3d0719c651656d668f315432473c87afc6e69",
+      "png": "graphics/upgrades/memory.png",
+      "rgba": "rgba/graphics/upgrades/memory.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/memory_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "b5eb136099cd3984d73c2c638312a68c23fe9d0c82d62de5d292ecb30bae31b3",
+      "png": "graphics/upgrades/memory_c.png",
+      "rgba": "rgba/graphics/upgrades/memory_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/memory_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "889eac9cabe65175a5137f97621a57077b6e1f724635cf205183942c7c32b30b",
+      "png": "graphics/upgrades/memory_h.png",
+      "rgba": "rgba/graphics/upgrades/memory_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/modem.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "dfd9916c5e8f11a2ef39e6d9e6776b0a9fb47bf3fca2e062910f9a039f48df10",
+      "png": "graphics/upgrades/modem.png",
+      "rgba": "rgba/graphics/upgrades/modem.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/modem_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "3648235b637046ec8b8828112af77a96fe718989eb33e45d7ac3875da274ad14",
+      "png": "graphics/upgrades/modem_c.png",
+      "rgba": "rgba/graphics/upgrades/modem_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/modem_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "50a8f60fbd445914f08862da2789bc1ec7e8f18f8ac5e3b3ada9f181bf01e386",
+      "png": "graphics/upgrades/modem_h.png",
+      "rgba": "rgba/graphics/upgrades/modem_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/power.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "e1e5f20b7d06ec266c30e8ba0c3b9363c4732779ced38e29ebe2f1d0971bfac9",
+      "png": "graphics/upgrades/power.png",
+      "rgba": "rgba/graphics/upgrades/power.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/power_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "c91b913bd449cc368b4e354e3cee7c3652cb9f9e17133502f84d507a24611d78",
+      "png": "graphics/upgrades/power_c.png",
+      "rgba": "rgba/graphics/upgrades/power_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/power_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "a3d38d90e0855e132c3eda318b4305b5c3b3f00dccc1f24b9b30f3ec950a5c45",
+      "png": "graphics/upgrades/power_h.png",
+      "rgba": "rgba/graphics/upgrades/power_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/security.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "6ecb4c00a70bed2f985ca1aeb4d96437165b0417f914c7d6b999ce0dd23f3015",
+      "png": "graphics/upgrades/security.png",
+      "rgba": "rgba/graphics/upgrades/security.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/security_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "53d2f6d3a997022102ff16837bdce1aa29568f0f5831cc935a59e3bdc69b6a2c",
+      "png": "graphics/upgrades/security_c.png",
+      "rgba": "rgba/graphics/upgrades/security_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/upgrades/security_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 3340,
+      "sha256": "067f5a420b9dea60485eba04529838a6116fb5d0726cfcabad2a396d406e74db",
+      "png": "graphics/upgrades/security_h.png",
+      "rgba": "rgba/graphics/upgrades/security_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/up_c.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "f8ab43ee400d11d5c381cdfc86556b0cad4c3e86dfba7dff29f623f780195873",
+      "png": "graphics/up_c.png",
+      "rgba": "rgba/graphics/up_c.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/up_h.tif": {
+      "archive": "graphics.dat",
+      "bytes": 928,
+      "sha256": "aa1cff6bdb9899e3d50754e0616d11477570292521d41824923ce9b1cb79a16c",
+      "png": "graphics/up_h.png",
+      "rgba": "rgba/graphics/up_h.tif.rgba",
+      "width": 15,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/userid.tif": {
+      "archive": "graphics.dat",
+      "bytes": 79556,
+      "sha256": "c685d2ea8dab1e69ba0c49a29a16051650e380342eb4869b7edfadc5f0595015",
+      "png": "graphics/userid.png",
+      "rgba": "rgba/graphics/userid.tif.rgba",
+      "width": 220,
+      "height": 120,
+      "mode": "RGB"
+    },
+    "graphics/worldmaplarge.tif": {
+      "archive": "graphics.dat",
+      "bytes": 197068,
+      "sha256": "a9785262aad99efbbb14d7d717da7dea4da35e41f1f58f18bbddd6aee2b6c1d5",
+      "png": "graphics/worldmaplarge.png",
+      "rgba": "rgba/graphics/worldmaplarge.tif.rgba",
+      "width": 256,
+      "height": 256,
+      "mode": "RGB"
+    },
+    "graphics/worldmaplarge_mask.tif": {
+      "archive": "graphics.dat",
+      "bytes": 8666,
+      "sha256": "a3360247051e3ab23cacad4efd0a363843dc1fd9c22c77a51febcf7514be3c53",
+      "png": "graphics/worldmaplarge_mask.png",
+      "rgba": "rgba/graphics/worldmaplarge_mask.tif.rgba",
+      "width": 256,
+      "height": 256,
+      "mode": "1"
+    },
+    "graphics/worldmapsmall.tif": {
+      "archive": "graphics.dat",
+      "bytes": 56708,
+      "sha256": "4645c29e8f7c8d0dfe2a2b3fed12295952f59bddd4509e61f91a1823833eef62",
+      "png": "graphics/worldmapsmall.png",
+      "rgba": "rgba/graphics/worldmapsmall.tif.rgba",
+      "width": 188,
+      "height": 100,
+      "mode": "RGB"
+    },
+    "graphics/loading/bluedive.tif": {
+      "archive": "loading.dat",
+      "bytes": 309414,
+      "sha256": "8fa2b420cca148f957c8ec8908428b34abb2819ca9ec9f5cef3512de2ed7558c",
+      "png": "graphics/loading/bluedive.png",
+      "rgba": "rgba/graphics/loading/bluedive.tif.rgba",
+      "width": 640,
+      "height": 480,
+      "mode": "P"
+    },
+    "graphics/loading/eye.tif": {
+      "archive": "loading.dat",
+      "bytes": 309414,
+      "sha256": "48ef58f8055dc68a9707339d043f463924faf974021fb262da8870c0f38e8a37",
+      "png": "graphics/loading/eye.png",
+      "rgba": "rgba/graphics/loading/eye.tif.rgba",
+      "width": 640,
+      "height": 480,
+      "mode": "P"
+    },
+    "graphics/loading/eye2.tif": {
+      "archive": "loading.dat",
+      "bytes": 112614,
+      "sha256": "8114afed1d16ec2e7573a9b32f70016e2e065845a5233e057b5cfd5b18c0b5d7",
+      "png": "graphics/loading/eye2.png",
+      "rgba": "rgba/graphics/loading/eye2.tif.rgba",
+      "width": 384,
+      "height": 288,
+      "mode": "P"
+    },
+    "graphics/loading/filenames.txt": {
+      "archive": "loading.dat",
+      "bytes": 96,
+      "sha256": "46cfb24b8446553060a1d5ea451507efae80f025fbbd1d6484b6f8358510dedf"
+    },
+    "graphics/loading/kris.tif": {
+      "archive": "loading.dat",
+      "bytes": 67526,
+      "sha256": "11bdfe8c8d49584e2157c616dd776db74f5f72dca2cbf7bc1c32215a9a3fc00c",
+      "png": "graphics/loading/kris.png",
+      "rgba": "rgba/graphics/loading/kris.tif.rgba",
+      "width": 256,
+      "height": 256,
+      "mode": "P"
+    },
+    "graphics/loading/Loading.tif": {
+      "archive": "loading.dat",
+      "bytes": 922284,
+      "sha256": "2513720f910f7e0bf2a6d4250bb43d3ee70a663d145053edf23e91a78940fc62",
+      "png": "graphics/loading/Loading.png",
+      "rgba": "rgba/graphics/loading/Loading.tif.rgba",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB"
+    },
+    "sounds/1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4548,
+      "sha256": "4eeed852283fbf94b0b82f3a7a785a5c58f25a436e39ad1337ac41f259a1489e"
+    },
+    "sounds/2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4548,
+      "sha256": "20c76c36577d02433aa537921447ddaf00bf58ea7f3f11f6cdaacdb330167d1a"
+    },
+    "sounds/3.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4606,
+      "sha256": "364a37f1f76c8202807739c62729a644886e462f456e7d0ad6d9993da13e9923"
+    },
+    "sounds/4.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4604,
+      "sha256": "bdadfa55b473f2a0df9180e0af4f4a231e8bbe329dcdbe4ba6ebb0a80a0de120"
+    },
+    "sounds/5.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4716,
+      "sha256": "f8e5052eb23ef85c53d9f1dc75635610f13926ee2a8ccfd5ae647e3c09976a85"
+    },
+    "sounds/6.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4546,
+      "sha256": "e3194709e5d50e470d0e2a588424ee33ad3a7a5f61c36a0dd89558492048d1c8"
+    },
+    "sounds/7.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4548,
+      "sha256": "4eeed852283fbf94b0b82f3a7a785a5c58f25a436e39ad1337ac41f259a1489e"
+    },
+    "sounds/8.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4548,
+      "sha256": "20c76c36577d02433aa537921447ddaf00bf58ea7f3f11f6cdaacdb330167d1a"
+    },
+    "sounds/9.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4606,
+      "sha256": "364a37f1f76c8202807739c62729a644886e462f456e7d0ad6d9993da13e9923"
+    },
+    "sounds/addlink.wav": {
+      "archive": "sounds.dat",
+      "bytes": 71840,
+      "sha256": "0bdf59a3d9a8c6f8e49010a45177b7a6f2ade10e435afa44c37b18fd0f7f6e1a"
+    },
+    "sounds/analyser/hello1_0.wav": {
+      "archive": "sounds.dat",
+      "bytes": 44038,
+      "sha256": "254e8cd39e1dfcad265a9c4c08a2e9e717ba6843c3c636b64c85461a5f269e3e"
+    },
+    "sounds/analyser/hello1_1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 46444,
+      "sha256": "6d9e94f38fdf164ca7fcddbf086dcc163afc14498834494876efa8cb1497eba8"
+    },
+    "sounds/analyser/hello1_2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 44638,
+      "sha256": "40261f542a7a70b0d8a85c02583f9a0766d77552db3e552de6c7c10e12413d30"
+    },
+    "sounds/analyser/hello2_0.wav": {
+      "archive": "sounds.dat",
+      "bytes": 43620,
+      "sha256": "29129b79629808ff10c06b87555ca85326b656613cb52634772ec32d41ff807f"
+    },
+    "sounds/analyser/hello2_1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 57712,
+      "sha256": "f65d1ba8f760f682dceb3c63eebdd919ee9be4adabccdfd2e0b7bba4512b9762"
+    },
+    "sounds/analyser/hello2_2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 40544,
+      "sha256": "29d545c4d9c7d5dfddbc14750351a3acd17ac924b906488ec7299d9f2ca7939a"
+    },
+    "sounds/analyser/hello3_0.wav": {
+      "archive": "sounds.dat",
+      "bytes": 28240,
+      "sha256": "2dc39a3a30aee8301df7f7f7880b296fad637133853c96fa67e74df4126ac43d"
+    },
+    "sounds/analyser/hello3_1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 28240,
+      "sha256": "e544f5f2fa80396999afdcf202cf0dec9ca56d06a0c7e7fef003b6a4a617b50f"
+    },
+    "sounds/analyser/hello3_2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 28240,
+      "sha256": "e431458e100cb8991f0db702fe8c4b1c7e73f0e27aa48824acd7be1cae9302db"
+    },
+    "sounds/analyser/hello4_0.wav": {
+      "archive": "sounds.dat",
+      "bytes": 27830,
+      "sha256": "83cc5e075a591f7f952fac1e40b07d67d1bc79c5e86e74818523b85b13a28a1c"
+    },
+    "sounds/analyser/hello4_1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 39858,
+      "sha256": "5a28ac9e3a9667560925c6328ca4e90ba013adc8bce34626d9bbf1bb51521546"
+    },
+    "sounds/analyser/hello4_2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 41950,
+      "sha256": "6ff782bfd463f6ab77abd2a843226cab572c7fee0470f3816463043947ce50c4"
+    },
+    "sounds/analyser/verifyme1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 352938,
+      "sha256": "12f229fea5eb378d4fd06450c1671ae6baa9db83fa4f4128a144a3a99ba13afb"
+    },
+    "sounds/analyser/verifyme2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 301800,
+      "sha256": "4b9878a74c775f22ddea5a96ea3efb1773200954d09ebf2539fe614f6ae126be"
+    },
+    "sounds/analyser/verifyme3.wav": {
+      "archive": "sounds.dat",
+      "bytes": 240496,
+      "sha256": "ca66c45e5c12fa39925aaa2de06be4be82842378cd1c5a8c74f8965fa452cf28"
+    },
+    "sounds/analyser/verifyme4.wav": {
+      "archive": "sounds.dat",
+      "bytes": 220616,
+      "sha256": "a96de0f5d195591b81be2b2e571cbf7730a9dbb46b2f6bd964aa231875f708b1"
+    },
+    "sounds/close.wav": {
+      "archive": "sounds.dat",
+      "bytes": 7886,
+      "sha256": "7cbdccf65918db559b75f61e38f157fc37e76ab2d41dfd5aab4655745bdbb583"
+    },
+    "sounds/done.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4548,
+      "sha256": "4eeed852283fbf94b0b82f3a7a785a5c58f25a436e39ad1337ac41f259a1489e"
+    },
+    "sounds/explosion1.wav": {
+      "archive": "sounds.dat",
+      "bytes": 130698,
+      "sha256": "419217e850684d1d76c46f15c4ab51b4171ebdefaca1b6bee1941e220166e7c5"
+    },
+    "sounds/explosion2.wav": {
+      "archive": "sounds.dat",
+      "bytes": 100434,
+      "sha256": "aad2b44880e9b06f5d226bffd95d24af4953df18debf431768ae42615011a892"
+    },
+    "sounds/explosion3.wav": {
+      "archive": "sounds.dat",
+      "bytes": 53114,
+      "sha256": "225b9f8a1797da35dfc386342f1548cbc8c5807c0b307b5e1ac1c73bf63fd406"
+    },
+    "sounds/failure.wav": {
+      "archive": "sounds.dat",
+      "bytes": 2340,
+      "sha256": "e9dce73bb8c858c92e1a0da0f54b8651b995795a001cfdf52ba9cac4a755b1c3"
+    },
+    "sounds/faith.wav": {
+      "archive": "sounds.dat",
+      "bytes": 91894,
+      "sha256": "cb51bd04053e29dd9b75bb484e58d48666c8c14ce330c92314fe82d858077d7a"
+    },
+    "sounds/login.wav": {
+      "archive": "sounds.dat",
+      "bytes": 88270,
+      "sha256": "d7cf7cd6f039a48a2a482634d63a56a3041d6d523f1c0556c32f1f1bbebb16b6"
+    },
+    "sounds/menuitemclick.wav": {
+      "archive": "sounds.dat",
+      "bytes": 5262,
+      "sha256": "198c9a5a6386ae6ff7321d02c2f974b4fceeecac1554a86547ab8c5bfdd23f12"
+    },
+    "sounds/mouseclick.wav": {
+      "archive": "sounds.dat",
+      "bytes": 1028,
+      "sha256": "58ed9e9cb6ae82404c5e66ccea8060394e67a4877edfedf728b7a8d4fe8c9737"
+    },
+    "sounds/mouseover.wav": {
+      "archive": "sounds.dat",
+      "bytes": 1480,
+      "sha256": "ed4ba5b13c0bf7345b3f5f31f7b8d5cf72252395f18c8e6cc61ba28a2fa25d52"
+    },
+    "sounds/newmail.wav": {
+      "archive": "sounds.dat",
+      "bytes": 40702,
+      "sha256": "940d845633ffed00a48529b85454b157203550d15b67c64618908f04b26ad681"
+    },
+    "sounds/newmailreverse.wav": {
+      "archive": "sounds.dat",
+      "bytes": 40702,
+      "sha256": "51a0a9899c8adfd508ca397b1efd6a7f1f81e4caee71ea34f5f83b3f285e61b8"
+    },
+    "sounds/openworldmap.wav": {
+      "archive": "sounds.dat",
+      "bytes": 5262,
+      "sha256": "198c9a5a6386ae6ff7321d02c2f974b4fceeecac1554a86547ab8c5bfdd23f12"
+    },
+    "sounds/phonepickup.wav": {
+      "archive": "sounds.dat",
+      "bytes": 12788,
+      "sha256": "21229b63d2e9526b1e896bad9aaab901e139249c9073571877cfc06241096a29"
+    },
+    "sounds/revelation.wav": {
+      "archive": "sounds.dat",
+      "bytes": 146180,
+      "sha256": "8879cc046dbe864f0177978f1639d1e894eed77955f2277ec277a91ecb6b7c3d"
+    },
+    "sounds/ringout.wav": {
+      "archive": "sounds.dat",
+      "bytes": 10456,
+      "sha256": "ca4fb28cee701f9c20f7f6476069e0b75401133e076aa29d4e7bde30cfda1671"
+    },
+    "sounds/runsoftware.wav": {
+      "archive": "sounds.dat",
+      "bytes": 16002,
+      "sha256": "9506a272face5cbaeaa38dd183c45c241cc25a3453c771e0e046113f490cffcd"
+    },
+    "sounds/softwaremenu.wav": {
+      "archive": "sounds.dat",
+      "bytes": 4990,
+      "sha256": "5f66793f6dfbdacbcd158fb5f99f1a029f1b033f51e679becde286b5909de6cb"
+    },
+    "sounds/success.wav": {
+      "archive": "sounds.dat",
+      "bytes": 180944,
+      "sha256": "edd7c3ba927f5f46532048270c01513fff882a20013e97fd5abdcb380a978878"
+    },
+    "sounds/tracebleep.wav": {
+      "archive": "sounds.dat",
+      "bytes": 5012,
+      "sha256": "87d33d1bc67962099b71d43b31c5757f215f30b57f2709c917635e5bc95b9c9e"
+    },
+    "sounds/zap.wav": {
+      "archive": "sounds.dat",
+      "bytes": 3656,
+      "sha256": "e8015cc86809d849499b1cefc9724cf6172be5c4739c855f4741b084ff051f94"
+    },
+    "music/a94final.uni": {
+      "archive": "music.dat",
+      "bytes": 353825,
+      "sha256": "74ad2f63021f7f7a1e4aacbbafa2d9c4597477660a4cd4ac191c5c5621a293f1",
+      "format": "MikMod UNIMOD version 5",
+      "magic": "UN05"
+    },
+    "music/bluevalley.uni": {
+      "archive": "music.dat",
+      "bytes": 500992,
+      "sha256": "6b642855eaf3f539ffd7547d3517078bc988bec7bd6a694b64f8e313cdb42898",
+      "format": "MikMod UNIMOD version 5",
+      "magic": "UN05"
+    },
+    "music/myst2.uni": {
+      "archive": "music.dat",
+      "bytes": 643297,
+      "sha256": "fc874dabffc1f8a3fb069b12200b36022f34794f78ed0d0ee2101cb776f5e9ce",
+      "format": "MikMod UNIMOD version 5",
+      "magic": "UN05"
+    },
+    "music/mystique.uni": {
+      "archive": "music.dat",
+      "bytes": 411652,
+      "sha256": "b20635c89772aeb082674c3dc45ae37de7ca7e0ade1afffcf73529888bd563e4",
+      "format": "MikMod UNIMOD version 5",
+      "magic": "UN05"
+    },
+    "music/serenity.uni": {
+      "archive": "music.dat",
+      "bytes": 249963,
+      "sha256": "4c6778038cdf35870383d646a571e9290109e40c49e2f03f70299984dce52375",
+      "format": "MikMod UNIMOD version 5",
+      "magic": "UN05"
+    },
+    "music/symphonic.uni": {
+      "archive": "music.dat",
+      "bytes": 110951,
+      "sha256": "f9dc2987067dae326eeed558cf9e61d36c081ebee597915f88ed000e6643ee26",
+      "format": "MikMod UNIMOD version 5",
+      "magic": "UN05"
+    },
+    "fonts/BATTLE3.TTF": {
+      "archive": "fonts.dat",
+      "bytes": 11256,
+      "sha256": "0203340e1c56d0bf99a315f6d61758dd9d73d1d0c810d0a89a24fb892d5eb8d2"
+    },
+    "fonts/dungeon.TTF": {
+      "archive": "fonts.dat",
+      "bytes": 67904,
+      "sha256": "d7e85a2fd061f44f1df8fa909d1a6c44ec0dde242ad5447d926c78206ba64228"
+    },
+    "data/lans/sample.txt": {
+      "archive": "patch.dat",
+      "bytes": 2872,
+      "sha256": "59581d39bfa4a13903c5624b327856ce47b6f0f11b0aac042c7dd6e7105e57fc"
+    },
+    "graphics/hud/irc.tif": {
+      "archive": "patch.dat",
+      "bytes": 1988,
+      "sha256": "15fae3887cabaf91a662d9b4e30a851a1e6107924fa1e3a1731ddf56cf5b17b9",
+      "png": "graphics/hud/irc.png",
+      "rgba": "rgba/graphics/hud/irc.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/irc_c.tif": {
+      "archive": "patch.dat",
+      "bytes": 1988,
+      "sha256": "6cfb1594ae7dc70345f7b99d03fb5c33eb467dad2b3fbd4e2bd8e28dbf2d0004",
+      "png": "graphics/hud/irc_c.png",
+      "rgba": "rgba/graphics/hud/irc_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/irc_h.tif": {
+      "archive": "patch.dat",
+      "bytes": 1988,
+      "sha256": "7555868b8f75b902f81d5caf5ddfc20b06b07afdc0580c35c791d869c662adf4",
+      "png": "graphics/hud/irc_h.png",
+      "rgba": "rgba/graphics/hud/irc_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/lan.tif": {
+      "archive": "patch.dat",
+      "bytes": 1988,
+      "sha256": "9c64199c65fac7d7013bb9f6b3e1710f7adedb45ed5b225542899679f1ef7762",
+      "png": "graphics/hud/lan.png",
+      "rgba": "rgba/graphics/hud/lan.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/lan_c.tif": {
+      "archive": "patch.dat",
+      "bytes": 1988,
+      "sha256": "48b8ec96e1318d8eaef3e875f147373c371d1454734bf2096b34d7f32278b59a",
+      "png": "graphics/hud/lan_c.png",
+      "rgba": "rgba/graphics/hud/lan_c.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/hud/lan_h.tif": {
+      "archive": "patch.dat",
+      "bytes": 1988,
+      "sha256": "ad211cb5ea6403a144af411d13f53f0f80f4661bd2c6a965ff11298015a11c3e",
+      "png": "graphics/hud/lan_h.png",
+      "rgba": "rgba/graphics/hud/lan_h.tif.rgba",
+      "width": 24,
+      "height": 24,
+      "mode": "RGB"
+    },
+    "graphics/irc/smileyhappy.tif": {
+      "archive": "patch.dat",
+      "bytes": 728,
+      "sha256": "de1f4e3fbeded62effb3ed19b0cdd143d4cb48de96103f9b45fa1f04be374476",
+      "png": "graphics/irc/smileyhappy.png",
+      "rgba": "rgba/graphics/irc/smileyhappy.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/irc/smileysad.tif": {
+      "archive": "patch.dat",
+      "bytes": 728,
+      "sha256": "ef83424c75727e30d0617d316aa09cbaf59a727181b30586dd7f0496dc1b59cb",
+      "png": "graphics/irc/smileysad.png",
+      "rgba": "rgba/graphics/irc/smileysad.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/irc/smileywink.tif": {
+      "archive": "patch.dat",
+      "bytes": 728,
+      "sha256": "ea4ffc4221a9f0c1118ac449282e2a4866244420bc5184477bee671144c89369",
+      "png": "graphics/irc/smileywink.png",
+      "rgba": "rgba/graphics/irc/smileywink.tif.rgba",
+      "width": 13,
+      "height": 13,
+      "mode": "RGB"
+    },
+    "graphics/lan/authentication.tif": {
+      "archive": "patch.dat",
+      "bytes": 7636,
+      "sha256": "c8a2da3178aac3d1524df4ae21f6e3a6ca89ffba31e87b4f707a6a038363deec",
+      "png": "graphics/lan/authentication.png",
+      "rgba": "rgba/graphics/lan/authentication.tif.rgba",
+      "width": 48,
+      "height": 51,
+      "mode": "RGB"
+    },
+    "graphics/lan/centralsystem.tif": {
+      "archive": "patch.dat",
+      "bytes": 11308,
+      "sha256": "f346fb868c1c4dd410b7ed9833bf714c1a2f422a140fc33d139e037748bbdf4c",
+      "png": "graphics/lan/centralsystem.png",
+      "rgba": "rgba/graphics/lan/centralsystem.tif.rgba",
+      "width": 72,
+      "height": 51,
+      "mode": "RGB"
+    },
+    "graphics/lan/hub.tif": {
+      "archive": "patch.dat",
+      "bytes": 3140,
+      "sha256": "db39bfb577c0b82d8197273960eddd8f53a1035b244a3d3f88db28767408a0e7",
+      "png": "graphics/lan/hub.png",
+      "rgba": "rgba/graphics/lan/hub.tif.rgba",
+      "width": 48,
+      "height": 20,
+      "mode": "RGB"
+    },
+    "graphics/lan/isolation.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "9b1d8a6e1115f55ae245748fd74327de101b2e3311d3786e1709efbba6e0b280",
+      "png": "graphics/lan/isolation.png",
+      "rgba": "rgba/graphics/lan/isolation.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/key.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "5822a66dd5c7e6ee58531e78479e49ad1f15f8a6da4ad01a78da1e761a8de3ed",
+      "png": "graphics/lan/key.png",
+      "rgba": "rgba/graphics/lan/key.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/lock.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "06f34f7a9007b6ba77b24f30db903d0703b06c520c70889a3ba2c2ecf8b80fb7",
+      "png": "graphics/lan/lock.png",
+      "rgba": "rgba/graphics/lan/lock.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/mailserver.tif": {
+      "archive": "patch.dat",
+      "bytes": 7636,
+      "sha256": "03ccd089a70fbca84eeb6d7543f748be73f9f739bdb2964fddca0d1359c93d35",
+      "png": "graphics/lan/mailserver.png",
+      "rgba": "rgba/graphics/lan/mailserver.tif.rgba",
+      "width": 48,
+      "height": 51,
+      "mode": "RGB"
+    },
+    "graphics/lan/modem.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "9e5f5251a4a771f533cb5de0f716d27683c711851bb9932a01ccd12b655bc2f0",
+      "png": "graphics/lan/modem.png",
+      "rgba": "rgba/graphics/lan/modem.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/radiorec.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "2fab51c9fe55f3d65f96055dd34c220e467de22435d300e4f842358042c2199b",
+      "png": "graphics/lan/radiorec.png",
+      "rgba": "rgba/graphics/lan/radiorec.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/radiotrans.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "a0cb7c89feb46760a4124c306eb1caa1cc25ba7d5ce8eaf52767b925fbbe89b7",
+      "png": "graphics/lan/radiotrans.png",
+      "rgba": "rgba/graphics/lan/radiotrans.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/router.tif": {
+      "archive": "patch.dat",
+      "bytes": 4876,
+      "sha256": "0ae3e69acfa1656f3a09a2d1f5c6cc06d2100635b36d4d8a4276f7c1d500f733",
+      "png": "graphics/lan/router.png",
+      "rgba": "rgba/graphics/lan/router.tif.rgba",
+      "width": 48,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/lan/terminal.tif": {
+      "archive": "patch.dat",
+      "bytes": 4494,
+      "sha256": "0358914c1ad7fdc1c5aa4e2968b461e3b66f9b447d0769ec1c31f6c998dd1cec",
+      "png": "graphics/lan/terminal.png",
+      "rgba": "rgba/graphics/lan/terminal.tif.rgba",
+      "width": 38,
+      "height": 37,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/newpatch.tif": {
+      "archive": "patch.dat",
+      "bytes": 63472,
+      "sha256": "e0062e06ff638e1c029b2766d914887dc1ba94aa7e83f53187d17d1714cffb65",
+      "png": "graphics/mainmenu/newpatch.png",
+      "rgba": "rgba/graphics/mainmenu/newpatch.tif.rgba",
+      "width": 405,
+      "height": 52,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/theme.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "4484f1f307e62ef3eab485c90b32e0ec8738323ab76ca325163fb3d1cdd6ff4e",
+      "png": "graphics/mainmenu/theme.png",
+      "rgba": "rgba/graphics/mainmenu/theme.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/theme_c.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "77dd8a84e819cda28bb99f616316d7ab651d8f7cdec9f3c89fff7331ff0e745e",
+      "png": "graphics/mainmenu/theme_c.png",
+      "rgba": "rgba/graphics/mainmenu/theme_c.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/theme_h.tif": {
+      "archive": "patch.dat",
+      "bytes": 3340,
+      "sha256": "206f35715fefc2096381d21f8712bcd580184e304b3f95eca7d4b93d63a9e45c",
+      "png": "graphics/mainmenu/theme_h.png",
+      "rgba": "rgba/graphics/mainmenu/theme_h.tif.rgba",
+      "width": 32,
+      "height": 32,
+      "mode": "RGB"
+    },
+    "graphics/mainmenu/versionnew.tif": {
+      "archive": "patch.dat",
+      "bytes": 12132,
+      "sha256": "cacfe856aa0702b9385f1e5511d07ed0c8ad833291028e700c31d49fc78df26e",
+      "png": "graphics/mainmenu/versionnew.png",
+      "rgba": "rgba/graphics/mainmenu/versionnew.tif.rgba",
+      "width": 330,
+      "height": 12,
+      "mode": "RGB"
+    },
+    "graphics/software/lan.tif": {
+      "archive": "patch.dat",
+      "bytes": 1152,
+      "sha256": "5e6c0e4228872e02b1bb3861d690815fcf1ce1dfa6c2c1ea3e0044593211707c",
+      "png": "graphics/software/lan.png",
+      "rgba": "rgba/graphics/software/lan.tif.rgba",
+      "width": 20,
+      "height": 15,
+      "mode": "RGB"
+    },
+    "graphics/theme.txt": {
+      "archive": "patch.dat",
+      "bytes": 1242,
+      "sha256": "182d09a638e5100129ccb00f068b387e84c712f7606d9c2313a88695906a07a9"
+    },
+    "sounds/siren.wav": {
+      "archive": "patch.dat",
+      "bytes": 93122,
+      "sha256": "680042d0fbd805eeaa4e436d7614677e88479a8f05e4121ef829d9dc904735d7"
+    },
+    "graphics/worldmaplarge_mask_new.tif": {
+      "archive": "patch2.dat",
+      "bytes": 4842,
+      "sha256": "e6e12099a325c60ae93f6cf27ee62c312018dd701c9da7a337304bb455a76cbb",
+      "png": "graphics/worldmaplarge_mask_new.png",
+      "rgba": "rgba/graphics/worldmaplarge_mask_new.tif.rgba",
+      "width": 256,
+      "height": 256,
+      "mode": "L"
+    },
+    "graphics/worldmaplarge_defcon.tif": {
+      "archive": "patch3.dat",
+      "bytes": 259288,
+      "sha256": "58a178c8caf0e076b0fe656bba78087488f1c29ea4abc2b99e48b4d1e5bb00e7",
+      "png": "graphics/worldmaplarge_defcon.png",
+      "rgba": "rgba/graphics/worldmaplarge_defcon.tif.rgba",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    "graphics/worldmaplarge_mask_defcon.tif": {
+      "archive": "patch3.dat",
+      "bytes": 5886,
+      "sha256": "932f5e83f7ea31e142c479f501d69e0f5fa36c461681b835833a1c4329e54376",
+      "png": "graphics/worldmaplarge_mask_defcon.png",
+      "rgba": "rgba/graphics/worldmaplarge_mask_defcon.tif.rgba",
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    "graphics/worldmapsmall_defcon.tif": {
+      "archive": "patch3.dat",
+      "bytes": 24288,
+      "sha256": "939e756b736b5f98c532d33d96e56881e46bdcc0371ed1bc133a2ba892cf9bfe",
+      "png": "graphics/worldmapsmall_defcon.png",
+      "rgba": "rgba/graphics/worldmapsmall_defcon.tif.rgba",
+      "width": 188,
+      "height": 100,
+      "mode": "RGB"
+    }
+  },
+  "archives": [
+    {
+      "name": "data.dat",
+      "format": "REDSHIRT (9-byte marker; payload byte XOR 0x80)",
+      "sha256": "569e52f3b4c997f40e9d612cc748506172dcb3928635adbdf276ee3c639b83f8",
+      "entries": 7
+    },
+    {
+      "name": "graphics.dat",
+      "format": "ZIP",
+      "sha256": "9def1f3f0df72979bb7395a8f73e1321f5d4c92457a4d384c97dd2b764b71197",
+      "entries": 244
+    },
+    {
+      "name": "loading.dat",
+      "format": "ZIP",
+      "sha256": "51191eb7b009acf5a804a8f23a3a2b968833e25561b820db570aae6c1a2899b0",
+      "entries": 6
+    },
+    {
+      "name": "sounds.dat",
+      "format": "ZIP",
+      "sha256": "99cc6b65ac4bda8f2215b9c2576a1f259714b3a1cab792791dbbbdde3ae6ae54",
+      "entries": 48
+    },
+    {
+      "name": "music.dat",
+      "format": "ZIP",
+      "sha256": "a46188ce35fa865ea44eeb259c237c1ed8524a2c39e945cbdd8d1ab72dccb038",
+      "entries": 6
+    },
+    {
+      "name": "fonts.dat",
+      "format": "ZIP",
+      "sha256": "7ea26d8d223aea48786f4c33ea916518988305400959924beb5ef093e79908ca",
+      "entries": 2
+    },
+    {
+      "name": "patch.dat",
+      "format": "ZIP",
+      "sha256": "29adf880225ef1ad12699286ef5e0efc27005f93567b6c69708e27139780c752",
+      "entries": 30
+    },
+    {
+      "name": "patch2.dat",
+      "format": "ZIP",
+      "sha256": "c71ad56798eaa434508fc3a9e1eb4ef53a73a4b064699d1d8f038dab3ecf6a5b",
+      "entries": 1
+    },
+    {
+      "name": "patch3.dat",
+      "format": "ZIP",
+      "sha256": "f61ca3096b349ce102ba24d0edf5889eda6c4bfcb9763dfdf277b97b35005a09",
+      "entries": 3
+    }
+  ],
+  "counts": {
+    ".txt": 10,
+    ".tif": 280,
+    ".wav": 49,
+    ".uni": 6,
+    ".ttf": 2
+  }
+}

@@ -1,0 +1,43 @@
+# Local SDK, transport helpers and input archive duplicates
+/toolchain/
+/library-helper/
+/source.zip
+/uplink-browser-port-changes.zip
+# Reproducible local outputs
+/port/game-objects/
+/port/ftgl/
+/port/*.log
+/port/game-link-test.*
+/prototype/music-build/
+/prototype/game.js
+/prototype/game.wasm
+/prototype/game.data
+/prototype/prototype.js
+/prototype/prototype.wasm
+/prototype/prototype.data
+/prototype/assets/music/*.wav
+/qa/
+/node_modules/
+/.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+# Native binaries/build artifacts from the original source distribution.
+*.o
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.sbr
+*.bsc
+*.ncb
+*.suo
+*.idb
+*.pch
+*.exe
+*.dll
+*.so
+*.a
+*.lib

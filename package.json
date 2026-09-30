@@ -17,7 +17,8 @@
     "test:browser-lifecycle": "node port/tests/browser-lifecycle.cjs",
     "test:browser-storage": "node port/tests/browser-storage.cjs",
     "prepare:pages": "python3 port/prepare-pages.py",
-    "test:pages": "node port/tests/browser-pages.cjs"
+    "test:pages": "node port/tests/browser-pages.cjs",
+    "test:browser-display": "node port/tests/browser-display.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

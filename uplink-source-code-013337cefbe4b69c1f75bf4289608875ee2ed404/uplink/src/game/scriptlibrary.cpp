@@ -1178,6 +1178,10 @@ void ScriptLibrary::Script42 ()
 	// Put this line in to disable "first time" after one game		
 
 	app->GetOptions ()->SetOptionValue ( "game_firsttime", 0 );
+#ifdef __EMSCRIPTEN__
+    // Persist completed onboarding before a browser reload can restart it.
+    app->GetOptions ()->Save ( NULL );
+#endif
 
 	game->GetInterface ()->GetRemoteInterface ()->RunScreen ( 6 );
 	

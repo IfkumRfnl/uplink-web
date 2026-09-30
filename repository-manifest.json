@@ -4,8 +4,8 @@
   "files": [
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 1799,
-      "sha256": "5d9efc9dcfb24401125005d9f969ac763b5eaf4819cc79d5740ae6895468359c"
+      "bytes": 1838,
+      "sha256": "62fd0153898546d063eb002c2c21ab6ea991b23223bcc26c98f4972fdfc054af"
     },
     {
       "path": ".gitignore",
@@ -84,8 +84,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1019,
-      "sha256": "e335682b012033d6071295e27b97dad306c350ccadd55aa92c6850e287d31d5b"
+      "bytes": 1086,
+      "sha256": "244bb0cfa45f01d6a818c22b9c2db552efbe1bbc9aedf51e191c34b046fdb773"
     },
     {
       "path": "port/BUILD_STATUS.md",
@@ -148,6 +148,11 @@
       "sha256": "e4c4a7f5d96410258a95ff7f6ff5b603b67bd3f0e2774bf55dd5189da672e17f"
     },
     {
+      "path": "port/display-notes.md",
+      "bytes": 2976,
+      "sha256": "ddf704b659f839dbef55f7d552458841c804f26f6e425060b739e58d28e5663f"
+    },
+    {
       "path": "port/gl-compat.cpp",
       "bytes": 2533,
       "sha256": "e91d7f965d2eb0776efdf41cee8e96e04d7ecc513ed24badbf53bc2e2c406069"
@@ -179,8 +184,8 @@
     },
     {
       "path": "port/patch-ftgl.py",
-      "bytes": 2431,
-      "sha256": "bffd8708cc48182aecb6a5788292abd45bbbffa31df61c851f3ad62e56a8386a"
+      "bytes": 2816,
+      "sha256": "6683bd1168a6ce1ca6cf87f9b78d978a640cbc9e0860776567c1f9c604786ce6"
     },
     {
       "path": "port/persistence-notes.md",
@@ -194,8 +199,8 @@
     },
     {
       "path": "port/prepare-pages.py",
-      "bytes": 1935,
-      "sha256": "3a4e43c381e5a1a46fa8649f02b741bd8e89ecf020da24a65a980580bf472d43"
+      "bytes": 1949,
+      "sha256": "5a233d60444449c1f2d85b6364cee6e4e25e042871491e5e04b955d47efaccf9"
     },
     {
       "path": "port/prototype.cpp",
@@ -224,8 +229,13 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 5447,
-      "sha256": "6fc3460c6395d70792d2139d895ea12c9aac30ff61e0d1f30e6193d88259767b"
+      "bytes": 6078,
+      "sha256": "999f6ca89cf60bdcf9e28f5f4b6ee7a2238baa4a90fc94a5dc55a5ec5d5ac3a6"
+    },
+    {
+      "path": "port/tests/browser-display.cjs",
+      "bytes": 8319,
+      "sha256": "a248a9f0ca9871ce700dd6db767bfe3a09bab509b49d9a23350a2d6db26db0f0"
     },
     {
       "path": "port/tests/browser-harness.cjs",
@@ -4903,9 +4913,14 @@
       "sha256": "aec4d37f608ebb349576bb1fdac1b482e0dd6a88487f1960856a2c553c5e4d24"
     },
     {
+      "path": "prototype/display.js",
+      "bytes": 5660,
+      "sha256": "855a85275af42f2cb2fa15480d7ce9d9f0678b058001e9996870040c0f6a2d5a"
+    },
+    {
       "path": "prototype/game.html",
-      "bytes": 1018,
-      "sha256": "ee089896663c1133b5456b5a488275aab1389e631be26767bd14791376c82964"
+      "bytes": 989,
+      "sha256": "307d104afa722c6dff9b52129d10da91ae70e2af11e391017c2ad3ce62eb6c20"
     },
     {
       "path": "prototype/index.html",

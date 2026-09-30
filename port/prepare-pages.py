@@ -14,7 +14,7 @@ destination = Path(args.output)
 if destination.exists() and any(destination.iterdir()):
     raise SystemExit('Pages output directory must be empty; choose a new --output.')
 inputs = [(root / 'prototype' / name, name) for name in
-          ('game.html', 'game.js', 'game.wasm', 'game.data')]
+          ('game.html', 'display.js', 'game.js', 'game.wasm', 'game.data')]
 music = sorted((root / 'prototype/assets/music').glob('*.ogg'))
 if len(music) != 6:
     raise SystemExit('Expected all six original music tracks.')

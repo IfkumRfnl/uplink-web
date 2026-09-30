@@ -26,3 +26,9 @@ Neither suite proves real browser IndexedDB reload persistence, rendering, audio
 - Main-loop checks also cover a ten-minute tick gap: overdue one-shot timers fire once, with original callback order, without being replayed on the next frame. This does not establish real hidden-tab timing or game-world progression.
 
 The browser smoke runner closes the private server even when Chromium launch fails, rejects uncaught page errors, and exits nonzero on failure. A zero exit only means the limited diagnostic capture completed; no login, gameplay, audio, or storage assertions are implied.
+
+## New runtime regressions
+
+`test-vanbakel-draw.py` compiles the actual task-label renderer and checks GL begin/end around its four vertices, followed by text. `test-options-apply.py` compiles the actual Apply callback and checks browser serialization after applying an option while retaining native behavior. Both run in `npm test`.
+
+`npm run test:browser-harness` runs Playwright against the separately labelled harness, asserting exact real C++ mouse/keyboard state, actual IndexedDB reload, WAV/OGG playback state, media replacement and resize/high-DPI input. It fails on page errors, failed assets and GL enum/operation errors. Its second-tab probe reports the actual visibility state and does not claim long hidden-tab coverage. It does not test original gameplay. See `port/CLOUD_RUNTIME_RESULTS.md` for the manual original game results.

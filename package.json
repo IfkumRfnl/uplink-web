@@ -10,6 +10,7 @@
     "test": "bash port/check.sh",
     "smoke:game": "node port/tests/browser-smoke.cjs game.html",
     "smoke:harness": "node port/tests/browser-smoke.cjs index.html",
+    "test:browser-harness": "node port/tests/browser-harness.cjs",
     "serve": "python3 -m http.server 8000 --bind 127.0.0.1 --directory prototype"
   },
   "devDependencies": {"playwright": "1.62.1"}

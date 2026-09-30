@@ -5,6 +5,20 @@
 
 #include <GL/gl.h>
 
+#ifdef __EMSCRIPTEN__
+// Native GL creates names on bind; WebGL requires a generated texture object.
+static void BindBrowserUITexture()
+{
+    static GLuint texture = 0;
+    if (!texture) glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+#endif
+
 #include <GL/glu.h> /* glu extention library */
 
 #include <stdio.h>
@@ -73,8 +87,18 @@ void clear_draw ( int x, int y, int w, int h )
 	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	glEnable ( GL_TEXTURE_2D );
 
+#ifdef __EMSCRIPTEN__
+    BindBrowserUITexture();
+#else
 	glBindTexture ( GL_TEXTURE_2D, 1 );
-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
+#endif
+	glTexImage2D ( GL_TEXTURE_2D, 0,
+#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
+                      GL_RGBA,
+#else
+                      GL_RGB,
+#endif
+ backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
 
 	float scaleX = (float) x / 640.0;
 	float scaleY = (float) y / 480.0;
@@ -124,8 +148,18 @@ void button_draw ( Button *button, bool highlighted, bool clicked )
 	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	glEnable ( GL_TEXTURE_2D );
 
+#ifdef __EMSCRIPTEN__
+    BindBrowserUITexture();
+#else
 	glBindTexture ( GL_TEXTURE_2D, 1 );
-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
+#endif
+	glTexImage2D ( GL_TEXTURE_2D, 0,
+#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
+                      GL_RGBA,
+#else
+                      GL_RGB,
+#endif
+ backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
 
 	float scaleX = (float) button->x / 640.0;
 	float scaleY = (float) button->y / 480.0;
@@ -280,8 +314,18 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 	glEnable ( GL_BLEND );
 	glBlendFunc ( GL_ONE, GL_ZERO );
 
+#ifdef __EMSCRIPTEN__
+    BindBrowserUITexture();
+#else
 	glBindTexture ( GL_TEXTURE_2D, 1 );
-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
+#endif
+	glTexImage2D ( GL_TEXTURE_2D, 0,
+#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
+                      GL_RGBA,
+#else
+                      GL_RGB,
+#endif
+ backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
 
 	currentY += 0.003;
 	float scaleX = currentX;
@@ -320,7 +364,11 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 
 	UplinkAssert ( image );
 	
+#ifdef __EMSCRIPTEN__
+    BindBrowserUITexture();
+#else
 	glBindTexture ( GL_TEXTURE_2D, 1 );
+#endif
 	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
 
 	// Scale the image to fit the button size
@@ -367,8 +415,18 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 
 	UplinkAssert ( image );
 	
+#ifdef __EMSCRIPTEN__
+    BindBrowserUITexture();
+#else
 	glBindTexture ( GL_TEXTURE_2D, 1 );
-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
+#endif
+	glTexImage2D ( GL_TEXTURE_2D, 0,
+#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
+                      GL_RGBA,
+#else
+                      GL_RGB,
+#endif
+ image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
 
 	// Scale the image to fit the button size
 

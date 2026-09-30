@@ -178,6 +178,10 @@ void SgInitialise ()
 
   /* Allocate an appropriate number of mixing channels */
   Mix_AllocateChannels(16);
+#ifdef __EMSCRIPTEN__
+  // Emscripten lacks per-chunk volume. All original effects use quarter gain.
+  Mix_Volume(-1, MIX_MAX_VOLUME / 4);
+#endif
   
   /* Reserve the first channel for music effects */
   Mix_ReserveChannels(1);
@@ -203,11 +207,15 @@ static void SgPrintSDLMixerVersionInfo()
 	 compile_version.major,
 	 compile_version.minor,
 	 compile_version.patch);
+#ifdef __EMSCRIPTEN__
+  printf("Running with Emscripten SDL_mixer compatibility backend (runtime version query unavailable)\n");
+#else
   link_version=Mix_Linked_Version();
   printf("Running with SDL_mixer version: %d.%d.%d\n", 
 	 link_version->major,
 	 link_version->minor,
 	 link_version->patch);
+#endif
 }
 
 static void SgPrintActualSoundSettings()
@@ -286,7 +294,9 @@ void SgPlaySound ( char *fullfilename, char *id, bool synchronised )
 
   }
 
+#ifndef __EMSCRIPTEN__
   Mix_VolumeChunk(sample, MIX_MAX_VOLUME / 4 );
+#endif
   if ( Mix_PlayChannel(-1 /* First free unreserved channel */, sample, 0 /* number of loops */) == -1 ) {
     SgDebugPrintf("SoundGarden WARNING : Failed to play sound file %s\n (%s)\n", 
       fullfilename, Mix_GetError());

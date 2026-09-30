@@ -36,9 +36,9 @@ Six full original music conversions are served separately over HTTP from `protot
 
 ## Actual cloud runtime verification
 
-The updated cloud environment runs Chromium/WebGL against localhost. Original registration, desktop, tutorial entry and same-origin save/login/options reload pass after documented fixes. See [CLOUD_RUNTIME_RESULTS.md](CLOUD_RUNTIME_RESULTS.md) for exact evidence and remaining boundaries. This is not a full gameplay/fidelity pass.
+The updated cloud environment runs Chromium/WebGL against localhost. Original registration, desktop, all three tutorial sections and the test mission and same-origin save/login/options reload pass after documented fixes. See [CLOUD_RUNTIME_RESULTS.md](CLOUD_RUNTIME_RESULTS.md) for exact evidence and remaining boundaries. This is not a full gameplay/fidelity pass.
 
-Ordinary browser environments still do not support native direct TCP/IRC; simulated game servers are separate. Music needs a browser gesture. Storage is browser-origin-local and not a cloud backup. Full tutorial completion, long hidden-tab timing and storage interruption/quota recovery remain untested.
+Ordinary browser environments still do not support native direct TCP/IRC; simulated game servers are separate. Music needs a browser gesture. Storage is browser-origin-local and not a cloud backup. Short genuine hidden-tab suspension and interrupted storage recovery pass. Long hidden-tab timing and quota exhaustion remain untested.
 
 ## Focused runtime-risk review (2026-09-30)
 

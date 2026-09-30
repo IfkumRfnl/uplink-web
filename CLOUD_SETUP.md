@@ -42,7 +42,7 @@ If required OS libraries are missing, install the official Playwright browser de
 
 For interactive private QA, run `npm run serve` and open `http://127.0.0.1:8000/game.html` using a supported local preview. Do not publish this copyrighted content as a workaround for unavailable preview.
 
-The updated cloud environment supports localhost and Playwright Chromium/WebGL. Original registration, tutorial entry, save/load and options reload have runtime evidence; see `port/CLOUD_RUNTIME_RESULTS.md`. Run `npm run test:browser-harness` for the separate harness integration checks. Remaining full-game QA is listed in the report.
+The updated cloud environment supports localhost and Playwright Chromium/WebGL. Original registration, all three tutorial sections and the test mission, save/load and options reload have runtime evidence; see `port/CLOUD_RUNTIME_RESULTS.md`. Run `npm run test:browser-harness` for the separate harness integration checks. Remaining full-game QA is listed in the report.
 
 ## Suggested first manual checks
 

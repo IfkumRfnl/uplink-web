@@ -9,13 +9,13 @@
     },
     {
       "path": "CLOUD_SETUP.md",
-      "bytes": 3192,
-      "sha256": "76a1980cdad64547f855f6b5a435fc54ae4e9c5d08ade4f87cb69cc44d7d6709"
+      "bytes": 3226,
+      "sha256": "480c0b9272b5bdba4f7540508e36e4b9e7956e6bdd238609ab4fcb1129af47df"
     },
     {
       "path": "README.md",
-      "bytes": 6413,
-      "sha256": "1a4712e7b6ad82738146b33cf7ce59e62e5d01d7135825e25ee2472fc869258c"
+      "bytes": 6477,
+      "sha256": "39c689a199505d238480e2f637abdc2209ea04f21c5a8da84aeb5b2e911a6d73"
     },
     {
       "path": "RIGHTS.md",
@@ -79,18 +79,18 @@
     },
     {
       "path": "package.json",
-      "bytes": 756,
-      "sha256": "477140e7913754ab5b95784bd70ea3411e20afb05dbd8a0fce98112c4583c555"
+      "bytes": 910,
+      "sha256": "fba825bf8ead9103c3232242106d3e42204a4df49e338badbac484c13a3439ba"
     },
     {
       "path": "port/BUILD_STATUS.md",
-      "bytes": 4620,
-      "sha256": "14f29d1254ec13eaf988fc0cb1ecc7d827bcac71f51553ab1cfba782f76fc8f9"
+      "bytes": 4684,
+      "sha256": "14d6599e11a63985f590327918e308ea94a41e882182460da90fd4e4337955f9"
     },
     {
       "path": "port/CLOUD_RUNTIME_RESULTS.md",
-      "bytes": 6939,
-      "sha256": "e0b52aed3c9e81339e11ebcec302bca79109685825fc36940c5d2d01f176d82d"
+      "bytes": 10550,
+      "sha256": "24af31b24ea73e6f271b0114beb93ccb445b5c9b2540abc2cdbe3c73ac2f1cae"
     },
     {
       "path": "port/MIGRATION.md",
@@ -124,8 +124,8 @@
     },
     {
       "path": "port/check.sh",
-      "bytes": 1048,
-      "sha256": "45838f13e184e55abb8e57e988832a01bcf23399fcf63d8601767880ab528f66"
+      "bytes": 1128,
+      "sha256": "008a093822e1aaae2e34ed377839cdf475aa021f1be9297e450a351087097310"
     },
     {
       "path": "port/compile-game.py",
@@ -143,6 +143,11 @@
       "sha256": "e91d7f965d2eb0776efdf41cee8e96e04d7ecc513ed24badbf53bc2e2c406069"
     },
     {
+      "path": "port/gl-immediate.js",
+      "bytes": 1503,
+      "sha256": "329a7d609f77822348c429681445ae0b0d5714649d1f38a79cf9f2b8f4140cc4"
+    },
+    {
       "path": "port/include/world/Player.h",
       "bytes": 26,
       "sha256": "262385f2e6eb2af7b56906ee9df55abeb5a345fa60758e7a32e7c1b3248c2fe8"
@@ -154,8 +159,8 @@
     },
     {
       "path": "port/link-game.sh",
-      "bytes": 966,
-      "sha256": "c5ff2ebd06ea7a1d4bf7f88a374ff89c885017928e10f38f4704fba4f2398024"
+      "bytes": 1008,
+      "sha256": "6adee8b7817b94a122581526714158662c70e3cea1413916212cff0fa2736749"
     },
     {
       "path": "port/mainloop-notes.md",
@@ -189,13 +194,13 @@
     },
     {
       "path": "port/runtime-review.md",
-      "bytes": 3854,
-      "sha256": "2d3ed386df0f0d47ea83247e4d7049089547fd5307388fc2daddb92546455324"
+      "bytes": 3888,
+      "sha256": "002746c92404b57fca272c8f3882c488bf2bedaa94ec3b874c26c25166176f66"
     },
     {
       "path": "port/source-changes.json",
-      "bytes": 3048,
-      "sha256": "24991198dd65154af37f40e409b8808e5877de07984c758c0a90b085d134c008"
+      "bytes": 3287,
+      "sha256": "1e953dcf282066873e525bbfb4b068fbc13cfc15f3c38850171e5d9f87bb170e"
     },
     {
       "path": "port/tests/README-image.md",
@@ -204,8 +209,8 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 3739,
-      "sha256": "a5f2c4212049f124f7f3d7ebc8f9f997d8d7470eb6fc4968ccef70c4fd458aba"
+      "bytes": 4474,
+      "sha256": "3c903af5168cb91d466bf4ba7282daba3bc023b3865d833e72b74138863e2504"
     },
     {
       "path": "port/tests/browser-harness.cjs",
@@ -213,9 +218,19 @@
       "sha256": "d0faa85ea0706ad9eeb213f84af65a19dc4d6928c3c05c94eaf6562a3d7d4f01"
     },
     {
+      "path": "port/tests/browser-lifecycle.cjs",
+      "bytes": 3876,
+      "sha256": "7c3b761bae4e84507602dce9798ae16242dc4a891c557d7aca4f708d6b0b7e0d"
+    },
+    {
       "path": "port/tests/browser-smoke.cjs",
       "bytes": 3034,
       "sha256": "34b20fc4c70659b492cec3c50129d771a03550675dee95f0023748f9c48868ce"
+    },
+    {
+      "path": "port/tests/browser-storage.cjs",
+      "bytes": 3316,
+      "sha256": "775cecc8aad576725290f6b9fa41192b2e6ba04d7a4f77f122384ada8607f055"
     },
     {
       "path": "port/tests/image_sidecar_test.cpp",
@@ -236,6 +251,16 @@
       "path": "port/tests/test-browser-smoke.cjs",
       "bytes": 1724,
       "sha256": "3afc1e6fcee33e0f5a43ea6390912cb7bec2e0cdf1c58656dfe4c68bd09eded4"
+    },
+    {
+      "path": "port/tests/test-firsttime-save.py",
+      "bytes": 1430,
+      "sha256": "20e334d79d8f29c4916124e8335d760cff041da289507dfdc94e00cd247d679b"
+    },
+    {
+      "path": "port/tests/test-gl-immediate.cjs",
+      "bytes": 1451,
+      "sha256": "0721bf7012c24da73f3253e6c3a1d0f0a1dca21f9a5d1921955d59c6ea726b9c"
     },
     {
       "path": "port/tests/test-mainloop.py",
@@ -264,8 +289,8 @@
     },
     {
       "path": "port/uplink-browser.patch",
-      "bytes": 31709,
-      "sha256": "cfaa223bb309aaaf0ccdac48a7eea2df0907a0c71f5e1a1a84c0478f984ce6b7"
+      "bytes": 32157,
+      "sha256": "d37fef5b7867e7166d3337da3ec6706993737cc82ba809081e0596d4207e0fd0"
     },
     {
       "path": "port/verify-inventory.py",
@@ -28734,8 +28759,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/game/scriptlibrary.cpp",
-      "bytes": 68774,
-      "sha256": "ccbd94c34fcbcb8cb3291174f9ce191a990d0c4407453f1f79b7e468747aea2f"
+      "bytes": 68918,
+      "sha256": "43b869d05191f93b458de65d9c482ac92e842f79f0fc11d0b5811d6bcd265830"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/game/scriptlibrary.h",

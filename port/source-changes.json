@@ -55,6 +55,11 @@
     "modified_sha256": "5b9ff37ee93a846e9a15fe4797cceec6de1a8ef1714e227c7b70834f6b91e795"
   },
   {
+    "path": "uplink/src/game/scriptlibrary.cpp",
+    "original_sha256": "ccbd94c34fcbcb8cb3291174f9ce191a990d0c4407453f1f79b7e468747aea2f",
+    "modified_sha256": "43b869d05191f93b458de65d9c482ac92e842f79f0fc11d0b5811d6bcd265830"
+  },
+  {
     "path": "uplink/src/mainmenu/genericoptions_interface.cpp",
     "original_sha256": "734bcdc74714b2c479cf312cbaf0ac8fbdc38cba3217d2d859b0227cce2a1e86",
     "modified_sha256": "6376e2c388d2235d8819454c1de09084457a6e6b07f317a86393ac2c384b54e1"

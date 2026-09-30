@@ -1,6 +1,6 @@
 # Uplink private browser port workbench
 
-Status: original C++ gameplay builds and runs in cloud Chromium. Registration, tutorial entry, gesture audio and save/options reload have runtime evidence. See `port/CLOUD_RUNTIME_RESULTS.md` for exact checks and remaining gaps. This is a private experimental port, not a finished game.
+Status: original C++ gameplay builds and runs in cloud Chromium. Registration, all three tutorial sections and the test mission, gesture audio and save/options reload have runtime evidence. See `port/CLOUD_RUNTIME_RESULTS.md` for exact checks and remaining gaps. This is a private experimental port, not a finished game.
 
 ## Inputs and identity
 
@@ -72,7 +72,7 @@ Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET
 
 ## Remaining limits
 
-- Original registration, login and tutorial entry pass in cloud Chromium; full tutorial/mission completion and broad gameplay QA remain open
+- Original registration, login and all three tutorial sections and the test mission pass in cloud Chromium; broad gameplay and Windows comparative fidelity QA remain open
 - Existing Steam save compatibility is not runtime tested
 - Dashed lines currently render solid and emit a diagnostic
 - Full visual fidelity/performance, resize/high-DPI behavior, audio mixing, repeated input, interrupted save recovery and browser persistence require runtime checks

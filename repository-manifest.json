@@ -79,8 +79,8 @@
     },
     {
       "path": "package-lock.json",
-      "bytes": 1453,
-      "sha256": "b7ede76f40bcffe573f266fedda54b144378c4e3d1181409cf8f260a613745cf"
+      "bytes": 1824,
+      "sha256": "66bce52755002f35f6cd4445c2803a0a8504d555059eec8eaeb4420f53813fee"
     },
     {
       "path": "package.json",

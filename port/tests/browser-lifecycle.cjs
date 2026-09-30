@@ -1,12 +1,13 @@
 // Pinned Playwright enables focus emulation on its own CDP session. Disable
 // that test-only override on the same session to observe genuine tab hiding.
+// Full installed Chromium supports tab visibility; headless shell does not.
 const fs=require('fs'),http=require('http'),{chromium}=require('playwright'),{requestHandler}=require('./browser-smoke.cjs');
 
 (async()=>{fs.mkdirSync('qa/followup',{recursive:true});
 const server=http.createServer(requestHandler);
 await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
 let browser;
-try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || require('path').resolve(__dirname,'../../toolchain/playwright/chromium-1234/chrome-linux64/chrome'),headless:true,ignoreDefaultArgs:['--disable-background-timer-throttling','--disable-backgrounding-occluded-windows','--disable-renderer-backgrounding'],args:['--enable-unsafe-swiftshader']});
+try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,channel:'chromium',headless:true,ignoreDefaultArgs:['--disable-background-timer-throttling','--disable-backgrounding-occluded-windows','--disable-renderer-backgrounding'],args:['--enable-unsafe-swiftshader']});
 const context=await browser.newContext({viewport:{width:1200,height:1000}}),page=await context.newPage();
 const errors=[];
 page.on('pageerror',e=>errors.push(e.stack));

@@ -4,7 +4,7 @@ const fs=require('fs'),http=require('http'),{chromium}=require('playwright'),{re
 const server=http.createServer(requestHandler);
 await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
 let browser;
-try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || require('path').resolve(__dirname,'../../toolchain/playwright/chromium-1234/chrome-linux64/chrome'),headless:true,args:['--enable-unsafe-swiftshader']});
+try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:['--enable-unsafe-swiftshader']});
 const context=await browser.newContext({viewport:{width:1200,height:1000}});
 const origin='http://127.0.0.1:'+server.address().port+'/game.html';
 const seed=await context.newPage();

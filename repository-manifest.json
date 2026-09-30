@@ -209,8 +209,8 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 4474,
-      "sha256": "3c903af5168cb91d466bf4ba7282daba3bc023b3865d833e72b74138863e2504"
+      "bytes": 4861,
+      "sha256": "56edee1c6f6933d5f7715b41cf0fa4ebf1ac336a9e7c34ee1ccee033cbcc8749"
     },
     {
       "path": "port/tests/browser-harness.cjs",
@@ -219,8 +219,8 @@
     },
     {
       "path": "port/tests/browser-lifecycle.cjs",
-      "bytes": 3876,
-      "sha256": "7c3b761bae4e84507602dce9798ae16242dc4a891c557d7aca4f708d6b0b7e0d"
+      "bytes": 3869,
+      "sha256": "bec95307223d203450ad798da597d6f754a57834f9fb4007933d1f4bded7078e"
     },
     {
       "path": "port/tests/browser-smoke.cjs",
@@ -229,8 +229,8 @@
     },
     {
       "path": "port/tests/browser-storage.cjs",
-      "bytes": 3316,
-      "sha256": "775cecc8aad576725290f6b9fa41192b2e6ba04d7a4f77f122384ada8607f055"
+      "bytes": 3213,
+      "sha256": "6221119f80aeb3e610bf0dafe406266c2bed818e8c72b6db035fb9436dd9b41f"
     },
     {
       "path": "port/tests/image_sidecar_test.cpp",

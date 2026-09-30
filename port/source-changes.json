@@ -22,7 +22,12 @@
   {
     "path": "lib/soundgarden/soundgarden_sdlmixer.cpp",
     "original_sha256": "1a92fae5d3b23c974ee3dae1c8760db694232b577c432a96efbaa5d991fc5d7c",
-    "modified_sha256": "502d6c7807f9446526c8904c9c28a6de060de93971b1b8eff43a32e65bc16723"
+    "modified_sha256": "13dd2aa817560d2b0c32a42eb884100cac36ea27e1195b04890a1a1deb52cd99"
+  },
+  {
+    "path": "lib/vanbakel/interface.cpp",
+    "original_sha256": "fcbf00c3c6a7053f3f480eb72dcba3af9c54f29be3996f54879d3f1e0baff6f0",
+    "modified_sha256": "54f6c8093bb46d2b5557c2386365b59c93e533fcf3af01f0ef2c30909737923f"
   },
   {
     "path": "uplink/src/app/app.cpp",
@@ -42,7 +47,22 @@
   {
     "path": "uplink/src/app/opengl.cpp",
     "original_sha256": "c67fe9d15e5bd45430a1300162b5e318cb6baf2853c1cf729bc5883c0f1f0f93",
-    "modified_sha256": "2920e18672758010d927de9cc469b5850c711da622f8fd67956518f5eb4fcfac"
+    "modified_sha256": "87156a4c7a3e3a13b551c613ec994e072f76e933cb86b69450a3be960e05b3df"
+  },
+  {
+    "path": "uplink/src/app/opengl_interface.cpp",
+    "original_sha256": "1392ab0cc51a9939922ed1c7eb1c5b372f042381925e50fe52a7e25f23365142",
+    "modified_sha256": "5b9ff37ee93a846e9a15fe4797cceec6de1a8ef1714e227c7b70834f6b91e795"
+  },
+  {
+    "path": "uplink/src/game/scriptlibrary.cpp",
+    "original_sha256": "ccbd94c34fcbcb8cb3291174f9ce191a990d0c4407453f1f79b7e468747aea2f",
+    "modified_sha256": "43b869d05191f93b458de65d9c482ac92e842f79f0fc11d0b5811d6bcd265830"
+  },
+  {
+    "path": "uplink/src/mainmenu/genericoptions_interface.cpp",
+    "original_sha256": "734bcdc74714b2c479cf312cbaf0ac8fbdc38cba3217d2d859b0227cce2a1e86",
+    "modified_sha256": "6376e2c388d2235d8819454c1de09084457a6e6b07f317a86393ac2c384b54e1"
   },
   {
     "path": "uplink/src/options/options.cpp",

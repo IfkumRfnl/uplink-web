@@ -1,6 +1,6 @@
 # Focused runtime-risk review
 
-2026-09-30. Static review plus isolated tests, not a browser gameplay pass.
+Earlier static review, followed by actual cloud runtime checks on 2026-09-30. See [CLOUD_RUNTIME_RESULTS.md](CLOUD_RUNTIME_RESULTS.md) for verified registration, all three tutorial sections and the test mission, audio gestures and reload persistence. The untested items below remain review boundaries unless that report records a completed check.
 
 ## Fixed and verified
 

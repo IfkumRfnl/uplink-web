@@ -6,6 +6,10 @@ cd "$ROOT"
 python3 port/tests/test-mainloop.py
 node port/tests/test-persistence.js
 python3 port/tests/test-options-save.py
+python3 port/tests/test-options-apply.py
+python3 port/tests/test-vanbakel-draw.py
+python3 port/tests/test-firsttime-save.py
+node port/tests/test-gl-immediate.cjs
 node port/tests/test-audio.js
 node port/tests/test-browser-smoke.cjs
 bash port/tests/run-image-tests.sh

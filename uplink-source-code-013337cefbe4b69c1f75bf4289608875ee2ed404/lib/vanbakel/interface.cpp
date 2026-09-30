@@ -73,6 +73,7 @@ void Svb_textbutton_draw ( Button *button, bool highlighted, bool clicked )
 	// Clear the background
 	
 	glColor4f ( 0.0f, 0.0f, 0.0f, 1.0f );
+	glBegin ( GL_QUADS );
 		glVertex2i ( button->x,	button->y);
 		glVertex2i ( button->x + button->width, button->y );
 		glVertex2i ( button->x + button->width, button->y + button->height );

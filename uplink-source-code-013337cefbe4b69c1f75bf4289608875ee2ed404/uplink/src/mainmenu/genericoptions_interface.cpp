@@ -75,6 +75,11 @@ void GenericOptionsInterface::ApplyClick ( Button *button )
 
 	}
 
+#ifdef __EMSCRIPTEN__
+    // Applying browser options must serialize them before a tab reload.
+    app->GetOptions()->Save(NULL);
+#endif
+
 }
 
 void GenericOptionsInterface::ToggleBoxDraw ( Button *button, bool highlighted, bool clicked )

@@ -11,7 +11,7 @@ Verified 2026-09-30T08:23:01.498889+00:00
 - Node `WebAssembly.validate` returned true for final `prototype/game.wasm`.
 - `prototype/game.js`: 595,745 bytes
 - `prototype/game.wasm`: 2,398,323 bytes
-- `prototype/game.data`: 26,855,599 bytes
+- `prototype/game.data`: now also includes the original standard installer world.dat; current runtime build is approximately 40 MiB
 
 ## Commands
 
@@ -34,13 +34,11 @@ Six full original music conversions are served separately over HTTP from `protot
 - Legacy GL compatibility preserves the renderer-used blend, texture enable/binding/environment, active texture unit, scissor, color, line width, matrix mode, depth and cull state. Texture enable is obtained from Emscripten's legacy emulation state rather than unsupported WebGL capability queries.
 - Original solid/dashed line code links, but dashed line stippling currently degrades to solid rendering and emits an explicit warning.
 
-## Runtime verification remains blocked
+## Actual cloud runtime verification
 
-**No browser gameplay pass is claimed.** The browser rejected the confirmed local HTTP server with `ERR_BLOCKED_BY_CLIENT`, so original login/tutorial progression, game rendering, input, audible music/effects and real IndexedDB reload persistence remain unverified.
+The updated cloud environment runs Chromium/WebGL against localhost. Original registration, desktop, all three tutorial sections and the test mission and same-origin save/login/options reload pass after documented fixes. See [CLOUD_RUNTIME_RESULTS.md](CLOUD_RUNTIME_RESULTS.md) for exact evidence and remaining boundaries. This is not a full gameplay/fidelity pass.
 
-TCP4u and IRC code compile, but ordinary browser environments do not provide native direct TCP connectivity. No proxy service or fake connectivity is installed. Music playback needs a permitted user gesture; unknown/custom modules fail explicitly. Saves are browser-origin-local and require successful asynchronous IDBFS completion; they are not cloud backups. Original startup redirects stdout/stderr to its debug.log, so runtime debugging may require reading that virtual file.
-
-This is a private technical build. No public hosting or redistribution permission is implied.
+Ordinary browser environments still do not support native direct TCP/IRC; simulated game servers are separate. Music needs a browser gesture. Storage is browser-origin-local and not a cloud backup. Short genuine hidden-tab suspension and interrupted storage recovery pass. Long hidden-tab timing and quota exhaustion remain untested.
 
 ## Focused runtime-risk review (2026-09-30)
 

@@ -26,3 +26,15 @@ Neither suite proves real browser IndexedDB reload persistence, rendering, audio
 - Main-loop checks also cover a ten-minute tick gap: overdue one-shot timers fire once, with original callback order, without being replayed on the next frame. This does not establish real hidden-tab timing or game-world progression.
 
 The browser smoke runner closes the private server even when Chromium launch fails, rejects uncaught page errors, and exits nonzero on failure. A zero exit only means the limited diagnostic capture completed; no login, gameplay, audio, or storage assertions are implied.
+
+## New runtime regressions
+
+`test-vanbakel-draw.py` compiles the actual task-label renderer and checks GL begin/end around its four vertices, followed by text. `test-options-apply.py` compiles the actual Apply callback and checks browser serialization after applying an option while retaining native behavior. Both run in `npm test`.
+
+`npm run test:browser-harness` runs Playwright against the separately labelled harness, asserting exact real C++ mouse/keyboard state, actual IndexedDB reload, WAV/OGG playback state, media replacement and resize/high-DPI input. It fails on page errors, failed assets and GL enum/operation errors. Its second-tab probe reports the actual visibility state and does not claim long hidden-tab coverage. It does not test original gameplay. See `port/CLOUD_RUNTIME_RESULTS.md` for the manual original game results.
+
+`test-gl-immediate.cjs` checks complete vertex colours for the original sparse Memory Banks draw sequence. `test-firsttime-save.py` checks browser onboarding serializes its completion flag through the original writer while native behavior stays unchanged. Both run in `npm test`.
+
+`npm run test:browser-storage` injects an actual IndexedDB write abort, recovers and reloads, then blocks restoration and proves existing files survive. `npm run test:browser-lifecycle` obtains real hidden visibility, verifies ten seconds of suspended animation frames, resumes, and checks five seconds of lifecycle freezing against the original game main-loop counter. These short tests do not prove quota exhaustion or multi-minute campaign behavior.
+
+Browser storage and lifecycle tests use Playwright’s installed browser when `CHROMIUM_PATH` is unset. The lifecycle test selects the `chromium` channel (full Chromium in new headless mode), because headless shell does not reproduce actual tab visibility. Install with `npx playwright install chromium`; custom installations may use Playwright’s standard `PLAYWRIGHT_BROWSERS_PATH`.

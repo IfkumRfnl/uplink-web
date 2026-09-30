@@ -1,6 +1,6 @@
 # Uplink private browser port workbench
 
-Status: original C++ gameplay compiles and links to WebAssembly. Actual browser execution, login/tutorial, audio output and reload persistence have **not yet been verified**. This is a private feasibility build, not a finished port.
+Status: original C++ gameplay builds and runs in cloud Chromium. Registration, all three tutorial sections and the test mission, gesture audio and save/options reload have runtime evidence. See `port/CLOUD_RUNTIME_RESULTS.md` for exact checks and remaining gaps. This is a private experimental port, not a finished game.
 
 ## Inputs and identity
 
@@ -39,7 +39,7 @@ Then serve privately on your own machine:
 
     python3 -m http.server 8000 --bind 127.0.0.1 --directory prototype
 
-Open `http://127.0.0.1:8000/game.html` for the game or `/index.html` for the platform probe. Neither has completed browser QA yet. Do not expose this server publicly.
+Open `http://127.0.0.1:8000/game.html` for the game or `/index.html` for the platform probe. Both have browser runtime evidence; comprehensive gameplay QA remains open. Do not expose this server publicly.
 
 See `CLOUD_SETUP.md` for a compact cloud setup command and a browser QA checklist. `npm run bootstrap`, `npm run build`, and `npm test` are convenience entrypoints.
 
@@ -49,7 +49,7 @@ See `CLOUD_SETUP.md` for a compact cloud setup command and a browser QA checklis
 
 The aggregate command runs main-loop, persistence-queue, options-save, audio-bridge, smoke-runner cleanup, and Image/Redshirt checks, then validates generated JavaScript and Wasm.
 
-Optional browser diagnostic requires Playwright 1.62.1 (`npm install --ignore-scripts`) and an environment that permits launching Chromium (`npx playwright install chromium`); run `npm run smoke:game`. This script captures logs/screenshots, not comprehensive gameplay assertions. Read `port/tests/README.md` and `README-image.md` for coverage boundaries. Current environment blocked Chromium startup with an OS socket permission error; actual gameplay, rendering, sound and persistence remain unverified.
+Optional browser diagnostic requires Playwright 1.62.1 (`npm install --ignore-scripts`) and an environment that permits launching Chromium (`npx playwright install chromium`); run `npm run smoke:game`. This script captures logs/screenshots, not comprehensive gameplay assertions. Read `port/tests/README.md` and `README-image.md` for coverage boundaries. The updated cloud environment launches Chromium successfully. See the runtime report for original gameplay evidence and `npm run test:browser-harness` for separate browser integration assertions.
 
 ### Asset preparation and provenance
 
@@ -72,8 +72,7 @@ Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET
 
 ## Remaining limits
 
-- Browser runtime QA pending because built-in browser currently rejects private localhost preview; diagnostic work continues
-- Original login, tutorial and gameplay have not been entered
+- Original registration, login and all three tutorial sections and the test mission pass in cloud Chromium; broad gameplay and Windows comparative fidelity QA remain open
 - Existing Steam save compatibility is not runtime tested
 - Dashed lines currently render solid and emit a diagnostic
 - Full visual fidelity/performance, resize/high-DPI behavior, audio mixing, repeated input, interrupted save recovery and browser persistence require runtime checks

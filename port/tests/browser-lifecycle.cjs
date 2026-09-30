@@ -1,0 +1,55 @@
+// Pinned Playwright enables focus emulation on its own CDP session. Disable
+// that test-only override on the same session to observe genuine tab hiding.
+// Full installed Chromium supports tab visibility; headless shell does not.
+const fs=require('fs'),http=require('http'),{chromium}=require('playwright'),{requestHandler}=require('./browser-smoke.cjs');
+
+(async()=>{fs.mkdirSync('qa/followup',{recursive:true});
+const server=http.createServer(requestHandler);
+await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
+let browser;
+try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,channel:'chromium',headless:true,ignoreDefaultArgs:['--disable-background-timer-throttling','--disable-backgrounding-occluded-windows','--disable-renderer-backgrounding'],args:['--enable-unsafe-swiftshader']});
+const context=await browser.newContext({viewport:{width:1200,height:1000}}),page=await context.newPage();
+const errors=[];
+page.on('pageerror',e=>errors.push(e.stack));
+const focus=page._connection.toImpl(page).delegate._mainFrameSession._client;
+await focus.send('Emulation.setFocusEmulationEnabled',{enabled:false});
+await page.goto('http://127.0.0.1:'+server.address().port+'/game.html');
+await page.waitForTimeout(25000);
+await page.evaluate(()=>{window.qaFrames=0;
+requestAnimationFrame(function tick(){++qaFrames;
+requestAnimationFrame(tick)})});
+await page.waitForTimeout(2000);
+const before=await page.evaluate(()=>({visibility:document.visibilityState,frames:qaFrames,time:performance.now()}));
+const opened=context.waitForEvent('page');
+await page.evaluate(()=>window.open('about:blank','_blank'));
+const other=await opened;
+await other.waitForTimeout(500);
+const otherFocus=other._connection.toImpl(other).delegate._mainFrameSession._client;
+await otherFocus.send('Emulation.setFocusEmulationEnabled',{enabled:false});
+await other.bringToFront();
+const hidden=await page.evaluate(()=>({visibility:document.visibilityState,frames:qaFrames,time:performance.now()}));
+await other.waitForTimeout(10000);
+const afterHidden=await page.evaluate(()=>({visibility:document.visibilityState,frames:qaFrames,time:performance.now()}));
+await page.bringToFront();
+await page.waitForTimeout(2500);
+const resumed=await page.evaluate(()=>({visibility:document.visibilityState,frames:qaFrames,time:performance.now(),storage:Module.uplinkPersistence,gl:GLctx.getError()}));
+await page.screenshot({path:'qa/followup/background-resumed.png'});
+const cdp=await context.newCDPSession(page);
+const freezeBefore=await page.evaluate(()=>({frames:MainLoop.currentFrameNumber,raf:qaFrames,time:performance.now()}));
+await other.bringToFront();
+await cdp.send('Page.setWebLifecycleState',{state:'frozen'});
+await other.waitForTimeout(5000);
+await cdp.send('Page.setWebLifecycleState',{state:'active'});
+await page.bringToFront();
+const freezeAfter=await page.evaluate(()=>({frames:MainLoop.currentFrameNumber,raf:qaFrames,time:performance.now(),visibility:document.visibilityState}));
+await page.waitForTimeout(1500);
+const freezeResumed=await page.evaluate(()=>({frames:MainLoop.currentFrameNumber,raf:qaFrames,time:performance.now(),gl:GLctx.getError()}));
+if(hidden.visibility!=='hidden'||afterHidden.visibility!=='hidden'||afterHidden.frames!==hidden.frames||resumed.frames<=afterHidden.frames||resumed.gl||errors.length)throw Error('Hidden-tab lifecycle regression');
+if(freezeAfter.frames-freezeBefore.frames>2||freezeResumed.frames<=freezeAfter.frames)throw Error('Frozen-page lifecycle regression');
+const result={before,hidden,afterHidden,resumed,freezeBefore,freezeAfter,freezeResumed,errors};
+fs.writeFileSync('qa/followup/background-results.json',JSON.stringify(result,null,2));
+console.log(JSON.stringify(result));
+}finally{if(browser)await browser.close();
+await new Promise(ok=>server.close(ok))}})().catch(e=>{console.error(e);
+process.exitCode=1});
+

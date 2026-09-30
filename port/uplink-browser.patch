@@ -610,7 +610,44 @@
  
  static Mix_Music *currentmod = NULL;
  static BTree <Mix_Chunk *> cache;					// Stores sounds already loaded
-@@ -213,6 +307,15 @@
+@@ -84,6 +178,10 @@
+ 
+   /* Allocate an appropriate number of mixing channels */
+   Mix_AllocateChannels(16);
++#ifdef __EMSCRIPTEN__
++  // Emscripten lacks per-chunk volume. All original effects use quarter gain.
++  Mix_Volume(-1, MIX_MAX_VOLUME / 4);
++#endif
+   
+   /* Reserve the first channel for music effects */
+   Mix_ReserveChannels(1);
+@@ -109,11 +207,15 @@
+ 	 compile_version.major,
+ 	 compile_version.minor,
+ 	 compile_version.patch);
++#ifdef __EMSCRIPTEN__
++  printf("Running with Emscripten SDL_mixer compatibility backend (runtime version query unavailable)\n");
++#else
+   link_version=Mix_Linked_Version();
+   printf("Running with SDL_mixer version: %d.%d.%d\n", 
+ 	 link_version->major,
+ 	 link_version->minor,
+ 	 link_version->patch);
++#endif
+ }
+ 
+ static void SgPrintActualSoundSettings()
+@@ -192,7 +294,9 @@
+ 
+   }
+ 
++#ifndef __EMSCRIPTEN__
+   Mix_VolumeChunk(sample, MIX_MAX_VOLUME / 4 );
++#endif
+   if ( Mix_PlayChannel(-1 /* First free unreserved channel */, sample, 0 /* number of loops */) == -1 ) {
+     SgDebugPrintf("SoundGarden WARNING : Failed to play sound file %s\n (%s)\n", 
+       fullfilename, Mix_GetError());
+@@ -213,6 +317,15 @@
  
    SgStopMod ();
  
@@ -626,7 +663,7 @@
    currentmod=Mix_LoadMUS(fullfilename);
  
    /* didn't work -> exit with errormsg. */
-@@ -235,6 +338,7 @@
+@@ -235,6 +348,7 @@
    }
          
    SgDebugPrintf ( "SoundGarden Playing Music : %s\n", fullfilename );
@@ -634,7 +671,7 @@
  
  }
  
-@@ -246,7 +350,11 @@
+@@ -246,7 +360,11 @@
    SgDebugPrintf ( "SoundGarden Music Volume: %d\n", newvolume );
      
    playerVolume = newvolume;
@@ -646,7 +683,7 @@
  }
  
  void SgStopMod ()
-@@ -254,11 +362,15 @@
+@@ -254,11 +372,15 @@
    if (!SgInitialised)
      return;
  
@@ -662,7 +699,7 @@
  }
  
  bool SgModFinished ()
-@@ -266,7 +378,11 @@
+@@ -266,7 +388,11 @@
    if (!SgInitialised)
      return false;
  
@@ -674,6 +711,16 @@
  }
  
  #endif
+--- a/lib/vanbakel/interface.cpp
++++ b/lib/vanbakel/interface.cpp
+@@ -73,6 +73,7 @@
+ 	// Clear the background
+ 	
+ 	glColor4f ( 0.0f, 0.0f, 0.0f, 1.0f );
++	glBegin ( GL_QUADS );
+ 		glVertex2i ( button->x,	button->y);
+ 		glVertex2i ( button->x + button->width, button->y );
+ 		glVertex2i ( button->x + button->width, button->y + button->height );
 --- a/uplink/src/app/app.cpp
 +++ b/uplink/src/app/app.cpp
 @@ -3,6 +3,9 @@
@@ -734,6 +781,15 @@
  	}
 --- a/uplink/src/app/opengl.cpp
 +++ b/uplink/src/app/opengl.cpp
+@@ -225,7 +225,7 @@
+ 		
+ 	glMatrixMode(GL_MODELVIEW);
+ 
+-	glTexEnvf ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );	
++	glTexEnvi ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+ 
+         glDisable(GL_ALPHA_TEST);        
+         glDisable(GL_FOG);        
 @@ -236,6 +236,7 @@
  		glDisable(GL_TEXTURE_2D);
  		glDisable(GL_BLEND);
@@ -742,7 +798,7 @@
          glPixelTransferi(GL_MAP_COLOR, GL_FALSE);
          glPixelTransferi(GL_RED_SCALE, 1);
          glPixelTransferi(GL_RED_BIAS, 0);
-@@ -245,6 +246,7 @@
+@@ -245,19 +246,27 @@
          glPixelTransferi(GL_BLUE_BIAS, 0);
          glPixelTransferi(GL_ALPHA_SCALE, 1);
          glPixelTransferi(GL_ALPHA_BIAS, 0);
@@ -750,6 +806,155 @@
  
  	GLuint texName;
  	glGenTextures( 1, &texName );
+ 	glBindTexture ( GL_TEXTURE_2D, texName );	
+ 
++#ifdef __EMSCRIPTEN__ // Original UI images are not power-of-two textures.
++	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++#else
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
++#endif
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+ 
++#ifndef __EMSCRIPTEN__ // WebGL does not support legacy smoothing hints.
+ 	glHint ( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
+ 	glHint ( GL_LINE_SMOOTH_HINT,	 GL_NICEST );
+ 	glHint ( GL_POINT_SMOOTH_HINT,	 GL_NICEST );
++#endif
+ 
+     EclReset ( app->GetOptions ()->GetOptionValue ("graphics_screenwidth"),
+ 			   app->GetOptions ()->GetOptionValue ("graphics_screenheight") );
+--- a/uplink/src/app/opengl_interface.cpp
++++ b/uplink/src/app/opengl_interface.cpp
+@@ -4,6 +4,20 @@
+ #include <time.h>
+ 
+ #include <GL/gl.h>
++
++#ifdef __EMSCRIPTEN__
++// Native GL creates names on bind; WebGL requires a generated texture object.
++static void BindBrowserUITexture()
++{
++    static GLuint texture = 0;
++    if (!texture) glGenTextures(1, &texture);
++    glBindTexture(GL_TEXTURE_2D, texture);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++}
++#endif
+ 
+ #include <GL/glu.h> /* glu extention library */
+ 
+@@ -73,8 +87,18 @@
+ 	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+ 	glEnable ( GL_TEXTURE_2D );
+ 
++#ifdef __EMSCRIPTEN__
++    BindBrowserUITexture();
++#else
+ 	glBindTexture ( GL_TEXTURE_2D, 1 );
+-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
++#endif
++	glTexImage2D ( GL_TEXTURE_2D, 0,
++#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
++                      GL_RGBA,
++#else
++                      GL_RGB,
++#endif
++ backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
+ 
+ 	float scaleX = (float) x / 640.0;
+ 	float scaleY = (float) y / 480.0;
+@@ -124,8 +148,18 @@
+ 	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+ 	glEnable ( GL_TEXTURE_2D );
+ 
++#ifdef __EMSCRIPTEN__
++    BindBrowserUITexture();
++#else
+ 	glBindTexture ( GL_TEXTURE_2D, 1 );
+-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
++#endif
++	glTexImage2D ( GL_TEXTURE_2D, 0,
++#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
++                      GL_RGBA,
++#else
++                      GL_RGB,
++#endif
++ backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
+ 
+ 	float scaleX = (float) button->x / 640.0;
+ 	float scaleY = (float) button->y / 480.0;
+@@ -280,8 +314,18 @@
+ 	glEnable ( GL_BLEND );
+ 	glBlendFunc ( GL_ONE, GL_ZERO );
+ 
++#ifdef __EMSCRIPTEN__
++    BindBrowserUITexture();
++#else
+ 	glBindTexture ( GL_TEXTURE_2D, 1 );
+-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
++#endif
++	glTexImage2D ( GL_TEXTURE_2D, 0,
++#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
++                      GL_RGBA,
++#else
++                      GL_RGB,
++#endif
++ backdrop->Width(), backdrop->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, backdrop->pixels );
+ 
+ 	currentY += 0.003;
+ 	float scaleX = currentX;
+@@ -320,7 +364,11 @@
+ 
+ 	UplinkAssert ( image );
+ 	
++#ifdef __EMSCRIPTEN__
++    BindBrowserUITexture();
++#else
+ 	glBindTexture ( GL_TEXTURE_2D, 1 );
++#endif
+ 	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
+ 
+ 	// Scale the image to fit the button size
+@@ -367,8 +415,18 @@
+ 
+ 	UplinkAssert ( image );
+ 	
++#ifdef __EMSCRIPTEN__
++    BindBrowserUITexture();
++#else
+ 	glBindTexture ( GL_TEXTURE_2D, 1 );
+-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
++#endif
++	glTexImage2D ( GL_TEXTURE_2D, 0,
++#ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
++                      GL_RGBA,
++#else
++                      GL_RGB,
++#endif
++ image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
+ 
+ 	// Scale the image to fit the button size
+ 
+--- a/uplink/src/mainmenu/genericoptions_interface.cpp
++++ b/uplink/src/mainmenu/genericoptions_interface.cpp
+@@ -75,6 +75,11 @@
+ 
+ 	}
+ 
++#ifdef __EMSCRIPTEN__
++    // Applying browser options must serialize them before a tab reload.
++    app->GetOptions()->Save(NULL);
++#endif
++
+ }
+ 
+ void GenericOptionsInterface::ToggleBoxDraw ( Button *button, bool highlighted, bool clicked )
 --- a/uplink/src/options/options.cpp
 +++ b/uplink/src/options/options.cpp
 @@ -2,6 +2,10 @@
@@ -774,3 +979,16 @@
  
  	}
  	else {
+--- a/uplink/src/game/scriptlibrary.cpp
++++ b/uplink/src/game/scriptlibrary.cpp
+@@ -1178,6 +1178,10 @@
+ 	// Put this line in to disable "first time" after one game		
+ 
+ 	app->GetOptions ()->SetOptionValue ( "game_firsttime", 0 );
++#ifdef __EMSCRIPTEN__
++    // Persist completed onboarding before a browser reload can restart it.
++    app->GetOptions ()->Save ( NULL );
++#endif
+ 
+ 	game->GetInterface ()->GetRemoteInterface ()->RunScreen ( 6 );
+ 	

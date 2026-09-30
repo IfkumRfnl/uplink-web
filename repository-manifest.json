@@ -224,8 +224,8 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 4861,
-      "sha256": "56edee1c6f6933d5f7715b41cf0fa4ebf1ac336a9e7c34ee1ccee033cbcc8749"
+      "bytes": 5447,
+      "sha256": "6fc3460c6395d70792d2139d895ea12c9aac30ff61e0d1f30e6193d88259767b"
     },
     {
       "path": "port/tests/browser-harness.cjs",
@@ -239,8 +239,8 @@
     },
     {
       "path": "port/tests/browser-pages.cjs",
-      "bytes": 6395,
-      "sha256": "d850415187e9ca01e879cba5507fc403bdc4e0d1dc2af349893fe6d8205d4091"
+      "bytes": 8922,
+      "sha256": "67c7f5a8afed252063328e4a8b42927d9e7b3cfb5f1d4a3f3eb1308230fa8c30"
     },
     {
       "path": "port/tests/browser-smoke.cjs",
@@ -4904,8 +4904,8 @@
     },
     {
       "path": "prototype/game.html",
-      "bytes": 2096,
-      "sha256": "fd8acf226a5ceb4b36c8c45112b3b20b5a45756c7d6f7711b8f5f04637040c61"
+      "bytes": 1018,
+      "sha256": "ee089896663c1133b5456b5a488275aab1389e631be26767bd14791376c82964"
     },
     {
       "path": "prototype/index.html",

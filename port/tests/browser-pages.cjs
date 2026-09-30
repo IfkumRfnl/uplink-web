@@ -56,6 +56,47 @@ const {chromium} = require('playwright');
     const initial = await page.evaluate(() => ({ready: Module.uplinkPersistence.ready,
       abort: ABORT, gl: GLctx.getError(), frames: MainLoop.currentFrameNumber}));
     assert(initial.ready && !initial.abort && !initial.gl && initial.frames > 5);
+    const layout = await page.evaluate(() => ({
+      footer: !!document.querySelector('footer, #flush, #debug, #save-status, #log'),
+      canvas: document.querySelector('#canvas').getBoundingClientRect().toJSON(),
+      bodyHeight: document.body.getBoundingClientRect().height
+    }));
+    assert.equal(layout.footer, false, 'Game page must not show the debug/save strip');
+    assert.equal(layout.bodyHeight, layout.canvas.bottom, 'No shell panel below the canvas');
+    await page.evaluate(() => {
+      window.qaRightButtons = [];
+      window.qaContextMenus = [];
+      document.addEventListener('contextmenu', event => qaContextMenus.push({
+        target: event.target.id || event.target.tagName, prevented: event.defaultPrevented
+      }));
+      // Observe events actually dequeued and translated for the C++ SDL consumer.
+      const makeCEvent = SDL.makeCEvent;
+      SDL.makeCEvent = function(event, ptr) {
+        const result = makeCEvent.call(this, event, ptr);
+        if (event.button === 2 && ['mousedown', 'mouseup'].includes(event.type) && result !== false)
+          qaRightButtons.push({type: event.type, button: HEAPU8[ptr + 16]});
+        return result;
+      };
+    });
+    const canvasBox = await page.locator('#canvas').boundingBox();
+    for (let i = 0; i < 5; i++) {
+      await page.mouse.click(canvasBox.x + 50, canvasBox.y + 50, {button:'right'});
+      await page.waitForTimeout(100);
+    }
+    await page.waitForFunction(() => qaRightButtons.length === 10);
+    await page.locator('header').click({button:'right'});
+    const rightClick = await page.evaluate(() => ({
+      buttons: qaRightButtons, menus: qaContextMenus, state: SDL.buttonState
+    }));
+    assert.deepEqual(rightClick.buttons, Array.from({length:5}, () => [
+      {type:'mousedown', button:3}, {type:'mouseup', button:3}
+    ]).flat());
+    assert.equal(rightClick.state & 4, 0, 'Right button must release between clicks');
+    assert.equal(rightClick.menus.filter(event => event.target === 'canvas').length, 5);
+    assert(rightClick.menus.filter(event => event.target === 'canvas').every(event => event.prevented));
+    assert(rightClick.menus.some(event => event.target !== 'canvas' && !event.prevented),
+      'Browser context menu must remain enabled outside the game');
+    await page.keyboard.press('Escape');
     await page.screenshot({path: path.join(output, 'menu.png'), fullPage:true});
     async function click(x, y, delay = 900) {
       const box = await page.locator('#canvas').boundingBox();
@@ -83,8 +124,10 @@ const {chromium} = require('playwright');
       Module.FS.writeFile('/persistent/pages-qa-marker.txt', 'live-pages-reload');
       await Module.uplinkFlushSaves();
     });
+    const beforeRetire = await page.evaluate(() => Module.uplinkPersistence.lastSavedAt);
     await click(10,10); await page.waitForTimeout(1500);
-    await page.evaluate(() => Module.uplinkFlushSaves());
+    await page.waitForFunction(previous => Module.uplinkPersistence.pending === 0 &&
+      Module.uplinkPersistence.lastSavedAt > previous, beforeRetire);
     const saved = await page.evaluate(() => Module.FS.stat('/persistent/.uplink/PagesQA.usr').size);
     assert(saved > 100000);
     await page.reload(); await page.waitForTimeout(18000);
@@ -102,7 +145,7 @@ const {chromium} = require('playwright');
     assert(!restored.abort && !restored.gl && !restored.storage.lastError);
     assert.deepEqual(errors, []); assert.deepEqual(failed, []);
     await page.screenshot({path:path.join(output, 'reloaded.png'), fullPage:true});
-    const result = {url, buildCommit:build.commit, initial, savedBytes:saved, audio, restored, errors, failed, resources};
+    const result = {url, buildCommit:build.commit, initial, layout, rightClick, savedBytes:saved, audio, restored, errors, failed, resources};
     fs.writeFileSync(path.join(output, 'results.json'), JSON.stringify(result,null,2));
     console.log(JSON.stringify(result));
   } finally {

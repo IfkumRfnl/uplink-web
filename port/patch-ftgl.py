@@ -3,11 +3,11 @@ p=Path(__file__).resolve().parent/'ftgl/src/FTTextureGlyph.cpp'
 s=p.read_text().replace('glPushClientAttrib( GL_CLIENT_PIXEL_STORE_BIT);','GLint oldUnpackAlignment; glGetIntegerv(GL_UNPACK_ALIGNMENT, &oldUnpackAlignment);').replace('glPixelStorei( GL_UNPACK_LSB_FIRST, GL_FALSE);','').replace('glPixelStorei( GL_UNPACK_ROW_LENGTH, 0);','').replace('glPopClientAttrib();','glPixelStorei(GL_UNPACK_ALIGNMENT, oldUnpackAlignment);')
 p.write_text(s)
 
-# The atlas is rasterized at the game's native font size. Linear sampling
-# softens those glyphs (unlike native bitmap blits); browser presentation
-# scaling is handled separately, without changing font metrics or layout.
+# Match the native FTGLBitmapFont: hinted, monochrome glyphs at the original
+# point size. Nearest sampling alone cannot sharpen an unhinted grayscale
+# raster. Keep browser-only FTGL changes in the generated build copy.
 p=p.with_name('FTGLTextureFont.cpp')
-s=('#define GL_GLEXT_PROTOTYPES\n' + p.read_text()).replace('GL_TEXTURE_MAG_FILTER, GL_LINEAR', 'GL_TEXTURE_MAG_FILTER, GL_NEAREST').replace('GL_TEXTURE_MIN_FILTER, GL_LINEAR', 'GL_TEXTURE_MIN_FILTER, GL_NEAREST').replace('GL_CLAMP)', 'GL_CLAMP_TO_EDGE)').replace('glPushAttrib( GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT);','''GLboolean oldBlend = glIsEnabled(GL_BLEND);
+s=('#define GL_GLEXT_PROTOTYPES\n' + p.read_text()).replace('FT_LOAD_NO_HINTING', 'FT_LOAD_TARGET_MONO').replace('GL_TEXTURE_MAG_FILTER, GL_LINEAR', 'GL_TEXTURE_MAG_FILTER, GL_NEAREST').replace('GL_TEXTURE_MIN_FILTER, GL_LINEAR', 'GL_TEXTURE_MIN_FILTER, GL_NEAREST').replace('GL_CLAMP)', 'GL_CLAMP_TO_EDGE)').replace('glPushAttrib( GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT);','''GLboolean oldBlend = glIsEnabled(GL_BLEND);
     GLint oldSrcRGB, oldDstRGB, oldSrcAlpha, oldDstAlpha;
     glGetIntegerv(GL_BLEND_SRC_RGB, &oldSrcRGB); glGetIntegerv(GL_BLEND_DST_RGB, &oldDstRGB);
     glGetIntegerv(GL_BLEND_SRC_ALPHA, &oldSrcAlpha); glGetIntegerv(GL_BLEND_DST_ALPHA, &oldDstAlpha);''').replace('glPopAttrib();','''glBlendFuncSeparate(oldSrcRGB, oldDstRGB, oldSrcAlpha, oldDstAlpha);
@@ -17,12 +17,31 @@ p.write_text(s)
 # WebGL ALPHA samples have zero RGB; legacy emulation modulates all four
 # channels. White RGBA glyph texels preserve the original text colour.
 p=p.with_name('FTTextureGlyph.cpp')
-s=p.read_text().replace('glTexSubImage2D( GL_TEXTURE_2D, 0, xOffset, yOffset, destWidth, destHeight, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap.buffer);', '\n'.join([
+s=p.read_text().replace('FT_RENDER_MODE_NORMAL', 'FT_RENDER_MODE_MONO')
+s=s.replace('FT_Bitmap      bitmap = glyph->bitmap;', '''FT_Bitmap      bitmap = glyph->bitmap;
+    if (bitmap.pixel_mode != FT_PIXEL_MODE_MONO &&
+        bitmap.pixel_mode != FT_PIXEL_MODE_GRAY &&
+        bitmap.pixel_mode != FT_PIXEL_MODE_GRAY2 &&
+        bitmap.pixel_mode != FT_PIXEL_MODE_GRAY4) {
+        err = 0x13; // Unsupported glyph format; never interpret color/LCD bytes as alpha.
+        return;
+    }''')
+s=s.replace('glTexSubImage2D( GL_TEXTURE_2D, 0, xOffset, yOffset, destWidth, destHeight, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap.buffer);', '\n'.join([
     'unsigned char* rgba = new unsigned char[destWidth * destHeight * 4];',
     'for (int y = 0; y < destHeight; ++y) for (int x = 0; x < destWidth; ++x) {',
     '    int i = (y * destWidth + x) * 4;',
     '    rgba[i] = rgba[i+1] = rgba[i+2] = 255;',
-    '    rgba[i+3] = bitmap.buffer[y * bitmap.pitch + x];',
+    '    const unsigned char* row = bitmap.buffer + (bitmap.pitch < 0',
+    '        ? (destHeight - 1 - y) * (-bitmap.pitch) : y * bitmap.pitch);',
+    '    switch (bitmap.pixel_mode) {',
+    '    case FT_PIXEL_MODE_MONO:',
+    '        rgba[i+3] = (row[x >> 3] & (0x80 >> (x & 7))) ? 255 : 0; break;',
+    '    case FT_PIXEL_MODE_GRAY2:',
+    '        rgba[i+3] = ((row[x >> 2] >> (6 - 2 * (x & 3))) & 3) * 85; break;',
+    '    case FT_PIXEL_MODE_GRAY4:',
+    '        rgba[i+3] = ((row[x >> 1] >> (4 - 4 * (x & 1))) & 15) * 17; break;',
+    '    default: rgba[i+3] = row[x]; break;',
+    '    }',
     '}',
     'glTexSubImage2D(GL_TEXTURE_2D, 0, xOffset, yOffset, destWidth, destHeight, GL_RGBA, GL_UNSIGNED_BYTE, rgba);',
     'delete [] rgba;'

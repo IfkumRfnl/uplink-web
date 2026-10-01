@@ -134,8 +134,8 @@
     },
     {
       "path": "port/check.sh",
-      "bytes": 1173,
-      "sha256": "a3551019156515b790a90c4db0906723ef65df06ced0fdc326bb654dc8f0c607"
+      "bytes": 1290,
+      "sha256": "45f7c97a4bc8e8ee92b431584601fef86bf0a2c759099845dc1c4d23cb3e7149"
     },
     {
       "path": "port/compile-game.py",
@@ -149,8 +149,8 @@
     },
     {
       "path": "port/display-notes.md",
-      "bytes": 2976,
-      "sha256": "ddf704b659f839dbef55f7d552458841c804f26f6e425060b739e58d28e5663f"
+      "bytes": 5341,
+      "sha256": "abab18c631ae5c221606cb8f335782f19f004d18bcfe6ee12098cc1e530cec24"
     },
     {
       "path": "port/include/world/Player.h",
@@ -174,8 +174,8 @@
     },
     {
       "path": "port/patch-ftgl.py",
-      "bytes": 3403,
-      "sha256": "e5f1d1c91641389897da1b049a877c2cb0f45af53806ce033fbe651ba173fe62"
+      "bytes": 4475,
+      "sha256": "74ee74cac6523a86b239077b5acc144b68674bf937e1123d4e2eb006ede9129c"
     },
     {
       "path": "port/persistence-notes.md",
@@ -210,7 +210,7 @@
     {
       "path": "port/source-changes.json",
       "bytes": 22500,
-      "sha256": "8f105ed8772d626ad8486aa1f98a7c64372fe6a290a4e21c7f82a5aef94d85b7"
+      "sha256": "2ec1969928ea5d5c46dd9c22b7abecc0531e385ff0646e874a7e7a41bb4b434d"
     },
     {
       "path": "port/tests/README-image.md",
@@ -224,8 +224,8 @@
     },
     {
       "path": "port/tests/browser-display.cjs",
-      "bytes": 8616,
-      "sha256": "773926fa3c0504f5b8d5e03f8498e7de38911282e36599062c100e17fcd8e797"
+      "bytes": 14932,
+      "sha256": "e71720c256eefa5230ff1b8f6aaa0a37818e535c20a3adc5a4987f08ef354a16"
     },
     {
       "path": "port/tests/browser-harness.cjs",
@@ -239,8 +239,8 @@
     },
     {
       "path": "port/tests/browser-pages.cjs",
-      "bytes": 8922,
-      "sha256": "67c7f5a8afed252063328e4a8b42927d9e7b3cfb5f1d4a3f3eb1308230fa8c30"
+      "bytes": 9036,
+      "sha256": "e418c301f9b5a6c3adcfba3ee51aa87df1b7a5949af99663dd46667cb9385c61"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -308,9 +308,19 @@
       "sha256": "3afc1e6fcee33e0f5a43ea6390912cb7bec2e0cdf1c58656dfe4c68bd09eded4"
     },
     {
+      "path": "port/tests/test-display-layout.cjs",
+      "bytes": 2116,
+      "sha256": "1ccd7bb66d234a6d75be6c791ce826db49766609278164deba76ba2d44494264"
+    },
+    {
       "path": "port/tests/test-firsttime-save.py",
       "bytes": 1430,
       "sha256": "20e334d79d8f29c4916124e8335d760cff041da289507dfdc94e00cd247d679b"
+    },
+    {
+      "path": "port/tests/test-font-raster.py",
+      "bytes": 6670,
+      "sha256": "e9f34261f86ff4da20d03c770c60da2f19a2dc01a7a5b332acbe9abc7174288b"
     },
     {
       "path": "port/tests/test-game-renderer-qa.py",
@@ -341,6 +351,11 @@
       "path": "port/tests/test-renderer-link.cjs",
       "bytes": 1170,
       "sha256": "8d787034745cb727b47b472516c3590ddd86901334a1099bdd85b941f03b5623"
+    },
+    {
+      "path": "port/tests/test-ui-texture.py",
+      "bytes": 2269,
+      "sha256": "bddb2922120d6f3db632e18425a9e229d3eec80e6c30b7aa1b7158bb383dd084"
     },
     {
       "path": "port/tests/test-vanbakel-draw.py",
@@ -4944,8 +4959,8 @@
     },
     {
       "path": "prototype/display.js",
-      "bytes": 5660,
-      "sha256": "855a85275af42f2cb2fa15480d7ce9d9f0678b058001e9996870040c0f6a2d5a"
+      "bytes": 7626,
+      "sha256": "934915fdf9bbcf6b9e86dfce0a7794f841e4e7b07218d5a13a0018477d085b7b"
     },
     {
       "path": "prototype/game.html",
@@ -28749,8 +28764,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/opengl_interface.cpp",
-      "bytes": 50776,
-      "sha256": "02b50895666a613ddc493f34e2a0de55d3708e1c49d5c9b52eaafb046a7a658f"
+      "bytes": 50844,
+      "sha256": "15c1db113c23fbf89c8494d31592b7033508f231e0efab63dfffcd242051f190"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/opengl_interface.h",

@@ -52,7 +52,7 @@
   {
     "path": "uplink/src/app/opengl_interface.cpp",
     "original_sha256": "1392ab0cc51a9939922ed1c7eb1c5b372f042381925e50fe52a7e25f23365142",
-    "modified_sha256": "02b50895666a613ddc493f34e2a0de55d3708e1c49d5c9b52eaafb046a7a658f"
+    "modified_sha256": "15c1db113c23fbf89c8494d31592b7033508f231e0efab63dfffcd242051f190"
   },
   {
     "path": "uplink/src/game/scriptlibrary.cpp",

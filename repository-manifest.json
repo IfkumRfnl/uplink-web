@@ -149,8 +149,8 @@
     },
     {
       "path": "port/display-notes.md",
-      "bytes": 4821,
-      "sha256": "510eb621f84cd316ba77384bf8f17b43f6399becdb94bbbc6bea9d8f1eea2160"
+      "bytes": 5341,
+      "sha256": "abab18c631ae5c221606cb8f335782f19f004d18bcfe6ee12098cc1e530cec24"
     },
     {
       "path": "port/include/world/Player.h",
@@ -224,8 +224,8 @@
     },
     {
       "path": "port/tests/browser-display.cjs",
-      "bytes": 12008,
-      "sha256": "6699656e926a0c98e157b3e0be7bce94c55bd15cfa40cd784feab1e8ba9344ed"
+      "bytes": 14932,
+      "sha256": "e71720c256eefa5230ff1b8f6aaa0a37818e535c20a3adc5a4987f08ef354a16"
     },
     {
       "path": "port/tests/browser-harness.cjs",
@@ -4959,8 +4959,8 @@
     },
     {
       "path": "prototype/display.js",
-      "bytes": 7201,
-      "sha256": "95e66ce9082c6f5b0b7227ede2f4505769748ed29d01b42254226e159ebc02b4"
+      "bytes": 7626,
+      "sha256": "934915fdf9bbcf6b9e86dfce0a7794f841e4e7b07218d5a13a0018477d085b7b"
     },
     {
       "path": "prototype/game.html",

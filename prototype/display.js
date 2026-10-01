@@ -76,12 +76,23 @@ window.UplinkDisplay = (() => {
     viewport.style.overflow = settings.scale === 'fit' ? 'hidden' : 'auto';
     // Clear old scrollbars before measuring. A previous oversized resolution
     // must not reduce the available space for a now-fitting whole-pixel scale.
+    const scrollLeft = viewport.scrollLeft, scrollTop = viewport.scrollTop;
     canvas.style.width = canvas.style.height = '0px';
     const factor = presentationScale(width, height, viewport.clientWidth,
       viewport.clientHeight, dpr, settings.scale);
     canvas.style.width = `${width * factor / dpr}px`;
     canvas.style.height = `${height * factor / dpr}px`;
+    viewport.scrollLeft = scrollLeft;
+    viewport.scrollTop = scrollTop;
     alignCanvas();
+  }
+  let layoutFrame = 0;
+  function scheduleLayout() {
+    if (layoutFrame) return;
+    layoutFrame = requestAnimationFrame(() => {
+      layoutFrame = 0;
+      layout();
+    });
   }
   control.querySelector('form').onsubmit = async event => {
     event.preventDefault();
@@ -117,8 +128,9 @@ window.UplinkDisplay = (() => {
   // SDL can assign canvas inline sizes when its video mode initializes.
   new MutationObserver(layout).observe(canvas, {attributes:true, attributeFilter:['width', 'height']});
   // SDL can also restore inline CSS dimensions after initializing/fullscreen.
-  new ResizeObserver(layout).observe(canvas);
-  new ResizeObserver(layout).observe(document.body);
+  // Defer writes outside ResizeObserver delivery and coalesce notifications.
+  new ResizeObserver(scheduleLayout).observe(canvas);
+  new ResizeObserver(scheduleLayout).observe(document.body);
   // Changing monitors/zoom can change DPR without a window resize.
   function watchDpr() {
     const query = matchMedia(`(resolution: ${window.devicePixelRatio || 1}dppx)`);

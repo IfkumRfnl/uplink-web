@@ -82,3 +82,11 @@ integer and fractional DPR and undersized windows. These are included in
 `npm test`; they do not establish full Wasm or browser behavior. The browser
 display suite additionally checks fractional DPR, pixel origins, fitted bounds,
 both-axis scrolling and fresh SDL pointer events after scrolling.
+
+CSS-only sizing changes from SDL also trigger relayout. ResizeObserver
+notifications schedule a coalesced animation-frame callback so layout never
+writes during observer delivery. Layout retains both scroll offsets while
+temporarily clearing canvas dimensions to measure available space. Browser
+regressions explicitly simulate CSS-only restoration in Sharp and Native,
+capture window errors (including observer-loop notifications), and check
+stable dimensions, physical-pixel origins and scroll offsets across frames.

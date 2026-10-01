@@ -18,6 +18,18 @@ const {requestHandler} = require('./browser-smoke.cjs');
       headless:true, args:['--enable-unsafe-swiftshader']});
     for (const dpr of [1, 1.25, 1.5, 1.75, 2]) {
       const context = await browser.newContext({viewport:{width:1366,height:900}, deviceScaleFactor:dpr});
+      await context.addInitScript(() => {
+        window.qaWindowErrors = [];
+        window.addEventListener('error', event => qaWindowErrors.push(event.message));
+        window.qaResizeCalls = 0;
+        const Original = window.ResizeObserver;
+        window.ResizeObserver = class extends Original {
+          constructor(callback) {super((entries, observer) => {
+            ++qaResizeCalls;
+            callback(entries, observer);
+          });}
+        };
+      });
       const page = await context.newPage();
       const errors = [];
       page.on('pageerror', error => errors.push(String(error)));
@@ -55,6 +67,7 @@ const {requestHandler} = require('./browser-smoke.cjs');
         });
       }
       async function checkInput() {
+        assert.deepEqual(await page.evaluate(() => qaWindowErrors), []);
         const g = await geometry(), box = await page.locator('#canvas').boundingBox();
         // The fixed form can cover the target in narrow windows. Keep this an
         // actual canvas click, then restore the form for subsequent selections.
@@ -84,6 +97,38 @@ const {requestHandler} = require('./browser-smoke.cjs');
         if (open) await page.locator('#display-control summary').click();
         return g;
       }
+      async function checkCssRestoration(mode) {
+        const before = await geometry();
+        const restoration = await page.evaluate(async () => {
+          const c = document.querySelector('#canvas'), v = document.querySelector('#display-viewport');
+          const start = qaResizeCalls, samples = [];
+          // SDL may change only CSS dimensions, leaving backing attributes intact.
+          c.style.width = c.width + 'px';
+          c.style.height = c.height + 'px';
+          for (let i = 0; i < 60; ++i) {
+            await new Promise(requestAnimationFrame);
+            const box = c.getBoundingClientRect();
+            samples.push({w:box.width,h:box.height,x:box.x,y:box.y,
+              scrollLeft:v.scrollLeft,scrollTop:v.scrollTop});
+          }
+          return {samples,resizeCalls:qaResizeCalls-start,errors:qaWindowErrors};
+        });
+        const settled = restoration.samples.at(-1);
+        assert.equal(settled.w, before.w);
+        assert.equal(settled.h, before.h);
+        assert.equal(settled.scrollLeft, before.viewport.scrollLeft, 'CSS restoration must preserve horizontal scroll');
+        assert.equal(settled.scrollTop, before.viewport.scrollTop, 'CSS restoration must preserve vertical scroll');
+        assert.deepEqual(restoration.errors, [], 'Capture window errors, including ResizeObserver delivery errors');
+        assert(restoration.resizeCalls < 6, 'Resize observers must settle after CSS restoration');
+        for (const sample of restoration.samples.slice(-30)) {
+          assert.deepEqual(sample, settled, 'Canvas sizing/origin/scroll must not oscillate');
+          for (const origin of [sample.x, sample.y])
+            assert(Math.abs(origin*dpr-Math.round(origin*dpr)) < 0.04);
+        }
+        const after = await checkInput();
+        results.push({dpr,mode,checks:'CSS-only SDL restoration; stable sizing, pixel origins and scroll; no window errors',
+          before,after,restoration});
+      }
       for (const viewport of [{width:1367,height:901},{width:1920,height:1080},
         {width:800,height:700},{width:390,height:844}]) {
         await page.setViewportSize(viewport);
@@ -107,6 +152,7 @@ const {requestHandler} = require('./browser-smoke.cjs');
       const scrolled = await checkInput();
       assert(scrolled.viewport.scrollLeft > 0 && scrolled.viewport.scrollTop > 0);
       results.push({dpr,checks:'fresh SDL down/up after horizontal and vertical canvas scroll',geometry:scrolled});
+      await checkCssRestoration('sharp');
       await page.locator('#display-control summary').click();
       await page.selectOption('#display-scale', 'fit');
       await page.getByRole('button',{name:'Apply display'}).click();
@@ -118,6 +164,14 @@ const {requestHandler} = require('./browser-smoke.cjs');
       await page.getByRole('button',{name:'Apply display'}).click();
       const smallNative = await checkInput();
       assert(Math.abs(smallNative.w * dpr / smallNative.width - 1) < 0.001);
+      await page.evaluate(() => {
+        const v = document.querySelector('#display-viewport');
+        v.scrollLeft = 63; v.scrollTop = 67;
+      });
+      await page.waitForTimeout(150);
+      const nativeScrolled = await geometry();
+      assert(nativeScrolled.viewport.scrollLeft > 0 && nativeScrolled.viewport.scrollTop > 0);
+      await checkCssRestoration('native');
       await page.selectOption('#display-scale', 'sharp');
       await page.getByRole('button',{name:'Apply display'}).click();
       await page.locator('#display-control summary').click();

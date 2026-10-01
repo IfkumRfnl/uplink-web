@@ -16,7 +16,7 @@ const {requestHandler} = require('./browser-smoke.cjs');
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH,
       headless:true, args:['--enable-unsafe-swiftshader']});
-    for (const dpr of [1, 2]) {
+    for (const dpr of [1, 1.25, 1.5, 1.75, 2]) {
       const context = await browser.newContext({viewport:{width:1366,height:900}, deviceScaleFactor:dpr});
       const page = await context.newPage();
       const errors = [];
@@ -30,8 +30,14 @@ const {requestHandler} = require('./browser-smoke.cjs');
           const original = SDL.makeCEvent;
           SDL.makeCEvent = function(event, ptr) {
             const result = original.call(this, event, ptr);
-            if (['mousedown','mouseup'].includes(event.type) && result !== false)
-              qaPointers.push([HEAP32[(ptr+20)>>2], HEAP32[(ptr+24)>>2]]);
+            if (['mousedown','mouseup'].includes(event.type) && result !== false) {
+              const canvas = document.querySelector('#canvas'), box = canvas.getBoundingClientRect();
+              qaPointers.push({
+                actual:[HEAP32[(ptr+20)>>2], HEAP32[(ptr+24)>>2]],
+                expected:[Math.trunc((event.pageX - window.scrollX - box.left) * canvas.width / box.width),
+                  Math.trunc((event.pageY - window.scrollY - box.top) * canvas.height / box.height)]
+              });
+            }
             return result;
           };
         });
@@ -40,38 +46,81 @@ const {requestHandler} = require('./browser-smoke.cjs');
       async function geometry() {
         return page.evaluate(() => {
           const c = document.querySelector('#canvas'), box = c.getBoundingClientRect();
-          return {width:c.width,height:c.height,w:box.width,h:box.height,
+          const v = document.querySelector('#display-viewport'), visible = v.getBoundingClientRect();
+          return {width:c.width,height:c.height,w:box.width,h:box.height,x:box.x,y:box.y,
+            viewport:{w:visible.width,h:visible.height,clientWidth:v.clientWidth,clientHeight:v.clientHeight,
+              scrollLeft:v.scrollLeft,scrollTop:v.scrollTop,scrollWidth:v.scrollWidth,scrollHeight:v.scrollHeight},
             dpr:devicePixelRatio,filter:getComputedStyle(c).imageRendering,
             backing:[GLctx.drawingBufferWidth, GLctx.drawingBufferHeight]};
         });
       }
       async function checkInput() {
         const g = await geometry(), box = await page.locator('#canvas').boundingBox();
+        // The fixed form can cover the target in narrow windows. Keep this an
+        // actual canvas click, then restore the form for subsequent selections.
+        const open = await page.locator('#display-control').evaluate(el => el.open);
+        if (open) await page.locator('#display-control summary').click();
         await page.evaluate(() => {qaPointers = [];});
         await page.mouse.click(box.x + 200 * box.width / g.width,
           box.y + 200 * box.height / g.height);
         // Require fresh down/up events; a previous successful click cannot mask
         // missing events after a resize. Wait for consumption instead of racing CI.
         await page.waitForFunction(() => qaPointers.length >= 2);
-        const mouse = await page.evaluate(() => qaPointers.at(-1));
-        assert(mouse, 'The C++ SDL consumer must receive a pointer event');
-        assert(Math.abs(mouse[0] - 200) <= 1 && Math.abs(mouse[1] - 200) <= 1,
+        const pointers = await page.evaluate(() => qaPointers);
+        for (const pointer of pointers)
+          assert.deepEqual(pointer.actual, pointer.expected, 'SDL must map the actual dispatched event through the canvas bounds');
+        const mouse = pointers.at(-1).actual;
+        // Chromium rounds mouse events to CSS pixels. Downscaled Fit can turn
+        // one CSS pixel into several game pixels; SDL then truncates to integers.
+        assert(Math.abs(mouse[0] - 200) <= 1 + g.width / box.width &&
+          Math.abs(mouse[1] - 200) <= 1 + g.height / box.height,
           `SDL input drift: ${mouse}`);
         assert.equal(g.filter, 'pixelated');
         assert.deepEqual(g.backing, [g.width,g.height]);
         assert(Math.abs(g.w/g.h - g.width/g.height) < 0.001);
+        for (const origin of [g.x, g.y])
+          assert(Math.abs(origin * g.dpr - Math.round(origin * g.dpr)) < 0.04,
+            `Fractional physical-pixel origin: ${JSON.stringify(g)}`);
+        if (open) await page.locator('#display-control summary').click();
         return g;
       }
-      for (const viewport of [{width:1366,height:900},{width:1920,height:1080},
+      for (const viewport of [{width:1367,height:901},{width:1920,height:1080},
         {width:800,height:700},{width:390,height:844}]) {
         await page.setViewportSize(viewport);
         await page.waitForTimeout(150);
         const g = await checkInput();
-        assert(g.w <= viewport.width + 1 && g.h <= viewport.height + 1);
+        assert(g.viewport.w <= viewport.width + 1 && g.viewport.h <= viewport.height + 1);
         const physicalScale = g.w * dpr / g.width;
-        if (physicalScale >= 1) assert(Math.abs(physicalScale - Math.round(physicalScale)) < 0.001);
+        assert(physicalScale >= 0.999 && Math.abs(physicalScale - Math.round(physicalScale)) < 0.001);
+        assert(Math.abs(g.w * dpr - g.width * Math.round(physicalScale)) < 0.05);
+        assert(Math.abs(g.h * dpr - g.height * Math.round(physicalScale)) < 0.05);
         results.push({dpr,viewport,geometry:g});
       }
+      // An oversized sharp canvas remains 1:1 and scrollable on both axes.
+      await page.setViewportSize({width:390,height:300});
+      await page.waitForTimeout(150);
+      await page.evaluate(() => {
+        const v = document.querySelector('#display-viewport');
+        v.scrollLeft = 63; v.scrollTop = 67;
+      });
+      await page.waitForTimeout(150);
+      const scrolled = await checkInput();
+      assert(scrolled.viewport.scrollLeft > 0 && scrolled.viewport.scrollTop > 0);
+      results.push({dpr,checks:'fresh SDL down/up after horizontal and vertical canvas scroll',geometry:scrolled});
+      await page.locator('#display-control summary').click();
+      await page.selectOption('#display-scale', 'fit');
+      await page.getByRole('button',{name:'Apply display'}).click();
+      const fitted = await checkInput();
+      assert(fitted.w <= fitted.viewport.clientWidth + 1 && fitted.h <= fitted.viewport.clientHeight + 1);
+      assert(fitted.viewport.scrollLeft === 0 && fitted.viewport.scrollTop === 0);
+      // Native also remains 1:1 in an undersized viewport.
+      await page.selectOption('#display-scale', 'native');
+      await page.getByRole('button',{name:'Apply display'}).click();
+      const smallNative = await checkInput();
+      assert(Math.abs(smallNative.w * dpr / smallNative.width - 1) < 0.001);
+      await page.selectOption('#display-scale', 'sharp');
+      await page.getByRole('button',{name:'Apply display'}).click();
+      await page.locator('#display-control summary').click();
       await page.setViewportSize({width:1366,height:1000});
       await page.locator('#display-control summary').click();
       await page.selectOption('#display-scale', 'fit');
@@ -151,7 +200,7 @@ const {requestHandler} = require('./browser-smoke.cjs');
       await context.close();
     }
     fs.writeFileSync(path.join(out,'results.json'),JSON.stringify(results,null,2));
-    console.log('PASS: DPR1/2, four viewport sizes, native game buffer, SDL pointer coordinates, saved settings, fullscreen');
+    console.log('PASS: integer/fractional DPR, sharp/native scrolling, fitted bounds, pixel origins, SDL input, saved settings, fullscreen');
   } finally {
     if (browser) await browser.close();
     if (server.listening) await new Promise(resolve => server.close(resolve));

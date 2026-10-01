@@ -13,9 +13,14 @@ window.UplinkDisplay = (() => {
   const canvas = document.getElementById('canvas');
   canvas.width = width;
   canvas.height = height;
+  const viewport = document.createElement('div');
+  viewport.id = 'display-viewport';
+  canvas.before(viewport);
+  viewport.append(canvas);
   const style = document.createElement('style');
   style.textContent = `
-    #canvas {max-width:none; image-rendering:pixelated;}
+    #display-viewport {width:100%;overflow:auto;position:relative;overscroll-behavior:contain;}
+    #canvas {max-width:none; image-rendering:pixelated;position:relative;}
     #display-control {position:fixed;right:8px;top:8px;z-index:20;color:#c6e1ec;
       font:13px system-ui;background:#081726eF;border:1px solid #527487;border-radius:4px;}
     #display-control summary {cursor:pointer;padding:6px 10px;}
@@ -31,7 +36,7 @@ window.UplinkDisplay = (() => {
   control.innerHTML = `<summary>Display</summary><form>
     <label>Game resolution<select id="display-resolution">${resolutions.map(r => `<option value="${r}">${r.replace('x', ' × ')}</option>`).join('')}</select></label>
     <label>Scaling<select id="display-scale"><option value="sharp">Sharp · whole pixels</option><option value="fit">Fit window</option><option value="native">Native · 1 device pixel</option></select></label>
-    <p>Sharp keeps whole device pixels when space allows. Smaller windows must downscale. Resolution changes restart the game; save your progress first.</p>
+    <p>Sharp and Native keep whole pixels; scroll when the game is larger than the window. Fit shows the whole game. Resolution changes restart the game; save your progress first.</p>
     <button type="submit">Apply display</button><button type="button" id="display-fullscreen">Fullscreen</button>
     <p id="display-message" role="status"></p></form>`;
   document.body.append(control);
@@ -40,6 +45,22 @@ window.UplinkDisplay = (() => {
   const message = control.querySelector('#display-message');
   resolution.value = settings.resolution;
   scale.value = settings.scale;
+  function presentationScale(w, h, availableWidth, availableHeight, dpr, mode) {
+    const fit = Math.min(availableWidth * dpr / w, availableHeight * dpr / h);
+    if (mode === 'native') return 1;
+    if (mode === 'sharp') return Math.max(1, Math.floor(fit + 1e-6));
+    return fit;
+  }
+  function pixelOffset(position, dpr) {
+    return Math.round(position * dpr) / dpr - position;
+  }
+  function alignCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.style.left = canvas.style.top = '0px';
+    const box = canvas.getBoundingClientRect();
+    canvas.style.left = `${pixelOffset(box.left, dpr)}px`;
+    canvas.style.top = `${pixelOffset(box.top, dpr)}px`;
+  }
   function layout() {
     const dpr = window.devicePixelRatio || 1;
     const chrome = ['header', 'footer', '#log'].reduce((sum, selector) => {
@@ -48,13 +69,19 @@ window.UplinkDisplay = (() => {
       const css = getComputedStyle(el);
       return sum + el.getBoundingClientRect().height + parseFloat(css.marginTop || 0) + parseFloat(css.marginBottom || 0);
     }, 0);
-    const fit = Math.min(window.innerWidth * dpr / width,
-      Math.max(1, window.innerHeight - chrome) * dpr / height);
-    let factor = fit;
-    if (settings.scale === 'sharp' && fit >= 1) factor = Math.floor(fit + 1e-6);
-    if (settings.scale === 'native') factor = Math.min(1, fit);
+    viewport.style.top = '0px';
+    const offset = pixelOffset(viewport.getBoundingClientRect().top, dpr);
+    viewport.style.top = `${offset}px`;
+    viewport.style.height = `${Math.max(1, window.innerHeight - chrome - Math.max(0, offset))}px`;
+    viewport.style.overflow = settings.scale === 'fit' ? 'hidden' : 'auto';
+    // Clear old scrollbars before measuring. A previous oversized resolution
+    // must not reduce the available space for a now-fitting whole-pixel scale.
+    canvas.style.width = canvas.style.height = '0px';
+    const factor = presentationScale(width, height, viewport.clientWidth,
+      viewport.clientHeight, dpr, settings.scale);
     canvas.style.width = `${width * factor / dpr}px`;
     canvas.style.height = `${height * factor / dpr}px`;
+    alignCanvas();
   }
   control.querySelector('form').onsubmit = async event => {
     event.preventDefault();
@@ -85,9 +112,12 @@ window.UplinkDisplay = (() => {
     } catch (_) { message.textContent = 'Fullscreen is unavailable in this browser.'; }
   };
   window.addEventListener('resize', layout);
+  viewport.addEventListener('scroll', alignCanvas, {passive:true});
   document.addEventListener('fullscreenchange', layout);
   // SDL can assign canvas inline sizes when its video mode initializes.
   new MutationObserver(layout).observe(canvas, {attributes:true, attributeFilter:['width', 'height']});
+  // SDL can also restore inline CSS dimensions after initializing/fullscreen.
+  new ResizeObserver(layout).observe(canvas);
   new ResizeObserver(layout).observe(document.body);
   // Changing monitors/zoom can change DPR without a window resize.
   function watchDpr() {

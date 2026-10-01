@@ -59,10 +59,11 @@ const {chromium} = require('playwright');
     const layout = await page.evaluate(() => ({
       footer: !!document.querySelector('footer, #flush, #debug, #save-status, #log'),
       canvas: document.querySelector('#canvas').getBoundingClientRect().toJSON(),
+      viewport: document.querySelector('#display-viewport').getBoundingClientRect().toJSON(),
       bodyHeight: document.body.getBoundingClientRect().height
     }));
     assert.equal(layout.footer, false, 'Game page must not show the debug/save strip');
-    assert.equal(layout.bodyHeight, layout.canvas.bottom, 'No shell panel below the canvas');
+    assert.equal(layout.bodyHeight, layout.viewport.bottom, 'No shell panel below the scrollable game viewport');
     await page.evaluate(() => {
       window.qaRightButtons = [];
       window.qaContextMenus = [];

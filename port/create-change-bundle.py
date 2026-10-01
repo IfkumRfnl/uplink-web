@@ -26,6 +26,8 @@ for p in sorted(source.rglob('*')):
  changes.append({'path':rel,'original_sha256':None,'modified_sha256':hashlib.sha256(current).hexdigest()})
  after=[line.rstrip('\r\n')+'\n' for line in current.decode('utf-8').splitlines(True)]
  patches.extend(difflib.unified_diff([],after,fromfile='/dev/null',tofile='b/'+rel))
-(root/'port/uplink-browser.patch').write_text(''.join(patches))
+output=root/'qa/provenance'
+output.mkdir(parents=True,exist_ok=True)
+(output/'uplink-browser.patch').write_text(''.join(patches))
 (root/'port/source-changes.json').write_text(json.dumps(changes,indent=2)+'\n')
 print(f'{len(changes)} source files changed; auth/main entrypoint unchanged:', not any(x['path']=='uplink/src/uplink.cpp' for x in changes))

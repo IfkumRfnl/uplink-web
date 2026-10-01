@@ -45,8 +45,4 @@ After staging with `python3 port/prepare-pages.py`, `npm run test:pages` checks 
 
 ## Shader/buffer renderer
 
-`test-renderer-link.cjs` runs in `npm test` and verifies both generated bundles use explicit shaders/direct WebGL draws with no legacy emulation dependency or warning text.
-
-`npm run test:browser-renderer-probe` builds the actual renderer for real pixel assertions, including sparse Memory Banks colours, transforms, clipping/state, texture replacement/blending and two context restorations. It runs in CI.
-
-`npm run test:browser-renderer` builds a separate QA variant and captures the original game screens, audio, actual saves/password reload and context recovery. Only this variant includes a deterministic map label fixture. Run `npm run build` afterwards before packaging a production bundle. See `port/renderer-notes.md` for baseline reproduction and `port/WEBGL_RENDERER_RESULTS.md` for coverage boundaries.
+See [renderer design, regression checks and comparison instructions](../renderer-notes.md). The pixel/context probe and original-game screen/save/audio test run in CI. Their QA bundles and evidence stay under ignored `qa/`; production output is not overwritten.

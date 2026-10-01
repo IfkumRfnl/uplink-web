@@ -11,13 +11,12 @@ def different_pixels(diff):
 
 
 root = Path(__file__).resolve().parents[2]
-out = root / 'port/evidence/webgl'
+out = root / 'qa/renderer-comparison'
 out.mkdir(parents=True, exist_ok=True)
 results = {}
 for before in sorted((root / 'qa/baseline').glob('*.png')):
-    after = root / 'qa/after' / before.name
-    if not after.exists():
-        continue
+    after = root / 'qa/renderer' / before.name
+    assert after.exists(), f"Missing candidate scene: {after.name}"
     a, b = Image.open(before).convert('RGB'), Image.open(after).convert('RGB')
     assert a.size == b.size
     diff = ImageChops.difference(a, b)
@@ -34,8 +33,9 @@ for before in sorted((root / 'qa/baseline').glob('*.png')):
     draw.text((8, 5), f'{before.stem}: main baseline', fill='white')
     draw.text((a.width + 8, 5), 'shader/buffer renderer', fill='white')
     pair.save(out / before.name)
-a = Image.open(root / 'qa/after/before-context-loss.png').convert('RGB')
-b = Image.open(root / 'qa/after/after-context-restore.png').convert('RGB')
+assert results, 'Run the baseline capture before comparing'
+a = Image.open(root / 'qa/renderer/before-context-loss.png').convert('RGB')
+b = Image.open(root / 'qa/renderer/after-context-restore.png').convert('RGB')
 diff = ImageChops.difference(a, b)
 ImageDraw.Draw(diff).rectangle((0, 0, 443, 49), fill=0)
 ImageDraw.Draw(diff).rectangle((0, 748, 1023, 767), fill=0)

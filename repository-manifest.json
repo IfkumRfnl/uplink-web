@@ -4,13 +4,13 @@
   "files": [
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 1884,
-      "sha256": "139aa64510e03af3841d6be0c3e9388145c7ed72a05daf8a52bfd3acbf97fe0b"
+      "bytes": 1995,
+      "sha256": "cac3ac58110db2c724bfbca0ba42d5e3c636155d6792871a9cc8fa12ee9d79d4"
     },
     {
       "path": ".gitignore",
-      "bytes": 696,
-      "sha256": "a0d9183b0dc3d8e0da6cc0b1ac0c186d551ff74448da9df7c58eae3c26877547"
+      "bytes": 798,
+      "sha256": "03dd108a49938d5471940729d79ee9125ecce10bfb82bd80b7c4ca71b0177aba"
     },
     {
       "path": "CLOUD_SETUP.md",
@@ -19,13 +19,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 7158,
-      "sha256": "84ee8286e296024eb28669d216c56000c2093286ac4c7ecf56bc07281db4cd12"
+      "bytes": 7151,
+      "sha256": "2aa8fdb6c61cea6d02a3941a99dfa47626fd1c5d45559499475500aa32e61b3c"
     },
     {
       "path": "RIGHTS.md",
-      "bytes": 1258,
-      "sha256": "9cff3d4c057fafd76fc966bde305b18afc5543ae87ec6b6538deaeff29f1cb32"
+      "bytes": 1283,
+      "sha256": "66985de5825fd17ec43220db1c4533fd5fcbc7f678af2c216c334cb942e8780c"
     },
     {
       "path": "Uplink-build-status.txt",
@@ -99,18 +99,13 @@
     },
     {
       "path": "port/MIGRATION.md",
-      "bytes": 2859,
-      "sha256": "2d592114490d4e5fee32e00d71704268d9df690663a8b3fb8675a404d26d1472"
+      "bytes": 3019,
+      "sha256": "277638f6d9521fdc3fc155f506fc2e7aa89a26b270da24f66b2480464382fd51"
     },
     {
       "path": "port/PAGES.md",
       "bytes": 2286,
       "sha256": "bac06d8bddba9002b503bf5db5d4e3b840a98c4075ea985e3ccfe443ade4beaf"
-    },
-    {
-      "path": "port/WEBGL_RENDERER_RESULTS.md",
-      "bytes": 5669,
-      "sha256": "86a3b133695f99adc2c8e084a3f77a2735292ffbd9b876e1c9265137d78c75e6"
     },
     {
       "path": "port/audio-notes.md",
@@ -149,108 +144,13 @@
     },
     {
       "path": "port/create-change-bundle.py",
-      "bytes": 1936,
-      "sha256": "df172d66fa4a7409a7201a2fa232898720e5a3a9436fb716adb176e38235c5de"
+      "bytes": 2002,
+      "sha256": "7cf2bef1e441529dff10d14eb435e54bfe93b6f5e790bb61e3d7794663d8b000"
     },
     {
       "path": "port/display-notes.md",
       "bytes": 2976,
       "sha256": "ddf704b659f839dbef55f7d552458841c804f26f6e425060b739e58d28e5663f"
-    },
-    {
-      "path": "port/evidence/webgl/after-results.json",
-      "bytes": 1319,
-      "sha256": "d263d4b5d32bff4e8bee9f4d018d4e6b2220ba18958a18193fbaf5024f028c65"
-    },
-    {
-      "path": "port/evidence/webgl/baseline-results.json",
-      "bytes": 1500,
-      "sha256": "c3e1701c7aee2605943dd313473f2ec1dd2b2f51519ec146ad5112f8696954a2"
-    },
-    {
-      "path": "port/evidence/webgl/build-measurements.json",
-      "bytes": 1268,
-      "sha256": "06dd4df13c770f4885efd20f2fc61f9e47a87f0d3fc10a56ade904d51606cc57"
-    },
-    {
-      "path": "port/evidence/webgl/desktop.png",
-      "bytes": 108281,
-      "sha256": "e88a03ed559d9be04e1ad4a1d4797bea98259528cca876d45785821230cb5fa5"
-    },
-    {
-      "path": "port/evidence/webgl/gateway.png",
-      "bytes": 349875,
-      "sha256": "8e05c3fb231c0b1af8b5f62718d46d670ff390cf19fe1dfa4d1de79165986a4d"
-    },
-    {
-      "path": "port/evidence/webgl/login.png",
-      "bytes": 29450,
-      "sha256": "99e288a95d81db75894a1ca29c5e6bfe77609faf3683a5fe3b62de4c9de74d83"
-    },
-    {
-      "path": "port/evidence/webgl/memory-banks.png",
-      "bytes": 140941,
-      "sha256": "16ff24802b4b06126a1321d2f583b15e9bb76bf135dc490d54a0f2b24dbed156"
-    },
-    {
-      "path": "port/evidence/webgl/mission.png",
-      "bytes": 159125,
-      "sha256": "6b6af2b24ab19e43ae111d81485f6bc56efe352142d519b380b8d20d15c4aebe"
-    },
-    {
-      "path": "port/evidence/webgl/password-login.png",
-      "bytes": 66279,
-      "sha256": "ee8a6431ce81f40be2245626ea7be528b3cef8677c787b658cf7bbbe4cdd5be7"
-    },
-    {
-      "path": "port/evidence/webgl/registration.png",
-      "bytes": 32249,
-      "sha256": "e23ea067add1d59f74d161997a206c259af5abf1b83f4b167c746304c11e8e39"
-    },
-    {
-      "path": "port/evidence/webgl/reloaded.png",
-      "bytes": 143965,
-      "sha256": "b5f6fcfa0c093d4b76a306f36f8ab5ba6b27a6204e004f6a01b5c7859f13aaa6"
-    },
-    {
-      "path": "port/evidence/webgl/software-menu.png",
-      "bytes": 149691,
-      "sha256": "68099ee6ec3154659f6f53ef4727f6b60e204bd40b893814889981d73e1812af"
-    },
-    {
-      "path": "port/evidence/webgl/software.png",
-      "bytes": 144964,
-      "sha256": "509e95596cda91cd4b17c192cbb60181df7840e364298f9b503c3a8042a541d3"
-    },
-    {
-      "path": "port/evidence/webgl/tutorial-menu.png",
-      "bytes": 161784,
-      "sha256": "dc95b23b058010708b40694a02d3e1b12e74a3de440d83decc8e1ca956b37b93"
-    },
-    {
-      "path": "port/evidence/webgl/tutorial-one.png",
-      "bytes": 108992,
-      "sha256": "bd7961d4fc98c2dfc5cc44e603a43e2420f37407753235a9823907165b2498c7"
-    },
-    {
-      "path": "port/evidence/webgl/tutorial-three.png",
-      "bytes": 161469,
-      "sha256": "264daacd1c0135f5606327a30b0fc78ced81dbd63ae529d9fb06d3c3c6e3ea73"
-    },
-    {
-      "path": "port/evidence/webgl/tutorial-two.png",
-      "bytes": 161598,
-      "sha256": "bbf653006c55311057d1ed132b9826c055213ad9049db3e0de95c63742b6686b"
-    },
-    {
-      "path": "port/evidence/webgl/visual-comparison.json",
-      "bytes": 1714,
-      "sha256": "f6ff8f88e7c419b860037df2585787793910284e803def4d655bcf3ddec9326f"
-    },
-    {
-      "path": "port/evidence/webgl/world-map.png",
-      "bytes": 369379,
-      "sha256": "8ffb103ea36c9856746efada3f129ea6506d7daa7546be69d2261e587a84e8fb"
     },
     {
       "path": "port/include/world/Player.h",
@@ -264,8 +164,8 @@
     },
     {
       "path": "port/link-game.sh",
-      "bytes": 969,
-      "sha256": "ed298d4394cd68824cd953a478bd49e0cf78c37f559a513fec365e3549663636"
+      "bytes": 992,
+      "sha256": "345ff590eeeb479a2b6ea085b9a1c8a813bbd47a6c1f427aec342e860794cab5"
     },
     {
       "path": "port/mainloop-notes.md",
@@ -299,8 +199,8 @@
     },
     {
       "path": "port/renderer-notes.md",
-      "bytes": 6319,
-      "sha256": "d2574549bd692fb1973c0dca9ab071b79bd707ed429a7f1057a18ece93a2dd9f"
+      "bytes": 4613,
+      "sha256": "6b0b5f9e1d8a6832e14fe3153862f3208cd92629363eaacb04485e0209e6bf34"
     },
     {
       "path": "port/runtime-review.md",
@@ -310,7 +210,7 @@
     {
       "path": "port/source-changes.json",
       "bytes": 22500,
-      "sha256": "80d0a24dc6a8b5388a48199b5f8c55191700790538df5b155f31f7587b08a813"
+      "sha256": "8f105ed8772d626ad8486aa1f98a7c64372fe6a290a4e21c7f82a5aef94d85b7"
     },
     {
       "path": "port/tests/README-image.md",
@@ -319,8 +219,8 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 6814,
-      "sha256": "257bb50f18464f54c80c7043704f237e166beb588f194a9771aa848bd01942c1"
+      "bytes": 6261,
+      "sha256": "9a212ba305948cfcc9ace0d7afc7dd76dbd18c440ffafc474347d226b31aab67"
     },
     {
       "path": "port/tests/browser-display.cjs",
@@ -344,13 +244,13 @@
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
-      "bytes": 2836,
-      "sha256": "152916b08c633bfe710d7489a295402b96dd74abc842c507f635a71d26447899"
+      "bytes": 2969,
+      "sha256": "f7de76aaeff5fcfefc30a59edb631f66641d48977c9786386bb72c07e4b7bd7e"
     },
     {
       "path": "port/tests/browser-renderer.cjs",
-      "bytes": 10259,
-      "sha256": "6331cb1c6f2b38dbd05da54574c104eeeb1de7e927a60ecbf2ee0aa10fae77b5"
+      "bytes": 7837,
+      "sha256": "ec0df396ff6798db7a0802d9b12e960c1da82cc32292c9e3ba3ec05064db09b1"
     },
     {
       "path": "port/tests/browser-smoke.cjs",
@@ -364,8 +264,8 @@
     },
     {
       "path": "port/tests/build-game-renderer-qa.sh",
-      "bytes": 635,
-      "sha256": "b87a43a0d33ddaad3c7fb993ec193a540b7414e4ab84a5120d6dcc86d7807d67"
+      "bytes": 693,
+      "sha256": "d863ad1719030b987a1405bacc3012fb22cffe9933e0253eff42121ee7ba9a7a"
     },
     {
       "path": "port/tests/build-renderer-probe.sh",
@@ -374,8 +274,8 @@
     },
     {
       "path": "port/tests/compare-renderer.py",
-      "bytes": 2221,
-      "sha256": "0bbda4ee21c84365591e5a9fb75053e30614aa9c3d814d3fb50f0c9b0826c28f"
+      "bytes": 2317,
+      "sha256": "0a40b07140810a631aaa9bfd4ed88d9f7a629d1f57944b8ba243613fef71595f"
     },
     {
       "path": "port/tests/image_sidecar_test.cpp",
@@ -441,11 +341,6 @@
       "path": "port/tests/test-vanbakel-draw.py",
       "bytes": 1604,
       "sha256": "001e2b08cafb3adca98f4643290fc349eb18129861ecd2dfdefd5b54fbc454c0"
-    },
-    {
-      "path": "port/uplink-browser.patch",
-      "bytes": 301977,
-      "sha256": "849e96ab73e597096ccb6e4f31ce3c81a6346a14c7f2eae6aadcd8eec0bb1b4f"
     },
     {
       "path": "port/verify-inventory.py",
@@ -27214,8 +27109,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/uplink_draw.h",
-      "bytes": 7025,
-      "sha256": "5e58d8d2963976a916a0e1d8432e53ceaf1c77ba9615751e13475b23e9a4b788"
+      "bytes": 5573,
+      "sha256": "a776943ac0fd08a182b4ba9c66d79c8ca29574a78a735cafccbd3d5eb6c987b4"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/includes.mk",

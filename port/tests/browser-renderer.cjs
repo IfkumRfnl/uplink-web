@@ -6,17 +6,14 @@ const assert = require("node:assert/strict"),
 const { chromium } = require("playwright");
 const { requestHandler } = require("./browser-smoke.cjs");
 (async () => {
-  const out = path.resolve("qa", process.env.QA_RENDERER_PHASE || "after");
+  const out = path.resolve("qa", process.env.QA_RENDERER_PHASE || "renderer");
   fs.mkdirSync(out, { recursive: true });
   for (const file of fs.readdirSync(out))
     if (file.endsWith(".png") || file === "results.json")
       fs.unlinkSync(path.join(out, file));
   const server = http.createServer((req, res) => {
     const filename = new URL(req.url, "http://local").pathname.slice(1);
-    if (
-      process.env.QA_RENDERER_PHASE === "baseline" &&
-      /^game\.(js|wasm|data)$/.test(filename)
-    ) {
+    if (/^game\.(js|wasm|data)$/.test(filename)) {
       res.setHeader(
         "Content-Type",
         filename.endsWith(".wasm")
@@ -33,7 +30,7 @@ const { requestHandler } = require("./browser-smoke.cjs");
   try {
     await new Promise((r) => server.listen(0, "127.0.0.1", r));
     browser = await chromium.launch({
-      executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium",
+      executablePath: process.env.CHROMIUM_PATH,
       headless: true,
       args: ["--enable-unsafe-swiftshader"],
     });
@@ -52,27 +49,6 @@ const { requestHandler } = require("./browser-smoke.cjs");
         return a;
       };
       window.Audio.prototype = Original.prototype;
-      window.qaGPU = { draws: 0, vertices: 0, uploads: 0, uploadBytes: 0 };
-      const gl = WebGLRenderingContext.prototype;
-      for (const name of [
-        "drawArrays",
-        "drawElements",
-        "bufferData",
-        "bufferSubData",
-      ]) {
-        const original = gl[name];
-        gl[name] = function (...args) {
-          if (name === "bufferData" || name === "bufferSubData") {
-            qaGPU.uploads++;
-            const data = args[name === "bufferData" ? 1 : 2];
-            qaGPU.uploadBytes += data?.byteLength || 0;
-          } else {
-            qaGPU.draws++;
-            qaGPU.vertices += (name === "drawArrays" ? args[2] : args[1]) || 0;
-          }
-          return original.apply(this, args);
-        };
-      }
     });
     const page = await context.newPage(),
       errors = [],
@@ -100,38 +76,6 @@ const { requestHandler } = require("./browser-smoke.cjs");
       );
       await page.waitForTimeout(delay);
     }
-    async function measure(name) {
-      const result = await page.evaluate(async () => {
-        const start = performance.now(),
-          old = { ...qaGPU },
-          frame = MainLoop.currentFrameNumber;
-        const durations = [];
-        const runIter = MainLoop.runIter;
-        MainLoop.runIter = function (...args) {
-          const before = performance.now();
-          try {
-            return runIter.apply(this, args);
-          } finally {
-            durations.push(performance.now() - before);
-          }
-        };
-        await new Promise((r) => setTimeout(r, 3000));
-        MainLoop.runIter = runIter;
-        durations.sort((a, b) => a - b);
-        return {
-          milliseconds: performance.now() - start,
-          frames: MainLoop.currentFrameNumber - frame,
-          draws: qaGPU.draws - old.draws,
-          uploads: qaGPU.uploads - old.uploads,
-          uploadBytes: qaGPU.uploadBytes - old.uploadBytes,
-          callbackMeanMs:
-            durations.reduce((a, b) => a + b, 0) / durations.length,
-          callbackMedianMs: durations[Math.floor(durations.length * 0.5)],
-          callbackP95Ms: durations[Math.floor(durations.length * 0.95)],
-        };
-      });
-      return { name, ...result };
-    }
     await page.keyboard.press("Escape");
     await snap("login");
     await click(320, 380);
@@ -155,11 +99,6 @@ const { requestHandler } = require("./browser-smoke.cjs");
     await click(325, 360);
     await click(465, 454);
     await snap("desktop");
-    const performanceResults = [await measure("desktop")];
-    fs.writeFileSync(
-      path.join(out, "performance.json"),
-      JSON.stringify(performanceResults, null, 2),
-    );
     await page.waitForTimeout(2500);
     await snap("tutorial-one");
     // Freeze only the label-placement fixture after the original map opens.
@@ -171,15 +110,9 @@ const { requestHandler } = require("./browser-smoke.cjs");
       Module._qaFreezeMapLabels();
     });
     await snap("world-map");
-    performanceResults.push(await measure("world-map"));
     await click(611, 581);
     await click(98, 737);
     await snap("memory-banks");
-    performanceResults.push(await measure("memory-banks"));
-    fs.writeFileSync(
-      path.join(out, "performance.json"),
-      JSON.stringify(performanceResults, null, 2),
-    );
     await click(30, 720);
     await snap("software-menu");
     const canvas = await page.locator("#canvas").boundingBox();
@@ -241,7 +174,7 @@ const { requestHandler } = require("./browser-smoke.cjs");
     const saved = await page.evaluate(() =>
       Module.FS.readFile("/persistent/.uplink/RenderQA.usr"),
     );
-    fs.writeFileSync(path.join(out, "RenderQA.usr"), Buffer.from(saved));
+    assert(saved.length > 0, "Original profile must be saved");
     await page.reload();
     await page.waitForTimeout(18000);
     assert.equal(
@@ -268,16 +201,16 @@ const { requestHandler } = require("./browser-smoke.cjs");
     assert(!log.includes("App::LoadGame, Failed"));
     fs.writeFileSync(path.join(out, "debug.log"), log);
     assert.deepEqual(errors, []);
+    if (process.env.QA_RENDERER_PHASE !== "baseline")
+      assert.deepEqual(warnings, []);
     assert.equal(state.gl, 0);
     assert(!state.abort);
     assert(state.audio.some((a) => !a.paused && a.time > 0 && !a.error));
     fs.writeFileSync(
       path.join(out, "results.json"),
-      JSON.stringify({ state, errors, warnings, performanceResults }, null, 2),
+      JSON.stringify({ state, errors, warnings }, null, 2),
     );
-  } catch (error) {
-    console.error(error);
-    throw error;
+    console.log("PASS: original game screen, save/reload and audio checks");
   } finally {
     if (browser) await browser.close();
     if (server.listening) await new Promise((r) => server.close(r));

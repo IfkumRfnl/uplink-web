@@ -28,7 +28,7 @@ const fs = require("node:fs"),
   try {
     await new Promise((r) => server.listen(0, "127.0.0.1", r));
     browser = await chromium.launch({
-      executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium",
+      executablePath: process.env.CHROMIUM_PATH,
       headless: true,
       args: ["--enable-unsafe-swiftshader"],
     });
@@ -42,6 +42,9 @@ const fs = require("node:fs"),
     await page.waitForFunction(() => Module.rendererProbeFrames > 5);
     assert.deepEqual(errors, []);
     for (let i = 1; i <= 2; i++) {
+      const previousFrames = await page.evaluate(
+        () => Module.rendererProbeFrames,
+      );
       await page.evaluate(() => {
         window.qaLoss = GLctx.getExtension("WEBGL_lose_context");
         qaLoss.loseContext();
@@ -53,7 +56,10 @@ const fs = require("node:fs"),
         (expected) => Module.uplinkRendererRestores === expected,
         i,
       );
-      await page.waitForFunction(() => Module.rendererProbeFrames > 10);
+      await page.waitForFunction(
+        (previous) => Module.rendererProbeFrames > previous,
+        previousFrames,
+      );
       assert.deepEqual(errors, []);
       assert.equal(await page.evaluate(() => GLctx.getError()), 0);
     }

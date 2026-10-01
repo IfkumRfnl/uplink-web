@@ -16,6 +16,7 @@ void glEnd() { assert(active && vertices==4); active=false; }
 void glVertex2i(int,int) { assert(active); ++vertices; }
 void glColor4f(float,float,float,float) {}
 void GciDrawText(int,int,char*,int) { assert(!active); ++labels; }
+namespace UplinkDraw { void begin(int m) { glBegin(m); } void end() { glEnd(); } void vertex2i(int x,int y) { glVertex2i(x,y); } void color4f(float r,float g,float b,float a) { glColor4f(r,g,b,a); } }
 void Svb_textbutton_draw''' + body + r'''
 int main() { char text[]="Task"; Button button={5,6,50,20,text};
 Svb_textbutton_draw(&button,false,false); assert(!active && vertices==4 && labels==1); }

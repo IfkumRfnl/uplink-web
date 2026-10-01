@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -56,14 +57,14 @@ void NuclearWarScreenInterface::DrawLocation ( Button *button, bool highlighted,
 
 	UplinkAssert (button);
 
-    glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+    UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-    glBegin ( GL_QUADS );
-        glVertex2i ( button->x, button->y );
-        glVertex2i ( button->x + 7, button->y );
-        glVertex2i ( button->x + 7, button->y + 7 );
-        glVertex2i ( button->x, button->y +7 );
-    glEnd ();
+    UplinkDraw::begin ( GL_QUADS );
+        UplinkDraw::vertex2i ( button->x, button->y );
+        UplinkDraw::vertex2i ( button->x + 7, button->y );
+        UplinkDraw::vertex2i ( button->x + 7, button->y + 7 );
+        UplinkDraw::vertex2i ( button->x, button->y +7 );
+    UplinkDraw::end ();
 
 	// Write some text
 
@@ -94,7 +95,7 @@ void NuclearWarScreenInterface::DrawMainMap ( Button *button, bool highlighted, 
 
     imagebutton_drawtextured ( button, highlighted, clicked );
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
     
     NuclearWarScreenInterface *nwsi = (NuclearWarScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen();
@@ -124,12 +125,12 @@ void NuclearWarScreenInterface::DrawMainMap ( Button *button, bool highlighted, 
             int sY = (int) ( nuke->sy + ((nuke->y + button->y) - nuke->sy) * d );
 
             float col = 1.0f - d;            
-            glColor3f ( col, 0.0, 0.0 );
+            UplinkDraw::color3f ( col, 0.0, 0.0 );
 
-            glBegin ( GL_LINE_LOOP );
-                glVertex2i ( sX, sY );
-                glVertex2i ( dX, dY );
-            glEnd ();
+            UplinkDraw::begin ( GL_LINE_LOOP );
+                UplinkDraw::vertex2i ( sX, sY );
+                UplinkDraw::vertex2i ( dX, dY );
+            UplinkDraw::end ();
                     
             //
             // Draw the explosion
@@ -142,16 +143,16 @@ void NuclearWarScreenInterface::DrawMainMap ( Button *button, bool highlighted, 
             int height = (int) ( 50 - (50 * d) );
 
             if ( timediff < 3200 )
-                glColor3f ( 1.0f, 0.8f, 0.0f );
+                UplinkDraw::color3f ( 1.0f, 0.8f, 0.0f );
             else
-                glColor3f ( col, 0.0, 0.0 );
+                UplinkDraw::color3f ( col, 0.0, 0.0 );
 
-            glBegin ( GL_QUADS );
-                glVertex2i ( centreX, centreY - height/2 );
-                glVertex2i ( centreX + width/2, centreY );
-                glVertex2i ( centreX, centreY + height/2 );
-                glVertex2i ( centreX - width/2, centreY );
-            glEnd ();
+            UplinkDraw::begin ( GL_QUADS );
+                UplinkDraw::vertex2i ( centreX, centreY - height/2 );
+                UplinkDraw::vertex2i ( centreX + width/2, centreY );
+                UplinkDraw::vertex2i ( centreX, centreY + height/2 );
+                UplinkDraw::vertex2i ( centreX - width/2, centreY );
+            UplinkDraw::end ();
 
             if ( !nuke->sound ) {
                 char explosion [128];
@@ -168,11 +169,11 @@ void NuclearWarScreenInterface::DrawMainMap ( Button *button, bool highlighted, 
             int dY = (int) ( nuke->sy + ((nuke->y + button->y) - nuke->sy) * d );
 
             float col = (float) (timediff) / 3000.0f;
-            glColor3f ( col, col, col );
-            glBegin ( GL_LINE_LOOP );
-                glVertex2i ( nuke->sx, nuke->sy );
-                glVertex2i ( dX, dY );
-            glEnd ();
+            UplinkDraw::color3f ( col, col, col );
+            UplinkDraw::begin ( GL_LINE_LOOP );
+                UplinkDraw::vertex2i ( nuke->sx, nuke->sy );
+                UplinkDraw::vertex2i ( dX, dY );
+            UplinkDraw::end ();
 
         }
                   

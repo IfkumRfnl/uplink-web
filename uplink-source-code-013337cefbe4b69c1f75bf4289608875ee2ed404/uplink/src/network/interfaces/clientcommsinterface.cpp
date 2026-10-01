@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 // ClientCommsInterface.cpp: implementation of the ClientCommsInterface class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -95,20 +96,20 @@ void ClientCommsInterface::LargeMapDraw ( Button *button, bool highlighted, bool
 	imagebutton_drawtextured ( button, highlighted, clicked );
 
     int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-    glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-    glEnable ( GL_SCISSOR_TEST );
+    UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+    UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 
-    glLineWidth ( 2.0 );
-    glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+    UplinkDraw::lineWidth ( 2.0 );
+    UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-    glLineStipple ( 2, stipplepattern );
+    UplinkDraw::lineStipple ( 2, stipplepattern );
     CycleStipplePattern ();
-    glEnable ( GL_LINE_STIPPLE );
+    UplinkDraw::enable ( GL_LINE_STIPPLE );
 
     // Draw the dotted lines
 
-    glBegin ( GL_LINE_STRIP );
+    UplinkDraw::begin ( GL_LINE_STRIP );
 
     for ( int li = 0; li < connection.Size (); ++li ) {
 
@@ -118,26 +119,26 @@ void ClientCommsInterface::LargeMapDraw ( Button *button, bool highlighted, bool
 		
 	if ( vl ) {
 
-	    glVertex2i ( button->x + vl->x, button->y + vl->y );
+	    UplinkDraw::vertex2i ( button->x + vl->x, button->y + vl->y );
 
 	    if ( traceprogress == (locations.Size () - li - 1) ) {
-		glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
-		glVertex2i ( button->x + vl->x, button->y + vl->y );				
+		UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+		UplinkDraw::vertex2i ( button->x + vl->x, button->y + vl->y );				
 	    }
 
 	}
 
     }
 
-    glEnd ();
+    UplinkDraw::end ();
 
-    glDisable ( GL_LINE_STIPPLE );
+    UplinkDraw::disable ( GL_LINE_STIPPLE );
 
 //     // Draw the dots for each location
 
-//     glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+//     UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-//     glBegin ( GL_QUADS );
+//     UplinkDraw::begin ( GL_QUADS );
 
 //     for ( int di = 0; di < connection.Size (); ++di ) {
 
@@ -150,20 +151,20 @@ void ClientCommsInterface::LargeMapDraw ( Button *button, bool highlighted, bool
 // 	    int x = button->x + vl->x;
 // 	    int y = button->y + vl->y;
 
-// 	    glVertex2f ( x - 3, y - 3 );
-// 	    glVertex2f ( x + 3, y - 3 );
-// 	    glVertex2f ( x + 3, y + 3 );
-// 	    glVertex2f ( x - 3, y + 3 );
+// 	    UplinkDraw::vertex2f ( x - 3, y - 3 );
+// 	    UplinkDraw::vertex2f ( x + 3, y - 3 );
+// 	    UplinkDraw::vertex2f ( x + 3, y + 3 );
+// 	    UplinkDraw::vertex2f ( x - 3, y + 3 );
 
 // 	}
 
 //     }
 
-//     glEnd ();
+//     UplinkDraw::end ();
 
 //     // Write any textual information
 
-//     glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+//     UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
 //     for ( int ti = 0; ti < connection.Size (); ++ti ) {
 
@@ -185,7 +186,7 @@ void ClientCommsInterface::LargeMapDraw ( Button *button, bool highlighted, bool
     
     DrawAllObjects();
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

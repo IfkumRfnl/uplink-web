@@ -1,3 +1,4 @@
+#include "uplink_draw.h"
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -159,19 +160,19 @@ void GciDrawText ( int x, int y, char *text, int STYLE )
 		//FTGLPixmapFont *font = fonts[STYLE];
 #ifdef __EMSCRIPTEN__
         GLint oldBinding, oldEnv;
-        glGetIntegerv(GL_TEXTURE_BINDING_2D, &oldBinding);
-        glGetTexEnviv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &oldEnv);
-        int oldTexture = EM_ASM_INT({ return GLImmediate.TexEnvJIT.getTexUnitType(0) === 0x0DE1 ? 1 : 0; });
-        glEnable(GL_TEXTURE_2D);
-        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-        glPushMatrix();
-        glTranslatef(x, y, 0);
-        glScalef(1, -1, 1);
+        UplinkDraw::getIntegerv(GL_TEXTURE_BINDING_2D, &oldBinding);
+        UplinkDraw::getTexEnviv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &oldEnv);
+        int oldTexture = UplinkDraw::isEnabled(GL_TEXTURE_2D);
+        UplinkDraw::enable(GL_TEXTURE_2D);
+        UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+        UplinkDraw::pushMatrix();
+        UplinkDraw::translatef(x, y, 0);
+        UplinkDraw::scalef(1, -1, 1);
         font->Render(text);
-        glPopMatrix();
-        glBindTexture(GL_TEXTURE_2D, oldBinding);
-        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, oldEnv);
-        if (!oldTexture) glDisable(GL_TEXTURE_2D);
+        UplinkDraw::popMatrix();
+        UplinkDraw::bindTexture(GL_TEXTURE_2D, oldBinding);
+        UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, oldEnv);
+        if (!oldTexture) UplinkDraw::disable(GL_TEXTURE_2D);
 #else
         glRasterPos2i(x, y);
         font->Render(text);

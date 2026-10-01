@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 // DialogScreenInterface.cpp: implementation of the DialogScreenInterface class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -46,12 +47,12 @@ void DialogScreenInterface::PasswordBoxDraw ( Button *button, bool highlighted, 
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
 
 	// Print the text
 
@@ -69,7 +70,7 @@ void DialogScreenInterface::PasswordBoxDraw ( Button *button, bool highlighted, 
 	if ( highlighted || clicked )
 		border_draw ( button );
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

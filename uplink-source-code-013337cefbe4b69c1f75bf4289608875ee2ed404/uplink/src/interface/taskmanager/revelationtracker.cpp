@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -153,14 +154,14 @@ void RevelationTracker::CloseClick ( Button *button )
 void RevelationTracker::MainBoxDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x, button->y );
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 
     text_draw ( button, highlighted, clicked );

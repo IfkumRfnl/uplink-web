@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 // LoginInterface.cpp: implementation of the LoginInterface class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -230,21 +231,21 @@ void LoginInterface::UserIDButtonDraw ( Button *button, bool highlighted, bool c
 	UplinkAssert ( button );
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Draw a background colour
 
 	SetColour ( "PasswordBoxBackground" );
 	
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Draw the text
 
@@ -256,7 +257,7 @@ void LoginInterface::UserIDButtonDraw ( Button *button, bool highlighted, bool c
 
 	if ( highlighted || clicked ) border_draw ( button );
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -266,21 +267,21 @@ void LoginInterface::CodeButtonDraw ( Button *button, bool highlighted, bool cli
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Draw a background colour
 
 	SetColour ( "PasswordBoxBackground" );
 	
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Print the text
 
@@ -300,7 +301,7 @@ void LoginInterface::CodeButtonDraw ( Button *button, bool highlighted, bool cli
 	if ( highlighted || clicked )
 		border_draw ( button );
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

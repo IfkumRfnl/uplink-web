@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -100,7 +101,7 @@ void VoiceAnalysisScreenInterface::DrawAnalysis ( Button *button, bool highlight
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glBegin ( GL_LINE_STRIP );
+	UplinkDraw::begin ( GL_LINE_STRIP );
 
 	for ( int i = 0; i < VOICE_NUMSAMPLES; ++i ) {
 
@@ -108,14 +109,14 @@ void VoiceAnalysisScreenInterface::DrawAnalysis ( Button *button, bool highlight
 		int y = (button->y + button->height) - thisint->sample [i];
 		float c = (float) thisint->sample[i] / 40.0f;
 
-		glColor4f ( 0.1f, 0.1f, c, 1.0f );
-		glVertex2i ( x, y );
+		UplinkDraw::color4f ( 0.1f, 0.1f, c, 1.0f );
+		UplinkDraw::vertex2i ( x, y );
 
 	}
 
-	glEnd ();
+	UplinkDraw::end ();
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	border_draw ( button );
 
 }
@@ -123,14 +124,14 @@ void VoiceAnalysisScreenInterface::DrawAnalysis ( Button *button, bool highlight
 void VoiceAnalysisScreenInterface::DrawBackground ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );		
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x, button->y );
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 	
 }

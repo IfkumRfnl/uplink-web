@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -35,33 +36,33 @@
 void LanSpoof::BorderDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		if      ( clicked )		glColor4f ( 0.5f, 0.5f, 0.6f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.2f, 0.2f, 0.5f, ALPHA );
-		else					glColor4f ( 0.2f, 0.2f, 0.4f, ALPHA );
-		glVertex2i ( button->x, button->y );
+		if      ( clicked )		UplinkDraw::color4f ( 0.5f, 0.5f, 0.6f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.2f, 0.2f, 0.5f, ALPHA );
+		else					UplinkDraw::color4f ( 0.2f, 0.2f, 0.4f, ALPHA );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
-		if		( clicked )		glColor4f ( 0.7f, 0.7f, 0.6f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.5f, 0.5f, 0.6f, ALPHA );
-		else					glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );
-		glVertex2i ( button->x + button->width, button->y );
+		if		( clicked )		UplinkDraw::color4f ( 0.7f, 0.7f, 0.6f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.5f, 0.5f, 0.6f, ALPHA );
+		else					UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
-		if		( clicked )		glColor4f ( 0.5f, 0.5f, 0.6f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.2f, 0.2f, 0.5f, ALPHA );
-		else					glColor4f ( 0.2f, 0.2f, 0.4f, ALPHA );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		if		( clicked )		UplinkDraw::color4f ( 0.5f, 0.5f, 0.6f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.2f, 0.2f, 0.5f, ALPHA );
+		else					UplinkDraw::color4f ( 0.2f, 0.2f, 0.4f, ALPHA );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-		if		( clicked )		glColor4f ( 0.7f, 0.7f, 0.6f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.5f, 0.5f, 0.6f, ALPHA );
-		else					glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );
-		glVertex2i ( button->x, button->y + button->height );
+		if		( clicked )		UplinkDraw::color4f ( 0.7f, 0.7f, 0.6f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.5f, 0.5f, 0.6f, ALPHA );
+		else					UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	if ( highlighted || clicked ) {
 
-		glColor4f ( 0.3f, 0.3f, 0.7f, 1.0f );
+		UplinkDraw::color4f ( 0.3f, 0.3f, 0.7f, 1.0f );
 		border_draw ( button );	
 
 	}
@@ -76,26 +77,26 @@ void LanSpoof::ProgressDraw ( Button *button, bool highlighted, bool clicked )
 	float scale = (float) button->width / 100.0f;
 	if ( highlighted ) scale *= 2;
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glColor4f ( 0.0f, 1.5f - scale, scale, 0.6f );
-		glVertex3i ( button->x, button->y, 0 );
+		UplinkDraw::color4f ( 0.0f, 1.5f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x, button->y, 0 );
 
-		glColor4f ( 0.0f, 1.5f - scale, scale, 0.6f );
-		glVertex3i ( button->x + button->width, button->y, 0 );
+		UplinkDraw::color4f ( 0.0f, 1.5f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x + button->width, button->y, 0 );
 
-		glColor4f ( 0.0f, 1.5f - scale, scale, 0.6f );
-		glVertex3i ( button->x + button->width, button->y + button->height, 0 );
+		UplinkDraw::color4f ( 0.0f, 1.5f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x + button->width, button->y + button->height, 0 );
 
-		glColor4f ( 0.0f, 1.5f - scale, scale, 0.6f );
-		glVertex3i ( button->x, button->y + button->height, 0 );
+		UplinkDraw::color4f ( 0.0f, 1.5f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x, button->y + button->height, 0 );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	int xpos = button->x + 5;
 	int ypos = (button->y + button->height / 2) + 3;
 		
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );    
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );    
     GciDrawText ( xpos, ypos, button->caption, HELVETICA_10 );
 
 }

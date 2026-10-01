@@ -1,3 +1,4 @@
+#include "../gucci/uplink_draw.h"
 
 /*
 	Interface for van bakel library
@@ -36,31 +37,31 @@ void Svb_button_draw ( Button *button, bool highlighted, bool clicked )
 	int xpos = button->x + 2;
 	int ypos = (button->y + button->height / 2) + 1;
 		
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		if ( clicked ) glColor4f ( 0.5f, 0.5f, 1.0f, 0.6f );
-		else if ( highlighted ) glColor4f ( 0.2f, 0.2f, 0.9f, 0.6f );
-		else glColor4f ( 0.0f, 0.0f, 0.4f, 0.6f );
-		glVertex3i ( button->x, button->y, 0 );
+		if ( clicked ) UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, 0.6f );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.2f, 0.2f, 0.9f, 0.6f );
+		else UplinkDraw::color4f ( 0.0f, 0.0f, 0.4f, 0.6f );
+		UplinkDraw::vertex3i ( button->x, button->y, 0 );
 
-		if ( clicked ) glColor4f ( 0.7f, 0.7f, 1.0f, 0.6f );
-		else if ( highlighted ) glColor4f ( 0.5f, 0.5f, 1.0f, 0.6f );
-		else glColor4f ( 0.0f, 0.0f, 0.7f, 0.6f );
-		glVertex3i ( button->x + button->width, button->y, 0 );
+		if ( clicked ) UplinkDraw::color4f ( 0.7f, 0.7f, 1.0f, 0.6f );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, 0.6f );
+		else UplinkDraw::color4f ( 0.0f, 0.0f, 0.7f, 0.6f );
+		UplinkDraw::vertex3i ( button->x + button->width, button->y, 0 );
 
-		if ( clicked ) glColor4f ( 0.5f, 0.5f, 1.0f, 0.6f );
-		else if ( highlighted ) glColor4f ( 0.2f, 0.2f, 0.9f, 0.6f );
-		else glColor4f ( 0.0f, 0.0f, 0.4f, 0.6f );
-		glVertex3i ( button->x + button->width, button->y + button->height, 0 );
+		if ( clicked ) UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, 0.6f );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.2f, 0.2f, 0.9f, 0.6f );
+		else UplinkDraw::color4f ( 0.0f, 0.0f, 0.4f, 0.6f );
+		UplinkDraw::vertex3i ( button->x + button->width, button->y + button->height, 0 );
 
-		if ( clicked ) glColor4f ( 0.7f, 0.7f, 1.0f, 0.6f );
-		else if ( highlighted ) glColor4f ( 0.5f, 0.5f, 1.0f, 0.6f );
-		else glColor4f ( 0.0f, 0.0f, 0.7f, 0.6f );
-		glVertex3i ( button->x, button->y + button->height, 0 );
+		if ( clicked ) UplinkDraw::color4f ( 0.7f, 0.7f, 1.0f, 0.6f );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, 0.6f );
+		else UplinkDraw::color4f ( 0.0f, 0.0f, 0.7f, 0.6f );
+		UplinkDraw::vertex3i ( button->x, button->y + button->height, 0 );
 
-	glEnd ();
+	UplinkDraw::end ();
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 0.8f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 0.8f );
     GciDrawText ( xpos, ypos, button->caption, HELVETICA_10 );
 
 }
@@ -72,20 +73,20 @@ void Svb_textbutton_draw ( Button *button, bool highlighted, bool clicked )
 
 	// Clear the background
 	
-	glColor4f ( 0.0f, 0.0f, 0.0f, 1.0f );
-	glBegin ( GL_QUADS );
-		glVertex2i ( button->x,	button->y);
-		glVertex2i ( button->x + button->width, button->y );
-		glVertex2i ( button->x + button->width, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
-	glEnd ();
+	UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, 1.0f );
+	UplinkDraw::begin ( GL_QUADS );
+		UplinkDraw::vertex2i ( button->x,	button->y);
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+	UplinkDraw::end ();
 
 	// Draw the text
 
 	int xpos = button->x + 2;
 	int ypos = (button->y + button->height / 2) + 1;
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 0.8f );    
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 0.8f );    
     GciDrawText ( xpos, ypos, button->caption, HELVETICA_10 );
 
 }
@@ -101,23 +102,23 @@ void Svb_column_draw ( Button *button, bool highlighted, bool clicked )
 	float scale = button->width / 50.0f;
 	if ( highlighted ) scale *= 2;
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glColor4f ( 0.0f, 2.0f - scale, scale, 0.6f );
-		glVertex3i ( button->x, button->y, 0 );
+		UplinkDraw::color4f ( 0.0f, 2.0f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x, button->y, 0 );
 
-		glColor4f ( 0.0f, 2.0f - scale, scale, 0.6f );
-		glVertex3i ( button->x + button->width, button->y, 0 );
+		UplinkDraw::color4f ( 0.0f, 2.0f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x + button->width, button->y, 0 );
 
-		glColor4f ( 0.0f, 2.0f - scale, scale, 0.6f );
-		glVertex3i ( button->x + button->width, button->y + button->height, 0 );
+		UplinkDraw::color4f ( 0.0f, 2.0f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x + button->width, button->y + button->height, 0 );
 
-		glColor4f ( 0.0f, 2.0f - scale, scale, 0.6f );
-		glVertex3i ( button->x, button->y + button->height, 0 );
+		UplinkDraw::color4f ( 0.0f, 2.0f - scale, scale, 0.6f );
+		UplinkDraw::vertex3i ( button->x, button->y + button->height, 0 );
 
-	glEnd ();
+	UplinkDraw::end ();
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
     GciDrawText ( xpos, ypos, button->caption, HELVETICA_10 );
 
 }

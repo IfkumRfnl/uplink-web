@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -37,14 +38,14 @@ int RadioTransmitterScreenInterface::frequencyMhz = 0;
 void RadioTransmitterScreenInterface::BackgroundDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-    glColor3f ( 0.0f, 0.0f, 0.0f );
+    UplinkDraw::color3f ( 0.0f, 0.0f, 0.0f );
 
-	glBegin ( GL_QUADS );		
-		glVertex2i ( button->x, button->y + button->height );
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width, button->y );
-		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour ( "PanelBorder" );
 	border_draw ( button );

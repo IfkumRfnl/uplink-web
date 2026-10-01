@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 
 #include "stdafx.h"
 
@@ -10,12 +11,12 @@
 static void BindBrowserUITexture()
 {
     static GLuint texture = 0;
-    if (!texture) glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    if (!texture) UplinkDraw::genTextures(1, &texture);
+    UplinkDraw::bindTexture(GL_TEXTURE_2D, texture);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 #endif
 
@@ -82,17 +83,17 @@ void clear_draw ( int x, int y, int w, int h )
 
 	if ( !backdrop ) initialise_transparency ();
 
-	glPushAttrib ( GL_ALL_ATTRIB_BITS );
+	UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-	glEnable ( GL_TEXTURE_2D );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::enable ( GL_TEXTURE_2D );
 
 #ifdef __EMSCRIPTEN__
     BindBrowserUITexture();
 #else
-	glBindTexture ( GL_TEXTURE_2D, 1 );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, 1 );
 #endif
-	glTexImage2D ( GL_TEXTURE_2D, 0,
+	UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0,
 #ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
                       GL_RGBA,
 #else
@@ -105,27 +106,27 @@ void clear_draw ( int x, int y, int w, int h )
 	float scaleW = (float) w / 640.0;
 	float scaleH = (float) h / 480.0;
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(scaleX, scaleY);						glVertex2f(x, y);
-		glTexCoord2f(scaleX + scaleW, scaleY);				glVertex2f(x + w, y);
-		glTexCoord2f(scaleX + scaleW, scaleY + scaleH);		glVertex2f(x + w, y + h);
-		glTexCoord2f(scaleX, scaleY + scaleH );				glVertex2f(x, y + h);
-	glEnd ();
+	UplinkDraw::begin(GL_QUADS);
+		UplinkDraw::texCoord2f(scaleX, scaleY);						UplinkDraw::vertex2f(x, y);
+		UplinkDraw::texCoord2f(scaleX + scaleW, scaleY);				UplinkDraw::vertex2f(x + w, y);
+		UplinkDraw::texCoord2f(scaleX + scaleW, scaleY + scaleH);		UplinkDraw::vertex2f(x + w, y + h);
+		UplinkDraw::texCoord2f(scaleX, scaleY + scaleH );				UplinkDraw::vertex2f(x, y + h);
+	UplinkDraw::end ();
 
-	glPopAttrib ();
+	UplinkDraw::popAttrib ();
 
 #else
 
     SetColour ( "Background" );
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glVertex2i ( x,		y	  );
-		glVertex2i ( x + w, y	  );
-		glVertex2i ( x + w, y + h );
-		glVertex2i ( x,		y + h );
+		UplinkDraw::vertex2i ( x,		y	  );
+		UplinkDraw::vertex2i ( x + w, y	  );
+		UplinkDraw::vertex2i ( x + w, y + h );
+		UplinkDraw::vertex2i ( x,		y + h );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 #endif
 
@@ -143,17 +144,17 @@ void button_draw ( Button *button, bool highlighted, bool clicked )
 
 	if ( !backdrop ) initialise_transparency ();
 
-	glPushAttrib ( GL_ALL_ATTRIB_BITS );
+	UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-	glEnable ( GL_TEXTURE_2D );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::enable ( GL_TEXTURE_2D );
 
 #ifdef __EMSCRIPTEN__
     BindBrowserUITexture();
 #else
-	glBindTexture ( GL_TEXTURE_2D, 1 );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, 1 );
 #endif
-	glTexImage2D ( GL_TEXTURE_2D, 0,
+	UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0,
 #ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
                       GL_RGBA,
 #else
@@ -166,48 +167,48 @@ void button_draw ( Button *button, bool highlighted, bool clicked )
 	float scaleW = (float) button->width / 640.0;
 	float scaleH = (float) button->height / 480.0;
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(scaleX, scaleY);						glVertex2f(button->x, button->y);
-		glTexCoord2f(scaleX + scaleW, scaleY);				glVertex2f(button->x + button->width, button->y);
-		glTexCoord2f(scaleX + scaleW, scaleY + scaleH);		glVertex2f(button->x + button->width, button->y + button->height);
-		glTexCoord2f(scaleX, scaleY + scaleH );				glVertex2f(button->x, button->y + button->height);
-	glEnd ();
+	UplinkDraw::begin(GL_QUADS);
+		UplinkDraw::texCoord2f(scaleX, scaleY);						UplinkDraw::vertex2f(button->x, button->y);
+		UplinkDraw::texCoord2f(scaleX + scaleW, scaleY);				UplinkDraw::vertex2f(button->x + button->width, button->y);
+		UplinkDraw::texCoord2f(scaleX + scaleW, scaleY + scaleH);		UplinkDraw::vertex2f(button->x + button->width, button->y + button->height);
+		UplinkDraw::texCoord2f(scaleX, scaleY + scaleH );				UplinkDraw::vertex2f(button->x, button->y + button->height);
+	UplinkDraw::end ();
 
-	glPopAttrib ();
+	UplinkDraw::popAttrib ();
 
 	// ============================================================
 
 #else
 	
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
- 	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
- 	glEnable ( GL_SCISSOR_TEST );
+ 	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+ 	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Draw the button
 	
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
 		if      ( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 	
 #endif
 
@@ -218,15 +219,15 @@ void button_draw ( Button *button, bool highlighted, bool clicked )
     SetColour ( "DefaultText" );
     GciDrawText ( xpos, ypos, button->caption );
 
- 	glDisable ( GL_SCISSOR_TEST );
+ 	UplinkDraw::disable ( GL_SCISSOR_TEST );
 }
 
 void imagebutton_draw ( Button *button, bool highlighted, bool clicked )
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	UplinkAssert (button);
 	
@@ -241,7 +242,7 @@ void imagebutton_draw ( Button *button, bool highlighted, bool clicked )
 		button->image_standard->Draw ( button->x, button->y );
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -249,8 +250,8 @@ void imagebutton_draw ( Button *button, bool highlighted, bool clicked, Image *s
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	UplinkAssert (button);
 	
@@ -264,7 +265,7 @@ void imagebutton_draw ( Button *button, bool highlighted, bool clicked, Image *s
 		standard_i_ref->Draw ( button->x, button->y );
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -272,8 +273,8 @@ void imagebutton_draw_blend ( Button *button, bool highlighted, bool clicked )
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	UplinkAssert (button);
 	
@@ -290,7 +291,7 @@ void imagebutton_draw_blend ( Button *button, bool highlighted, bool clicked )
 		button->image_standard->DrawBlend ( button->x, button->y );
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -307,19 +308,19 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 
 	if ( !backdrop ) initialise_transparency ();
 
-	glPushAttrib ( GL_ALL_ATTRIB_BITS );
+	UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-	glEnable ( GL_TEXTURE_2D );
-	glEnable ( GL_BLEND );
-	glBlendFunc ( GL_ONE, GL_ZERO );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::enable ( GL_TEXTURE_2D );
+	UplinkDraw::enable ( GL_BLEND );
+	UplinkDraw::blendFunc ( GL_ONE, GL_ZERO );
 
 #ifdef __EMSCRIPTEN__
     BindBrowserUITexture();
 #else
-	glBindTexture ( GL_TEXTURE_2D, 1 );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, 1 );
 #endif
-	glTexImage2D ( GL_TEXTURE_2D, 0,
+	UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0,
 #ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
                       GL_RGBA,
 #else
@@ -333,19 +334,19 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 	float scaleW = 0.8;
 	float scaleH = 0.5;
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(scaleX, scaleY);						glVertex2f(button->x, button->y);
-		glTexCoord2f(scaleX + scaleW, scaleY);				glVertex2f(button->x + button->width, button->y);
-		glTexCoord2f(scaleX + scaleW, scaleY + scaleH);		glVertex2f(button->x + button->width, button->y + button->height);
-		glTexCoord2f(scaleX, scaleY + scaleH );				glVertex2f(button->x, button->y + button->height);
-	glEnd ();
+	UplinkDraw::begin(GL_QUADS);
+		UplinkDraw::texCoord2f(scaleX, scaleY);						UplinkDraw::vertex2f(button->x, button->y);
+		UplinkDraw::texCoord2f(scaleX + scaleW, scaleY);				UplinkDraw::vertex2f(button->x + button->width, button->y);
+		UplinkDraw::texCoord2f(scaleX + scaleW, scaleY + scaleH);		UplinkDraw::vertex2f(button->x + button->width, button->y + button->height);
+		UplinkDraw::texCoord2f(scaleX, scaleY + scaleH );				UplinkDraw::vertex2f(button->x, button->y + button->height);
+	UplinkDraw::end ();
 
 	// ============================================================
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
-	glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
+	UplinkDraw::blendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 	UplinkAssert (button);
 	
 	Image *image = NULL;
@@ -367,35 +368,35 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 #ifdef __EMSCRIPTEN__
     BindBrowserUITexture();
 #else
-	glBindTexture ( GL_TEXTURE_2D, 1 );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, 1 );
 #endif
-	glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
+	UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, image->Width(), image->Height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels );
 
 	// Scale the image to fit the button size
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 1.0);		glVertex2f(button->x, button->y);
-		glTexCoord2f(1.0, 1.0);		glVertex2f(button->x + button->width, button->y);
-		glTexCoord2f(1.0, 0.0);		glVertex2f(button->x + button->width, button->y + button->height);
-		glTexCoord2f(0.0, 0.0);		glVertex2f(button->x, button->y + button->height);
-	glEnd ();
+	UplinkDraw::begin(GL_QUADS);
+		UplinkDraw::texCoord2f(0.0, 1.0);		UplinkDraw::vertex2f(button->x, button->y);
+		UplinkDraw::texCoord2f(1.0, 1.0);		UplinkDraw::vertex2f(button->x + button->width, button->y);
+		UplinkDraw::texCoord2f(1.0, 0.0);		UplinkDraw::vertex2f(button->x + button->width, button->y + button->height);
+		UplinkDraw::texCoord2f(0.0, 0.0);		UplinkDraw::vertex2f(button->x, button->y + button->height);
+	UplinkDraw::end ();
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
-	glPopAttrib ();
+	UplinkDraw::popAttrib ();
 
 #else
 
 
-	glPushAttrib ( GL_ALL_ATTRIB_BITS );
+	UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-	glEnable ( GL_TEXTURE_2D );
+	UplinkDraw::enable ( GL_TEXTURE_2D );
 	
 	UplinkAssert (button);
 	
@@ -418,9 +419,9 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 #ifdef __EMSCRIPTEN__
     BindBrowserUITexture();
 #else
-	glBindTexture ( GL_TEXTURE_2D, 1 );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, 1 );
 #endif
-	glTexImage2D ( GL_TEXTURE_2D, 0,
+	UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0,
 #ifdef __EMSCRIPTEN__ // WebGL requires matching internal and source formats.
                       GL_RGBA,
 #else
@@ -430,16 +431,16 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 
 	// Scale the image to fit the button size
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 1.0f);		glVertex2i(button->x, button->y);
-		glTexCoord2f(1.0f, 1.0f);		glVertex2i(button->x + button->width, button->y);
-		glTexCoord2f(1.0f, 0.0f);		glVertex2i(button->x + button->width, button->y + button->height);
-		glTexCoord2f(0.0f, 0.0f);		glVertex2i(button->x, button->y + button->height);
-	glEnd ();
+	UplinkDraw::begin(GL_QUADS);
+		UplinkDraw::texCoord2f(0.0f, 1.0f);		UplinkDraw::vertex2i(button->x, button->y);
+		UplinkDraw::texCoord2f(1.0f, 1.0f);		UplinkDraw::vertex2i(button->x + button->width, button->y);
+		UplinkDraw::texCoord2f(1.0f, 0.0f);		UplinkDraw::vertex2i(button->x + button->width, button->y + button->height);
+		UplinkDraw::texCoord2f(0.0f, 0.0f);		UplinkDraw::vertex2i(button->x, button->y + button->height);
+	UplinkDraw::end ();
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
-	glPopAttrib ();
+	UplinkDraw::popAttrib ();
 
 #endif
 
@@ -448,14 +449,14 @@ void imagebutton_drawtextured ( Button *button, bool highlighted, bool clicked )
 void border_draw ( Button *button )
 {
 
-	glBegin ( GL_LINE_LOOP );
+	UplinkDraw::begin ( GL_LINE_LOOP );
 
-		glVertex2i ( button->x,						button->y );
-		glVertex2i ( button->x + button->width - 1, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
-		glVertex2i ( button->x,						button->y + button->height - 1 );
+		UplinkDraw::vertex2i ( button->x,						button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
+		UplinkDraw::vertex2i ( button->x,						button->y + button->height - 1 );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 }
 
@@ -579,8 +580,8 @@ void text_draw ( Button *button, bool highlighted, bool clicked )
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	SetColour ( "DefaultText" );    
 
@@ -640,7 +641,7 @@ void text_draw ( Button *button, bool highlighted, bool clicked )
 
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -650,8 +651,8 @@ void textbutton_draw  ( Button *button, bool highlighted, bool clicked )
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Black out the background
 	clear_draw ( button->x, button->y, button->width, button->height );
@@ -667,7 +668,7 @@ void textbutton_draw  ( Button *button, bool highlighted, bool clicked )
 
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -725,34 +726,34 @@ void textbox_draw ( Button *button, bool highlighted, bool clicked )
 	UplinkAssert (  button );
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Draw the background
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
 		if      ( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Draw the text
 			
@@ -762,21 +763,21 @@ void textbox_draw ( Button *button, bool highlighted, bool clicked )
 	if ( highlighted || clicked ) 
 		border_draw ( button );
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
 void buttonborder_draw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glColor4f ( 0.2f, 0.2f, 0.4f, ALPHA );			glVertex2i ( button->x, button->y );
-		glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );			glVertex2i ( button->x + button->width, button->y );
-		glColor4f ( 0.2f, 0.2f, 0.4f, ALPHA );			glVertex2i ( button->x + button->width, button->y + button->height );
-		glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );			glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color4f ( 0.2f, 0.2f, 0.4f, ALPHA );			UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );			UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color4f ( 0.2f, 0.2f, 0.4f, ALPHA );			UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );			UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 }
 /*
@@ -787,57 +788,57 @@ void superhighlight_draw ( Button *button, bool highlighted, bool clicked )
 
 	if ( time(NULL) >= (superhighlight_flash-1) ) {
 
-		glBegin ( GL_QUADS );
+		UplinkDraw::begin ( GL_QUADS );
 
 			// Top
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x, button->y - 5 );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width, button->y - 5 );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x + button->width, button->y );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y - 5 );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y - 5 );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y );
 
 			// Right
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width + 5, button->y );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width + 5, button->y + button->height );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x + button->width, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width + 5, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width + 5, button->y + button->height );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 	
 			// Bottom
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x, button->y + button->height + 5 );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height + 5 );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x, button->y + button->height );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height + 5 );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height + 5 );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
 			// Left
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x - 5, button->y );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x - 5, button->y + button->height );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x, button->y + button->height );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x - 5, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x - 5, button->y + button->height );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y );
 	
 			// Top left			
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x - 5, button->y - 5 );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x - 5, button->y );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x, button->y );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x, button->y - 5 );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x - 5, button->y - 5 );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x - 5, button->y );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y - 5 );
 
 			// Top right			
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width + 5, button->y - 5 );			
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width + 5, button->y );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x + button->width, button->y );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width, button->y - 5 );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width + 5, button->y - 5 );			
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width + 5, button->y );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y - 5 );
 
 			// Bottom right					
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width + 5, button->y + button->height + 5 );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height + 5 );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x + button->width + 5, button->y + button->height );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width + 5, button->y + button->height + 5 );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height + 5 );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width + 5, button->y + button->height );
 
 			// Bottom left								
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x - 5, button->y + button->height + 5 );			
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x, button->y + button->height + 5 );
-			glColor4f ( 1.0f, 1.0f, 0.5f, ALPHA );		glVertex2i ( button->x, button->y + button->height );
-			glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		glVertex2i ( button->x - 5, button->y + button->height );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x - 5, button->y + button->height + 5 );			
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height + 5 );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 0.5f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		UplinkDraw::vertex2i ( button->x - 5, button->y + button->height );
 
-		glEnd ();
+		UplinkDraw::end ();
 
 		if ( time (NULL) >= superhighlight_flash )
 			superhighlight_flash = time(NULL) + 2;
@@ -851,7 +852,7 @@ void superhighlight_draw ( Button *button, bool highlighted, bool clicked )
 
 	UplinkAssert (  button );
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
 		int border = 3;
 
@@ -865,54 +866,54 @@ void superhighlight_draw ( Button *button, bool highlighted, bool clicked )
             fraction = 0.0f;
 
 		// Top
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + border, button->y );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width - border, button->y );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + button->width - border, button->y + border );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + border, button->y + border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + border, button->y );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width - border, button->y );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width - border, button->y + border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + border, button->y + border );
 
 		// Right
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width, button->y + border );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width, button->y + button->height - border );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + button->width - border, button->y + button->height - border );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + button->width - border, button->y + border );			
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width, button->y + border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height - border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width - border, button->y + button->height - border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width - border, button->y + border );			
 
 		// Bottom
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + border, button->y + button->height );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width - border, button->y + button->height );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + button->width - border, button->y + button->height - border );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + border, button->y + button->height - border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + border, button->y + button->height );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width - border, button->y + button->height );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width - border, button->y + button->height - border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + border, button->y + button->height - border );
 
 		// Left
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x, button->y + border );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x, button->y + button->height - border );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + border, button->y + button->height - border );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + border, button->y + border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x, button->y + border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x, button->y + button->height - border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + border, button->y + button->height - border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + border, button->y + border );
 
 		// Top left			
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + border/2, button->y + border/2 );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + border, button->y );
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + border, button->y + border );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x, button->y + border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + border/2, button->y + border/2 );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + border, button->y );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + border, button->y + border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x, button->y + border );
 
 		// Top right			
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + button->width - border, button->y + border );			
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width - border, button->y );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width - border/2, button->y + border/2 );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width, button->y + border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width - border, button->y + border );			
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width - border, button->y );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width - border/2, button->y + border/2 );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width, button->y + border );
 
 		// Bottom right					
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + button->width - border, button->y + button->height - border );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width, button->y + button->height - border );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width - border/2, button->y + button->height - border/2 );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + button->width - border, button->y + button->height );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width - border, button->y + button->height - border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height - border );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width - border/2, button->y + button->height - border/2 );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + button->width - border, button->y + button->height );
 
 		// Bottom left								
-		glColor4f ( fraction, fraction, fraction/2.0f, ALPHA );		glVertex2i ( button->x + border, button->y + button->height - border );			
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + border, button->y + button->height );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x + border/2, button->y + button->height - border/2 );
-		glColor4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    glVertex2i ( button->x, button->y + button->height - border );
+		UplinkDraw::color4f ( fraction, fraction, fraction/2.0f, ALPHA );		UplinkDraw::vertex2i ( button->x + border, button->y + button->height - border );			
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + border, button->y + button->height );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x + border/2, button->y + button->height - border/2 );
+		UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, ALPHA );		                    UplinkDraw::vertex2i ( button->x, button->y + button->height - border );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	if ( EclGetAccurateTime () >= superhighlight_flash )
 		superhighlight_flash = (int) ( EclGetAccurateTime () + 2000 );
@@ -1246,8 +1247,8 @@ void draw_stextbox ( Button *button, bool highlighted, bool clicked )
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Get the offset
 
@@ -1260,29 +1261,29 @@ void draw_stextbox ( Button *button, bool highlighted, bool clicked )
 
 	// Draw the button
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
 		if      ( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Draw a border if highlighted
 
@@ -1318,36 +1319,36 @@ void draw_stextbox ( Button *button, bool highlighted, bool clicked )
 
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
 void draw_scrollbox  ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
 		if      ( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 }
 
@@ -1363,19 +1364,19 @@ void stextbox_scroll ( char *name, int newValue )
 void draw_msgboxbackground ( Button *button, bool highlighted, bool clicked )
 {
 /*
-	glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-	glEnable ( GL_BLEND );
+	UplinkDraw::blendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+	UplinkDraw::enable ( GL_BLEND );
 	
-	glColor4f ( 0.0f, 0.0f, 0.0f, 0.5f );
+	UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, 0.5f );
 
-	glBegin ( GL_QUADS );
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width, button->y );
-		glVertex2i ( button->x + button->width, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+	UplinkDraw::end ();
 	
-	glDisable ( GL_BLEND );
+	UplinkDraw::disable ( GL_BLEND );
 */
 
 }
@@ -1383,12 +1384,12 @@ void draw_msgboxbackground ( Button *button, bool highlighted, bool clicked )
 void draw_msgboxbox ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
-		SetColour ( "PanelBackgroundA" );		glVertex2i ( button->x, button->y + button->height );
-		SetColour ( "PanelBackgroundB" );		glVertex2i ( button->x, button->y );
-		SetColour ( "PanelBackgroundA" );		glVertex2i ( button->x + button->width, button->y );
-		SetColour ( "PanelBackgroundB" );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		SetColour ( "PanelBackgroundA" );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		SetColour ( "PanelBackgroundB" );		UplinkDraw::vertex2i ( button->x, button->y );
+		SetColour ( "PanelBackgroundA" );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour ( "PanelBackgroundB" );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour ( "PanelBorder" );
 	border_draw ( button );

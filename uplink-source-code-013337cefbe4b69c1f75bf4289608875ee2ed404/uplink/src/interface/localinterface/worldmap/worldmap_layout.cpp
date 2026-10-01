@@ -1,3 +1,4 @@
+#include "../../../../../lib/gucci/uplink_draw.h"
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -134,25 +135,25 @@ void WorldMapInterfaceObject::Draw ( int xOffset, int yOffset, float zoom )
         {
 
 			if ( isMission )
-				//glColor4f ( 119.0f / 255.0f, 210.0f / 255.0f, 221.0f / 255.0f, 1.0f );
-				glColor4f ( 0.0f, 1.0f, 0.0f, 1.0f );
+				//UplinkDraw::color4f ( 119.0f / 255.0f, 210.0f / 255.0f, 221.0f / 255.0f, 1.0f );
+				UplinkDraw::color4f ( 0.0f, 1.0f, 0.0f, 1.0f );
 			else if ( isColored )
-				//glColor4f ( 0.4f, 0.4f, 0.6f, 1.0f );
-				glColor4f ( 1.0f, 0.5f, 0.0f, 1.0f );
+				//UplinkDraw::color4f ( 0.4f, 0.4f, 0.6f, 1.0f );
+				UplinkDraw::color4f ( 1.0f, 0.5f, 0.0f, 1.0f );
 			else
-				glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+				UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
             int xPos = (int) ( 23 + ( (x - 23) - xOffset ) * zoom );
             int yPos = (int) ( 50 + ( (y - 50) - yOffset ) * zoom );
  
             if ( xPos >= 0 && yPos >= 0 ) {
             
-                glBegin ( GL_QUADS );
-                    glVertex2i ( xPos, yPos );
-                    glVertex2i ( xPos + 7, yPos );
-                    glVertex2i ( xPos + 7, yPos + 7 );
-                    glVertex2i ( xPos, yPos + 7 );
-                glEnd ();
+                UplinkDraw::begin ( GL_QUADS );
+                    UplinkDraw::vertex2i ( xPos, yPos );
+                    UplinkDraw::vertex2i ( xPos + 7, yPos );
+                    UplinkDraw::vertex2i ( xPos + 7, yPos + 7 );
+                    UplinkDraw::vertex2i ( xPos, yPos + 7 );
+                UplinkDraw::end ();
 
             }
 
@@ -228,16 +229,16 @@ void WorldMapInterfaceLabel::Draw ( int xOffset, int yOffset, float zoom )
 
         UplinkAssert (caption);
 /*        
-         glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
-         glBegin ( GL_QUADS ); 
+         UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+         UplinkDraw::begin ( GL_QUADS ); 
          {
          MapRectangle r = GetExtent();
-         glVertex2i ( r.x1, r.y1 );
-         glVertex2i ( r.x2(), r.y1 );
-         glVertex2i ( r.x2(), r.y2() );
-         glVertex2i ( r.x1, r.y2() );
+         UplinkDraw::vertex2i ( r.x1, r.y1 );
+         UplinkDraw::vertex2i ( r.x2(), r.y1 );
+         UplinkDraw::vertex2i ( r.x2(), r.y2() );
+         UplinkDraw::vertex2i ( r.x1, r.y2() );
          } 
-         glEnd ();
+         UplinkDraw::end ();
   */      
 
         int dX = x - baseX;
@@ -250,7 +251,7 @@ void WorldMapInterfaceLabel::Draw ( int xOffset, int yOffset, float zoom )
         yPos += dY;
 
         if ( xPos >= 0 && yPos >= 0 ) {
-            glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );        
+            UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );        
             GciDrawText ( xPos, yPos + 7, caption );
         }
 

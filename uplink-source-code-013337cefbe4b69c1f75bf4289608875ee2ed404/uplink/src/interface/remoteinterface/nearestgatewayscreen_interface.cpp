@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -50,14 +51,14 @@ void NearestGatewayScreenInterface::DrawLocation ( Button *button, bool highligh
 
 	UplinkAssert (button);
 
-    glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+    UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-    glBegin ( GL_QUADS );
-        glVertex2i ( button->x, button->y );
-        glVertex2i ( button->x + 7, button->y );
-        glVertex2i ( button->x + 7, button->y + 7 );
-        glVertex2i ( button->x, button->y +7 );
-    glEnd ();
+    UplinkDraw::begin ( GL_QUADS );
+        UplinkDraw::vertex2i ( button->x, button->y );
+        UplinkDraw::vertex2i ( button->x + 7, button->y );
+        UplinkDraw::vertex2i ( button->x + 7, button->y + 7 );
+        UplinkDraw::vertex2i ( button->x, button->y +7 );
+    UplinkDraw::end ();
 
 	// Write some text
 
@@ -88,7 +89,7 @@ void NearestGatewayScreenInterface::DrawMainMap ( Button *button, bool highlight
 
 	imagebutton_drawtextured ( button, highlighted, clicked );
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 
 }

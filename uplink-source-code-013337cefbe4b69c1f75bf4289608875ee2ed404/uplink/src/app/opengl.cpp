@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 // -*- tab-width:4; c-file-style:"cc-mode" -*- 
 /*
 
@@ -210,7 +211,7 @@ local void init(void)
 	printf ( "\n" );
 */
 
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	UplinkDraw::clearColor(0.0, 0.0, 0.0, 0.0);
 
 	// ====================================================================== 
 	// Fix for Riva TNT cards (these don't automatically clear the background
@@ -220,21 +221,21 @@ local void init(void)
 	// clear_draw ( 0, 0, screenwidth, screenheight );
 	// ======================================================================
 
-//	glEnable(GL_DEPTH_TEST);
-	glDisable ( GL_DEPTH_TEST );
+//	UplinkDraw::enable(GL_DEPTH_TEST);
+	UplinkDraw::disable ( GL_DEPTH_TEST );
 		
-	glMatrixMode(GL_MODELVIEW);
+	UplinkDraw::matrixMode(GL_MODELVIEW);
 
-	glTexEnvi ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+	UplinkDraw::texEnvi ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
 
-        glDisable(GL_ALPHA_TEST);        
-        glDisable(GL_FOG);        
-		glDisable(GL_LIGHTING);
-        glDisable(GL_LOGIC_OP);        
-		glDisable(GL_STENCIL_TEST);
-        glDisable(GL_TEXTURE_1D);      
-		glDisable(GL_TEXTURE_2D);
-		glDisable(GL_BLEND);
+        UplinkDraw::disable(GL_ALPHA_TEST);        
+        UplinkDraw::disable(GL_FOG);        
+		UplinkDraw::disable(GL_LIGHTING);
+        UplinkDraw::disable(GL_LOGIC_OP);        
+		UplinkDraw::disable(GL_STENCIL_TEST);
+        UplinkDraw::disable(GL_TEXTURE_1D);      
+		UplinkDraw::disable(GL_TEXTURE_2D);
+		UplinkDraw::disable(GL_BLEND);
 		
 #ifndef __EMSCRIPTEN__ // WebGL pixel transfers are already identity.
         glPixelTransferi(GL_MAP_COLOR, GL_FALSE);
@@ -249,18 +250,18 @@ local void init(void)
 #endif
 
 	GLuint texName;
-	glGenTextures( 1, &texName );
-	glBindTexture ( GL_TEXTURE_2D, texName );	
+	UplinkDraw::genTextures( 1, &texName );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, texName );	
 
 #ifdef __EMSCRIPTEN__ // Original UI images are not power-of-two textures.
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 #else
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 #endif
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 #ifndef __EMSCRIPTEN__ // WebGL does not support legacy smoothing hints.
 	glHint ( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
@@ -342,17 +343,17 @@ void display(void)
 		//int inter1, inter2;
 		//inter1 = (int) ( EclGetAccurateTime () * 100 );
 
-		glPushMatrix ();
-		glLoadIdentity ();
-		glMatrixMode ( GL_PROJECTION );
-		glPushMatrix ();
-		glLoadIdentity ();
-		glPushAttrib ( GL_ALL_ATTRIB_BITS );
+		UplinkDraw::pushMatrix ();
+		UplinkDraw::loadIdentity ();
+		UplinkDraw::matrixMode ( GL_PROJECTION );
+		UplinkDraw::pushMatrix ();
+		UplinkDraw::loadIdentity ();
+		UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
         
-		glOrtho ( 0.0, app->GetOptions ()->GetOptionValue ( "graphics_screenwidth" ), 
+		UplinkDraw::ortho ( 0.0, app->GetOptions ()->GetOptionValue ( "graphics_screenwidth" ), 
 					   app->GetOptions ()->GetOptionValue ( "graphics_screenheight" ), 0.0, -1.0, 1.0 );
 
-		glTranslatef ( 0.375f, 0.375f, 0.0f );
+		UplinkDraw::translatef ( 0.375f, 0.375f, 0.0f );
 
 		// Added by François for testing new display
 		EclClearRectangle ( 0, 0, app->GetOptions ()->GetOptionValue ( "graphics_screenwidth" ), 
@@ -360,17 +361,17 @@ void display(void)
         
 		EclDrawAllButtons ();
 
-		glPopAttrib ();
-		glPopMatrix ();
-		glMatrixMode ( GL_MODELVIEW );
-		glPopMatrix ();
+		UplinkDraw::popAttrib ();
+		UplinkDraw::popMatrix ();
+		UplinkDraw::matrixMode ( GL_MODELVIEW );
+		UplinkDraw::popMatrix ();
 
 		//  Swap the buffers, do it all again to the new back-buffer
 		GciSwapBuffers();
 	/*
 	}
 	*/
-	glFinish();
+	UplinkDraw::finish();
 
 	////For speed testing
 	//inter2 = (int) ( EclGetAccurateTime () * 100 );
@@ -612,22 +613,22 @@ local void mousedraw ( Button *button, bool highlighted, bool clicked )
 
 	UplinkAssert (button);
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-	glBegin ( GL_LINES );
+	UplinkDraw::begin ( GL_LINES );
 
-		glLineWidth ( 1.0 );
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
+		UplinkDraw::lineWidth ( 1.0 );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
 		
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( (int) ( button->x + button->width/1.5 ), button->y );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( (int) ( button->x + button->width/1.5 ), button->y );
 
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x, (int) ( button->y + button->height/1.5 ) );
-	glEnd ();
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x, (int) ( button->y + button->height/1.5 ) );
+	UplinkDraw::end ();
 
-	glLineWidth ( 1.0 );
+	UplinkDraw::lineWidth ( 1.0 );
 
 }
 
@@ -733,16 +734,18 @@ void resize(int width, int height)
 
 	if (height == 0) height = 1;
 	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	UplinkDraw::matrixMode(GL_PROJECTION);
+	UplinkDraw::loadIdentity();
 
 	/* note we divide our width by our height to get the aspect ratio */
+	#ifndef __EMSCRIPTEN__
 	gluPerspective(45.0, width / height, 1.0, 400.0);
+#endif
 
 	/* set initial position */
-	glTranslatef(0.0, -5.0, -150.0);
+	UplinkDraw::translatef(0.0, -5.0, -150.0);
 
-	glMatrixMode(GL_MODELVIEW);
+	UplinkDraw::matrixMode(GL_MODELVIEW);
 
 }
 

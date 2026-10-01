@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -121,12 +122,12 @@ TheTeamInterface::~TheTeamInterface()
 void TheTeamInterface::NameDraw ( Button *button, bool highlighted, bool clicked )
 {
     
-    glScissor ( button->x, 480 - (button->y + button->height), button->width, button->height );    
-    glEnable ( GL_SCISSOR_TEST );
+    UplinkDraw::scissor ( button->x, 480 - (button->y + button->height), button->width, button->height );    
+    UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	int ypos = (button->y + button->height / 2) + 5;
 
 	for ( size_t i = 0; i < strlen(button->caption); ++i ) {
@@ -135,19 +136,19 @@ void TheTeamInterface::NameDraw ( Button *button, bool highlighted, bool clicked
 		GciDrawText ( (int) ( button->x + i * 12 ), ypos, thischar, HELVETICA_18 );
 	}
 		
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
 void TheTeamInterface::TextDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-    glScissor ( button->x, 480 - (button->y + button->height), button->width, button->height );    
-    glEnable ( GL_SCISSOR_TEST );
+    UplinkDraw::scissor ( button->x, 480 - (button->y + button->height), button->width, button->height );    
+    UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
 	LList <char *> *wrappedText = wordwraptext ( button->caption, button->width );
 	UplinkAssert (wrappedText);
@@ -170,7 +171,7 @@ void TheTeamInterface::TextDraw ( Button *button, bool highlighted, bool clicked
 		delete [] wrappedText->GetData (0);				// Only delete first entry - since there is only one string really
 	delete wrappedText;
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

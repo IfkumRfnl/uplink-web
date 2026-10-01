@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -192,14 +193,14 @@ void RemoteInterface::RunNewLocation ()
 local void li_draw ( Button *button, bool highlighted, bool clicked ) 
 {
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 0.8f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 0.8f );
 	
-	glBegin ( GL_LINE_LOOP );
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width, button->y );
-		glVertex2i ( button->x + button->width, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_LINE_LOOP );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+	UplinkDraw::end ();
  
 }
 

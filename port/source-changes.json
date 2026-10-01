@@ -2,17 +2,17 @@
   {
     "path": "lib/gucci/gucci.cpp",
     "original_sha256": "723bb667945096e873aa4f43d206cee4be1a41bedd72b0fd094d80423014747c",
-    "modified_sha256": "d21d73d7202cd34687b8c6493f90a8379cecf16d500f67031dfeb69405040b53"
+    "modified_sha256": "9d8d895ce822fe78c280f9c587bff95968095f5120984467e70e325bede23dd4"
   },
   {
     "path": "lib/gucci/gucci_sdl.cpp",
     "original_sha256": "e0a7bdd08b43fcf106ddb5ad252ec06d9df66cf14faa56e6f9425ff015799824",
-    "modified_sha256": "5a66746e06ecc726ae93edbba46296cff4e41aef7bb9e6175731b6506de9b69e"
+    "modified_sha256": "c13170e234d4e9d468938fb464b7d89e38a42ba080b4e0f42345ac0db5adc8f3"
   },
   {
     "path": "lib/gucci/image.cpp",
     "original_sha256": "3e87bb47254d05377ab3a28b09569d501083a18885b1044f1156617c5b98ef81",
-    "modified_sha256": "b8cdbc7df6ffa3bad59008c32d16734bab0fa705beaf856eba08234e820299d2"
+    "modified_sha256": "4eb6ba4b8bb194ab6b27292dcf34fd5450b380fb89b8f243b5a7f3f2f7bd8da8"
   },
   {
     "path": "lib/redshirt/redshirt.cpp",
@@ -27,7 +27,7 @@
   {
     "path": "lib/vanbakel/interface.cpp",
     "original_sha256": "fcbf00c3c6a7053f3f480eb72dcba3af9c54f29be3996f54879d3f1e0baff6f0",
-    "modified_sha256": "54f6c8093bb46d2b5557c2386365b59c93e533fcf3af01f0ef2c30909737923f"
+    "modified_sha256": "47810a41cbd5973902e96341525bab39bac379f6df832ab5d33ceaca1f8ff5e0"
   },
   {
     "path": "uplink/src/app/app.cpp",
@@ -42,22 +42,352 @@
   {
     "path": "uplink/src/app/miscutils.cpp",
     "original_sha256": "3a200d3b12e187089cc78f11a8e66d5f0bd82c0a40d1e94a0cd28567d7f9e150",
-    "modified_sha256": "24dd1dc5bf12344f38ecb623f8ae3cc95e1c8b31ed6674ea8aeb9fc3d59b5847"
+    "modified_sha256": "39f11ddc81b13e6792f849d6d140434f6bbf95e749f5fb1937eb0cd1729a276b"
   },
   {
     "path": "uplink/src/app/opengl.cpp",
     "original_sha256": "c67fe9d15e5bd45430a1300162b5e318cb6baf2853c1cf729bc5883c0f1f0f93",
-    "modified_sha256": "87156a4c7a3e3a13b551c613ec994e072f76e933cb86b69450a3be960e05b3df"
+    "modified_sha256": "08e3a7a362a7a7d70039c4bbddad059888735e057c44decfebab99714e3054f5"
   },
   {
     "path": "uplink/src/app/opengl_interface.cpp",
     "original_sha256": "1392ab0cc51a9939922ed1c7eb1c5b372f042381925e50fe52a7e25f23365142",
-    "modified_sha256": "5b9ff37ee93a846e9a15fe4797cceec6de1a8ef1714e227c7b70834f6b91e795"
+    "modified_sha256": "02b50895666a613ddc493f34e2a0de55d3708e1c49d5c9b52eaafb046a7a658f"
   },
   {
     "path": "uplink/src/game/scriptlibrary.cpp",
     "original_sha256": "ccbd94c34fcbcb8cb3291174f9ce191a990d0c4407453f1f79b7e468747aea2f",
-    "modified_sha256": "43b869d05191f93b458de65d9c482ac92e842f79f0fc11d0b5811d6bcd265830"
+    "modified_sha256": "e876bf08ef3b3f5c52d0b435e43bb00f3e47542d304b3662519c4f47f38f3a29"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/analyser_interface.cpp",
+    "original_sha256": "d3c00dad5248922a3f174800963fae8e4b65ec6c63cb1226355e65c5a5daf2d8",
+    "modified_sha256": "99bc483664cf33fbee7e235d5897d227710faa3c371a69db459fc835add1a9ba"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/evtqueue_interface.cpp",
+    "original_sha256": "4e5f95d63188ea2b8b190c01eec147c04a35003667ed48a85f4fc72d5a1cb76e",
+    "modified_sha256": "af449fd27a58f84324942bd2c7221247a1cfda91412e92d26bea03e737555a38"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/finance_interface.cpp",
+    "original_sha256": "faa20944ee674d4afaf3541f2edf04e7cf29d92c2d5e86bf68434e8f39ee1cac",
+    "modified_sha256": "3fca50f8bebb08075788b1543487b0e23ec6044d2ed27f6df4f37d6afec8dd8f"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/gateway_interface.cpp",
+    "original_sha256": "cb434952c6ee074fa5c9ddce367893a0a430840695dba36386ede24a2526cc32",
+    "modified_sha256": "b307e1c88420331a6bb5f9380893f44a158514771bd2b1bc6efb3fa1f1163a56"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/hud_interface.cpp",
+    "original_sha256": "4f664cc7c2f0035a173f89be6af962da5cd8c1ffd25b5f06cbb7cdcd3120acae",
+    "modified_sha256": "b7461dd7da6093d87d5c672780a1aac8a8bcf84d89fc375cd14b867e3cfdeb08"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/irc_interface.cpp",
+    "original_sha256": "1fafeeaafe2cfea0d33faeb1120719818e08b49215092112b871d04dbe0af98c",
+    "modified_sha256": "1c8537d3fc4b657ddf4ac49420e8b827b276c3a07d693f914ba846b3fb30d575"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/lan_interface.cpp",
+    "original_sha256": "4d380d94c218b120a2edb58402d2cc2d2f263e5aba100d43223d609b1b2f094b",
+    "modified_sha256": "4da1364305951be2e52d45346a7dc784f0ae3960ee3cdfdf694eaf8a76cf7840"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/localinterfacescreen.cpp",
+    "original_sha256": "4232c459a32acd325cf10dd5ddb1852225217e38912d887f52953dae7deecb51",
+    "modified_sha256": "db65396c3d8551470e6e94024f42de55f0a732e0b7d040e8b981842ad9b58191"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/memory_interface.cpp",
+    "original_sha256": "196c62747db4d668fe259db7124b372dead9b55ab85d44876c1df975e34da463",
+    "modified_sha256": "10ba7045f30e55a4dc6d09a0835d1c5594e228e3d4a5bb34441d4c3b9f1d26a0"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/sw_interface.cpp",
+    "original_sha256": "0dc4a5996228390e1c95cc558822721d87d46674a673f2897db635007bbed758",
+    "modified_sha256": "8510a61d2e264d45be393f6f122b5bba9a7d57c7709d8af382294fb26d34c192"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/worldmap/worldmap_interface.cpp",
+    "original_sha256": "820cc063deda547665c99d85c50f4c32a47b743d3e0719562743a619cd589140",
+    "modified_sha256": "41f75e637ac3085d1ec9a1027400bbf604db577756bfa3d60b68fe5b4554a8c8"
+  },
+  {
+    "path": "uplink/src/interface/localinterface/worldmap/worldmap_layout.cpp",
+    "original_sha256": "64268a3fc6718aaba669f301845569a04028700f2e6dd456cc47acccdce917b2",
+    "modified_sha256": "4eda16a716ff44a04b0428332525383a6149b42fa959e81b00166b0fae737134"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/bbsscreen_interface.cpp",
+    "original_sha256": "6a92f914fc65f0e06e5be5540311c3099c576886a33c2f95466e724cf9ba46a0",
+    "modified_sha256": "db90beec20479b70bc44842bacdbca9805e60fc1a98844d6cdcda13f76302972"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/changegatewayscreen_interface.cpp",
+    "original_sha256": "5742c84d670313cf566090522694fb03cf12bc88d22312c8158267c7df757ab0",
+    "modified_sha256": "eb6b9bfc95da801db281f22190c1495498c6d1a8663165c7c7b2d0ad49a08f09"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/codecardscreen_interface.cpp",
+    "original_sha256": "1fa3c04a58990b936f18b939c9f3206ba814eb5049435dd1073be7a679462af7",
+    "modified_sha256": "aca1e9c93f50afc5709c856170236f28d25805ea28beff999bc649042cb5cefa"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/consolescreen_interface.cpp",
+    "original_sha256": "2f0135ffc145e2aaf8bdbcba0962730843da76ed3bb9c81064b4fbfd0410cd0d",
+    "modified_sha256": "9b74e8e3454dcaa6946c8915ec9a6c11de637a70f7a6d35dc1ff370337d6977c"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/contactscreen_interface.cpp",
+    "original_sha256": "277049a4dccd91aab785aa20b9295ddd16ae83a084d60cb6c059c2e4be75a0a0",
+    "modified_sha256": "2f961fcd9f1233891d28ae633bee5e920581777a521ed4860d8ae81ba4c81922"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/cypherscreen_interface.cpp",
+    "original_sha256": "36c002e50611ba2b10a56174177ae624bcad321c44b18d040b8c75526f17ac8d",
+    "modified_sha256": "668eebe7c11f51259b2d7ebea85b3e9deebc91e06b2e189461856dfa3e479464"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/dialogscreen_interface.cpp",
+    "original_sha256": "8754831321e95f7acbd2466af12733b73f1ba24058c4e378971a782fbc7cfcf1",
+    "modified_sha256": "49d1a00134a0d165e59d316054b7f97dfc61ff2a7dbda44731981371ed218689"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/fileserverscreen_interface.cpp",
+    "original_sha256": "50f3d9ea6a1168955653428f71940abc3597a8dcdec3334eac0cbdc54bdb5f27",
+    "modified_sha256": "e0adf7ced34ef25f87af7222084824059e49a5ee696c2e90ea77e8716aacd979"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/highsecurityscreen_interface.cpp",
+    "original_sha256": "80b8e35e631c4c721eca219aa76269cfa5ad76077548b6c7d9fc743e0e316732",
+    "modified_sha256": "1374f573530b4772e180e9416107873d9f636870553cab86fa3731db6482e2c8"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/hwsalesscreen_interface.cpp",
+    "original_sha256": "456d2a87823b4d05b8d9d97ba903df535897f5468e676d7cb4da914c434ba612",
+    "modified_sha256": "7e87985a7b68a88e917dec9969767c1843c0174b7b1c39e68d3cfaef23d17275"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/linksscreen_interface.cpp",
+    "original_sha256": "0fe348ab1101af25cabfdbb7d6a894eb45e22b5647f973a21f2da0ea946d639c",
+    "modified_sha256": "10d57a949ae9fe8e0a2a83a398cba1ed30b595594457a3ecf90cdf971e8e43ff"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/logscreen_interface.cpp",
+    "original_sha256": "c0957619fa2facb8d455e4fc6e4a3d93dd3e53efc7f5a9382cf5c9d2309b3325",
+    "modified_sha256": "12135242928dcf7b7f87bf9fae460fc54fa7f62207bf09e93d2802e262d3f6c7"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/nearestgatewayscreen_interface.cpp",
+    "original_sha256": "2d460ba70bb1c56d9b4ebe1d1ab37c5906a2f8c13b3f2f5a4ef9f5e65bf4d037",
+    "modified_sha256": "6c1f84dc13b9d17e468cfd714369eac973787cef7b2eb73941e8930d2f739917"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/newsscreen_interface.cpp",
+    "original_sha256": "b27ea438b10c09049471558a0aa8459abbb233e95698a89d52492622ff1e00f2",
+    "modified_sha256": "7e2f8c3f12d29b80d1b09cc70dbb8abd55a74045ad9802dff91619cc92173263"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/nuclearwarscreen_interface.cpp",
+    "original_sha256": "edac0a0cc7f4368b16b6c5fa74063dade20b1265da14b1ed78fb2f2a52b3bb1b",
+    "modified_sha256": "b7fa466f81f9a2b172a7cc4959638152566377002f17023ce332f7a5ba4dd989"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/passwordscreen_interface.cpp",
+    "original_sha256": "a2211ffe354b0cb90ca95d1be7794694d1caf6feee017a71d4eb3edca013191b",
+    "modified_sha256": "8df04d2025e1725cfd2bb54d33bca883251c60f68401b0e01c70c54410655955"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/radiotransmitterscreen_interface.cpp",
+    "original_sha256": "05584ca5198b699d8a7a6559dcac54e6198a74d99d64baeb8b100083f74d1d23",
+    "modified_sha256": "62f23430ed6e4c3991470204b7cbe42a867df56f21df13f00d43280d145390c4"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/rankingscreen_interface.cpp",
+    "original_sha256": "f7df0154f2673c9082928bdb3d208ca97385bd9b22695a8bae75e1336be51373",
+    "modified_sha256": "873f5807927ceb4bbd9b3aed8c235104e74ac6eb63789f6ed1476f5ed55e4408"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/remoteinterface.cpp",
+    "original_sha256": "629896857bb58a01b3a4cc55f2bf3eae0be44a36d1a7aef43c479217f952e1cf",
+    "modified_sha256": "42c1f577dc1723b90d3d62b6d42ac766fb1fea6d27ff4973de08251e92ba741d"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/remoteinterfacescreen.cpp",
+    "original_sha256": "9492dfa7caac89077f4c849f821e33e5fe028b3f2ba82129ea34b95dc27ee7f5",
+    "modified_sha256": "b75fab570ea21f46f142228c1a1ffb1ce5eeea2980c5ba6fab5275fd5d61d982"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/securityscreen_interface.cpp",
+    "original_sha256": "fc92c1d971e254ef45b7e62fec0b6049700f7d7cd9cef56220dedbac67eb3fb8",
+    "modified_sha256": "7171a6fd8a93ae19689cb01da344aa0577063507783f43c9219b0b03e621cded"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/shareslistscreen_interface.cpp",
+    "original_sha256": "7eb2a206d68273ca906bc3e3e7b6c14b77db27a00d900fda0b4b74c0d1dc5716",
+    "modified_sha256": "a5e5560daf1c692f2388ab393fa3e2484e38885828c8e30c42a53f81d000bb08"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/sharesviewscreen_interface.cpp",
+    "original_sha256": "3bdafeb1e704786eca0fa39d9e03fec74ed84ae7bb8c8416496f470a153c6949",
+    "modified_sha256": "454c3759a2a901ceab174d11e3d3c19e9686da215aadfa886a1de1aa53cc4182"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/swsalesscreen_interface.cpp",
+    "original_sha256": "4392e2449b2b767aabc9ab78c881dfafb1fdb4f2a301e2170d259c98a970b294",
+    "modified_sha256": "e83aa8dbcf2dc4bb2bfff3d31c6b6bc62185459f7a73ceae8ae0f89b82286d57"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/useridscreen_interface.cpp",
+    "original_sha256": "5ea04c7b8d806f933c5ad78a45500370951dea92af40d37fcaf11673aa16a947",
+    "modified_sha256": "b5d9f2fb1ba4254e59066d1259e4efe0d340752c008e3e9fde3fd84c974a602d"
+  },
+  {
+    "path": "uplink/src/interface/remoteinterface/voiceanalysisscreen_interface.cpp",
+    "original_sha256": "c64b341767fff87e03ec9667115ef7fbc4d7d3290d1b823e7e2183280cc0aeb4",
+    "modified_sha256": "6c298deaf8885a5cdff96d1be900f408df7115b8d3ee28761e337cb61f329c5f"
+  },
+  {
+    "path": "uplink/src/interface/scrollbox.cpp",
+    "original_sha256": "209b6a7ae19f06a14f47fd633554c5922cfaf47722876012d2b5dbf724db8802",
+    "modified_sha256": "4adaf9c54afcf3af30626dcfe1ed87d6c135e59bff98e3c25642f533706155a2"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/decrypter.cpp",
+    "original_sha256": "cd302ed9c6fbaca838058b95b725afe9e0437cfc20ed402ac48802dbb0aa4408",
+    "modified_sha256": "9523d53f092555d27ef983159c7e95a7e84c34d8aec817e8ee70d672ead242c0"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/decypher.cpp",
+    "original_sha256": "c5bb2588e8d959b786928f4d88a6a871e6390b02fe590b2b74db61ead7b48d05",
+    "modified_sha256": "6a1d3a806bbd40b8d90bb70f0e06c72346e021ccc703db9dd4b10b14284281f9"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/defrag.cpp",
+    "original_sha256": "7efcd5fee3149dc3e2a7eef4542b8d89bae2637c45abf16947e0442d8e23218f",
+    "modified_sha256": "c6b87f73052554c87488ff6c8be73302fd8b0dc5a0284577622d4d448859902e"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/dictionaryhacker.cpp",
+    "original_sha256": "8885627344f9c29f479bd1b3305f50fb89ff0366d00ab22d16e01da758b7bbbc",
+    "modified_sha256": "a94bd46ea908df2a5492bc8eb34636fc1d3f6b179563d97ca77233c62f2b29e6"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/filecopier.cpp",
+    "original_sha256": "79eb6f89cc01d05bd13d5932da6b19cbfce6163e8623603d3c7adf00ddeee249",
+    "modified_sha256": "764ad974d16842a3add024a64685acd650b66f4bc5975cbb0b2c6b17dfb8c6d8"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/filedeleter.cpp",
+    "original_sha256": "25e57af33eb06c75f2c3f10a9814dd98fd7870b2053b2d9a57f11b27c715edc9",
+    "modified_sha256": "fbe4f37a40b5bd78d5e8a76c1305e00b01ed82a69f5a988d4b59cd16b12e67e1"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/firewalldisable.cpp",
+    "original_sha256": "d24b6b67c91d81b73ba55495789020c8c451924c8bd581b8fa18b7e1172ddfb9",
+    "modified_sha256": "5123b3822cb60f8b0f0601d5ae5f4e1f26eaf5630d827f107b8e657688c2ae72"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/gatewaynuke.cpp",
+    "original_sha256": "f2e0c87d8d6d68e75c7690866175a62a4d9d199a05a29c3391432d00cb29ee09",
+    "modified_sha256": "3e6b9c7194133475d150c88beabe87710f3473d164c9c02e5ae5a87a6296b481"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/iplookup.cpp",
+    "original_sha256": "06587a8017166152566283a6efecc5add36a37bab05049adb557ae4d4f2f2eec",
+    "modified_sha256": "0779125b1c6ed2203b28abe359ecfab83286e9accaf7ff8cbbb380acc9c6ce32"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/ipprobe.cpp",
+    "original_sha256": "c8ecd60996d7d0cecf0c122f15c0ddd020e6d6fbbd15b02a07d4f24a7aef7940",
+    "modified_sha256": "a9d95e0b2e53b0d8b5c51bcf4d4fc6ea238b72c779747948b5f5e979560b7b3a"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/lanforce.cpp",
+    "original_sha256": "69be947b972b154ab8d22a7cdcc4477fa82c926d453d5e6da090b41b4f51e850",
+    "modified_sha256": "3f4fbc1adcdb811e0f6daea95539d35337a23ad750eb46557c4cefc51645df8f"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/lanprobe.cpp",
+    "original_sha256": "52b6bc81feffb7105921fb409c6c2ba3c4fdb20d35b385147885cb098ab96a89",
+    "modified_sha256": "0140c9eff013583e255e5e9fc7b02748f91f33eff1bd4aa949e696e99cabb0fb"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/lanscan.cpp",
+    "original_sha256": "b4bc65b585e7e606a6ee452b635596d544f0d1ba487b8a5bd342d7fad147677a",
+    "modified_sha256": "e8bc5796bf237919a5c4504f2ffbd658fe2f8fee713808e9ea624b1f41140c54"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/lanspoof.cpp",
+    "original_sha256": "ccc886435822b386ebcae72f2435fd8f02da272479e2629ea80b7a827dcc515b",
+    "modified_sha256": "2ceba6565239641c8499560a52a68ec31bf653a99804f81bb6932ffcc16bc27b"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/logdeleter.cpp",
+    "original_sha256": "8e97725b95d8ce3eaab4503c1346b96661b53c3ecc5d181fbda09b4176f5a7a1",
+    "modified_sha256": "6696badc692ab673fe5e3356f8cab549059ed111f86a7af7cade2c08d6cc0762"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/logmodifier.cpp",
+    "original_sha256": "0a64dcd8f36b13a5aa4f13def3abc35bc42a1a1a0586d390c601ed7f47999d4c",
+    "modified_sha256": "beabd89a5f7112014978009c889b1347c1b15058e5be69561c5c2654a3be9d97"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/logundeleter.cpp",
+    "original_sha256": "57dc34c0cd97844f9b31902298fd36815c25bee0fb16639e8902454996a9d1eb",
+    "modified_sha256": "c635e44095b05f9867c8a95654e40ad6f0cf059996d2af435929d711c0bd2656"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/motionsensor.cpp",
+    "original_sha256": "63d1b2c56d9c76fd17b907bcb2fc42653b2265424d4392280ef50e1d87bf764a",
+    "modified_sha256": "cd37442d4fec46ea24703a9e77ce4f61430ddc19b36394215a5f7c8f8dcf27a4"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/passwordbreaker.cpp",
+    "original_sha256": "519e141b0946026305ea7b78ea9bcc9cb5b0946702135ba94f24f6ae3546c9ba",
+    "modified_sha256": "db3f224a8e33ab3c158dbead961d8b3ab50edcac59844cb9a723ce5781449235"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/proxydisable.cpp",
+    "original_sha256": "de3cc61882def3e86ca0c5bcfe2df1b46eea17690c3acda9f85e7a386dee8adb",
+    "modified_sha256": "54c1e13af456113834dd081855cad29ffd3293fc2ce1fd90f71c56e4f2daba28"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/revelation.cpp",
+    "original_sha256": "05bfeb2c0ea03ea61f921624202380bb13151e2d70b5800e9639362d055c7e86",
+    "modified_sha256": "ad477ce9e085baf1bbdf241bbcaf145e7cfb597ba820f819ff45a089506c0cde"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/revelationtracker.cpp",
+    "original_sha256": "1b02cff02025e6bfe13df99e654acb92ebaca0d7c30491a37499c9578ece04dd",
+    "modified_sha256": "3ca81c5beccb1321ce2ee05ed44e76276a55d38281d42de60b7cf260f9873f3e"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/tracetracker.cpp",
+    "original_sha256": "cfc4565433b99be6a9d40d34e4d700021aa8e1337f27bda2c7b0e55b31c003c9",
+    "modified_sha256": "f1288d51e9d341fb3dcc4d2bbf4de8da6ba08ab986065747004d19eca62eedd4"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/tutorial.cpp",
+    "original_sha256": "ea99a09c0cff788143179dcdb53847465c37177cdf28f157ca857766a74f9abe",
+    "modified_sha256": "a81a93a4b5a07e85f76fa59c045c5a7809535b455a062484977e113958e2a82f"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/uplinkagentlist.cpp",
+    "original_sha256": "e17e14639a6451c31a38d0244927e03ade64093fa5fd6cb6465346211b9d9a79",
+    "modified_sha256": "a85cc0949e6776ecb38874bad7f5483ffd712f495bf0c0ca4b0f1dafb29ed7dc"
+  },
+  {
+    "path": "uplink/src/interface/taskmanager/voiceanalyser.cpp",
+    "original_sha256": "8e1b8b90d97851989ffec4cc7e44cc90cb9d75990ade85c2f5880c2f324aa8d0",
+    "modified_sha256": "4dcf3263cdf52e81588e3dbb6d09781ab7f2e766598cb8502487e1ad0e92d8a5"
+  },
+  {
+    "path": "uplink/src/mainmenu/closing_interface.cpp",
+    "original_sha256": "7dbb365909c4c5facc701036eb4be3c6de76e7e141ff4a1f22efa0867ff0a50c",
+    "modified_sha256": "434e43cc92cde50a5b62a83526473398d1abe8b457a773438f61a15602aa48f4"
   },
   {
     "path": "uplink/src/mainmenu/genericoptions_interface.cpp",
@@ -65,8 +395,48 @@
     "modified_sha256": "6376e2c388d2235d8819454c1de09084457a6e6b07f317a86393ac2c384b54e1"
   },
   {
+    "path": "uplink/src/mainmenu/graphicoptions_interface.cpp",
+    "original_sha256": "f61087ce0e95cfebda0689147bcd277fce870420947318a759aecf6ed7c9b960",
+    "modified_sha256": "8bdba459e68f08f1bc0e4fa4c6954a4c3b20a0b45639a7f4fd6408b910de3368"
+  },
+  {
+    "path": "uplink/src/mainmenu/login_interface.cpp",
+    "original_sha256": "d312d2c30fb888e006a9b9da56e40914086731c8619939257579dcd7f2c3ceff",
+    "modified_sha256": "f2cd25ce0fd200f66db9da835a0a9374ae44099fc7b8aad04d9f6952690dced3"
+  },
+  {
+    "path": "uplink/src/mainmenu/obituary_interface.cpp",
+    "original_sha256": "8bb4e0e2352220b59ee723c358f8901d5fc78f47f28e0da2f61a5d45abe1b649",
+    "modified_sha256": "c14fb4815ecb936bf7d7327728080008ab7a84af167fb869a926deb8e1cabcfb"
+  },
+  {
+    "path": "uplink/src/mainmenu/theme_interface.cpp",
+    "original_sha256": "dac48865d8f775dda1c67afff566fedba3827b97f1258aaf4636aea7f0d24be1",
+    "modified_sha256": "50182df9c1043d3c699fcfc3b67f0e09e9a901d4ee6536d040849a1f4f69bf17"
+  },
+  {
+    "path": "uplink/src/mainmenu/theteam_interface.cpp",
+    "original_sha256": "95952d1ff9485f1c6a7b616943e9284faba0465a2028ea2cf64665e060e51c2e",
+    "modified_sha256": "cb3a13a2fad8ee93f6d40ae1de8f4d63575d6561a5adb42a7e010fd5f8f2a177"
+  },
+  {
+    "path": "uplink/src/network/interfaces/clientcommsinterface.cpp",
+    "original_sha256": "89d155012ace0550919f38df60e4b35ba3f217425931a6a3cf09b989526673ab",
+    "modified_sha256": "c335250df2ce030a5e2265538c23228dcb7c9f4f9802b906c020b41febd3bf99"
+  },
+  {
+    "path": "uplink/src/network/interfaces/clientstatusinterface.cpp",
+    "original_sha256": "f33ffc833d1d69bda7236b8a6a31214763db8a62088cb5751d2bec6a217ce2bf",
+    "modified_sha256": "4eb19e0f567e5754049f880660f4a3e62e6da117746ab4b891a9dd7947e1ee52"
+  },
+  {
     "path": "uplink/src/options/options.cpp",
     "original_sha256": "a7bc3b079d0c3df1494a27745453fa0ccf0b5b59dab7603961bbcc8bb74b010b",
     "modified_sha256": "3cd703d2a52b6cf261a8990989e485e5682f8bac37d5f771cfdcd4f15ca16031"
+  },
+  {
+    "path": "lib/gucci/uplink_draw.h",
+    "original_sha256": null,
+    "modified_sha256": "5e58d8d2963976a916a0e1d8432e53ceaf1c77ba9615751e13475b23e9a4b788"
   }
 ]

@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -98,36 +99,36 @@ void SWInterface::SoftwareDraw ( Button *button, bool highlighted, bool clicked 
 
 	// Draw the button
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
 		if      ( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedA" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedA" );
 		else					SetColour ( "ButtonNormalA" );
-		glVertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
 		if		( clicked )		SetColour ( "ButtonClickedB" );
 		else if ( highlighted ) SetColour ( "ButtonHighlightedB" );
 		else					SetColour ( "ButtonNormalB" );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 	
 	char softwarename [128];
 	float version;
 	sscanf ( button->caption, "%s v%f", softwarename, &version );
 
-	if ( nhighlighted || clicked )	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-	else							glColor4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
+	if ( nhighlighted || clicked )	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	else							UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
 
 	// Write the software name
 	GciDrawText ( button->x + 5, (button->y + button->height / 2) + 3, softwarename );

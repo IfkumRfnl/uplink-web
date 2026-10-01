@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 // TraceTracker.cpp: implementation of the TraceTracker class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -92,24 +93,24 @@ void TraceTracker::TraceDraw ( Button *button, bool highlighted, bool clicked )
     //
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 	
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glColor4f ( brightness, brightness, 0.7f, 0.5f );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color4f ( brightness, brightness, 0.7f, 0.5f );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-		glColor4f ( brightness, brightness, 0.4f, 0.5f );
-		glVertex2i ( button->x, button->y );
+		UplinkDraw::color4f ( brightness, brightness, 0.4f, 0.5f );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
-		glColor4f ( brightness, brightness, 0.7f, 0.5f );
-		glVertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color4f ( brightness, brightness, 0.7f, 0.5f );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
-		glColor4f ( brightness, brightness, 0.4f, 0.5f );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::color4f ( brightness, brightness, 0.4f, 0.5f );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	//
     // Draw the text
@@ -118,11 +119,11 @@ void TraceTracker::TraceDraw ( Button *button, bool highlighted, bool clicked )
 	int xpos = (button->x + button->width  / 2) - ( GciTextWidth ( button->caption ) / 2 );
 	int ypos = (button->y + button->height / 2) + 2;
 
-	if ( highlighted || clicked )	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-	else							glColor4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
+	if ( highlighted || clicked )	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	else							UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
     GciDrawText ( xpos, ypos, button->caption );
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

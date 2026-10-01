@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -54,25 +55,25 @@ void HighSecurityScreenInterface::SystemTitleDraw ( Button *button, bool highlig
 
 	// Draw 2 background lines
 
-	if ( mso->security == 10 )	glColor3f ( 0.2f, 0.2f, 0.7f );
-	else						glColor3f ( 0.0f, 0.0f, 0.3f );
+	if ( mso->security == 10 )	UplinkDraw::color3f ( 0.2f, 0.2f, 0.7f );
+	else						UplinkDraw::color3f ( 0.0f, 0.0f, 0.3f );
 
-	glLineWidth (2);
+	UplinkDraw::lineWidth (2);
 
-	glBegin ( GL_LINES );
-		glVertex2i ( button->x, button->y + 10 );
-		glVertex2i ( button->x + button->width, button->y + 10 );
+	UplinkDraw::begin ( GL_LINES );
+		UplinkDraw::vertex2i ( button->x, button->y + 10 );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + 10 );
 
-		glVertex2i ( button->x, button->y + 15 );
-		glVertex2i ( button->x + button->width, button->y + 15 );
-	glEnd ();
+		UplinkDraw::vertex2i ( button->x, button->y + 15 );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + 15 );
+	UplinkDraw::end ();
 
-	glLineWidth (1);
+	UplinkDraw::lineWidth (1);
 
 	// Write the text
 
-	if ( mso->security == 10 )	glColor3f ( 1.0f, 1.0f, 1.0f );
-	else						glColor3f ( 0.5f, 0.5f, 0.5f );
+	if ( mso->security == 10 )	UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
+	else						UplinkDraw::color3f ( 0.5f, 0.5f, 0.5f );
 		
 	GciDrawText ( button->x + 10, button->y + 18, button->caption, HELVETICA_18 );
 

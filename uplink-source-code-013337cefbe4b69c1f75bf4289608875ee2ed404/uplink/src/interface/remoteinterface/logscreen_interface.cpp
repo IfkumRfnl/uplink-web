@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -198,8 +199,8 @@ void LogScreenInterface::LogDraw ( Button *button, bool highlighted, bool clicke
 	UplinkAssert ( button );
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 	
 	int logindex;
 	sscanf ( button->name, "logscreen_log %d", &logindex );
@@ -217,26 +218,26 @@ void LogScreenInterface::LogDraw ( Button *button, bool highlighted, bool clicke
 
 		if ( logindex % 2 == 0 ) {
 
-			glBegin ( GL_QUADS );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x, button->y );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x + button->width, button->y + button->height );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x, button->y );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 		else {
 
-			glBegin ( GL_QUADS );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x + button->width, button->y );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y + button->height );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 		GciDrawText ( button->x + 10, button->y + 10, log->date.GetShortString () );
 		
 		char *description = log->GetDescription ();
@@ -246,7 +247,7 @@ void LogScreenInterface::LogDraw ( Button *button, bool highlighted, bool clicke
 		// Draw a bounding box
 		if ( highlighted ) {
 
-			glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 			border_draw ( button );
 
 		}
@@ -258,7 +259,7 @@ void LogScreenInterface::LogDraw ( Button *button, bool highlighted, bool clicke
 
 	}
 	
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

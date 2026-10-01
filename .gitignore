@@ -17,7 +17,7 @@
 /prototype/prototype.data
 /prototype/assets/music/*.wav
 /qa/
-/node_modules/
+/node_modules
 /.venv/
 __pycache__/
 *.pyc

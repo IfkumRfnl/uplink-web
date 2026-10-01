@@ -1,0 +1,63 @@
+{
+  "state": {
+    "ready": true,
+    "abort": false,
+    "gl": 0,
+    "files": [
+      ".",
+      "..",
+      "userstmp",
+      "usersold",
+      "debug.log",
+      "options",
+      "RenderQA.usr",
+      "RenderQA.tmp"
+    ],
+    "audio": [
+      {
+        "paused": false,
+        "time": 104.83632
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": [
+    "WARNING: using emscripten GL immediate mode emulation. This is very limited in what it supports",
+    "WARNING: using emscripten GL immediate mode emulation. This is very limited in what it supports"
+  ],
+  "performanceResults": [
+    {
+      "name": "desktop",
+      "milliseconds": 3106.600000000093,
+      "frames": 74,
+      "draws": 46028,
+      "uploads": 46028,
+      "uploadBytes": 4892288,
+      "callbackMeanMs": 29.741891891896927,
+      "callbackMedianMs": 29.59999999962747,
+      "callbackP95Ms": 37.200000000186265
+    },
+    {
+      "name": "world-map",
+      "milliseconds": 3070.2000000001863,
+      "frames": 63,
+      "draws": 48447,
+      "uploads": 48447,
+      "uploadBytes": 5162976,
+      "callbackMeanMs": 33.903174603195296,
+      "callbackMedianMs": 34,
+      "callbackP95Ms": 40.200000000186265
+    },
+    {
+      "name": "memory-banks",
+      "milliseconds": 3121.399999999907,
+      "frames": 56,
+      "draws": 44856,
+      "uploads": 44856,
+      "uploadBytes": 4771200,
+      "callbackMeanMs": 42.40178571431066,
+      "callbackMedianMs": 41.3000000002794,
+      "callbackP95Ms": 52.59999999962747
+    }
+  ]
+}

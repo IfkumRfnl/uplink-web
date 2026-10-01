@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -59,12 +60,12 @@ void RankingScreenInterface::ActiveAgentDraw ( Button *button, bool highlighted,
 void RankingScreenInterface::PlayerDraw ( Button *button, bool highlighted, bool clicked )
 {
 		
-	glBegin ( GL_QUADS );
-		SetColour ( "PanelBackgroundA" );   glVertex2i ( button->x - 1, button->y );
-		SetColour ( "PanelBackgroundB" );   glVertex2i ( button->x + button->width, button->y );
-		SetColour ( "PanelBackgroundA" );   glVertex2i ( button->x + button->width, button->y + button->height );
-		SetColour ( "PanelBackgroundB" );   glVertex2i ( button->x, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		SetColour ( "PanelBackgroundA" );   UplinkDraw::vertex2i ( button->x - 1, button->y );
+		SetColour ( "PanelBackgroundB" );   UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour ( "PanelBackgroundA" );   UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		SetColour ( "PanelBackgroundB" );   UplinkDraw::vertex2i ( button->x, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour ( "PanelBorder" );
 	border_draw ( button );

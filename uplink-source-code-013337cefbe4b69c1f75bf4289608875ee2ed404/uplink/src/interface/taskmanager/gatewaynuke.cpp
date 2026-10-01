@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 
 #ifdef WIN32
@@ -37,14 +38,14 @@
 void GatewayNuke::TitleDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glColor4f ( 0.2f, 0.2f, 0.4f, ALPHA );			glVertex2i ( button->x, button->y );
-		glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );			glVertex2i ( button->x + button->width, button->y );
-		glColor4f ( 0.2f, 0.2f, 0.4f, ALPHA );			glVertex2i ( button->x + button->width, button->y + button->height );
-		glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );			glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color4f ( 0.2f, 0.2f, 0.4f, ALPHA );			UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );			UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color4f ( 0.2f, 0.2f, 0.4f, ALPHA );			UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );			UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	text_draw ( button, highlighted, clicked );
 

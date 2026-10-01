@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 // RemoteInterfaceScreen.cpp: implementation of the RemoteInterfaceScreen class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -39,8 +40,8 @@ void RemoteInterfaceScreen::DrawMainTitle ( Button *button, bool highlighted, bo
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 
     SetColour ( "MenuText" );
@@ -48,7 +49,7 @@ void RemoteInterfaceScreen::DrawMainTitle ( Button *button, bool highlighted, bo
 	GciDrawText ( button->x, ypos, button->caption, HELVETICA_18 );
 
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -56,8 +57,8 @@ void RemoteInterfaceScreen::DrawSubTitle ( Button *button, bool highlighted, boo
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	
 	SetColour ( "DefaultText" );
@@ -65,7 +66,7 @@ void RemoteInterfaceScreen::DrawSubTitle ( Button *button, bool highlighted, boo
 	GciDrawText ( button->x, ypos, button->caption, HELVETICA_12 );
 
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

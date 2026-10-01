@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 
 #ifdef WIN32
@@ -67,11 +68,11 @@ void IRCInterface::MainTextDraw ( Button *button, bool highlighted, bool clicked
     // Clipping
 
 	int screenh = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenh - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenh - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw( button->x, button->y, button->width, button->height );
-	glColor3f( 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color3f( 1.0f, 1.0f, 1.0f );
 	border_draw( button );
 
 	//int mainHeight = (int) ( screenh * 0.8 );
@@ -98,13 +99,13 @@ void IRCInterface::MainTextDraw ( Button *button, bool highlighted, bool clicked
 			int ypos = button->y + 10 + i * 15;
 
             if ( msg->user ) {
-                glColor3f( COLOUR_USER );
+                UplinkDraw::color3f( COLOUR_USER );
                 GciDrawText ( xpos, ypos, msg->user );
                 xpos += 80;
                 // TODO : Handle big nick names
             }
 
-            glColor3f( msg->red, msg->green, msg->blue );
+            UplinkDraw::color3f( msg->red, msg->green, msg->blue );
           	GciDrawText ( xpos, ypos, msg->text );
 			
             AddEmoticons ( i, ":)", imgSmileyHappy );
@@ -118,7 +119,7 @@ void IRCInterface::MainTextDraw ( Button *button, bool highlighted, bool clicked
 
 	}
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -191,8 +192,8 @@ void IRCInterface::UserListDraw ( Button *button, bool highlighted, bool clicked
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
     LocalInterfaceScreen::BackgroundDraw( button, highlighted, clicked );
 
@@ -212,9 +213,9 @@ void IRCInterface::UserListDraw ( Button *button, bool highlighted, bool clicked
                 int ypos = button->y + 20 + i * 17;
             
                 if ( users.GetData(i + baseOffset)->status == 0 ) 
-                    glColor3f ( 1.0f, 1.0f, 1.0f );
+                    UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
                 else
-                    glColor3f ( 1.0f, 0.5f, 0.5f );
+                    UplinkDraw::color3f ( 1.0f, 0.5f, 0.5f );
 
                 GciDrawText ( xpos, ypos, users.GetData(i + baseOffset)->name ); 
 
@@ -224,7 +225,7 @@ void IRCInterface::UserListDraw ( Button *button, bool highlighted, bool clicked
 
     }
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

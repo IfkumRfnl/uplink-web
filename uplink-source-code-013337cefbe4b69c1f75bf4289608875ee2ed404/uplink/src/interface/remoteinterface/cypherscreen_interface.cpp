@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include "windows.h"
@@ -62,8 +63,8 @@ void CypherScreenInterface::DrawCypher ( Button *button, bool highlighted, bool 
 	UplinkAssert (thisint);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 
 	clear_draw ( button->x, button->y, button->width, button->height );
@@ -80,23 +81,23 @@ void CypherScreenInterface::DrawCypher ( Button *button, bool highlighted, bool 
 			if ( thisint->cypherlock[i][j] ) {
 				
 				float shade = 0.2f + (float) (thisint->cypher [i][j] - '0') / 10.0f;
-				glColor4f ( shade, shade, shade, 1.0f );
+				UplinkDraw::color4f ( shade, shade, shade, 1.0f );
 
 				int cubeW = (button->width / CYPHER_WIDTH) + 1;
 				int cubeH = (button->height / CYPHER_HEIGHT) + 1;
 
-				glBegin ( GL_QUADS );
-					glVertex2i ( xpos, ypos - 10 );
-					glVertex2i ( xpos + cubeW, ypos - 10 );
-					glVertex2i ( xpos + cubeW, ypos + cubeH - 10 );
-					glVertex2i ( xpos, ypos + cubeH - 10 );
-				glEnd ();
+				UplinkDraw::begin ( GL_QUADS );
+					UplinkDraw::vertex2i ( xpos, ypos - 10 );
+					UplinkDraw::vertex2i ( xpos + cubeW, ypos - 10 );
+					UplinkDraw::vertex2i ( xpos + cubeW, ypos + cubeH - 10 );
+					UplinkDraw::vertex2i ( xpos, ypos + cubeH - 10 );
+				UplinkDraw::end ();
 
-				glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+				UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
 			}
 			else
-				glColor4f ( 0.6f, 0.6f, 0.6f, 1.0f );
+				UplinkDraw::color4f ( 0.6f, 0.6f, 0.6f, 1.0f );
 
 			GciDrawText ( xpos, ypos, text, HELVETICA_12 );
 
@@ -104,11 +105,11 @@ void CypherScreenInterface::DrawCypher ( Button *button, bool highlighted, bool 
 	}
 
 	if ( clicked || highlighted ) {
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 		border_draw ( button );
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

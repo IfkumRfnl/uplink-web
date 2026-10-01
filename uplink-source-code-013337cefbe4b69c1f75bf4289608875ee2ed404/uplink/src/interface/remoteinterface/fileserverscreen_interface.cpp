@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -302,26 +303,26 @@ void FileServerScreenInterface::FileDraw ( Button *button, bool highlighted, boo
 
 		if ( fileindex % 2 == 0 ) {
 
-			glBegin ( GL_QUADS );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x, button->y );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x + button->width, button->y + button->height );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x, button->y );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 		else {
 
-			glBegin ( GL_QUADS );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x + button->width, button->y );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y + button->height );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
 		GciDrawText ( button->x, button->y + 10, data->title );
 
@@ -346,7 +347,7 @@ void FileServerScreenInterface::FileDraw ( Button *button, bool highlighted, boo
 
 		clear_draw ( button->x, button->y, button->width, button->height );
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
 		GciDrawText ( button->x, button->y + 10, "Free space" );
 
@@ -368,7 +369,7 @@ void FileServerScreenInterface::FileDraw ( Button *button, bool highlighted, boo
 	*/
 	if ( highlighted && fileindex < nbRowsDisplayDataBank ) {
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 		border_draw ( button );
 
 	}

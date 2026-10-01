@@ -1,0 +1,60 @@
+{
+  "state": {
+    "ready": true,
+    "abort": false,
+    "gl": 0,
+    "files": [
+      ".",
+      "..",
+      "userstmp",
+      "usersold",
+      "debug.log",
+      "options",
+      "RenderQA.tmp",
+      "RenderQA.usr"
+    ],
+    "audio": [
+      {
+        "paused": false,
+        "time": 92.929792
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": [],
+  "performanceResults": [
+    {
+      "name": "desktop",
+      "milliseconds": 3000.399999999907,
+      "frames": 180,
+      "draws": 13680,
+      "uploads": 13680,
+      "uploadBytes": 18789120,
+      "callbackMeanMs": 0.8322222222237744,
+      "callbackMedianMs": 0.7999999998137355,
+      "callbackP95Ms": 1.1000000000931323
+    },
+    {
+      "name": "world-map",
+      "milliseconds": 3000.2999999998137,
+      "frames": 180,
+      "draws": 17820,
+      "uploads": 17820,
+      "uploadBytes": 23173920,
+      "callbackMeanMs": 0.9038888889209677,
+      "callbackMedianMs": 0.8999999999068677,
+      "callbackP95Ms": 1.2000000001862645
+    },
+    {
+      "name": "memory-banks",
+      "milliseconds": 3011.100000000093,
+      "frames": 180,
+      "draws": 24840,
+      "uploads": 24840,
+      "uploadBytes": 24181920,
+      "callbackMeanMs": 1.2311111111297375,
+      "callbackMedianMs": 1.1000000000931323,
+      "callbackP95Ms": 1.6999999997206032
+    }
+  ]
+}

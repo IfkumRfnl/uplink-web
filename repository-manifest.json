@@ -4,13 +4,13 @@
   "files": [
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 1838,
-      "sha256": "62fd0153898546d063eb002c2c21ab6ea991b23223bcc26c98f4972fdfc054af"
+      "bytes": 1884,
+      "sha256": "139aa64510e03af3841d6be0c3e9388145c7ed72a05daf8a52bfd3acbf97fe0b"
     },
     {
       "path": ".gitignore",
-      "bytes": 697,
-      "sha256": "71f07fe392c9bb93983a2ca412ca87f6a13a68804b158948b3b82f02c2c17ef4"
+      "bytes": 696,
+      "sha256": "a0d9183b0dc3d8e0da6cc0b1ac0c186d551ff74448da9df7c58eae3c26877547"
     },
     {
       "path": "CLOUD_SETUP.md",
@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6870,
-      "sha256": "49545edc27827f680df011e2d0c9e2728d3e44a1708e29d9e5c4e6761f0a3c3a"
+      "bytes": 7158,
+      "sha256": "84ee8286e296024eb28669d216c56000c2093286ac4c7ecf56bc07281db4cd12"
     },
     {
       "path": "RIGHTS.md",
@@ -84,8 +84,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1086,
-      "sha256": "244bb0cfa45f01d6a818c22b9c2db552efbe1bbc9aedf51e191c34b046fdb773"
+      "bytes": 1324,
+      "sha256": "d50e27c14aa36405b958c65c6c8abc9eb505d8e0ae3065607f09e8b5ad572e4b"
     },
     {
       "path": "port/BUILD_STATUS.md",
@@ -108,6 +108,11 @@
       "sha256": "bac06d8bddba9002b503bf5db5d4e3b840a98c4075ea985e3ccfe443ade4beaf"
     },
     {
+      "path": "port/WEBGL_RENDERER_RESULTS.md",
+      "bytes": 5669,
+      "sha256": "86a3b133695f99adc2c8e084a3f77a2735292ffbd9b876e1c9265137d78c75e6"
+    },
+    {
       "path": "port/audio-notes.md",
       "bytes": 3982,
       "sha256": "4b0dfa3acc74ddee1b8a7458fc2681501d755bdb1eb6ab3227dd035a266cc453"
@@ -119,8 +124,8 @@
     },
     {
       "path": "port/build-ftgl.sh",
-      "bytes": 915,
-      "sha256": "e9196f7742ba7af98c6c24db77cc2aa07e35a9973d8600b74a0db1f3f2de56d4"
+      "bytes": 940,
+      "sha256": "c6b22c8d368d70c29eec4c611fbb2b27603cf8480c7a9d343b55695c59a9b9a0"
     },
     {
       "path": "port/build-game.sh",
@@ -129,23 +134,23 @@
     },
     {
       "path": "port/build-prototype.sh",
-      "bytes": 922,
-      "sha256": "a33e31d673a68f5e5287fac6a0351dcfafd3b0aa80aa2b2888ff176fa793706b"
+      "bytes": 930,
+      "sha256": "b52d7c467d6da86dc1efeedc7df334be2124b94dcf90444e8a4f063a2dc60973"
     },
     {
       "path": "port/check.sh",
-      "bytes": 1128,
-      "sha256": "008a093822e1aaae2e34ed377839cdf475aa021f1be9297e450a351087097310"
+      "bytes": 1129,
+      "sha256": "d24e015b3c35e91883b0bb122221318feb8d409537a4b73e161210173431af05"
     },
     {
       "path": "port/compile-game.py",
-      "bytes": 2591,
-      "sha256": "cc3469f94e67ba614b309d104fe76d410d8db92f04ba5f77d04e831de409a3ae"
+      "bytes": 2645,
+      "sha256": "6933f1b32988ce5b7deb094554ad2f2ee3cba3dfd4ab8bc3acbbdf62fecb708d"
     },
     {
       "path": "port/create-change-bundle.py",
-      "bytes": 1295,
-      "sha256": "e4c4a7f5d96410258a95ff7f6ff5b603b67bd3f0e2774bf55dd5189da672e17f"
+      "bytes": 1936,
+      "sha256": "df172d66fa4a7409a7201a2fa232898720e5a3a9436fb716adb176e38235c5de"
     },
     {
       "path": "port/display-notes.md",
@@ -153,14 +158,99 @@
       "sha256": "ddf704b659f839dbef55f7d552458841c804f26f6e425060b739e58d28e5663f"
     },
     {
-      "path": "port/gl-compat.cpp",
-      "bytes": 2533,
-      "sha256": "e91d7f965d2eb0776efdf41cee8e96e04d7ecc513ed24badbf53bc2e2c406069"
+      "path": "port/evidence/webgl/after-results.json",
+      "bytes": 1319,
+      "sha256": "d263d4b5d32bff4e8bee9f4d018d4e6b2220ba18958a18193fbaf5024f028c65"
     },
     {
-      "path": "port/gl-immediate.js",
-      "bytes": 1503,
-      "sha256": "329a7d609f77822348c429681445ae0b0d5714649d1f38a79cf9f2b8f4140cc4"
+      "path": "port/evidence/webgl/baseline-results.json",
+      "bytes": 1500,
+      "sha256": "c3e1701c7aee2605943dd313473f2ec1dd2b2f51519ec146ad5112f8696954a2"
+    },
+    {
+      "path": "port/evidence/webgl/build-measurements.json",
+      "bytes": 1268,
+      "sha256": "06dd4df13c770f4885efd20f2fc61f9e47a87f0d3fc10a56ade904d51606cc57"
+    },
+    {
+      "path": "port/evidence/webgl/desktop.png",
+      "bytes": 108281,
+      "sha256": "e88a03ed559d9be04e1ad4a1d4797bea98259528cca876d45785821230cb5fa5"
+    },
+    {
+      "path": "port/evidence/webgl/gateway.png",
+      "bytes": 349875,
+      "sha256": "8e05c3fb231c0b1af8b5f62718d46d670ff390cf19fe1dfa4d1de79165986a4d"
+    },
+    {
+      "path": "port/evidence/webgl/login.png",
+      "bytes": 29450,
+      "sha256": "99e288a95d81db75894a1ca29c5e6bfe77609faf3683a5fe3b62de4c9de74d83"
+    },
+    {
+      "path": "port/evidence/webgl/memory-banks.png",
+      "bytes": 140941,
+      "sha256": "16ff24802b4b06126a1321d2f583b15e9bb76bf135dc490d54a0f2b24dbed156"
+    },
+    {
+      "path": "port/evidence/webgl/mission.png",
+      "bytes": 159125,
+      "sha256": "6b6af2b24ab19e43ae111d81485f6bc56efe352142d519b380b8d20d15c4aebe"
+    },
+    {
+      "path": "port/evidence/webgl/password-login.png",
+      "bytes": 66279,
+      "sha256": "ee8a6431ce81f40be2245626ea7be528b3cef8677c787b658cf7bbbe4cdd5be7"
+    },
+    {
+      "path": "port/evidence/webgl/registration.png",
+      "bytes": 32249,
+      "sha256": "e23ea067add1d59f74d161997a206c259af5abf1b83f4b167c746304c11e8e39"
+    },
+    {
+      "path": "port/evidence/webgl/reloaded.png",
+      "bytes": 143965,
+      "sha256": "b5f6fcfa0c093d4b76a306f36f8ab5ba6b27a6204e004f6a01b5c7859f13aaa6"
+    },
+    {
+      "path": "port/evidence/webgl/software-menu.png",
+      "bytes": 149691,
+      "sha256": "68099ee6ec3154659f6f53ef4727f6b60e204bd40b893814889981d73e1812af"
+    },
+    {
+      "path": "port/evidence/webgl/software.png",
+      "bytes": 144964,
+      "sha256": "509e95596cda91cd4b17c192cbb60181df7840e364298f9b503c3a8042a541d3"
+    },
+    {
+      "path": "port/evidence/webgl/tutorial-menu.png",
+      "bytes": 161784,
+      "sha256": "dc95b23b058010708b40694a02d3e1b12e74a3de440d83decc8e1ca956b37b93"
+    },
+    {
+      "path": "port/evidence/webgl/tutorial-one.png",
+      "bytes": 108992,
+      "sha256": "bd7961d4fc98c2dfc5cc44e603a43e2420f37407753235a9823907165b2498c7"
+    },
+    {
+      "path": "port/evidence/webgl/tutorial-three.png",
+      "bytes": 161469,
+      "sha256": "264daacd1c0135f5606327a30b0fc78ced81dbd63ae529d9fb06d3c3c6e3ea73"
+    },
+    {
+      "path": "port/evidence/webgl/tutorial-two.png",
+      "bytes": 161598,
+      "sha256": "bbf653006c55311057d1ed132b9826c055213ad9049db3e0de95c63742b6686b"
+    },
+    {
+      "path": "port/evidence/webgl/visual-comparison.json",
+      "bytes": 1714,
+      "sha256": "f6ff8f88e7c419b860037df2585787793910284e803def4d655bcf3ddec9326f"
+    },
+    {
+      "path": "port/evidence/webgl/world-map.png",
+      "bytes": 369379,
+      "sha256": "8ffb103ea36c9856746efada3f129ea6506d7daa7546be69d2261e587a84e8fb"
     },
     {
       "path": "port/include/world/Player.h",
@@ -174,8 +264,8 @@
     },
     {
       "path": "port/link-game.sh",
-      "bytes": 1008,
-      "sha256": "6adee8b7817b94a122581526714158662c70e3cea1413916212cff0fa2736749"
+      "bytes": 969,
+      "sha256": "ed298d4394cd68824cd953a478bd49e0cf78c37f559a513fec365e3549663636"
     },
     {
       "path": "port/mainloop-notes.md",
@@ -184,8 +274,8 @@
     },
     {
       "path": "port/patch-ftgl.py",
-      "bytes": 2816,
-      "sha256": "6683bd1168a6ce1ca6cf87f9b78d978a640cbc9e0860776567c1f9c604786ce6"
+      "bytes": 3403,
+      "sha256": "e5f1d1c91641389897da1b049a877c2cb0f45af53806ce033fbe651ba173fe62"
     },
     {
       "path": "port/persistence-notes.md",
@@ -204,13 +294,13 @@
     },
     {
       "path": "port/prototype.cpp",
-      "bytes": 4144,
-      "sha256": "183e82d258449feff9aa53f3ce4d2f41dc05ee46c2d5c2261964a19e30b28027"
+      "bytes": 4379,
+      "sha256": "b40840e17b7cbc7e8cdfb3e726d27c261755aab0f10bd160c75fe91ecfea53f4"
     },
     {
       "path": "port/renderer-notes.md",
-      "bytes": 2102,
-      "sha256": "5fe8b937d87617407211318b8f7a5da7d1b5b996f8564b5c0eb3a446e63d0ad0"
+      "bytes": 6319,
+      "sha256": "d2574549bd692fb1973c0dca9ab071b79bd707ed429a7f1057a18ece93a2dd9f"
     },
     {
       "path": "port/runtime-review.md",
@@ -219,8 +309,8 @@
     },
     {
       "path": "port/source-changes.json",
-      "bytes": 3287,
-      "sha256": "1e953dcf282066873e525bbfb4b068fbc13cfc15f3c38850171e5d9f87bb170e"
+      "bytes": 22500,
+      "sha256": "80d0a24dc6a8b5388a48199b5f8c55191700790538df5b155f31f7587b08a813"
     },
     {
       "path": "port/tests/README-image.md",
@@ -229,8 +319,8 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 6078,
-      "sha256": "999f6ca89cf60bdcf9e28f5f4b6ee7a2238baa4a90fc94a5dc55a5ec5d5ac3a6"
+      "bytes": 6814,
+      "sha256": "257bb50f18464f54c80c7043704f237e166beb588f194a9771aa848bd01942c1"
     },
     {
       "path": "port/tests/browser-display.cjs",
@@ -253,6 +343,16 @@
       "sha256": "67c7f5a8afed252063328e4a8b42927d9e7b3cfb5f1d4a3f3eb1308230fa8c30"
     },
     {
+      "path": "port/tests/browser-renderer-probe.cjs",
+      "bytes": 2836,
+      "sha256": "152916b08c633bfe710d7489a295402b96dd74abc842c507f635a71d26447899"
+    },
+    {
+      "path": "port/tests/browser-renderer.cjs",
+      "bytes": 10259,
+      "sha256": "6331cb1c6f2b38dbd05da54574c104eeeb1de7e927a60ecbf2ee0aa10fae77b5"
+    },
+    {
       "path": "port/tests/browser-smoke.cjs",
       "bytes": 3034,
       "sha256": "34b20fc4c70659b492cec3c50129d771a03550675dee95f0023748f9c48868ce"
@@ -263,14 +363,39 @@
       "sha256": "6221119f80aeb3e610bf0dafe406266c2bed818e8c72b6db035fb9436dd9b41f"
     },
     {
+      "path": "port/tests/build-game-renderer-qa.sh",
+      "bytes": 635,
+      "sha256": "b87a43a0d33ddaad3c7fb993ec193a540b7414e4ab84a5120d6dcc86d7807d67"
+    },
+    {
+      "path": "port/tests/build-renderer-probe.sh",
+      "bytes": 385,
+      "sha256": "ffae919dc897650d2b37f4bf9c79b402d1d6cdcc71cc3bb92d3a27997f2dbd86"
+    },
+    {
+      "path": "port/tests/compare-renderer.py",
+      "bytes": 2221,
+      "sha256": "0bbda4ee21c84365591e5a9fb75053e30614aa9c3d814d3fb50f0c9b0826c28f"
+    },
+    {
       "path": "port/tests/image_sidecar_test.cpp",
       "bytes": 5873,
       "sha256": "7a1a6551e0cb6eb0f50a8dc773a4d139a4f1e4a7aee9ab1a1a74d44545e361be"
     },
     {
+      "path": "port/tests/renderer-game-qa.cpp",
+      "bytes": 762,
+      "sha256": "e212cf250ec9ba0c00ce9dd569a546dac322673c504a652d4d6dabcdac80532b"
+    },
+    {
+      "path": "port/tests/renderer-probe.cpp",
+      "bytes": 3716,
+      "sha256": "717287a76fa71fcb250be2c603a18cadd197d9128f5296358fa6362411be466f"
+    },
+    {
       "path": "port/tests/run-image-tests.sh",
-      "bytes": 1049,
-      "sha256": "4299590d3496bd27e1587eb2a84d01fd85744a362afbf89b71038ea03dab67f3"
+      "bytes": 1057,
+      "sha256": "b95287dbb11d34348157c1d4228fa85d659546caa84e16fedd846683aee013b8"
     },
     {
       "path": "port/tests/test-audio.js",
@@ -286,11 +411,6 @@
       "path": "port/tests/test-firsttime-save.py",
       "bytes": 1430,
       "sha256": "20e334d79d8f29c4916124e8335d760cff041da289507dfdc94e00cd247d679b"
-    },
-    {
-      "path": "port/tests/test-gl-immediate.cjs",
-      "bytes": 1451,
-      "sha256": "0721bf7012c24da73f3253e6c3a1d0f0a1dca21f9a5d1921955d59c6ea726b9c"
     },
     {
       "path": "port/tests/test-mainloop.py",
@@ -313,19 +433,29 @@
       "sha256": "0b7a8fdbaf5fc143aadd068e2e8fd2c92a818214963cad53c2e7f4f0186a8ae1"
     },
     {
+      "path": "port/tests/test-renderer-link.cjs",
+      "bytes": 1170,
+      "sha256": "8d787034745cb727b47b472516c3590ddd86901334a1099bdd85b941f03b5623"
+    },
+    {
       "path": "port/tests/test-vanbakel-draw.py",
-      "bytes": 1403,
-      "sha256": "bcb395472141cc256cd1adcf26cfe12dab3da758e6597574aeb001fb43c0eb16"
+      "bytes": 1604,
+      "sha256": "001e2b08cafb3adca98f4643290fc349eb18129861ecd2dfdefd5b54fbc454c0"
     },
     {
       "path": "port/uplink-browser.patch",
-      "bytes": 32157,
-      "sha256": "d37fef5b7867e7166d3337da3ec6706993737cc82ba809081e0596d4207e0fd0"
+      "bytes": 301977,
+      "sha256": "849e96ab73e597096ccb6e4f31ce3c81a6346a14c7f2eae6aadcd8eec0bb1b4f"
     },
     {
       "path": "port/verify-inventory.py",
       "bytes": 946,
       "sha256": "1b465728cb4e3bfaa3fa6a2180cf4fdee508d489ae19dda34a5fd5b754782cf5"
+    },
+    {
+      "path": "port/webgl-renderer.cpp",
+      "bytes": 18232,
+      "sha256": "96584aaa6422a256961ac636907c515ea49434516e964cbcb50114a01752786c"
     },
     {
       "path": "prototype/ASSET_PREPARATION.md",
@@ -27034,8 +27164,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/gucci.cpp",
-      "bytes": 6417,
-      "sha256": "d21d73d7202cd34687b8c6493f90a8379cecf16d500f67031dfeb69405040b53"
+      "bytes": 6506,
+      "sha256": "9d8d895ce822fe78c280f9c587bff95968095f5120984467e70e325bede23dd4"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/gucci.h",
@@ -27054,13 +27184,13 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/gucci_sdl.cpp",
-      "bytes": 17859,
-      "sha256": "5a66746e06ecc726ae93edbba46296cff4e41aef7bb9e6175731b6506de9b69e"
+      "bytes": 17936,
+      "sha256": "c13170e234d4e9d468938fb464b7d89e38a42ba080b4e0f42345ac0db5adc8f3"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/image.cpp",
-      "bytes": 16306,
-      "sha256": "b8cdbc7df6ffa3bad59008c32d16734bab0fa705beaf856eba08234e820299d2"
+      "bytes": 16727,
+      "sha256": "4eb6ba4b8bb194ab6b27292dcf34fd5450b380fb89b8f243b5a7f3f2f7bd8da8"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/image.h",
@@ -27081,6 +27211,11 @@
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/resize_win32.cpp",
       "bytes": 2525,
       "sha256": "b90556de84ff79d707cc4c8a4d876863d043cb0b50d633c390d46740fa5e1c94"
+    },
+    {
+      "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/uplink_draw.h",
+      "bytes": 7025,
+      "sha256": "5e58d8d2963976a916a0e1d8432e53ceaf1c77ba9615751e13475b23e9a4b788"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/includes.mk",
@@ -27259,8 +27394,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/vanbakel/interface.cpp",
-      "bytes": 6182,
-      "sha256": "54f6c8093bb46d2b5557c2386365b59c93e533fcf3af01f0ef2c30909737923f"
+      "bytes": 6596,
+      "sha256": "47810a41cbd5973902e96341525bab39bac379f6df832ab5d33ceaca1f8ff5e0"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/vanbakel/interface.h",
@@ -28694,8 +28829,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/miscutils.cpp",
-      "bytes": 10553,
-      "sha256": "24dd1dc5bf12344f38ecb623f8ae3cc95e1c8b31ed6674ea8aeb9fc3d59b5847"
+      "bytes": 10617,
+      "sha256": "39f11ddc81b13e6792f849d6d140434f6bbf95e749f5fb1937eb0cd1729a276b"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/miscutils.h",
@@ -28704,8 +28839,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/opengl.cpp",
-      "bytes": 19207,
-      "sha256": "87156a4c7a3e3a13b551c613ec994e072f76e933cb86b69450a3be960e05b3df"
+      "bytes": 19772,
+      "sha256": "08e3a7a362a7a7d70039c4bbddad059888735e057c44decfebab99714e3054f5"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/opengl.h",
@@ -28714,8 +28849,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/opengl_interface.cpp",
-      "bytes": 47642,
-      "sha256": "5b9ff37ee93a846e9a15fe4797cceec6de1a8ef1714e227c7b70834f6b91e795"
+      "bytes": 50776,
+      "sha256": "02b50895666a613ddc493f34e2a0de55d3708e1c49d5c9b52eaafb046a7a658f"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/app/opengl_interface.h",
@@ -28794,8 +28929,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/game/scriptlibrary.cpp",
-      "bytes": 68918,
-      "sha256": "43b869d05191f93b458de65d9c482ac92e842f79f0fc11d0b5811d6bcd265830"
+      "bytes": 69172,
+      "sha256": "e876bf08ef3b3f5c52d0b435e43bb00f3e47542d304b3662519c4f47f38f3a29"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/game/scriptlibrary.h",
@@ -28829,8 +28964,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/analyser_interface.cpp",
-      "bytes": 14400,
-      "sha256": "d3c00dad5248922a3f174800963fae8e4b65ec6c63cb1226355e65c5a5daf2d8"
+      "bytes": 14747,
+      "sha256": "99bc483664cf33fbee7e235d5897d227710faa3c371a69db459fc835add1a9ba"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/analyser_interface.h",
@@ -28859,8 +28994,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/evtqueue_interface.cpp",
-      "bytes": 7363,
-      "sha256": "4e5f95d63188ea2b8b190c01eec147c04a35003667ed48a85f4fc72d5a1cb76e"
+      "bytes": 7440,
+      "sha256": "af449fd27a58f84324942bd2c7221247a1cfda91412e92d26bea03e737555a38"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/evtqueue_interface.h",
@@ -28869,8 +29004,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/finance_interface.cpp",
-      "bytes": 12242,
-      "sha256": "faa20944ee674d4afaf3541f2edf04e7cf29d92c2d5e86bf68434e8f39ee1cac"
+      "bytes": 12439,
+      "sha256": "3fca50f8bebb08075788b1543487b0e23ec6044d2ed27f6df4f37d6afec8dd8f"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/finance_interface.h",
@@ -28879,8 +29014,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/gateway_interface.cpp",
-      "bytes": 9814,
-      "sha256": "cb434952c6ee074fa5c9ddce367893a0a430840695dba36386ede24a2526cc32"
+      "bytes": 10001,
+      "sha256": "b307e1c88420331a6bb5f9380893f44a158514771bd2b1bc6efb3fa1f1163a56"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/gateway_interface.h",
@@ -28889,8 +29024,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/hud_interface.cpp",
-      "bytes": 25043,
-      "sha256": "4f664cc7c2f0035a173f89be6af962da5cd8c1ffd25b5f06cbb7cdcd3120acae"
+      "bytes": 25100,
+      "sha256": "b7461dd7da6093d87d5c672780a1aac8a8bcf84d89fc375cd14b867e3cfdeb08"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/hud_interface.h",
@@ -28909,8 +29044,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/irc_interface.cpp",
-      "bytes": 37587,
-      "sha256": "1fafeeaafe2cfea0d33faeb1120719818e08b49215092112b871d04dbe0af98c"
+      "bytes": 37744,
+      "sha256": "1c8537d3fc4b657ddf4ac49420e8b827b276c3a07d693f914ba846b3fb30d575"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/irc_interface.h",
@@ -28929,8 +29064,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/lan_interface.cpp",
-      "bytes": 42516,
-      "sha256": "4d380d94c218b120a2edb58402d2cc2d2f263e5aba100d43223d609b1b2f094b"
+      "bytes": 43813,
+      "sha256": "4da1364305951be2e52d45346a7dc784f0ae3960ee3cdfdf694eaf8a76cf7840"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/lan_interface.h",
@@ -28949,8 +29084,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/localinterfacescreen.cpp",
-      "bytes": 2929,
-      "sha256": "4232c459a32acd325cf10dd5ddb1852225217e38912d887f52953dae7deecb51"
+      "bytes": 3036,
+      "sha256": "db65396c3d8551470e6e94024f42de55f0a732e0b7d040e8b981842ad9b58191"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/localinterfacescreen.h",
@@ -28959,8 +29094,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/memory_interface.cpp",
-      "bytes": 11779,
-      "sha256": "196c62747db4d668fe259db7124b372dead9b55ab85d44876c1df975e34da463"
+      "bytes": 12076,
+      "sha256": "10ba7045f30e55a4dc6d09a0835d1c5594e228e3d4a5bb34441d4c3b9f1d26a0"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/memory_interface.h",
@@ -29009,8 +29144,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/sw_interface.cpp",
-      "bytes": 18320,
-      "sha256": "0dc4a5996228390e1c95cc558822721d87d46674a673f2897db635007bbed758"
+      "bytes": 18447,
+      "sha256": "8510a61d2e264d45be393f6f122b5bba9a7d57c7709d8af382294fb26d34c192"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/sw_interface.h",
@@ -29034,8 +29169,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/worldmap/worldmap_interface.cpp",
-      "bytes": 53545,
-      "sha256": "820cc063deda547665c99d85c50f4c32a47b743d3e0719562743a619cd589140"
+      "bytes": 54865,
+      "sha256": "41f75e637ac3085d1ec9a1027400bbf604db577756bfa3d60b68fe5b4554a8c8"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/worldmap/worldmap_interface.h",
@@ -29044,8 +29179,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/worldmap/worldmap_layout.cpp",
-      "bytes": 14558,
-      "sha256": "64268a3fc6718aaba669f301845569a04028700f2e6dd456cc47acccdce917b2"
+      "bytes": 14798,
+      "sha256": "4eda16a716ff44a04b0428332525383a6149b42fa959e81b00166b0fae737134"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/localinterface/worldmap/worldmap_layout.h",
@@ -29074,8 +29209,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/bbsscreen_interface.cpp",
-      "bytes": 13200,
-      "sha256": "6a92f914fc65f0e06e5be5540311c3099c576886a33c2f95466e724cf9ba46a0"
+      "bytes": 13427,
+      "sha256": "db90beec20479b70bc44842bacdbca9805e60fc1a98844d6cdcda13f76302972"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/bbsscreen_interface.h",
@@ -29084,8 +29219,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/changegatewayscreen_interface.cpp",
-      "bytes": 18468,
-      "sha256": "5742c84d670313cf566090522694fb03cf12bc88d22312c8158267c7df757ab0"
+      "bytes": 18765,
+      "sha256": "eb6b9bfc95da801db281f22190c1495498c6d1a8663165c7c7b2d0ad49a08f09"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/changegatewayscreen_interface.h",
@@ -29094,8 +29229,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/codecardscreen_interface.cpp",
-      "bytes": 16158,
-      "sha256": "1fa3c04a58990b936f18b939c9f3206ba814eb5049435dd1073be7a679462af7"
+      "bytes": 16215,
+      "sha256": "aca1e9c93f50afc5709c856170236f28d25805ea28beff999bc649042cb5cefa"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/codecardscreen_interface.h",
@@ -29114,8 +29249,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/consolescreen_interface.cpp",
-      "bytes": 26658,
-      "sha256": "2f0135ffc145e2aaf8bdbcba0962730843da76ed3bb9c81064b4fbfd0410cd0d"
+      "bytes": 26725,
+      "sha256": "9b74e8e3454dcaa6946c8915ec9a6c11de637a70f7a6d35dc1ff370337d6977c"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/consolescreen_interface.h",
@@ -29124,8 +29259,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/contactscreen_interface.cpp",
-      "bytes": 16967,
-      "sha256": "277049a4dccd91aab785aa20b9295ddd16ae83a084d60cb6c059c2e4be75a0a0"
+      "bytes": 17034,
+      "sha256": "2f961fcd9f1233891d28ae633bee5e920581777a521ed4860d8ae81ba4c81922"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/contactscreen_interface.h",
@@ -29144,8 +29279,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/cypherscreen_interface.cpp",
-      "bytes": 7682,
-      "sha256": "36c002e50611ba2b10a56174177ae624bcad321c44b18d040b8c75526f17ac8d"
+      "bytes": 7859,
+      "sha256": "668eebe7c11f51259b2d7ebea85b3e9deebc91e06b2e189461856dfa3e479464"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/cypherscreen_interface.h",
@@ -29154,8 +29289,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/dialogscreen_interface.cpp",
-      "bytes": 10792,
-      "sha256": "8754831321e95f7acbd2466af12733b73f1ba24058c4e378971a782fbc7cfcf1"
+      "bytes": 10879,
+      "sha256": "49d1a00134a0d165e59d316054b7f97dfc61ff2a7dbda44731981371ed218689"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/dialogscreen_interface.h",
@@ -29184,8 +29319,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/fileserverscreen_interface.cpp",
-      "bytes": 15527,
-      "sha256": "50f3d9ea6a1168955653428f71940abc3597a8dcdec3334eac0cbdc54bdb5f27"
+      "bytes": 15804,
+      "sha256": "e0adf7ced34ef25f87af7222084824059e49a5ee696c2e90ea77e8716aacd979"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/fileserverscreen_interface.h",
@@ -29194,8 +29329,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/highsecurityscreen_interface.cpp",
-      "bytes": 8069,
-      "sha256": "80b8e35e631c4c721eca219aa76269cfa5ad76077548b6c7d9fc743e0e316732"
+      "bytes": 8236,
+      "sha256": "1374f573530b4772e180e9416107873d9f636870553cab86fa3731db6482e2c8"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/highsecurityscreen_interface.h",
@@ -29204,8 +29339,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/hwsalesscreen_interface.cpp",
-      "bytes": 19367,
-      "sha256": "456d2a87823b4d05b8d9d97ba903df535897f5468e676d7cb4da914c434ba612"
+      "bytes": 19534,
+      "sha256": "7e87985a7b68a88e917dec9969767c1843c0174b7b1c39e68d3cfaef23d17275"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/hwsalesscreen_interface.h",
@@ -29214,8 +29349,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/linksscreen_interface.cpp",
-      "bytes": 26765,
-      "sha256": "0fe348ab1101af25cabfdbb7d6a894eb45e22b5647f973a21f2da0ea946d639c"
+      "bytes": 26942,
+      "sha256": "10d57a949ae9fe8e0a2a83a398cba1ed30b595594457a3ecf90cdf971e8e43ff"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/linksscreen_interface.h",
@@ -29234,8 +29369,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/logscreen_interface.cpp",
-      "bytes": 12144,
-      "sha256": "c0957619fa2facb8d455e4fc6e4a3d93dd3e53efc7f5a9382cf5c9d2309b3325"
+      "bytes": 12441,
+      "sha256": "12135242928dcf7b7f87bf9fae460fc54fa7f62207bf09e93d2802e262d3f6c7"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/logscreen_interface.h",
@@ -29264,8 +29399,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/nearestgatewayscreen_interface.cpp",
-      "bytes": 7441,
-      "sha256": "2d460ba70bb1c56d9b4ebe1d1ab37c5906a2f8c13b3f2f5a4ef9f5e65bf4d037"
+      "bytes": 7568,
+      "sha256": "6c1f84dc13b9d17e468cfd714369eac973787cef7b2eb73941e8930d2f739917"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/nearestgatewayscreen_interface.h",
@@ -29274,8 +29409,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/newsscreen_interface.cpp",
-      "bytes": 12017,
-      "sha256": "b27ea438b10c09049471558a0aa8459abbb233e95698a89d52492622ff1e00f2"
+      "bytes": 12364,
+      "sha256": "7e2f8c3f12d29b80d1b09cc70dbb8abd55a74045ad9802dff91619cc92173263"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/newsscreen_interface.h",
@@ -29284,8 +29419,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/nuclearwarscreen_interface.cpp",
-      "bytes": 12280,
-      "sha256": "edac0a0cc7f4368b16b6c5fa74063dade20b1265da14b1ed78fb2f2a52b3bb1b"
+      "bytes": 12587,
+      "sha256": "b7fa466f81f9a2b172a7cc4959638152566377002f17023ce332f7a5ba4dd989"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/nuclearwarscreen_interface.h",
@@ -29294,8 +29429,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/passwordscreen_interface.cpp",
-      "bytes": 7677,
-      "sha256": "a2211ffe354b0cb90ca95d1be7794694d1caf6feee017a71d4eb3edca013191b"
+      "bytes": 7844,
+      "sha256": "8df04d2025e1725cfd2bb54d33bca883251c60f68401b0e01c70c54410655955"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/passwordscreen_interface.h",
@@ -29314,8 +29449,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/radiotransmitterscreen_interface.cpp",
-      "bytes": 9120,
-      "sha256": "05584ca5198b699d8a7a6559dcac54e6198a74d99d64baeb8b100083f74d1d23"
+      "bytes": 9237,
+      "sha256": "62f23430ed6e4c3991470204b7cbe42a867df56f21df13f00d43280d145390c4"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/radiotransmitterscreen_interface.h",
@@ -29324,8 +29459,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/rankingscreen_interface.cpp",
-      "bytes": 8318,
-      "sha256": "f7df0154f2673c9082928bdb3d208ca97385bd9b22695a8bae75e1336be51373"
+      "bytes": 8425,
+      "sha256": "873f5807927ceb4bbd9b3aed8c235104e74ac6eb63789f6ed1476f5ed55e4408"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/rankingscreen_interface.h",
@@ -29344,8 +29479,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/remoteinterface.cpp",
-      "bytes": 16977,
-      "sha256": "629896857bb58a01b3a4cc55f2bf3eae0be44a36d1a7aef43c479217f952e1cf"
+      "bytes": 17094,
+      "sha256": "42c1f577dc1723b90d3d62b6d42ac766fb1fea6d27ff4973de08251e92ba741d"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/remoteinterface.h",
@@ -29354,8 +29489,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/remoteinterfacescreen.cpp",
-      "bytes": 2806,
-      "sha256": "9492dfa7caac89077f4c849f821e33e5fe028b3f2ba82129ea34b95dc27ee7f5"
+      "bytes": 2913,
+      "sha256": "b75fab570ea21f46f142228c1a1ffb1ce5eeea2980c5ba6fab5275fd5d61d982"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/remoteinterfacescreen.h",
@@ -29364,8 +29499,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/securityscreen_interface.cpp",
-      "bytes": 7780,
-      "sha256": "fc92c1d971e254ef45b7e62fec0b6049700f7d7cd9cef56220dedbac67eb3fb8"
+      "bytes": 7947,
+      "sha256": "7171a6fd8a93ae19689cb01da344aa0577063507783f43c9219b0b03e621cded"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/securityscreen_interface.h",
@@ -29374,8 +29509,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/shareslistscreen_interface.cpp",
-      "bytes": 14338,
-      "sha256": "7eb2a206d68273ca906bc3e3e7b6c14b77db27a00d900fda0b4b74c0d1dc5716"
+      "bytes": 14625,
+      "sha256": "a5e5560daf1c692f2388ab393fa3e2484e38885828c8e30c42a53f81d000bb08"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/shareslistscreen_interface.h",
@@ -29384,8 +29519,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/sharesviewscreen_interface.cpp",
-      "bytes": 11152,
-      "sha256": "3bdafeb1e704786eca0fa39d9e03fec74ed84ae7bb8c8416496f470a153c6949"
+      "bytes": 11329,
+      "sha256": "454c3759a2a901ceab174d11e3d3c19e9686da215aadfa886a1de1aa53cc4182"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/sharesviewscreen_interface.h",
@@ -29404,8 +29539,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/swsalesscreen_interface.cpp",
-      "bytes": 15138,
-      "sha256": "4392e2449b2b767aabc9ab78c881dfafb1fdb4f2a301e2170d259c98a970b294"
+      "bytes": 15305,
+      "sha256": "e83aa8dbcf2dc4bb2bfff3d31c6b6bc62185459f7a73ceae8ae0f89b82286d57"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/swsalesscreen_interface.h",
@@ -29414,8 +29549,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/useridscreen_interface.cpp",
-      "bytes": 12374,
-      "sha256": "5ea04c7b8d806f933c5ad78a45500370951dea92af40d37fcaf11673aa16a947"
+      "bytes": 12601,
+      "sha256": "b5d9f2fb1ba4254e59066d1259e4efe0d340752c008e3e9fde3fd84c974a602d"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/useridscreen_interface.h",
@@ -29424,8 +29559,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/voiceanalysisscreen_interface.cpp",
-      "bytes": 6992,
-      "sha256": "c64b341767fff87e03ec9667115ef7fbc4d7d3290d1b823e7e2183280cc0aeb4"
+      "bytes": 7199,
+      "sha256": "6c298deaf8885a5cdff96d1be900f408df7115b8d3ee28761e337cb61f329c5f"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/remoteinterface/voiceanalysisscreen_interface.h",
@@ -29444,8 +29579,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/scrollbox.cpp",
-      "bytes": 10914,
-      "sha256": "209b6a7ae19f06a14f47fd633554c5922cfaf47722876012d2b5dbf724db8802"
+      "bytes": 11078,
+      "sha256": "4adaf9c54afcf3af30626dcfe1ed87d6c135e59bff98e3c25642f533706155a2"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/scrollbox.h",
@@ -29454,8 +29589,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/decrypter.cpp",
-      "bytes": 11377,
-      "sha256": "cd302ed9c6fbaca838058b95b725afe9e0437cfc20ed402ac48802dbb0aa4408"
+      "bytes": 11724,
+      "sha256": "9523d53f092555d27ef983159c7e95a7e84c34d8aec817e8ee70d672ead242c0"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/decrypter.h",
@@ -29464,8 +29599,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/decypher.cpp",
-      "bytes": 10157,
-      "sha256": "c5bb2588e8d959b786928f4d88a6a871e6390b02fe590b2b74db61ead7b48d05"
+      "bytes": 10504,
+      "sha256": "6a1d3a806bbd40b8d90bb70f0e06c72346e021ccc703db9dd4b10b14284281f9"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/decypher.h",
@@ -29474,8 +29609,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/defrag.cpp",
-      "bytes": 11257,
-      "sha256": "7efcd5fee3149dc3e2a7eef4542b8d89bae2637c45abf16947e0442d8e23218f"
+      "bytes": 11604,
+      "sha256": "c6b87f73052554c87488ff6c8be73302fd8b0dc5a0284577622d4d448859902e"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/defrag.h",
@@ -29484,8 +29619,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/dictionaryhacker.cpp",
-      "bytes": 12019,
-      "sha256": "8885627344f9c29f479bd1b3305f50fb89ff0366d00ab22d16e01da758b7bbbc"
+      "bytes": 12166,
+      "sha256": "a94bd46ea908df2a5492bc8eb34636fc1d3f6b179563d97ca77233c62f2b29e6"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/dictionaryhacker.h",
@@ -29504,8 +29639,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/filecopier.cpp",
-      "bytes": 13071,
-      "sha256": "79eb6f89cc01d05bd13d5932da6b19cbfce6163e8623603d3c7adf00ddeee249"
+      "bytes": 13418,
+      "sha256": "764ad974d16842a3add024a64685acd650b66f4bc5975cbb0b2c6b17dfb8c6d8"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/filecopier.h",
@@ -29514,8 +29649,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/filedeleter.cpp",
-      "bytes": 11418,
-      "sha256": "25e57af33eb06c75f2c3f10a9814dd98fd7870b2053b2d9a57f11b27c715edc9"
+      "bytes": 11765,
+      "sha256": "fbe4f37a40b5bd78d5e8a76c1305e00b01ed82a69f5a988d4b59cd16b12e67e1"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/filedeleter.h",
@@ -29524,8 +29659,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/firewalldisable.cpp",
-      "bytes": 10171,
-      "sha256": "d24b6b67c91d81b73ba55495789020c8c451924c8bd581b8fa18b7e1172ddfb9"
+      "bytes": 10518,
+      "sha256": "5123b3822cb60f8b0f0601d5ae5f4e1f26eaf5630d827f107b8e657688c2ae72"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/firewalldisable.h",
@@ -29534,8 +29669,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/gatewaynuke.cpp",
-      "bytes": 5508,
-      "sha256": "f2e0c87d8d6d68e75c7690866175a62a4d9d199a05a29c3391432d00cb29ee09"
+      "bytes": 5655,
+      "sha256": "3e6b9c7194133475d150c88beabe87710f3473d164c9c02e5ae5a87a6296b481"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/gatewaynuke.h",
@@ -29544,8 +29679,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/iplookup.cpp",
-      "bytes": 5645,
-      "sha256": "06587a8017166152566283a6efecc5add36a37bab05049adb557ae4d4f2f2eec"
+      "bytes": 5792,
+      "sha256": "0779125b1c6ed2203b28abe359ecfab83286e9accaf7ff8cbbb380acc9c6ce32"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/iplookup.h",
@@ -29554,8 +29689,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/ipprobe.cpp",
-      "bytes": 7057,
-      "sha256": "c8ecd60996d7d0cecf0c122f15c0ddd020e6d6fbbd15b02a07d4f24a7aef7940"
+      "bytes": 7204,
+      "sha256": "a9d95e0b2e53b0d8b5c51bcf4d4fc6ea238b72c779747948b5f5e979560b7b3a"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/ipprobe.h",
@@ -29564,8 +29699,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanforce.cpp",
-      "bytes": 9919,
-      "sha256": "69be947b972b154ab8d22a7cdcc4477fa82c926d453d5e6da090b41b4f51e850"
+      "bytes": 10266,
+      "sha256": "3f4fbc1adcdb811e0f6daea95539d35337a23ad750eb46557c4cefc51645df8f"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanforce.h",
@@ -29574,8 +29709,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanprobe.cpp",
-      "bytes": 12838,
-      "sha256": "52b6bc81feffb7105921fb409c6c2ba3c4fdb20d35b385147885cb098ab96a89"
+      "bytes": 13185,
+      "sha256": "0140c9eff013583e255e5e9fc7b02748f91f33eff1bd4aa949e696e99cabb0fb"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanprobe.h",
@@ -29584,8 +29719,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanscan.cpp",
-      "bytes": 9178,
-      "sha256": "b4bc65b585e7e606a6ee452b635596d544f0d1ba487b8a5bd342d7fad147677a"
+      "bytes": 9525,
+      "sha256": "e8bc5796bf237919a5c4504f2ffbd658fe2f8fee713808e9ea624b1f41140c54"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanscan.h",
@@ -29594,8 +29729,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanspoof.cpp",
-      "bytes": 10640,
-      "sha256": "ccc886435822b386ebcae72f2435fd8f02da272479e2629ea80b7a827dcc515b"
+      "bytes": 10987,
+      "sha256": "2ceba6565239641c8499560a52a68ec31bf653a99804f81bb6932ffcc16bc27b"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/lanspoof.h",
@@ -29604,8 +29739,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/logdeleter.cpp",
-      "bytes": 18239,
-      "sha256": "8e97725b95d8ce3eaab4503c1346b96661b53c3ecc5d181fbda09b4176f5a7a1"
+      "bytes": 18586,
+      "sha256": "6696badc692ab673fe5e3356f8cab549059ed111f86a7af7cade2c08d6cc0762"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/logdeleter.h",
@@ -29614,8 +29749,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/logmodifier.cpp",
-      "bytes": 23922,
-      "sha256": "0a64dcd8f36b13a5aa4f13def3abc35bc42a1a1a0586d390c601ed7f47999d4c"
+      "bytes": 24379,
+      "sha256": "beabd89a5f7112014978009c889b1347c1b15058e5be69561c5c2654a3be9d97"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/logmodifier.h",
@@ -29624,8 +29759,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/logundeleter.cpp",
-      "bytes": 11751,
-      "sha256": "57dc34c0cd97844f9b31902298fd36815c25bee0fb16639e8902454996a9d1eb"
+      "bytes": 12098,
+      "sha256": "c635e44095b05f9867c8a95654e40ad6f0cf059996d2af435929d711c0bd2656"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/logundeleter.h",
@@ -29634,8 +29769,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/motionsensor.cpp",
-      "bytes": 4241,
-      "sha256": "63d1b2c56d9c76fd17b907bcb2fc42653b2265424d4392280ef50e1d87bf764a"
+      "bytes": 4388,
+      "sha256": "cd37442d4fec46ea24703a9e77ce4f61430ddc19b36394215a5f7c8f8dcf27a4"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/motionsensor.h",
@@ -29644,8 +29779,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/passwordbreaker.cpp",
-      "bytes": 13482,
-      "sha256": "519e141b0946026305ea7b78ea9bcc9cb5b0946702135ba94f24f6ae3546c9ba"
+      "bytes": 13829,
+      "sha256": "db3f224a8e33ab3c158dbead961d8b3ab50edcac59844cb9a723ce5781449235"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/passwordbreaker.h",
@@ -29654,8 +29789,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/proxydisable.cpp",
-      "bytes": 9996,
-      "sha256": "de3cc61882def3e86ca0c5bcfe2df1b46eea17690c3acda9f85e7a386dee8adb"
+      "bytes": 10343,
+      "sha256": "54c1e13af456113834dd081855cad29ffd3293fc2ce1fd90f71c56e4f2daba28"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/proxydisable.h",
@@ -29664,8 +29799,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/revelation.cpp",
-      "bytes": 5486,
-      "sha256": "05bfeb2c0ea03ea61f921624202380bb13151e2d70b5800e9639362d055c7e86"
+      "bytes": 5543,
+      "sha256": "ad477ce9e085baf1bbdf241bbcaf145e7cfb597ba820f819ff45a089506c0cde"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/revelation.h",
@@ -29674,8 +29809,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/revelationtracker.cpp",
-      "bytes": 6886,
-      "sha256": "1b02cff02025e6bfe13df99e654acb92ebaca0d7c30491a37499c9578ece04dd"
+      "bytes": 7043,
+      "sha256": "3ca81c5beccb1321ce2ee05ed44e76276a55d38281d42de60b7cf260f9873f3e"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/revelationtracker.h",
@@ -29704,8 +29839,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/tracetracker.cpp",
-      "bytes": 11594,
-      "sha256": "cfc4565433b99be6a9d40d34e4d700021aa8e1337f27bda2c7b0e55b31c003c9"
+      "bytes": 11791,
+      "sha256": "f1288d51e9d341fb3dcc4d2bbf4de8da6ba08ab986065747004d19eca62eedd4"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/tracetracker.h",
@@ -29714,8 +29849,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/tutorial.cpp",
-      "bytes": 75208,
-      "sha256": "ea99a09c0cff788143179dcdb53847465c37177cdf28f157ca857766a74f9abe"
+      "bytes": 75365,
+      "sha256": "a81a93a4b5a07e85f76fa59c045c5a7809535b455a062484977e113958e2a82f"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/tutorial.h",
@@ -29724,8 +29859,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/uplinkagentlist.cpp",
-      "bytes": 14204,
-      "sha256": "e17e14639a6451c31a38d0244927e03ade64093fa5fd6cb6465346211b9d9a79"
+      "bytes": 14431,
+      "sha256": "a85cc0949e6776ecb38874bad7f5483ffd712f495bf0c0ca4b0f1dafb29ed7dc"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/uplinkagentlist.h",
@@ -29744,8 +29879,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/voiceanalyser.cpp",
-      "bytes": 19226,
-      "sha256": "8e1b8b90d97851989ffec4cc7e44cc90cb9d75990ade85c2f5880c2f324aa8d0"
+      "bytes": 19433,
+      "sha256": "4dcf3263cdf52e81588e3dbb6d09781ab7f2e766598cb8502487e1ad0e92d8a5"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/interface/taskmanager/voiceanalyser.h",
@@ -29754,8 +29889,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/closing_interface.cpp",
-      "bytes": 5056,
-      "sha256": "7dbb365909c4c5facc701036eb4be3c6de76e7e141ff4a1f22efa0867ff0a50c"
+      "bytes": 5110,
+      "sha256": "434e43cc92cde50a5b62a83526473398d1abe8b457a773438f61a15602aa48f4"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/closing_interface.h",
@@ -29814,8 +29949,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/graphicoptions_interface.cpp",
-      "bytes": 17732,
-      "sha256": "f61087ce0e95cfebda0689147bcd277fce870420947318a759aecf6ed7c9b960"
+      "bytes": 17896,
+      "sha256": "8bdba459e68f08f1bc0e4fa4c6954a4c3b20a0b45639a7f4fd6408b910de3368"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/graphicoptions_interface.h",
@@ -29834,8 +29969,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/login_interface.cpp",
-      "bytes": 15400,
-      "sha256": "d312d2c30fb888e006a9b9da56e40914086731c8619939257579dcd7f2c3ceff"
+      "bytes": 15624,
+      "sha256": "f2cd25ce0fd200f66db9da835a0a9374ae44099fc7b8aad04d9f6952690dced3"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/login_interface.h",
@@ -29874,8 +30009,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/obituary_interface.cpp",
-      "bytes": 10436,
-      "sha256": "8bb4e0e2352220b59ee723c358f8901d5fc78f47f28e0da2f61a5d45abe1b649"
+      "bytes": 10560,
+      "sha256": "c14fb4815ecb936bf7d7327728080008ab7a84af167fb869a926deb8e1cabcfb"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/obituary_interface.h",
@@ -29914,8 +30049,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/theme_interface.cpp",
-      "bytes": 9934,
-      "sha256": "dac48865d8f775dda1c67afff566fedba3827b97f1258aaf4636aea7f0d24be1"
+      "bytes": 10098,
+      "sha256": "50182df9c1043d3c699fcfc3b67f0e09e9a901d4ee6536d040849a1f4f69bf17"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/theme_interface.h",
@@ -29924,8 +30059,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/theteam_interface.cpp",
-      "bytes": 11076,
-      "sha256": "95952d1ff9485f1c6a7b616943e9284faba0465a2028ea2cf64665e060e51c2e"
+      "bytes": 11200,
+      "sha256": "cb3a13a2fad8ee93f6d40ae1de8f4d63575d6561a5adb42a7e010fd5f8f2a177"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/mainmenu/theteam_interface.h",
@@ -29959,8 +30094,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/network/interfaces/clientcommsinterface.cpp",
-      "bytes": 8174,
-      "sha256": "89d155012ace0550919f38df60e4b35ba3f217425931a6a3cf09b989526673ab"
+      "bytes": 8431,
+      "sha256": "c335250df2ce030a5e2265538c23228dcb7c9f4f9802b906c020b41febd3bf99"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/network/interfaces/clientcommsinterface.h",
@@ -29969,8 +30104,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/network/interfaces/clientstatusinterface.cpp",
-      "bytes": 8672,
-      "sha256": "f33ffc833d1d69bda7236b8a6a31214763db8a62088cb5751d2bec6a217ce2bf"
+      "bytes": 8949,
+      "sha256": "4eb19e0f567e5754049f880660f4a3e62e6da117746ab4b891a9dd7947e1ee52"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/network/interfaces/clientstatusinterface.h",

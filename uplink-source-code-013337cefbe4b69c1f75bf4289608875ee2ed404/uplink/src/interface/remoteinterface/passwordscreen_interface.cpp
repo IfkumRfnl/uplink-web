@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -106,14 +107,14 @@ void PasswordScreenInterface::CodeButtonDraw ( Button *button, bool highlighted,
 
 	SetColour ( "PasswordBoxBackground" );
 	
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Print the text
 
@@ -132,14 +133,14 @@ void PasswordScreenInterface::CodeButtonDraw ( Button *button, bool highlighted,
 
 	if ( highlighted || clicked ) {
 
-		glBegin ( GL_LINE_LOOP );
+		UplinkDraw::begin ( GL_LINE_LOOP );
 
-			glVertex2i ( button->x, button->y );
-			glVertex2i ( button->x + button->width, button->y );
-			glVertex2i ( button->x + button->width, button->y + button->height );
-			glVertex2i ( button->x, button->y + button->height );
+			UplinkDraw::vertex2i ( button->x, button->y );
+			UplinkDraw::vertex2i ( button->x + button->width, button->y );
+			UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-		glEnd ();
+		UplinkDraw::end ();
 
 	}
 

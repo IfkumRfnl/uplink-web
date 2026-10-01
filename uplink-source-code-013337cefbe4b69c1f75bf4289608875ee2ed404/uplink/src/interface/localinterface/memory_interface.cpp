@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 // MemoryInterface.cpp: implementation of the MemoryInterface class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -73,7 +74,7 @@ void MemoryInterface::MemoryBlockDraw ( Button *button, bool highlighted, bool c
 
 		char caption [64];
 		UplinkSnprintf ( caption, sizeof ( caption ), "%03d", index );
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 		GciDrawText ( button->x, button->y + button->height - 1, caption );	
 
 		// Draw a box, colour coded on the data type
@@ -82,62 +83,62 @@ void MemoryInterface::MemoryBlockDraw ( Button *button, bool highlighted, bool c
 		if ( data ) {
 				
 			if ( data->TYPE == DATATYPE_DATA )
-				glColor4f ( 0.2f, 0.8f, 0.2f, ALPHA );
+				UplinkDraw::color4f ( 0.2f, 0.8f, 0.2f, ALPHA );
 
 			else if ( data->TYPE == DATATYPE_PROGRAM )
-				glColor4f ( 0.8f, 0.2f, 0.2f, ALPHA );
+				UplinkDraw::color4f ( 0.8f, 0.2f, 0.2f, ALPHA );
 				
 			else
-				glColor4f ( 0.4f, 0.4f, 0.4f, ALPHA );
+				UplinkDraw::color4f ( 0.4f, 0.4f, 0.4f, ALPHA );
 
 		}
 		else {
 
-			glColor4f ( 0.3f, 0.3f, 0.5f, ALPHA );
+			UplinkDraw::color4f ( 0.3f, 0.3f, 0.5f, ALPHA );
 
 		}
 
 		// Draw the background colour of the box
-		glBegin ( GL_QUADS );
-			glVertex2i ( button->x + 30, button->y );
-			glVertex2i ( button->x + 30, button->y + button->height );
+		UplinkDraw::begin ( GL_QUADS );
+			UplinkDraw::vertex2i ( button->x + 30, button->y );
+			UplinkDraw::vertex2i ( button->x + 30, button->y + button->height );
 
 			if ( highlighted || ( index == specialHighlight ) )
-				glColor4f ( 0.6f, 0.6f, 0.8f, ALPHA );
+				UplinkDraw::color4f ( 0.6f, 0.6f, 0.8f, ALPHA );
 
 			else
-				glColor4f ( 0.3f, 0.3f, 0.8f, ALPHA );
+				UplinkDraw::color4f ( 0.3f, 0.3f, 0.8f, ALPHA );
 
-			glVertex2i ( button->x + button->width, button->y + button->height );
-			glVertex2i ( button->x + button->width, button->y );			
-		glEnd ();
+			UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::vertex2i ( button->x + button->width, button->y );			
+		UplinkDraw::end ();
 
 
 		// Draw a box if this program is highlighted
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, ALPHA );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, ALPHA );
 
 		if ( currentprogramindex != -1 && 
 			 game->GetWorld ()->GetPlayer ()->gateway.databank.GetDataIndex (index) == currentprogramindex ) {
 
-			glBegin ( GL_LINES );
+			UplinkDraw::begin ( GL_LINES );
 
-				glVertex2i ( button->x + 30, button->y );
-				glVertex2i ( button->x + 30, button->y + button->height );
-				glVertex2i ( button->x + button->width - 1, button->y );			
-				glVertex2i ( button->x + button->width - 1, button->y + button->height );
+				UplinkDraw::vertex2i ( button->x + 30, button->y );
+				UplinkDraw::vertex2i ( button->x + 30, button->y + button->height );
+				UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );			
+				UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height );
 							
 				if ( game->GetWorld ()->GetPlayer ()->gateway.databank.GetDataIndex (index-1) != currentprogramindex ) {
-					glVertex2i ( button->x + 30, button->y );
-					glVertex2i ( button->x + button->width - 1, button->y );
+					UplinkDraw::vertex2i ( button->x + 30, button->y );
+					UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
 				}
 
 				if ( game->GetWorld ()->GetPlayer ()->gateway.databank.GetDataIndex (index+1) != currentprogramindex ) {
-					glVertex2i ( button->x + 30, button->y + button->height - 1 );
-					glVertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
+					UplinkDraw::vertex2i ( button->x + 30, button->y + button->height - 1 );
+					UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
 				}
 
-			glEnd ();
+			UplinkDraw::end ();
 
 		}
 
@@ -163,7 +164,7 @@ void MemoryInterface::MemoryBlockDraw ( Button *button, bool highlighted, bool c
 		//clear_draw ( button->x, button->y, button->width, button->height );
 
 		if ( index == game->GetWorld ()->GetPlayer ()->gateway.databank.GetSize () * 5 ) {
-			glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 			GciDrawText ( button->x, button->y + 8, "Mouse-Button now fucked" );
 		}
 

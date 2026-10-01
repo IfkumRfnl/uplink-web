@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -327,29 +328,29 @@ void PasswordBreaker::PasswordDraw ( Button *button, bool highlighted, bool clic
 
     /*
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		if      ( clicked )		glColor4f ( 0.5f, 0.5f, 1.0f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.2f, 0.2f, 0.9f, ALPHA );
-		else					glColor4f ( 0.0f, 0.0f, 0.5f, ALPHA );
-		glVertex2i ( button->x, button->y );
+		if      ( clicked )		UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.2f, 0.2f, 0.9f, ALPHA );
+		else					UplinkDraw::color4f ( 0.0f, 0.0f, 0.5f, ALPHA );
+		UplinkDraw::vertex2i ( button->x, button->y );
 
-		if		( clicked )		glColor4f ( 0.7f, 0.7f, 1.0f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.5f, 0.5f, 1.0f, ALPHA );
-		else					glColor4f ( 0.0f, 0.0f, 0.7f, ALPHA );
-		glVertex2i ( button->x + button->width, button->y );
+		if		( clicked )		UplinkDraw::color4f ( 0.7f, 0.7f, 1.0f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, ALPHA );
+		else					UplinkDraw::color4f ( 0.0f, 0.0f, 0.7f, ALPHA );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
 
-		if		( clicked )		glColor4f ( 0.5f, 0.5f, 1.0f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.2f, 0.2f, 0.9f, ALPHA );
-		else					glColor4f ( 0.0f, 0.0f, 0.5f, ALPHA );
-		glVertex2i ( button->x + button->width, button->y + button->height );
+		if		( clicked )		UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.2f, 0.2f, 0.9f, ALPHA );
+		else					UplinkDraw::color4f ( 0.0f, 0.0f, 0.5f, ALPHA );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
 
-		if		( clicked )		glColor4f ( 0.7f, 0.7f, 1.0f, ALPHA );
-		else if ( highlighted ) glColor4f ( 0.5f, 0.5f, 1.0f, ALPHA );
-		else					glColor4f ( 0.0f, 0.0f, 0.7f, ALPHA );
-		glVertex2i ( button->x, button->y + button->height );
+		if		( clicked )		UplinkDraw::color4f ( 0.7f, 0.7f, 1.0f, ALPHA );
+		else if ( highlighted ) UplinkDraw::color4f ( 0.5f, 0.5f, 1.0f, ALPHA );
+		else					UplinkDraw::color4f ( 0.0f, 0.0f, 0.7f, ALPHA );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
     */
 
@@ -358,7 +359,7 @@ void PasswordBreaker::PasswordDraw ( Button *button, bool highlighted, bool clic
 	int xpos = button->x + 10;
 	int ypos = button->y + 18;
 		
-	glColor4f ( 1.0f, 1.0f, 1.0f, 0.8f );    
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 0.8f );    
     
 	if ( strcmp ( button->caption, "Select target" ) != 0 ) {
 
@@ -402,14 +403,14 @@ void PasswordBreaker::CloseClick ( Button *button )
 void PasswordBreaker::BackgroundDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );		
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x, button->y );
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 	
 }

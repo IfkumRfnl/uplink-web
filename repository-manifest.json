@@ -199,8 +199,8 @@
     },
     {
       "path": "port/renderer-notes.md",
-      "bytes": 4613,
-      "sha256": "6b0b5f9e1d8a6832e14fe3153862f3208cd92629363eaacb04485e0209e6bf34"
+      "bytes": 4671,
+      "sha256": "4380864f0c7aaf9434aa12b3ba5e8aad624cdffa8d2d2546962c8fb8683954d7"
     },
     {
       "path": "port/runtime-review.md",

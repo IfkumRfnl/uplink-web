@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -46,7 +47,7 @@ void ClosingInterface::LargeTextDraw ( Button *button, bool highlighted, bool cl
 
     clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	int ypos = (button->y + button->height / 2) + 5;
 	GciDrawText ( button->x, ypos, button->caption, HELVETICA_18 );
 

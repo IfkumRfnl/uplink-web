@@ -33,7 +33,7 @@ The browser smoke runner closes the private server even when Chromium launch fai
 
 `npm run test:browser-harness` runs Playwright against the separately labelled harness, asserting exact real C++ mouse/keyboard state, actual IndexedDB reload, WAV/OGG playback state, media replacement and resize/high-DPI input. It fails on page errors, failed assets and GL enum/operation errors. Its second-tab probe reports the actual visibility state and does not claim long hidden-tab coverage. It does not test original gameplay. See `port/CLOUD_RUNTIME_RESULTS.md` for the manual original game results.
 
-`test-gl-immediate.cjs` checks complete vertex colours for the original sparse Memory Banks draw sequence. `test-firsttime-save.py` checks browser onboarding serializes its completion flag through the original writer while native behavior stays unchanged. Both run in `npm test`.
+`test-firsttime-save.py` checks browser onboarding serializes its completion flag through the original writer while native behavior stays unchanged. Both run in `npm test`.
 
 `npm run test:browser-storage` injects an actual IndexedDB write abort, recovers and reloads, then blocks restoration and proves existing files survive. `npm run test:browser-lifecycle` obtains real hidden visibility, verifies ten seconds of suspended animation frames, resumes, and checks five seconds of lifecycle freezing against the original game main-loop counter. These short tests do not prove quota exhaustion or multi-minute campaign behavior.
 
@@ -42,3 +42,7 @@ Browser storage and lifecycle tests use Playwright’s installed browser when `C
 After staging with `python3 port/prepare-pages.py`, `npm run test:pages` checks the original game at a Pages-style subpath. It verifies that the bottom debug/save panel is absent, five repeated right-clicks translate into SDL right-button press/release pairs, canvas context menus are canceled, and context menus outside the canvas remain enabled. It also registers a profile, checks gesture audio, retires through the native game and waits for automatic persistence, then reloads and logs back into the saved profile. Screenshots and structured results are written under `qa/pages/`.
 
 `npm run test:browser-display` exercises the actual game at DPR 1 and 2, four viewport sizes (1366×900, 1920×1080, 800×700, 390×844), all four display resolutions, three scaling modes, saved settings and fullscreen entry/exit. It observes pointer coordinates in events actually dequeued for the C++ SDL consumer, verifies WebGL backing dimensions and aspect ratio, and captures onboarding text with nearest sampling and the previous linear sampler. Evidence goes to `qa/display/`. These checks do not establish readability after unavoidable downscaling, browser coverage beyond Chromium, or comparative Windows font fidelity.
+
+## Shader/buffer renderer
+
+See [renderer design, regression checks and comparison instructions](../renderer-notes.md). The pixel/context probe and original-game screen/save/audio test run in CI. Their QA bundles and evidence stay under ignored `qa/`; production output is not overwritten.

@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 // -*- tab-width:4 c-file-style:"cc-mode" -*-
 
 #include "stdafx.h"
@@ -432,14 +433,14 @@ void SetColour ( char *colourName )
          !app->GetOptions()->GetColour( colourName ) ) {
 
         printf ( "SetColour WARNING : Failed to find colour %s\n", colourName );
-        glColor3f ( 0.0f, 0.0f, 0.0f );
+        UplinkDraw::color3f ( 0.0f, 0.0f, 0.0f );
         return;
 
     }
 
     ColourOption *col = app->GetOptions ()->GetColour ( colourName );
     UplinkAssert (col);
-    glColor3f ( col->r, col->g, col->b );
+    UplinkDraw::color3f ( col->r, col->g, col->b );
 
 }
 

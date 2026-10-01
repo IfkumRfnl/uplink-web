@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -49,7 +50,7 @@ void GatewayInterface::DrawPopulatedItem ( Button *button, bool highlighted, boo
 
 	if ( highlighted || clicked ) {
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 		border_draw ( button );
 
 	}
@@ -65,15 +66,15 @@ void GatewayInterface::DrawUnPopulatedItem ( Button *button, bool highlighted, b
 void GatewayInterface::DrawGatewayBackground ( Button *button, bool highlighted, bool clicked )
 {
 
-//	glBegin ( GL_QUADS );		
-//		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-//		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x, button->y );
-//		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-//		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x + button->width, button->y + button->height );
-//	glEnd ();
+//	UplinkDraw::begin ( GL_QUADS );		
+//		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+//		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x, button->y );
+//		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+//		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+//	UplinkDraw::end ();
 
 	clear_draw ( button->x, button->y, button->width, button->height );	
-	glColor3f ( 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
 	border_draw ( button );
 
 }
@@ -82,7 +83,7 @@ void GatewayInterface::DrawGatewayPicture ( Button *button, bool highlighted, bo
 {
 
 	imagebutton_draw ( button, highlighted, clicked );
-//	glColor3ub ( 81, 138, 215 );	
+//	UplinkDraw::color3ub ( 81, 138, 215 );	
 //	border_draw ( button );
 
 }
@@ -90,7 +91,7 @@ void GatewayInterface::DrawGatewayPicture ( Button *button, bool highlighted, bo
 void GatewayInterface::DrawMainTitle ( Button *button, bool highlighted, bool clicked )
 {
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	int ypos = (button->y + button->height / 2) + 5;
 
 	GciDrawText ( button->x, ypos, button->caption, HELVETICA_18 );

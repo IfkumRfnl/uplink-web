@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 
 #ifdef WIN32
@@ -200,7 +201,7 @@ void VoiceAnalyser::DrawAnalysis ( Button *button, bool highlighted, bool clicke
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glBegin ( GL_LINE_STRIP );
+	UplinkDraw::begin ( GL_LINE_STRIP );
 
 	for ( int i = 0; i < VOICEANALYSER_NUMSAMPLES; ++i ) {
 
@@ -209,14 +210,14 @@ void VoiceAnalyser::DrawAnalysis ( Button *button, bool highlighted, bool clicke
 		float r = 0.7f - ((float) thistask->sample[i] / 40.0f);		
 		float b = (float) thistask->sample[i] / 40.0f;
 
-		glColor4f ( r, 0.1f, b, 1.0f );
-		glVertex2i ( x, y );
+		UplinkDraw::color4f ( r, 0.1f, b, 1.0f );
+		UplinkDraw::vertex2i ( x, y );
 
 	}
 
-	glEnd ();
+	UplinkDraw::end ();
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 	border_draw ( button );
 
 }
@@ -224,14 +225,14 @@ void VoiceAnalyser::DrawAnalysis ( Button *button, bool highlighted, bool clicke
 void VoiceAnalyser::MainTextDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );		
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x, button->y );
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 
 	text_draw ( button, highlighted, clicked );

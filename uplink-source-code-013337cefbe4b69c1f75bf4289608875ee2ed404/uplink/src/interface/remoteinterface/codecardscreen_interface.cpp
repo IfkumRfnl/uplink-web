@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -181,7 +182,7 @@ void CodeCardScreenInterface::CodeButtonDraw ( Button *button, bool highlighted,
 {
 
     textbutton_draw ( button, highlighted, clicked );
-    glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+    UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
     border_draw ( button );
 
 }

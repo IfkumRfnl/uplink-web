@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -72,14 +73,14 @@ void ChangeGatewayScreenInterface::GatewayButtonDraw ( Button *button, bool high
 
 //	if ( index == thisint->currentselect ) {
 //
-//		glBegin ( GL_QUADS );
-//			glColor4f ( 0.6f, 0.6f, 0.6f, ALPHA );		glVertex2i ( button->x, button->y );
-//			glColor4f ( 0.4f, 0.4f, 0.4f, ALPHA );		glVertex2i ( button->x + button->width, button->y );
-//			glColor4f ( 0.6f, 0.6f, 0.6f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height );
-//			glColor4f ( 0.4f, 0.4f, 0.4f, ALPHA );		glVertex2i ( button->x, button->y + button->height );
-//		glEnd ();
+//		UplinkDraw::begin ( GL_QUADS );
+//			UplinkDraw::color4f ( 0.6f, 0.6f, 0.6f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y );
+//			UplinkDraw::color4f ( 0.4f, 0.4f, 0.4f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+//			UplinkDraw::color4f ( 0.6f, 0.6f, 0.6f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+//			UplinkDraw::color4f ( 0.4f, 0.4f, 0.4f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+//		UplinkDraw::end ();
 //
-//  	glColor3ub ( 81, 138, 215 );
+//  	UplinkDraw::color3ub ( 81, 138, 215 );
 //	    border_draw ( button );
 //
 //	}
@@ -87,22 +88,22 @@ void ChangeGatewayScreenInterface::GatewayButtonDraw ( Button *button, bool high
 
 		if ( index % 2 == 0 ) {
 
-			glBegin ( GL_QUADS );
-				SetColour ( "DarkPanelA" );     glVertex2i ( button->x, button->y + button->height );
-				SetColour ( "DarkPanelB" );     glVertex2i ( button->x, button->y );
-				SetColour ( "DarkPanelA" );     glVertex2i ( button->x + button->width, button->y );
-				SetColour ( "DarkPanelB" );     glVertex2i ( button->x + button->width, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x, button->y + button->height );
+				SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x, button->y );
+				SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 		else {
 
-			glBegin ( GL_QUADS );
-				SetColour ( "DarkPanelB" );     glVertex2i ( button->x, button->y + button->height );
-				SetColour ( "DarkPanelA" );     glVertex2i ( button->x, button->y );
-				SetColour ( "DarkPanelB" );     glVertex2i ( button->x + button->width, button->y );
-				SetColour ( "DarkPanelA" );     glVertex2i ( button->x + button->width, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x, button->y + button->height );
+				SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x, button->y );
+				SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 
@@ -281,12 +282,12 @@ void ChangeGatewayScreenInterface::GatewayPictureDraw ( Button *button, bool hig
 	ChangeGatewayScreenInterface *thisint = (ChangeGatewayScreenInterface *) game->GetInterface ()->GetRemoteInterface ()->GetInterfaceScreen ();
 	UplinkAssert (thisint);
 
-    glColor3f ( 1.0f, 1.0f, 1.0f );
+    UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
     border_draw ( button );
 
 #ifdef DEMOGAME
     if ( thisint->currentselect > DEMO_MAXGATEWAY ) {
-        glColor3f ( 1.0f, 1.0f, 1.0f );
+        UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
         GciDrawText ( button->x + 50, button->y + button->height/2, "NOT AVAILABLE IN DEMO" );
     }
 #endif

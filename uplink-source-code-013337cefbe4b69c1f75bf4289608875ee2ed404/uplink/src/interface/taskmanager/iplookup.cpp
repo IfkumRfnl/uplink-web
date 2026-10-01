@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -31,12 +32,12 @@ void IPLookup::DisplayDraw ( Button *button, bool highlighted, bool clicked )
 
 	// Draw a grey background
 
-	glBegin ( GL_QUADS );
-		glColor4f ( 0.6f, 0.6f, 0.6f, ALPHA );		glVertex2i ( button->x, button->y );
-		glColor4f ( 0.4f, 0.4f, 0.4f, ALPHA );		glVertex2i ( button->x + button->width, button->y );
-		glColor4f ( 0.6f, 0.6f, 0.6f, ALPHA );		glVertex2i ( button->x + button->width, button->y + button->height );
-		glColor4f ( 0.4f, 0.4f, 0.4f, ALPHA );		glVertex2i ( button->x, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		UplinkDraw::color4f ( 0.6f, 0.6f, 0.6f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color4f ( 0.4f, 0.4f, 0.4f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color4f ( 0.6f, 0.6f, 0.6f, ALPHA );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::color4f ( 0.4f, 0.4f, 0.4f, ALPHA );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+	UplinkDraw::end ();
 
 	// Draw ordinary text
 

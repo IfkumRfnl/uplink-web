@@ -1,15 +1,37 @@
-# Browser Image renderer
+# Browser renderer
 
-Only `__EMSCRIPTEN__` branches in the original `lib/gucci/image.cpp` were changed. Native libtiff loading, GLU scaling, and glDrawPixels drawing remain intact.
+`port/webgl-renderer.cpp` draws the original C++ game with one authored GLES2/WebGL 1 shader, an interleaved vertex buffer and explicit state. `lib/gucci/uplink_draw.h` routes browser submissions to it and retains direct OpenGL aliases for native builds. Gameplay, authentication, FTGL glyph metrics and game scheduling are unchanged. Neither browser bundle links legacy immediate-mode emulation.
 
-- `Image::LoadTIF(name)` loads `name + ".rgba"`: two little-endian unsigned 32-bit dimensions followed by tightly packed bottom-up RGBA8 pixels. Missing, truncated, zero-sized, or overflowing image dimensions produce the existing error bitmap.
-- Browser scaling is CPU bilinear interpolation at pixel centers. Nonpositive or overflowing requested dimensions are ignored.
-- `Draw` and `DrawBlend` upload RGBA8 to a temporary texture and draw an immediate-mode quad under Emscripten legacy GL emulation. Top vertices use texture v=1; bottom vertices v=0. This matches the game's top-left coordinates and TIFF's bottom-up source scanlines.
-- Texture filtering is nearest for exact pixel blits, with clamp-to-edge for NPOT WebGL textures. Blended draws retain the original SRC_ALPHA / ONE_MINUS_SRC_ALPHA behavior.
-- GL_REPLACE avoids tinting images with the current drawing color and leaves that color untouched. The helper restores active texture unit, unit-0 texture binding/environment/enable, unpack alignment, culling, blend enable, and separate RGB/alpha blend factors.
-- Emscripten's `glIsEnabled(GL_TEXTURE_2D)` does not query its emulated enable state. A small EM_ASM_INT query uses `GLImmediate.TexEnvJIT.getTexUnitType(0)` from the installed toolchain instead. Link with `-sLEGACY_GL_EMULATION=1`.
-- Temporary texture uploads ensure changes from SetAlpha, flips, and scaling are immediately reflected without changing the Image class layout. A persistent invalidated texture cache would be a future performance optimization.
+## Design
 
-## Verification
+WebGL 1 covers the game's actual 2D requirements without introducing a WebGL 2-only dependency. There is no client-array emulation or fixed-function shader generator. See [Emscripten's supported modes](https://emscripten.org/docs/porting/multimedia_and_graphics/OpenGL-support.html).
 
-Compiled `image.cpp` successfully with the installed Emscripten toolchain. A standalone Node-hosted WebAssembly test also passed actual RGBA loading, bottom-up source pixel order, a 2x2-to-3x3 bilinear center value of 128 for RGB, nonpositive-scale rejection, and missing-file fallback. Browser visual verification remains the parent prototype's integration step.
+- Quads become triangles. Each vertex carries transformed clip coordinates, UVs and RGBA8 colour, preserving sparse colour changes such as Memory Banks gradients. Compatible adjacent triangles and independent lines batch together; strips/loops flush separately and retain ordering.
+- CPU model/projection stacks implement ortho, translate and scale. Explicit state handles texture REPLACE/MODULATE, blending, scissor clipping, depth/cull enable, line width and UI save/restore. State changes, presentation and texture mutations flush pending geometry.
+- Original FTGL atlases and Image RGBA uploads keep their nearest sampling and existing metrics/scaling/alpha behavior. Live textures retain CPU pixels and sampler parameters; deletion releases them. Context recovery rebuilds textures, shader and buffer without reloading game/save state.
+
+The previous browser's solid rendering of stippled lines is retained. Unused native lighting/fog/alpha-test initialization remains a browser no-op. Context recovery adds CPU texture backing memory, which has not been benchmarked.
+
+## Regression checks
+
+- `npm test`: compiled JS/Wasm contain direct WebGL draws and authored shaders, with no legacy bindings or warning text. Image and task-label checks retain their original behavior assertions.
+- `npm run test:browser-renderer-probe`: real pixel readback for sparse gradients, quads/triangles, transforms, clipping/state restoration, textures/blending and independent lines; the same assertions run after each of two forced context restorations.
+- `npm run test:browser-renderer`: original game login/registration, gateway, desktop/map, Memory Banks, software/File Copier, mission details, all three tutorial screens, audio, context recovery and real profile save/password reload. A QA-only helper fixes random map-label placement. Its bundle and captures stay under ignored `qa/renderer/`; production outputs are untouched.
+
+CI runs these and the existing storage/lifecycle/display/Pages-subpath checks. Generated screenshots, results and logs are CI artifacts retained for three days, rather than checked-in output. The full-screen test captures evidence; it is not a completed tutorial/mission or campaign replay.
+
+For baseline comparisons, build main `dbb5cd0` with the same SDK in a detached worktree, then run `bash port/tests/build-game-renderer-qa.sh /path/to/worktree`. The helper isolates the older link script's QA output too; copy its `qa/renderer/game.{js,wasm,data}` files to this checkout's `qa/baseline/`; run `QA_RENDERER_PHASE=baseline node port/tests/browser-renderer.cjs`, then the candidate test. `python3 port/tests/compare-renderer.py` (Pillow) writes paired screenshots and comparisons to `qa/renderer-comparison/`.
+
+## Initial migration measurements
+
+Emscripten 6.0.10, Chromium 151 on Debian 13 with SwiftShader, matching viewport/DPR and sequential three-second samples. These are software-rendered callback measurements including original synchronization, not hardware GPU predictions.
+
+| Scene | Draws/frame before → after | Callback median ms before → after |
+| --- | ---: | ---: |
+| Desktop | 622 → 76 | 29.6 → 0.8 |
+| Map | 769 → 99 | 34.0 → 0.9 |
+| Memory Banks | 801 → 138 | 41.3 → 1.1 |
+
+Expanded triangles increase vertex uploads: 66,112→104,384 / 81,952→128,744 / 85,200→134,344 bytes/frame respectively. Production JS shrank 594,637→420,539 bytes (gzip 138,742→107,392); Wasm grew 2,395,842→2,413,470 (gzip 761,267→768,029); 41,256,391 bytes of data were unchanged.
+
+All 16 original comparisons had identical stable pixels, including context recovery. Only changing HUD `[0,0,444,50)` and footer `[0,748,1024,768)` rectangles were excluded; full frames and unmasked difference counts are preserved by the comparison tool. Login, registration, gateway and password-login frames were wholly identical. Firefox/Safari/mobile, hardware GPUs, native compilation and complete campaign replay remain untested.

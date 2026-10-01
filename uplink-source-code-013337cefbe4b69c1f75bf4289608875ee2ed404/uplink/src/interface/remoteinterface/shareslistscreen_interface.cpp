@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -93,26 +94,26 @@ void SharesListScreenInterface::ShareDraw ( Button *button, bool highlighted, bo
 
 		if ( shareindex % 2 == 0 ) {
 
-			glBegin ( GL_QUADS );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x, button->y );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x + button->width, button->y + button->height );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x, button->y );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 		else {
 
-			glBegin ( GL_QUADS );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x + button->width, button->y );
-				glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y + button->height );
-				glColor3ub ( 8, 20, 80 );		glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::color3ub ( 8, 20, 80 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
 		char currentprice [16];
 		UplinkSnprintf ( currentprice, sizeof ( currentprice ), "%d c", company->GetSharePrice () );
@@ -135,14 +136,14 @@ void SharesListScreenInterface::ShareDraw ( Button *button, bool highlighted, bo
 		GciDrawText ( button->x + 20, button->y + 10, company->name );
 		GciDrawText ( button->x + 200, button->y + 10, currentprice );
 
-		if ( company->GetShareChange () < 0 ) glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+		if ( company->GetShareChange () < 0 ) UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
 		GciDrawText ( button->x + 300, button->y + 10, changeinprice );
 
 		// Draw a bounding box
 
 		if ( highlighted ) {
 
-			glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+			UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 			border_draw ( button );
 
 		}
@@ -196,7 +197,7 @@ void SharesListScreenInterface::FilterDraw ( Button *button, bool highlighted, b
 
 	textbutton_draw ( button, highlighted, clicked );
 
-	glColor3f ( 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
 	border_draw ( button );
 
 }

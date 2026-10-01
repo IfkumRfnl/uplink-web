@@ -11,6 +11,6 @@ cp "$SRC"/src/*.cpp "$BUILD/src/"
 python3 "$ROOT/port/patch-ftgl.py"
 # Only texture font and common core; polygon paths need GLU tessellation.
 for UNIT in FTCharmap FTGlyphContainer FTGlyph FTTextureGlyph FTGLTextureFont FTPoint FTFont FTSize FTLibrary FTFace; do
- "$EM/em++" -std=gnu++98 -O1 -sUSE_FREETYPE=1 -I"$BUILD/include/ftgl" -c "$BUILD/src/$UNIT.cpp" -o "$BUILD/obj/$UNIT.o"
+ "$EM/em++" -std=gnu++98 -O1 -sUSE_FREETYPE=1 -I"$BUILD/include/ftgl" -I"$SRC/../../lib/gucci" -c "$BUILD/src/$UNIT.cpp" -o "$BUILD/obj/$UNIT.o"
 done
 "$EM/emar" rcs "$BUILD/libftgl.a" "$BUILD"/obj/*.o

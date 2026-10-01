@@ -35,6 +35,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Test browser platform and storage
         run: |
+          npm run test:browser-renderer-probe
+          npm run test:browser-renderer
           npm run test:browser-harness
           npm run test:browser-storage
           npm run test:browser-lifecycle
@@ -46,8 +48,11 @@ jobs:
         if: always()
         with:
           name: browser-qa
-          path: qa/
-          retention-days: 7
+          path: |
+            qa/**/*.png
+            qa/**/*.json
+            qa/**/*.log
+          retention-days: 3
       - uses: actions/configure-pages@v5
         if: github.event_name != 'pull_request'
       - uses: actions/upload-pages-artifact@v4

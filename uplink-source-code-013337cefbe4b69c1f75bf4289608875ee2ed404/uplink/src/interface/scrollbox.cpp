@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 
 #include "stdafx.h"
 
@@ -94,12 +95,12 @@ void ScrollBox::DrawScrollBar ( Button *button, bool highlighted, bool clicked )
     //
     // Draw the background
 
-	glBegin ( GL_QUADS );		
-		SetColour ( "PanelBackgroundA" );       glVertex2i ( button->x, button->y + button->height );
-		SetColour ( "PanelBackgroundB" );       glVertex2i ( button->x, button->y );
-		SetColour ( "PanelBackgroundA" );       glVertex2i ( button->x + button->width, button->y );
-		SetColour ( "PanelBackgroundB" );       glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		SetColour ( "PanelBackgroundA" );       UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		SetColour ( "PanelBackgroundB" );       UplinkDraw::vertex2i ( button->x, button->y );
+		SetColour ( "PanelBackgroundA" );       UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour ( "PanelBackgroundB" );       UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
     //
     // Draw the selecter, when the crowd say bo
@@ -117,12 +118,12 @@ void ScrollBox::DrawScrollBar ( Button *button, bool highlighted, bool clicked )
         int h = (int) ( ((float) thisBox->windowSize / (float) thisBox->numItems) * (thisBox->h - 30) );
         if ( h > button->height ) h = button->height;
 
-	    glBegin ( GL_QUADS );
-		    SetColour ( "ButtonNormalA" );          glVertex2i ( x, y + h );
-		    SetColour ( "ButtonNormalB" );          glVertex2i ( x, y );
-		    SetColour ( "ButtonNormalA" );          glVertex2i ( x + w, y );
-            SetColour ( "ButtonNormalB" );          glVertex2i ( x + w, y + h );
-	    glEnd ();
+	    UplinkDraw::begin ( GL_QUADS );
+		    SetColour ( "ButtonNormalA" );          UplinkDraw::vertex2i ( x, y + h );
+		    SetColour ( "ButtonNormalB" );          UplinkDraw::vertex2i ( x, y );
+		    SetColour ( "ButtonNormalA" );          UplinkDraw::vertex2i ( x + w, y );
+            SetColour ( "ButtonNormalB" );          UplinkDraw::vertex2i ( x + w, y + h );
+	    UplinkDraw::end ();
 
     }
 

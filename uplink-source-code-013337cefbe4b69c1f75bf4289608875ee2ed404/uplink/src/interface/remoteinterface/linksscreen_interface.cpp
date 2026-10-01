@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -171,22 +172,22 @@ void LinksScreenInterface::LinkDraw ( Button *button, bool highlighted, bool cli
 
 		if ( linkindex % 2 == 0 ) {
 
-			glBegin ( GL_QUADS );
-				SetColour ( "DarkPanelB" );   glVertex2i ( button->x, button->y );
-				SetColour ( "DarkPanelA" );   glVertex2i ( button->x + button->width, button->y );
-				SetColour ( "DarkPanelB" );   glVertex2i ( button->x + button->width, button->y + button->height );
-				SetColour ( "DarkPanelA" );   glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				SetColour ( "DarkPanelB" );   UplinkDraw::vertex2i ( button->x, button->y );
+				SetColour ( "DarkPanelA" );   UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				SetColour ( "DarkPanelB" );   UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				SetColour ( "DarkPanelA" );   UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 		else {
 
-			glBegin ( GL_QUADS );
-				SetColour ( "DarkPanelA" );   glVertex2i ( button->x, button->y );
-				SetColour ( "DarkPanelB" );   glVertex2i ( button->x + button->width, button->y );
-				SetColour ( "DarkPanelA" );   glVertex2i ( button->x + button->width, button->y + button->height );
-				SetColour ( "DarkPanelB" );   glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				SetColour ( "DarkPanelA" );   UplinkDraw::vertex2i ( button->x, button->y );
+				SetColour ( "DarkPanelB" );   UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				SetColour ( "DarkPanelA" );   UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				SetColour ( "DarkPanelB" );   UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 
@@ -480,7 +481,7 @@ void LinksScreenInterface::FilterDraw ( Button *button, bool highlighted, bool c
 
 	textbutton_draw ( button, highlighted, clicked );
 
-	glColor3f ( 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
 	border_draw ( button );
 
 }

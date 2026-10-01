@@ -18,7 +18,9 @@
     "test:browser-storage": "node port/tests/browser-storage.cjs",
     "prepare:pages": "python3 port/prepare-pages.py",
     "test:pages": "node port/tests/browser-pages.cjs",
-    "test:browser-display": "node port/tests/browser-display.cjs"
+    "test:browser-display": "node port/tests/browser-display.cjs",
+    "test:browser-renderer-probe": "bash port/tests/build-renderer-probe.sh && node port/tests/browser-renderer-probe.cjs",
+    "test:browser-renderer": "bash port/tests/build-game-renderer-qa.sh && node port/tests/browser-renderer.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

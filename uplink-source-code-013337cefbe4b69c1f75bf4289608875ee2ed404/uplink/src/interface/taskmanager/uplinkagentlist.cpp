@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -83,22 +84,22 @@ void UplinkAgentList::UplinkAgentListDraw ( Button *button, bool highlighted, bo
     //
     // Draw the background
 
-	glBegin ( GL_QUADS );		
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x, button->y + button->height );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x, button->y );
-		glColor3ub ( 8, 20, 0 );		glVertex2i ( button->x + button->width, button->y );
-		glColor3ub ( 8, 20, 124 );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 
 
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 
     //
@@ -117,19 +118,19 @@ void UplinkAgentList::UplinkAgentListDraw ( Button *button, bool highlighted, bo
             UplinkAssert (handle);
             UplinkAssert (name);
             
-            glColor3f ( 1.0f, 1.0f, 1.0f );
+            UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
             GciDrawText ( button->x + 10, button->y + 15 + i * 20, handle );
         
-            if      ( strcmp ( name, "Unknown" ) == 0 )     glColor3f ( 0.5f, 0.0f, 0.0f );
-            else if ( strcmp ( name, "Encrypted" ) == 0 )   glColor3f ( 0.8f, 0.0f, 0.0f );
-            else                                            glColor3f ( 1.0f, 0.0f, 0.0f );
+            if      ( strcmp ( name, "Unknown" ) == 0 )     UplinkDraw::color3f ( 0.5f, 0.0f, 0.0f );
+            else if ( strcmp ( name, "Encrypted" ) == 0 )   UplinkDraw::color3f ( 0.8f, 0.0f, 0.0f );
+            else                                            UplinkDraw::color3f ( 1.0f, 0.0f, 0.0f );
             GciDrawText ( button->x + 100, button->y + 15 + i * 20, name );
 
         }
 
     }
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

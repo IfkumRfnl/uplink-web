@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -97,8 +98,8 @@ void EventQueueInterface::EventDraw ( Button *button, bool highlighted, bool cli
 		button_draw ( button, highlighted, clicked );
 
 		int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-		glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-		glEnable ( GL_SCISSOR_TEST );
+		UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+		UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 		// Print the date
 
@@ -111,7 +112,7 @@ void EventQueueInterface::EventDraw ( Button *button, bool highlighted, bool cli
 		GciDrawText ( button->x + 5, button->y + 24, shortdesc, HELVETICA_10 );
 		delete [] shortdesc;
 
-		glDisable ( GL_SCISSOR_TEST );
+		UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 	}
 	else {

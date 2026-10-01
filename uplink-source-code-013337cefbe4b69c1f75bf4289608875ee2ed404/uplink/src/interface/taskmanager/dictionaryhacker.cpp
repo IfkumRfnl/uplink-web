@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -183,14 +184,14 @@ void DictionaryHacker::DictionaryHackerDraw ( Button *button, bool highlighted, 
 	
 	//textbutton_draw ( button, highlighted, clicked );
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glColor3ub ( 0,  14,  59  );			glVertex2i ( button->x, button->y );
-		glColor3ub ( 36, 72,  146 );			glVertex2i ( button->x + button->width, button->y );
-		glColor3ub ( 82, 134, 206 );			glVertex2i ( button->x + button->width, button->y + button->height );
-		glColor3ub ( 73, 122, 194 );			glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::color3ub ( 0,  14,  59  );			UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::color3ub ( 36, 72,  146 );			UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::color3ub ( 82, 134, 206 );			UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+		UplinkDraw::color3ub ( 73, 122, 194 );			UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	text_draw ( button, highlighted, clicked );
 

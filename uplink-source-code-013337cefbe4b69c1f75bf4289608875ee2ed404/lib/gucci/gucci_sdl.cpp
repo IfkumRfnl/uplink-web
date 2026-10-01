@@ -1,3 +1,4 @@
+#include "uplink_draw.h"
 #ifdef USE_SDL
 
 #ifdef WIN32
@@ -271,6 +272,9 @@ bool GciLayerDamaged()
 
 void GciSwapBuffers()
 {
+#ifdef __EMSCRIPTEN__
+  UplinkDraw::flush();
+#endif
   SDL_GL_SwapBuffers();
   displayDamaged = false;
 }

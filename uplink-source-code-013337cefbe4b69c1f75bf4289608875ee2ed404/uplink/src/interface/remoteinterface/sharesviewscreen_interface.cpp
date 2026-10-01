@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -68,17 +69,17 @@ void SharesViewScreenInterface::DrawPriceGraph ( Button *button, bool highlighte
 
 		// Draw the axis
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-		glBegin ( GL_LINES );
+		UplinkDraw::begin ( GL_LINES );
 			
-			glVertex2d ( button->x + 25, button->y + button->height - 40 );						// vertical
-			glVertex2d ( button->x + 25, button->y + button->height - 190 );					// price
+			UplinkDraw::vertex2d ( button->x + 25, button->y + button->height - 40 );						// vertical
+			UplinkDraw::vertex2d ( button->x + 25, button->y + button->height - 190 );					// price
 
-			glVertex2d ( button->x + 25, button->y + button->height - 40 );						// Horizontal
-			glVertex2d ( button->x + 190, button->y + button->height - 40 );					// time
+			UplinkDraw::vertex2d ( button->x + 25, button->y + button->height - 40 );						// Horizontal
+			UplinkDraw::vertex2d ( button->x + 190, button->y + button->height - 40 );					// time
 				
-		glEnd ();
+		UplinkDraw::end ();
 
 		GciDrawText ( 37, button->y + button->height - 40, "0" );
 		GciDrawText ( 32, button->y + button->height - 190, "150" );
@@ -89,10 +90,10 @@ void SharesViewScreenInterface::DrawPriceGraph ( Button *button, bool highlighte
 		int monthnow = thisint->lastmonthset;
 		int yearnow = game->GetWorld ()->date.GetYear ();
 
-		glColor4f ( 0.2f, 0.2f, 1.0f, 1.0f );
-		glLineWidth ( 2 );
+		UplinkDraw::color4f ( 0.2f, 0.2f, 1.0f, 1.0f );
+		UplinkDraw::lineWidth ( 2 );
 
-		glBegin ( GL_LINE_STRIP );
+		UplinkDraw::begin ( GL_LINE_STRIP );
 
 		for ( int it = 0; it < 12; ++it ) {
 
@@ -103,12 +104,12 @@ void SharesViewScreenInterface::DrawPriceGraph ( Button *button, bool highlighte
 			UplinkSnprintf ( date, sizeof ( date ), "%s, %d", Date::GetMonthName ( month + 1 ), month > monthnow ? yearnow - 1 : yearnow );
 
 			int value = thisint->sharehistory [month];			
-			glVertex2d ( button->x + 190 - ( it * 15 ), button->y + button->height - 40 - value );
+			UplinkDraw::vertex2d ( button->x + 190 - ( it * 15 ), button->y + button->height - 40 - value );
 					
 		}
 
-		glEnd ();
-		glLineWidth ( 1 );
+		UplinkDraw::end ();
+		UplinkDraw::lineWidth ( 1 );
 
 	}
 

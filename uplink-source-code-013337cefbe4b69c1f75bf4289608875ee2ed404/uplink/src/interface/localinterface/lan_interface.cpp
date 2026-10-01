@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -106,11 +107,11 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
     clear_draw ( button->x, button->y, button->width, button->height );
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 
 
@@ -128,7 +129,7 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 
     if ( comp->TYPE != COMPUTER_TYPE_LAN ) {
 
-        glColor3f ( 1.0f, 1.0f, 1.0f );
+        UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
         char message[] = "No Local Area Network (LAN) detected.";
         GciDrawText ( (background->x + background->width / 2) - (GciTextWidth(message) / 2), 
                       background->y + background->height / 2, message );
@@ -155,20 +156,20 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 		int width = intObj->width;
 		int height = intObj->height;
     
-        glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f ); 
-        glLineWidth ( 2 );
-		glLineStipple ( 2, stipplepattern );
-		glEnable ( GL_LINE_STIPPLE );
+        UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f ); 
+        UplinkDraw::lineWidth ( 2 );
+		UplinkDraw::lineStipple ( 2, stipplepattern );
+		UplinkDraw::enable ( GL_LINE_STIPPLE );
 
-		glBegin ( GL_LINE_LOOP );
-			glVertex2i ( x - 4, y - 4 );
-			glVertex2i ( x + width + 4, y - 4 );
-			glVertex2i ( x + width + 4, y + height + 4 );
-			glVertex2i ( x - 4, y + height + 4 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_LOOP );
+			UplinkDraw::vertex2i ( x - 4, y - 4 );
+			UplinkDraw::vertex2i ( x + width + 4, y - 4 );
+			UplinkDraw::vertex2i ( x + width + 4, y + height + 4 );
+			UplinkDraw::vertex2i ( x - 4, y + height + 4 );
+		UplinkDraw::end ();
 
-		glLineWidth ( 1 );
-		glDisable ( GL_LINE_STIPPLE );
+		UplinkDraw::lineWidth ( 1 );
+		UplinkDraw::disable ( GL_LINE_STIPPLE );
 
 	}
 
@@ -188,31 +189,31 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 		int width = intObj->width;
 		int height = intObj->height;
 
-		glColor4f ( 0.7f, 0.7f, 1.0f, 1.0f );
+		UplinkDraw::color4f ( 0.7f, 0.7f, 1.0f, 1.0f );
 
-		glBegin ( GL_LINE_LOOP );
-			glVertex2i ( x - 5, y - 5 );
-			glVertex2i ( x + width + 5, y - 5 );
-			glVertex2i ( x + width + 5, y + height + 5 );
-			glVertex2i ( x - 5, y + height + 5 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_LOOP );
+			UplinkDraw::vertex2i ( x - 5, y - 5 );
+			UplinkDraw::vertex2i ( x + width + 5, y - 5 );
+			UplinkDraw::vertex2i ( x + width + 5, y + height + 5 );
+			UplinkDraw::vertex2i ( x - 5, y + height + 5 );
+		UplinkDraw::end ();
 
-		glBegin ( GL_LINE_LOOP );
-			glVertex2i ( x - 3, y - 3 );
-			glVertex2i ( x + width + 3, y - 3 );
-			glVertex2i ( x + width + 3, y + height + 3 );
-			glVertex2i ( x - 3, y + height + 3 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_LOOP );
+			UplinkDraw::vertex2i ( x - 3, y - 3 );
+			UplinkDraw::vertex2i ( x + width + 3, y - 3 );
+			UplinkDraw::vertex2i ( x + width + 3, y + height + 3 );
+			UplinkDraw::vertex2i ( x - 3, y + height + 3 );
+		UplinkDraw::end ();
 
-		glDisable ( GL_LINE_STIPPLE );
+		UplinkDraw::disable ( GL_LINE_STIPPLE );
 
 	}
 
 	//
 	// Draw connecting lines
 
-    glLineWidth ( 2.0f );
-    glColor4f ( 0.0f, 0.5f, 0.6f, 1.0f );   
+    UplinkDraw::lineWidth ( 2.0f );
+    UplinkDraw::color4f ( 0.0f, 0.5f, 0.6f, 1.0f );   
 
     for ( int i = 0; i < lanComp->links.Size(); ++i ) {
         if ( lanComp->links.ValidIndex(i) ) {
@@ -248,12 +249,12 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 				if ( link->visible == LANLINKVISIBLE_FROMAWARE ||
 					 link->visible >= LANLINKVISIBLE_AWARE ) {
 
-					glBegin ( GL_QUADS );
-						glVertex2i ( fromX - 2, fromY - 2 );
-						glVertex2i ( fromX + 2, fromY - 2 );
-						glVertex2i ( fromX + 2, fromY + 2 );
-						glVertex2i ( fromX - 2, fromY + 2 );
-					glEnd ();
+					UplinkDraw::begin ( GL_QUADS );
+						UplinkDraw::vertex2i ( fromX - 2, fromY - 2 );
+						UplinkDraw::vertex2i ( fromX + 2, fromY - 2 );
+						UplinkDraw::vertex2i ( fromX + 2, fromY + 2 );
+						UplinkDraw::vertex2i ( fromX - 2, fromY + 2 );
+					UplinkDraw::end ();
 
 				}
 
@@ -263,12 +264,12 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 				if ( link->visible == LANLINKVISIBLE_TOAWARE ||
 					 link->visible >= LANLINKVISIBLE_AWARE ) {
 
-					glBegin ( GL_QUADS );
-						glVertex2i ( toX - 2, toY - 2 );
-						glVertex2i ( toX + 2, toY - 2 );
-						glVertex2i ( toX + 2, toY + 2 );
-						glVertex2i ( toX - 2, toY + 2 );
-					glEnd ();
+					UplinkDraw::begin ( GL_QUADS );
+						UplinkDraw::vertex2i ( toX - 2, toY - 2 );
+						UplinkDraw::vertex2i ( toX + 2, toY - 2 );
+						UplinkDraw::vertex2i ( toX + 2, toY + 2 );
+						UplinkDraw::vertex2i ( toX - 2, toY + 2 );
+					UplinkDraw::end ();
 
 				}
 
@@ -277,9 +278,9 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 
 				if ( link->visible >= LANLINKVISIBLE_AWARE ) {
 
-                    glLineWidth ( 2.0 );
+                    UplinkDraw::lineWidth ( 2.0 );
 					DrawLink ( link, (float) fromX, (float) fromY, (float) toX, (float) toY );
-                    glLineWidth ( 1.0 );
+                    UplinkDraw::lineWidth ( 1.0 );
 
                     int toIndex = LanMonitor::GetNodeIndex( link->to );
                     int fromIndex = LanMonitor::GetNodeIndex( link->from );
@@ -288,26 +289,26 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 					if ( toIndex != -1 && fromIndex != -1 && 
                          ( toIndex == fromIndex - 1 || fromIndex == toIndex - 1 ) ) {
 												
-						glEnable ( GL_LINE_STIPPLE );
-                        glLineStipple ( 2, stipplepattern );
+						UplinkDraw::enable ( GL_LINE_STIPPLE );
+                        UplinkDraw::lineStipple ( 2, stipplepattern );
                         
-                        glColor4f ( 0.3f, 0.3f, 0.9f, 1.0f );
-                        glLineWidth ( 4.0 );
+                        UplinkDraw::color4f ( 0.3f, 0.3f, 0.9f, 1.0f );
+                        UplinkDraw::lineWidth ( 4.0 );
                         DrawLink ( link, (float) fromX, (float) fromY, (float) toX, (float) toY );
                         
                         if ( ( sysAdminIndex >= toIndex && toIndex >= fromIndex ) ||
                              ( sysAdminIndex >= fromIndex && fromIndex >= toIndex ) )
-                            glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+                            UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
 
                         else
-                            glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );                           
+                            UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );                           
 
-                        glLineWidth ( 2.0 );
+                        UplinkDraw::lineWidth ( 2.0 );
                         DrawLink ( link, (float) fromX, (float) fromY, (float) toX, (float) toY );
                         
-                        glColor4f ( 0.0f, 0.5f, 0.6f, 1.0f );   
-		                glDisable ( GL_LINE_STIPPLE );
-                        glLineWidth ( 1.0 );
+                        UplinkDraw::color4f ( 0.0f, 0.5f, 0.6f, 1.0f );   
+		                UplinkDraw::disable ( GL_LINE_STIPPLE );
+                        UplinkDraw::lineWidth ( 1.0 );
 
 					}
 						
@@ -343,20 +344,20 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 		    int width = intObj->width;
 		    int height = intObj->height;
     
-            glColor4f ( 0.8f, 0.8f, 0.1f, 1.0f ); 
-            glLineWidth ( 1.0 );
-            glEnable ( GL_LINE_STIPPLE );
-            glLineStipple ( 1, stipplepattern );
+            UplinkDraw::color4f ( 0.8f, 0.8f, 0.1f, 1.0f ); 
+            UplinkDraw::lineWidth ( 1.0 );
+            UplinkDraw::enable ( GL_LINE_STIPPLE );
+            UplinkDraw::lineStipple ( 1, stipplepattern );
 
-		    glBegin ( GL_LINE_LOOP );
-			    glVertex2i ( x - 3, y - 3 );
-			    glVertex2i ( x + width + 3, y - 3 );
-			    glVertex2i ( x + width + 3, y + height + 3 );
-			    glVertex2i ( x - 3, y + height + 3 );
-		    glEnd ();
+		    UplinkDraw::begin ( GL_LINE_LOOP );
+			    UplinkDraw::vertex2i ( x - 3, y - 3 );
+			    UplinkDraw::vertex2i ( x + width + 3, y - 3 );
+			    UplinkDraw::vertex2i ( x + width + 3, y + height + 3 );
+			    UplinkDraw::vertex2i ( x - 3, y + height + 3 );
+		    UplinkDraw::end ();
 
-            glDisable ( GL_LINE_STIPPLE );
-            glLineWidth ( 1.0 );
+            UplinkDraw::disable ( GL_LINE_STIPPLE );
+            UplinkDraw::lineWidth ( 1.0 );
 
             GciDrawText ( x - 10, y + height + 15, lih->text );
 
@@ -364,7 +365,7 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 
     }
 
-    glLineWidth ( 1.0f );
+    UplinkDraw::lineWidth ( 1.0f );
 
     
     //
@@ -373,7 +374,7 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
     int xPos = button->x + 20;
     int yPos = button->y + button->height - 15;
     clear_draw ( xPos, yPos, 300, 14 );
-    glColor4f( 1.0f, 0.0f, 0.0f, 1.0f );
+    UplinkDraw::color4f( 1.0f, 0.0f, 0.0f, 1.0f );
 
     switch ( LanMonitor::sysAdminState )
     {
@@ -397,25 +398,25 @@ void LanInterface::LanBackgroundDraw ( Button *button, bool highlighted, bool cl
 		int width = intObj->width;
 		int height = intObj->height;
     
-        glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f ); 
-        glLineWidth ( 2 );
-		glLineStipple ( 2, stipplepattern );
-		glEnable ( GL_LINE_STIPPLE );
+        UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f ); 
+        UplinkDraw::lineWidth ( 2 );
+		UplinkDraw::lineStipple ( 2, stipplepattern );
+		UplinkDraw::enable ( GL_LINE_STIPPLE );
 
-		glBegin ( GL_LINE_LOOP );
-			glVertex2i ( x - 4, y - 4 );
-			glVertex2i ( x + width + 4, y - 4 );
-			glVertex2i ( x + width + 4, y + height + 4 );
-			glVertex2i ( x - 4, y + height + 4 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_LOOP );
+			UplinkDraw::vertex2i ( x - 4, y - 4 );
+			UplinkDraw::vertex2i ( x + width + 4, y - 4 );
+			UplinkDraw::vertex2i ( x + width + 4, y + height + 4 );
+			UplinkDraw::vertex2i ( x - 4, y + height + 4 );
+		UplinkDraw::end ();
 
-		glLineWidth ( 1 );
-		glDisable ( GL_LINE_STIPPLE );
+		UplinkDraw::lineWidth ( 1 );
+		UplinkDraw::disable ( GL_LINE_STIPPLE );
 
 	}
 
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -427,36 +428,36 @@ void LanInterface::DrawLink ( LanComputerLink *link,
     if ( (link->fromY == 1.0 && link->toY == 0.0) ||				  // Bottom to top
 		 (link->fromY == 0.0 && link->toY == 1.0) ) {                 // Top to bottom
 
-		glBegin ( GL_LINE_STRIP );
-			glVertex2f ( fromX, fromY );
+		UplinkDraw::begin ( GL_LINE_STRIP );
+			UplinkDraw::vertex2f ( fromX, fromY );
 			if ( fromX > toX ) {
-				glVertex2f ( fromX, fromY + (toY - fromY) * link->fromX );
-				glVertex2f ( toX, fromY + (toY - fromY) * link->fromX );
+				UplinkDraw::vertex2f ( fromX, fromY + (toY - fromY) * link->fromX );
+				UplinkDraw::vertex2f ( toX, fromY + (toY - fromY) * link->fromX );
 			}
 			else {
-				glVertex2f ( fromX, fromY + (toY - fromY) * (1.0f - link->fromX) );
-				glVertex2f ( toX, fromY + (toY - fromY) * (1.0f - link->fromX) );
+				UplinkDraw::vertex2f ( fromX, fromY + (toY - fromY) * (1.0f - link->fromX) );
+				UplinkDraw::vertex2f ( toX, fromY + (toY - fromY) * (1.0f - link->fromX) );
 			}
 
-			glVertex2f ( toX, toY );
-		glEnd ();
+			UplinkDraw::vertex2f ( toX, toY );
+		UplinkDraw::end ();
 
 	}
 	else if ( (link->fromX == 1.0 && link->toX == 0.0) ||               // Right to left
 			  (link->fromX == 0.0 && link->toX == 1.0) ) {				// Left to right
 
-		glBegin ( GL_LINE_STRIP );
-			glVertex2f ( fromX, fromY );
+		UplinkDraw::begin ( GL_LINE_STRIP );
+			UplinkDraw::vertex2f ( fromX, fromY );
             if ( fromY > toY ) {
-                glVertex2f ( fromX + (toX - fromX) * link->fromY, fromY );
-                glVertex2f ( fromX + (toX - fromX) * link->fromY, toY );
+                UplinkDraw::vertex2f ( fromX + (toX - fromX) * link->fromY, fromY );
+                UplinkDraw::vertex2f ( fromX + (toX - fromX) * link->fromY, toY );
             }
             else {
-                glVertex2f ( fromX + (toX - fromX) * (1.0f - link->fromY), fromY );
-                glVertex2f ( fromX + (toX - fromX) * (1.0f - link->fromY), toY );
+                UplinkDraw::vertex2f ( fromX + (toX - fromX) * (1.0f - link->fromY), fromY );
+                UplinkDraw::vertex2f ( fromX + (toX - fromX) * (1.0f - link->fromY), toY );
             }                
-			glVertex2f ( toX, toY );
-		glEnd ();
+			UplinkDraw::vertex2f ( toX, toY );
+		UplinkDraw::end ();
 
 	}
 	else if ( (link->fromY == 0 && link->toX == 0) ||				// Top to left
@@ -464,11 +465,11 @@ void LanInterface::DrawLink ( LanComputerLink *link,
 			  (link->fromY == 1 && link->toX == 0) ||				// Bottom to left
 			  (link->fromY == 0 && link->toX == 1) ) {				// Top to right
 
-		glBegin ( GL_LINE_STRIP );
-			glVertex2f ( fromX, fromY );
-			glVertex2f ( fromX, toY );
-			glVertex2f ( toX, toY );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_STRIP );
+			UplinkDraw::vertex2f ( fromX, fromY );
+			UplinkDraw::vertex2f ( fromX, toY );
+			UplinkDraw::vertex2f ( toX, toY );
+		UplinkDraw::end ();
 
 	}
 	else if ( (link->fromX == 1 && link->toY == 0) ||					// Right to top
@@ -476,20 +477,20 @@ void LanInterface::DrawLink ( LanComputerLink *link,
 			  (link->fromX == 0 && link->toY == 0) ||					// Left to top
 			  (link->fromX == 1 && link->toY == 1) ) {					// Right to bottom
 
-		glBegin ( GL_LINE_STRIP );
-			glVertex2f ( fromX, fromY );
-			glVertex2f ( toX, fromY );
-			glVertex2f ( toX, toY );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_STRIP );
+			UplinkDraw::vertex2f ( fromX, fromY );
+			UplinkDraw::vertex2f ( toX, fromY );
+			UplinkDraw::vertex2f ( toX, toY );
+		UplinkDraw::end ();
 
 	}
 	else {																// Fuck knows
 
-		glBegin ( GL_LINE_STRIP );
-			glVertex2f ( fromX, fromY );
-			glVertex2f ( toX, fromY );
-			glVertex2f ( toX, toY );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_STRIP );
+			UplinkDraw::vertex2f ( fromX, fromY );
+			UplinkDraw::vertex2f ( toX, fromY );
+			UplinkDraw::vertex2f ( toX, toY );
+		UplinkDraw::end ();
 
 	}
 
@@ -505,8 +506,8 @@ void LanInterface::LanSystemDraw ( Button *button, bool highlighted, bool clicke
     Button *background = EclGetButton ( "lan_background" );
     UplinkAssert (background);
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( background->x, screenheight - (background->y + background->height), background->width - 2, background->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( background->x, screenheight - (background->y + background->height), background->width - 2, background->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 
     //
@@ -540,7 +541,7 @@ void LanInterface::LanSystemDraw ( Button *button, bool highlighted, bool clicke
         case LANSYSTEMVISIBLE_AWARE:
 
             clear_draw ( button->x, button->y, button->width, button->height );
-            glColor3ub ( 187, 207, 247 );
+            UplinkDraw::color3ub ( 187, 207, 247 );
             border_draw ( button );
             break;
 
@@ -556,7 +557,7 @@ void LanInterface::LanSystemDraw ( Button *button, bool highlighted, bool clicke
     //
     // Un scissor
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -841,14 +842,14 @@ void LanInterface::TitleDraw ( Button *button, bool highlighted, bool clicked )
 void LanInterface::PanelBackgroundDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-    glColor4f ( 0.0f, 0.0f, 0.0f, 1.0f );
+    UplinkDraw::color4f ( 0.0f, 0.0f, 0.0f, 1.0f );
 
-	glBegin ( GL_QUADS );		
-		glVertex2i ( button->x, button->y + button->height );
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width, button->y );
-		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour ( "PanelBorder" );
 	border_draw ( button );

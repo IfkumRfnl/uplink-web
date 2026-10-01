@@ -62,6 +62,8 @@ Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET
 
 ## Browser adaptations
 
+The browser uses a WebGL 1 shader/buffer renderer without legacy immediate-mode emulation. See [renderer design and validation](port/renderer-notes.md).
+
 - Original GUCCI event iteration scheduled with Emscripten's browser main loop
 - TIFF originals converted to bottom-up RGBA at preparation time; original Image API preserves pixel/alpha/scaling logic and draws texture quads
 - FTGL texture-font glyph atlases replace unsupported bitmap glyph drawing
@@ -74,8 +76,8 @@ Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET
 
 - Original registration, login and all three tutorial sections and the test mission pass in cloud Chromium; broad gameplay and Windows comparative fidelity QA remain open
 - Existing Steam save compatibility is not runtime tested
-- Dashed lines currently render solid and emit a diagnostic
-- Full visual fidelity/performance, resize/high-DPI behavior, audio mixing, repeated input, interrupted save recovery and browser persistence require runtime checks
+- Stippled lines retain the previous browser solid rendering; see `port/renderer-notes.md`
+- Shader/buffer rendering, screen comparisons, DPR/resolution/input, context recovery and browser checks are documented in `port/renderer-notes.md`; hardware GPU and cross-browser comparative fidelity remain untested
 - No public hosting; this workbench is intended only for the private personal repository
 
 ## Repository inventory
@@ -84,7 +86,7 @@ Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET
 
 ## Review changes
 
-With the optional original `source.zip` download restored, run `python port/create-change-bundle.py` to regenerate port/uplink-browser.patch and source-changes.json against the exact downloaded source archive. This records every modified original source file and hashes; it is separate from authored build/support files. Asset preparation provenance is in prototype/assets/manifest.json and prototype/ASSET_PREPARATION.md.
+With the optional original `source.zip` download restored, run `python port/create-change-bundle.py` to regenerate the ignored qa/provenance/uplink-browser.patch and the compact port/source-changes.json index against the exact downloaded source archive. This records every modified original source file and hashes; it is separate from authored build/support files. Asset preparation provenance is in prototype/assets/manifest.json and prototype/ASSET_PREPARATION.md.
 
 ## GitHub Pages
 

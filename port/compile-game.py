@@ -19,7 +19,7 @@ incs=[root/'port/include',src/'contrib',src/'uplink/src',root/'port/ftgl/include
 flags+=['-I'+str(v) for v in incs]
 def compile(p):
  name=str(p.relative_to(src)).replace('/','__'); obj=out/(name+'.o'); log=out/(name+'.log')
- if os.environ.get('UPLINK_REBUILD') != '1' and obj.exists() and obj.stat().st_mtime>p.stat().st_mtime: return (p,True,'cached')
+ if os.environ.get('UPLINK_REBUILD') != '1' and obj.exists() and obj.stat().st_mtime>max(p.stat().st_mtime, (src/'lib/gucci/uplink_draw.h').stat().st_mtime): return (p,True,'cached')
  unitflags=flags if p.suffix=='.cpp' else [v for v in flags if v not in ['-std=gnu++98','-fms-extensions']] + ['-std=gnu89','-DUNIX']
  compiler='em++' if p.suffix=='.cpp' else 'emcc'
  proc=subprocess.run([str(root/'toolchain/emsdk-main/upstream/emscripten'/compiler),*unitflags,'-c',str(p),'-o',str(obj)],capture_output=True,text=True)

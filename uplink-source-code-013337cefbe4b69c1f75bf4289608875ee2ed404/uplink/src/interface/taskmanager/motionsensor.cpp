@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -40,27 +41,27 @@ void MotionSensor::SensorDraw ( Button *button, bool highlighted, bool clicked )
 	//
 
 	if ( numpeople == 0 )
-		glColor3f ( 0.2f, 0.2f, 0.2f );
+		UplinkDraw::color3f ( 0.2f, 0.2f, 0.2f );
 
 	else if ( numpeople == 1 ) 
-		glColor3f ( 0.9f, 0.9f, 0.2f );
+		UplinkDraw::color3f ( 0.9f, 0.9f, 0.2f );
 
 	else if ( numpeople >= 2 ) 
-		glColor3f ( 1.0f, 0.3f, 0.3f );
+		UplinkDraw::color3f ( 1.0f, 0.3f, 0.3f );
 
-	glBegin ( GL_QUADS );
-		glVertex2d ( button->x, button->y );
-		glVertex2d ( button->x + button->width, button->y );
-		glVertex2d ( button->x + button->width, button->y + button->height );
-		glVertex2d ( button->x, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		UplinkDraw::vertex2d ( button->x, button->y );
+		UplinkDraw::vertex2d ( button->x + button->width, button->y );
+		UplinkDraw::vertex2d ( button->x + button->width, button->y + button->height );
+		UplinkDraw::vertex2d ( button->x, button->y + button->height );
+	UplinkDraw::end ();
 
 	// 
 	// Border if mouse over
 	//
 
 	if ( highlighted || clicked ) {
-		glColor3d ( 1.0, 1.0, 1.0 );
+		UplinkDraw::color3d ( 1.0, 1.0, 1.0 );
 		border_draw ( button );
 	}
 

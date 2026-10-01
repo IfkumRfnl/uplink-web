@@ -11,9 +11,9 @@ fi
 BUILD="$(mktemp -d "${TMPDIR:-/tmp}/uplink-image-tests.XXXXXX")"
 trap 'rm -rf "$BUILD"' EXIT
 "$EMXX" -std=gnu++11 -Wno-writable-strings -sASSERTIONS=1 \
-  -sLEGACY_GL_EMULATION=1 -sENVIRONMENT=node -sSINGLE_FILE=1 \
+  -sENVIRONMENT=node -sSINGLE_FILE=1 \
   -I"$SOURCE_ROOT/lib/gucci" -I"$SOURCE_ROOT/lib/mmgr" \
   -I"$SOURCE_ROOT/lib/redshirt" -I"$SOURCE_ROOT/lib/bungle" -I"$SOURCE_ROOT/lib/tosser" \
-  "$SOURCE_ROOT/lib/gucci/image.cpp" "$TEST_DIR/image_sidecar_test.cpp" \
+  "$ROOT/port/webgl-renderer.cpp" "$SOURCE_ROOT/lib/gucci/image.cpp" "$TEST_DIR/image_sidecar_test.cpp" \
   -o "$BUILD/image-tests.js"
 "$NODE" "$BUILD/image-tests.js"

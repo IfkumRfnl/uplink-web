@@ -17,7 +17,10 @@
 /prototype/prototype.data
 /prototype/assets/music/*.wav
 /qa/
-/node_modules/
+# Generated renderer comparisons and optional source patch
+/port/evidence/
+/port/uplink-browser.patch
+/node_modules
 /.venv/
 __pycache__/
 *.pyc

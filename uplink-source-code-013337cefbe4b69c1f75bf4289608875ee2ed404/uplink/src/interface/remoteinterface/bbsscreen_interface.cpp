@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -86,8 +87,8 @@ void BBSScreenInterface::DrawBBSButton ( Button *button, bool highlighted, bool 
 	index += baseoffset;
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
@@ -102,12 +103,12 @@ void BBSScreenInterface::DrawBBSButton ( Button *button, bool highlighted, bool 
 		
 		if ( index == currentselect ) {
 
-			glBegin ( GL_QUADS );
-				SetColour ( "PanelHighlightA" );        glVertex2i ( button->x, button->y );
-				SetColour ( "PanelHighlightB" );        glVertex2i ( button->x + button->width, button->y );
-				SetColour ( "PanelHighlightA" );        glVertex2i ( button->x + button->width, button->y + button->height );
-				SetColour ( "PanelHighlightB" );        glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				SetColour ( "PanelHighlightA" );        UplinkDraw::vertex2i ( button->x, button->y );
+				SetColour ( "PanelHighlightB" );        UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				SetColour ( "PanelHighlightA" );        UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				SetColour ( "PanelHighlightB" );        UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 
@@ -130,9 +131,9 @@ void BBSScreenInterface::DrawBBSButton ( Button *button, bool highlighted, bool 
 			UplinkStrncpy ( date, mission->createdate.GetShortString (), sizeof ( date ) );
 
 #ifdef DEMOGAME
-            glColor4f ( 1.0f - ratingdif * 0.2f, 1.0f - ratingdif * 0.2f, 1.0f - ratingdif * 0.2f, 1.0f );
+            UplinkDraw::color4f ( 1.0f - ratingdif * 0.2f, 1.0f - ratingdif * 0.2f, 1.0f - ratingdif * 0.2f, 1.0f );
 #else
-			glColor4f ( 1.0f - ratingdif * 0.1f, 1.0f - ratingdif * 0.1f, 1.0f - ratingdif * 0.1f, 1.0f );
+			UplinkDraw::color4f ( 1.0f - ratingdif * 0.1f, 1.0f - ratingdif * 0.1f, 1.0f - ratingdif * 0.1f, 1.0f );
 #endif
 
 		}
@@ -141,7 +142,7 @@ void BBSScreenInterface::DrawBBSButton ( Button *button, bool highlighted, bool 
 			UplinkStrncpy ( subject, "Encrypted (Insufficient Uplink Rating)", sizeof ( subject ) );
 			UplinkStrncpy ( date, "Unknown", sizeof ( date ) );
 
-			glColor4f ( 0.2f, 0.2f, 0.2f, 1.0f );		
+			UplinkDraw::color4f ( 0.2f, 0.2f, 0.2f, 1.0f );		
 
 		}
 
@@ -150,19 +151,19 @@ void BBSScreenInterface::DrawBBSButton ( Button *button, bool highlighted, bool 
 
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
 void BBSScreenInterface::DrawDetails ( Button *button, bool highlighted, bool clicked )
 {
 
-	glBegin ( GL_QUADS );
-		SetColour ( "PanelBackgroundA" );       glVertex2i ( button->x, button->y + button->height );
-		SetColour ( "PanelBackgroundB" );       glVertex2i ( button->x, button->y );
-		SetColour ( "PanelBackgroundA" );       glVertex2i ( button->x + button->width, button->y );
-		SetColour ( "PanelBackgroundB" );       glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		SetColour ( "PanelBackgroundA" );       UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		SetColour ( "PanelBackgroundB" );       UplinkDraw::vertex2i ( button->x, button->y );
+		SetColour ( "PanelBackgroundA" );       UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour ( "PanelBackgroundB" );       UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
     SetColour ( "PanelBorder" );
 	border_draw ( button );

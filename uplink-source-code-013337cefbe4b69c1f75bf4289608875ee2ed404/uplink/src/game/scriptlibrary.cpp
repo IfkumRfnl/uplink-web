@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 // ScriptLibrary.cpp: implementation of the ScriptLibrary class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -606,45 +607,45 @@ void ScriptLibrary::DrawConnection ( Button *button, bool highlighted, bool clic
 {
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
-	glColor4f ( 0.3f, 0.5f, 1.0f, 1.0f );
-	glLineWidth ( 2.0 );
-//    glLineStipple ( 2, 0x1111 );
-//    glEnable ( GL_LINE_STIPPLE );
+	UplinkDraw::color4f ( 0.3f, 0.5f, 1.0f, 1.0f );
+	UplinkDraw::lineWidth ( 2.0 );
+//    UplinkDraw::lineStipple ( 2, 0x1111 );
+//    UplinkDraw::enable ( GL_LINE_STIPPLE );
 
 	if ( button->height == 4 ) {
 
 		// Horizontal button
-		glBegin ( GL_LINES );
-			glVertex2i ( button->x + 1, button->y + 1 );
-			glVertex2i ( button->x + 1 + button->width - 1, button->y + 1 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINES );
+			UplinkDraw::vertex2i ( button->x + 1, button->y + 1 );
+			UplinkDraw::vertex2i ( button->x + 1 + button->width - 1, button->y + 1 );
+		UplinkDraw::end ();
 
 	}
 	else if ( button->width == 4 ) {
 		
 		// Vertical button
-		glBegin ( GL_LINES );
-			glVertex2i ( button->x + 1, button->y + 1 );
-			glVertex2i ( button->x + 1, button->y + button->height - 1 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINES );
+			UplinkDraw::vertex2i ( button->x + 1, button->y + 1 );
+			UplinkDraw::vertex2i ( button->x + 1, button->y + button->height - 1 );
+		UplinkDraw::end ();
 
 	}
 	else {
 
 		// Diagonal button
-		glBegin ( GL_LINES );
-			glVertex2i ( button->x + 1, button->y + 1 );
-			glVertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINES );
+			UplinkDraw::vertex2i ( button->x + 1, button->y + 1 );
+			UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height - 1 );
+		UplinkDraw::end ();
 
 	}
 
-	glLineWidth ( 1.0 );
-//    glDisable ( GL_LINE_STIPPLE );
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::lineWidth ( 1.0 );
+//    UplinkDraw::disable ( GL_LINE_STIPPLE );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

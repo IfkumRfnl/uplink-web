@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -153,7 +154,7 @@ void Revelation::DrawRevelation ( Button *button, bool highlighted, bool clicked
 
         float shade = (float) difference / 40.0f;
     
-        glColor4f ( shade, shade, shade, 1.0 );
+        UplinkDraw::color4f ( shade, shade, shade, 1.0 );
         GciDrawText ( button->x + 5, button->y + 8, button->caption );
 
     }

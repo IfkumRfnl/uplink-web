@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -260,22 +261,22 @@ void GraphicOptionsInterface::ScreenOptionDraw ( Button *button, bool highlighte
 
     if ( highlighted || clicked || currentValue ) {
 
-	    glBegin ( GL_QUADS );		
-		    SetColour ( "PanelHighlightA" );	glVertex2i ( button->x, button->y + button->height );
-		    SetColour ( "PanelHighlightB" );	glVertex2i ( button->x, button->y );
-		    SetColour ( "PanelHighlightA" );	glVertex2i ( button->x + button->width, button->y );
-		    SetColour ( "PanelHighlightB" );	glVertex2i ( button->x + button->width, button->y + button->height );
-	    glEnd ();
+	    UplinkDraw::begin ( GL_QUADS );		
+		    SetColour ( "PanelHighlightA" );	UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		    SetColour ( "PanelHighlightB" );	UplinkDraw::vertex2i ( button->x, button->y );
+		    SetColour ( "PanelHighlightA" );	UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		    SetColour ( "PanelHighlightB" );	UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	    UplinkDraw::end ();
 
     }
     else {
 
-	    glBegin ( GL_QUADS );		
-		    SetColour ( "PanelBackgroundA" );   glVertex2i ( button->x, button->y + button->height );
-		    SetColour ( "PanelBackgroundB" );   glVertex2i ( button->x, button->y );
-		    SetColour ( "PanelBackgroundA" );   glVertex2i ( button->x + button->width, button->y );
-		    SetColour ( "PanelBackgroundB" );   glVertex2i ( button->x + button->width, button->y + button->height );
-	    glEnd ();
+	    UplinkDraw::begin ( GL_QUADS );		
+		    SetColour ( "PanelBackgroundA" );   UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		    SetColour ( "PanelBackgroundB" );   UplinkDraw::vertex2i ( button->x, button->y );
+		    SetColour ( "PanelBackgroundA" );   UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		    SetColour ( "PanelBackgroundB" );   UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	    UplinkDraw::end ();
 
     }
 

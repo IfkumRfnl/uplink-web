@@ -1,3 +1,4 @@
+#include "../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -37,19 +38,19 @@ void ObituaryInterface::MediumTextDraw ( Button *button, bool highlighted, bool 
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
 	int xpos = button->x + 10;
 	int ypos = (button->y + button->height / 2) + 3;
 	GciDrawText ( xpos, ypos, button->caption, HELVETICA_12 );
 
 	if ( highlighted || clicked ) border_draw ( button );
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -59,19 +60,19 @@ void ObituaryInterface::LargeTextDraw  ( Button *button, bool highlighted, bool 
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, ALPHA );    
 	int xpos = button->x + 10;
 	int ypos = (button->y + button->height / 2) + 3;
 	GciDrawText ( xpos, ypos, button->caption, HELVETICA_18 );
 
 	if ( highlighted || clicked ) border_draw ( button );
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -213,21 +214,21 @@ void UserIDScreenInterface::UserIDButtonDraw ( Button *button, bool highlighted,
 	UplinkAssert ( button );
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Draw a background colour
 
 	SetColour ( "PasswordBoxBackground" );
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Draw the text
 
@@ -239,7 +240,7 @@ void UserIDScreenInterface::UserIDButtonDraw ( Button *button, bool highlighted,
 
 	if ( highlighted || clicked ) border_draw ( button );
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 
@@ -249,21 +250,21 @@ void UserIDScreenInterface::CodeButtonDraw ( Button *button, bool highlighted, b
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Draw a background colour
 
     SetColour ( "PasswordBoxBackground" );
 
-	glBegin ( GL_QUADS );
+	UplinkDraw::begin ( GL_QUADS );
 
-		glVertex2i ( button->x, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y );
-		glVertex2i ( button->x + button->width - 1, button->y + button->height );
-		glVertex2i ( button->x, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y );
+		UplinkDraw::vertex2i ( button->x + button->width - 1, button->y + button->height );
+		UplinkDraw::vertex2i ( button->x, button->y + button->height );
 
-	glEnd ();
+	UplinkDraw::end ();
 
 	// Print the text
 
@@ -283,7 +284,7 @@ void UserIDScreenInterface::CodeButtonDraw ( Button *button, bool highlighted, b
 	if ( highlighted || clicked )
 		border_draw ( button );
 
-    glDisable ( GL_SCISSOR_TEST );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 }
 

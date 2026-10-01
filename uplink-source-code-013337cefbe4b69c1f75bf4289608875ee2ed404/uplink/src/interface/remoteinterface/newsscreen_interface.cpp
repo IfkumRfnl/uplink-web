@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -112,39 +113,39 @@ void NewsScreenInterface::DrawNewsButton ( Button *button, bool highlighted, boo
 	if ( news ) {
 
 		int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-		glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-		glEnable ( GL_SCISSOR_TEST );
+		UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+		UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 		if ( index == currentselect ) {
 
-			glBegin ( GL_QUADS );
-				SetColour ( "PanelHighlightA" );		glVertex2i ( button->x, button->y );
-				SetColour ( "PanelHighlightB" );        glVertex2i ( button->x + button->width, button->y );
-				SetColour ( "PanelHighlightA" );        glVertex2i ( button->x + button->width, button->y + button->height );
-				SetColour ( "PanelHighlightB" );        glVertex2i ( button->x, button->y + button->height );
-			glEnd ();
+			UplinkDraw::begin ( GL_QUADS );
+				SetColour ( "PanelHighlightA" );		UplinkDraw::vertex2i ( button->x, button->y );
+				SetColour ( "PanelHighlightB" );        UplinkDraw::vertex2i ( button->x + button->width, button->y );
+				SetColour ( "PanelHighlightA" );        UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				SetColour ( "PanelHighlightB" );        UplinkDraw::vertex2i ( button->x, button->y + button->height );
+			UplinkDraw::end ();
 
 		}
 		else {
 			
 			if ( index % 2 == 0 ) {
 
-				glBegin ( GL_QUADS );
-					SetColour ( "DarkPanelA" );     glVertex2i ( button->x, button->y + button->height );
-					SetColour ( "DarkPanelB" );     glVertex2i ( button->x, button->y );
-					SetColour ( "DarkPanelA" );     glVertex2i ( button->x + button->width, button->y );
-					SetColour ( "DarkPanelB" );     glVertex2i ( button->x + button->width, button->y + button->height );
-				glEnd ();
+				UplinkDraw::begin ( GL_QUADS );
+					SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x, button->y + button->height );
+					SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x, button->y );
+					SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x + button->width, button->y );
+					SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::end ();
 
 			}
 			else {
 
-				glBegin ( GL_QUADS );
-					SetColour ( "DarkPanelB" );     glVertex2i ( button->x, button->y + button->height );
-					SetColour ( "DarkPanelA" );     glVertex2i ( button->x, button->y );
-					SetColour ( "DarkPanelB" );     glVertex2i ( button->x + button->width, button->y );
-					SetColour ( "DarkPanelA" );     glVertex2i ( button->x + button->width, button->y + button->height );
-				glEnd ();
+				UplinkDraw::begin ( GL_QUADS );
+					SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x, button->y + button->height );
+					SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x, button->y );
+					SetColour ( "DarkPanelB" );     UplinkDraw::vertex2i ( button->x + button->width, button->y );
+					SetColour ( "DarkPanelA" );     UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+				UplinkDraw::end ();
 
 			}
 
@@ -187,7 +188,7 @@ void NewsScreenInterface::DrawNewsButton ( Button *button, bool highlighted, boo
         SetColour ( "DimmedText" );
         GciDrawText ( button->x + 110, button->y + 25, details );
 
-		glDisable ( GL_SCISSOR_TEST );
+		UplinkDraw::disable ( GL_SCISSOR_TEST );
 
 	}
 	
@@ -199,8 +200,8 @@ void NewsScreenInterface::DrawDetails ( Button *button, bool highlighted, bool c
 	UplinkAssert (button);
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 	// Get the offset
 
@@ -212,12 +213,12 @@ void NewsScreenInterface::DrawDetails ( Button *button, bool highlighted, bool c
 	
 	// Draw the button
 
-	glBegin ( GL_QUADS );
-		SetColour ( "PanelBackgroundA" );       glVertex2i ( button->x, button->y + button->height );
-		SetColour ( "PanelBackgroundB" );       glVertex2i ( button->x, button->y );
-		SetColour ( "PanelBackgroundA" );       glVertex2i ( button->x + button->width, button->y );
-		SetColour ( "PanelBackgroundB" );       glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		SetColour ( "PanelBackgroundA" );       UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		SetColour ( "PanelBackgroundB" );       UplinkDraw::vertex2i ( button->x, button->y );
+		SetColour ( "PanelBackgroundA" );       UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour ( "PanelBackgroundB" );       UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour ( "PanelBorder" );
 	border_draw ( button );
@@ -252,7 +253,7 @@ void NewsScreenInterface::DrawDetails ( Button *button, bool highlighted, bool c
 
 	}
 
-	glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::disable ( GL_SCISSOR_TEST );
 	
 }
 

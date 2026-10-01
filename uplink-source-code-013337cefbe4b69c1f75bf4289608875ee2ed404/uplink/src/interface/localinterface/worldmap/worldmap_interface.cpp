@@ -1,3 +1,4 @@
+#include "../../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h> 
@@ -318,19 +319,19 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
 
         // Draw a dot to represent the player
 
-        glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+        UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
         
         int playerX = game->GetWorld ()->GetPlayer ()->GetLocalHost ()->x;
         int playerY = game->GetWorld ()->GetPlayer ()->GetLocalHost ()->y;
         int scaledX = button->x + GetScaledX ( playerX, WORLDMAP_SMALL );
         int scaledY = button->y + GetScaledY ( playerY, WORLDMAP_SMALL );
         
-        glBegin ( GL_QUADS );
-            glVertex2i ( scaledX - 1, scaledY - 1 );    
-            glVertex2i ( scaledX + 2, scaledY - 1 );
-            glVertex2i ( scaledX + 2, scaledY + 2 );
-            glVertex2i ( scaledX - 1, scaledY + 2 );
-        glEnd ();
+        UplinkDraw::begin ( GL_QUADS );
+            UplinkDraw::vertex2i ( scaledX - 1, scaledY - 1 );    
+            UplinkDraw::vertex2i ( scaledX + 2, scaledY - 1 );
+            UplinkDraw::vertex2i ( scaledX + 2, scaledY + 2 );
+            UplinkDraw::vertex2i ( scaledX - 1, scaledY + 2 );
+        UplinkDraw::end ();
 
     }
     else {
@@ -339,37 +340,37 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
 
         // Draw the lines
 
-        glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-        glLineWidth ( 2.0 );        
-        glLineStipple ( 1, stipplepattern );    
-        glEnable ( GL_LINE_STIPPLE );
+        UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+        UplinkDraw::lineWidth ( 2.0 );        
+        UplinkDraw::lineStipple ( 1, stipplepattern );    
+        UplinkDraw::enable ( GL_LINE_STIPPLE );
 
-        glBegin ( GL_LINE_STRIP );
+        UplinkDraw::begin ( GL_LINE_STRIP );
 
             for ( int li = 0; li < connection->vlocations.Size (); ++li ) {
 
                 VLocation *vl = game->GetWorld ()->GetVLocation ( connection->vlocations.GetData (li) );
                 UplinkAssert ( vl );
-                glVertex2i ( button->x + GetScaledX ( vl->x, WORLDMAP_SMALL ), button->y + GetScaledY ( vl->y, WORLDMAP_SMALL ) );
+                UplinkDraw::vertex2i ( button->x + GetScaledX ( vl->x, WORLDMAP_SMALL ), button->y + GetScaledY ( vl->y, WORLDMAP_SMALL ) );
 
                 if ( connection->TraceInProgress () &&
                      connection->traceprogress == (connection->vlocations.Size () - li - 1) &&
                      game->GetWorld ()->GetPlayer ()->gateway.HasHUDUpgrade (HUDUPGRADE_MAPSHOWSTRACE) ) {
-                    glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
-                    glVertex2i ( button->x + GetScaledX ( vl->x, WORLDMAP_SMALL ), button->y + GetScaledY ( vl->y, WORLDMAP_SMALL ) );                        
+                    UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+                    UplinkDraw::vertex2i ( button->x + GetScaledX ( vl->x, WORLDMAP_SMALL ), button->y + GetScaledY ( vl->y, WORLDMAP_SMALL ) );                        
                 }
 
             }
 
-        glEnd ();
+        UplinkDraw::end ();
 
-        glLineWidth ( 1.0 );
-        glDisable ( GL_LINE_STIPPLE );
-        glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+        UplinkDraw::lineWidth ( 1.0 );
+        UplinkDraw::disable ( GL_LINE_STIPPLE );
+        UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
         // Draw the dots
 
-        glBegin ( GL_QUADS );
+        UplinkDraw::begin ( GL_QUADS );
 
             for ( int di = 0; di < connection->vlocations.Size (); ++di ) {
 
@@ -379,18 +380,18 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
                 int x = button->x + GetScaledX ( vl->x, WORLDMAP_SMALL );
                 int y = button->y + GetScaledY ( vl->y, WORLDMAP_SMALL );
 
-                glVertex2i ( x - 1, y - 1 );
-                glVertex2i ( x + 2, y - 1 );
-                glVertex2i ( x + 2, y + 2 );
-                glVertex2i ( x - 1, y + 2 );
+                UplinkDraw::vertex2i ( x - 1, y - 1 );
+                UplinkDraw::vertex2i ( x + 2, y - 1 );
+                UplinkDraw::vertex2i ( x + 2, y + 2 );
+                UplinkDraw::vertex2i ( x - 1, y + 2 );
 
                 if ( connection->traceprogress == (connection->vlocations.Size () - di - 1) &&
                      game->GetWorld ()->GetPlayer ()->gateway.HasHUDUpgrade (HUDUPGRADE_MAPSHOWSTRACE) )
-                    glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+                    UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
 
             }
 
-        glEnd ();
+        UplinkDraw::end ();
 
     }
 
@@ -398,7 +399,7 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
     // Draw red circles over computers infected with Revelation
     //
 
-    glBegin ( GL_QUADS );
+    UplinkDraw::begin ( GL_QUADS );
 
         for ( int i = 0; i < game->GetWorld ()->plotgenerator.infected.Size (); ++i ) {
 
@@ -411,28 +412,28 @@ void WorldMapInterface::DrawWorldMapSmall ( Button *button, bool highlighted, bo
             int x = button->x + GetScaledX ( vl->x, WORLDMAP_SMALL );
             int y = button->y + GetScaledY ( vl->y, WORLDMAP_SMALL );
 
-            glColor4f ( revelationColour, 0.0f, 0.0f, 1.0f );
-            glVertex2i ( x - 3, y - 3 );
-            glVertex2i ( x + 4, y - 3 );
-            glVertex2i ( x + 4, y + 4 );
-            glVertex2i ( x - 3, y + 4 );
+            UplinkDraw::color4f ( revelationColour, 0.0f, 0.0f, 1.0f );
+            UplinkDraw::vertex2i ( x - 3, y - 3 );
+            UplinkDraw::vertex2i ( x + 4, y - 3 );
+            UplinkDraw::vertex2i ( x + 4, y + 4 );
+            UplinkDraw::vertex2i ( x - 3, y + 4 );
 
             revelationColour -= 0.09f;
             if ( revelationColour < 0.0f ) revelationColour = 1.0f;
 
         }
 
-    glEnd ();
+    UplinkDraw::end ();
 
     if ( highlighted || clicked ) {
 
-        glColor4f ( 0.4f, 0.4f, 0.8f, 1.0f );
+        UplinkDraw::color4f ( 0.4f, 0.4f, 0.8f, 1.0f );
         border_draw ( button );
 
     }
 	else {
 
-		glColor3ub ( 81, 138, 215 );
+		UplinkDraw::color3ub ( 81, 138, 215 );
 		border_draw ( button );
 
 	}
@@ -473,15 +474,15 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
 
     UplinkAssert ( button );
 
-	glPushAttrib ( GL_ALL_ATTRIB_BITS );
+	UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 
     //
     // Draw the background image
     //
 
     /* Draw the image */
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-	glEnable ( GL_TEXTURE_2D );      
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::enable ( GL_TEXTURE_2D );      
 	Image *image = button->image_standard;	    
     UplinkAssert (image);
 
@@ -490,55 +491,55 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
 	static GLuint texId = 0;
 
 	if (texId == 0) {
-		glGenTextures ( 1, &texId );
-		glBindTexture ( GL_TEXTURE_2D, texId );
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		UplinkDraw::genTextures ( 1, &texId );
+		UplinkDraw::bindTexture ( GL_TEXTURE_2D, texId );
+		UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		
 		// Better speed at the price of lesser image quality ???
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		//UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		//image->Scale ( image->Width() * 2, image->Height() * 2 );
 		
-		glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, image->Width(), image->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->GetRGBPixels() );
+		UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0, GL_RGB, image->Width(), image->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->GetRGBPixels() );
 	}
 
-	glBindTexture ( GL_TEXTURE_2D, texId );
+	UplinkDraw::bindTexture ( GL_TEXTURE_2D, texId );
 
 	// Removed in favor of the upper code.
 
-	//glBindTexture ( GL_TEXTURE_2D, 1 );
-	//glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, image->Width(), image->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->GetRGBPixels() );
+	//UplinkDraw::bindTexture ( GL_TEXTURE_2D, 1 );
+	//UplinkDraw::texImage2D ( GL_TEXTURE_2D, 0, GL_RGB, image->Width(), image->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->GetRGBPixels() );
 
 	// ** used to be here **
 
     float windowW = 1.0f / zoom;
     float windowH = 1.0f / zoom;
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(scrollX, 1.0f - scrollY);                       glVertex2i(button->x, button->y);
-		glTexCoord2f(scrollX + windowW, 1.0f - scrollY); 	        glVertex2i(button->x + button->width, button->y);
-		glTexCoord2f(scrollX + windowW, 1.0f - (scrollY + windowH)); glVertex2i(button->x + button->width, button->y + button->height);
-		glTexCoord2f(scrollX, 1.0f - (scrollY + windowH));           glVertex2i(button->x, button->y + button->height);
-	glEnd ();
+	UplinkDraw::begin(GL_QUADS);
+		UplinkDraw::texCoord2f(scrollX, 1.0f - scrollY);                       UplinkDraw::vertex2i(button->x, button->y);
+		UplinkDraw::texCoord2f(scrollX + windowW, 1.0f - scrollY); 	        UplinkDraw::vertex2i(button->x + button->width, button->y);
+		UplinkDraw::texCoord2f(scrollX + windowW, 1.0f - (scrollY + windowH)); UplinkDraw::vertex2i(button->x + button->width, button->y + button->height);
+		UplinkDraw::texCoord2f(scrollX, 1.0f - (scrollY + windowH));           UplinkDraw::vertex2i(button->x, button->y + button->height);
+	UplinkDraw::end ();
 
-    glDisable ( GL_TEXTURE_2D );
+    UplinkDraw::disable ( GL_TEXTURE_2D );
 
     //
     // Gimme a border
     //
 
-	glColor3ub ( 81, 138, 215 );
+	UplinkDraw::color3ub ( 81, 138, 215 );
 	border_draw ( button );
 
     //
     // Clipping
 
 	int screenheight = app->GetOptions ()->GetOptionValue ( "graphics_screenheight" );
-	glScissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
-	glEnable ( GL_SCISSOR_TEST );
+	UplinkDraw::scissor ( button->x, screenheight - (button->y + button->height), button->width, button->height );	
+	UplinkDraw::enable ( GL_SCISSOR_TEST );
 
     //
     // Draw the text labels, dots etc
@@ -553,7 +554,7 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
     // Draw red circles over computers infected with Revelation
     //
 
-    glBegin ( GL_QUADS );
+    UplinkDraw::begin ( GL_QUADS );
 
         for ( int j = 0; j < game->GetWorld ()->plotgenerator.infected.Size (); ++j ) {
 
@@ -566,11 +567,11 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
             int x = button->x + GetScaledX ( vl->x, WORLDMAP_LARGE );
             int y = button->y + GetScaledY ( vl->y, WORLDMAP_LARGE );
 
-            glColor4f ( revelationColour, 0.0f, 0.0f, 1.0f );
-            glVertex2i ( x - 6, y - 6 );
-            glVertex2i ( x + 7, y - 7 );
-            glVertex2i ( x + 7, y + 7 );
-            glVertex2i ( x - 6, y + 7 );
+            UplinkDraw::color4f ( revelationColour, 0.0f, 0.0f, 1.0f );
+            UplinkDraw::vertex2i ( x - 6, y - 6 );
+            UplinkDraw::vertex2i ( x + 7, y - 7 );
+            UplinkDraw::vertex2i ( x + 7, y + 7 );
+            UplinkDraw::vertex2i ( x - 6, y + 7 );
 
             revelationColour -= 0.09f;
             if ( revelationColour < 0.0f ) 
@@ -578,7 +579,7 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
 
         }
 
-    glEnd ();
+    UplinkDraw::end ();
 
     //
     // Draw connecting lines over the players connection
@@ -586,13 +587,13 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
 
     Connection *connection = game->GetWorld ()->GetPlayer ()->GetConnection ();
 
-    glLineWidth ( 2.0 );
-    glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+    UplinkDraw::lineWidth ( 2.0 );
+    UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 
-    glLineStipple ( 2, stipplepattern );
-    glEnable ( GL_LINE_STIPPLE );
+    UplinkDraw::lineStipple ( 2, stipplepattern );
+    UplinkDraw::enable ( GL_LINE_STIPPLE );
 
-    glBegin ( GL_LINE_STRIP );
+    UplinkDraw::begin ( GL_LINE_STRIP );
 
         for ( int i = 0; i < connection->vlocations.Size (); ++i ) {
 
@@ -602,25 +603,25 @@ void WorldMapInterface::DrawWorldMapLarge ( Button *button, bool highlighted, bo
             int xpos = button->x + GetScaledX ( vl->x, WORLDMAP_LARGE );
             int ypos = button->y + GetScaledY ( vl->y, WORLDMAP_LARGE );
 
-            glVertex2i ( xpos, ypos );
+            UplinkDraw::vertex2i ( xpos, ypos );
 
             if ( connection->TraceInProgress () &&
                  connection->traceprogress == (connection->vlocations.Size () - i - 1) &&
                  game->GetWorld ()->GetPlayer ()->gateway.HasHUDUpgrade (HUDUPGRADE_MAPSHOWSTRACE) ) {
-                glColor4f ( 1.0f, 0.0f, 0.0f, 1.0f );
-                glVertex2i ( xpos, ypos );                
+                UplinkDraw::color4f ( 1.0f, 0.0f, 0.0f, 1.0f );
+                UplinkDraw::vertex2i ( xpos, ypos );                
             }
 
         }
 
-    glEnd ();
+    UplinkDraw::end ();
 
 
-	glLineWidth ( 1.0 );
-    glDisable ( GL_LINE_STIPPLE );
-    glDisable ( GL_SCISSOR_TEST );
+	UplinkDraw::lineWidth ( 1.0 );
+    UplinkDraw::disable ( GL_LINE_STIPPLE );
+    UplinkDraw::disable ( GL_SCISSOR_TEST );
 
-  	glPopAttrib ();
+  	UplinkDraw::popAttrib ();
 
 }
 
@@ -664,24 +665,24 @@ void WorldMapInterface::DrawLocation ( Button *button, bool highlighted, bool cl
         int h = button->height + 3;
         
         if ( accesslevel > 1 ) {
-            glLineStipple ( 1, stipplepattern );        
-            glEnable ( GL_LINE_STIPPLE );
+            UplinkDraw::lineStipple ( 1, stipplepattern );        
+            UplinkDraw::enable ( GL_LINE_STIPPLE );
             x -= 1;
             y -= 1;
             w += 2;
             h += 2;
         }
                         
-        glColor3f ( 1.0f, 1.0f, 1.0f );        
+        UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );        
 
-		glBegin ( GL_LINE_LOOP );
-			glVertex2i ( x, y + h );
-			glVertex2i ( x, y );
-			glVertex2i ( x + w, y );
-			glVertex2i ( x + w, y + h );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_LOOP );
+			UplinkDraw::vertex2i ( x, y + h );
+			UplinkDraw::vertex2i ( x, y );
+			UplinkDraw::vertex2i ( x + w, y );
+			UplinkDraw::vertex2i ( x + w, y + h );
+		UplinkDraw::end ();
 
-        glDisable ( GL_LINE_STIPPLE );
+        UplinkDraw::disable ( GL_LINE_STIPPLE );
 
     }
 
@@ -701,8 +702,8 @@ void WorldMapInterface::DrawLocation ( Button *button, bool highlighted, bool cl
 		int scissorY = screenheight - (largemap->y + largemap->height);
 		int scissorW = largemap->width;
 		int scissorH = largemap->height;
-        glScissor ( scissorX, scissorY, scissorW, scissorH );    
-        glEnable ( GL_SCISSOR_TEST );
+        UplinkDraw::scissor ( scissorX, scissorY, scissorW, scissorH );    
+        UplinkDraw::enable ( GL_SCISSOR_TEST );
 
 		// Draw a box behind the text
 
@@ -729,21 +730,21 @@ void WorldMapInterface::DrawLocation ( Button *button, bool highlighted, bool cl
 
 		// Draw the box
 
-		glBegin ( GL_QUADS );		
-			glColor3ub ( 8, 20, 0 );		glVertex2i ( x, y + h );
-			glColor3ub ( 8, 20, 124 );		glVertex2i ( x, y );
-			glColor3ub ( 8, 20, 0 );		glVertex2i ( x + w, y );
-			glColor3ub ( 8, 20, 124 );		glVertex2i ( x + w, y + h );
-		glEnd ();
+		UplinkDraw::begin ( GL_QUADS );		
+			UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( x, y + h );
+			UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( x, y );
+			UplinkDraw::color3ub ( 8, 20, 0 );		UplinkDraw::vertex2i ( x + w, y );
+			UplinkDraw::color3ub ( 8, 20, 124 );		UplinkDraw::vertex2i ( x + w, y + h );
+		UplinkDraw::end ();
 
-		glColor3ub ( 81, 138, 215 );
+		UplinkDraw::color3ub ( 81, 138, 215 );
 
-		glBegin ( GL_LINE_LOOP );
-			glVertex2i ( x, y + h );
-			glVertex2i ( x, y );
-			glVertex2i ( x + w, y );
-			glVertex2i ( x + w, y + h );
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_LOOP );
+			UplinkDraw::vertex2i ( x, y + h );
+			UplinkDraw::vertex2i ( x, y );
+			UplinkDraw::vertex2i ( x + w, y );
+			UplinkDraw::vertex2i ( x + w, y + h );
+		UplinkDraw::end ();
 		
 
 		// Draw the text
@@ -751,11 +752,11 @@ void WorldMapInterface::DrawLocation ( Button *button, bool highlighted, bool cl
         char line1 [64], line2 [128];
         UplinkSnprintf ( line1, sizeof ( line1 ), "IP: %s", ip );
         UplinkSnprintf ( line2, sizeof ( line2 ), "Owner: %s", comp->companyname );
-        glColor3f ( 1.0f, 1.0f, 1.0f );
+        UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
 		GciDrawText ( x + 5, y + 10, line1 );
         GciDrawText ( x + 5, y + 20, line2 );
 
-        glDisable ( GL_SCISSOR_TEST );
+        UplinkDraw::disable ( GL_SCISSOR_TEST );
 
     }
 
@@ -835,13 +836,13 @@ void WorldMapInterface::ZoomButtonDraw ( Button *button, bool highlighted, bool 
     // 
     // Zoom bar
 
-    glColor3ub ( 81, 138, 215 );
+    UplinkDraw::color3ub ( 81, 138, 215 );
 
-    glBegin ( GL_TRIANGLES );
-        glVertex2i ( button->x, button->y + 5 );    
-        glVertex2i ( button->x + button->width, button->y + 5 );
-        glVertex2i ( button->x + button->width, button->y + 10 );
-    glEnd ();
+    UplinkDraw::begin ( GL_TRIANGLES );
+        UplinkDraw::vertex2i ( button->x, button->y + 5 );    
+        UplinkDraw::vertex2i ( button->x + button->width, button->y + 5 );
+        UplinkDraw::vertex2i ( button->x + button->width, button->y + 10 );
+    UplinkDraw::end ();
     
     WorldMapInterface *thisint = (WorldMapInterface *) &(game->GetInterface ()->GetLocalInterface ()->GetHUD ()->wmi);
     UplinkAssert (thisint);
@@ -849,15 +850,15 @@ void WorldMapInterface::ZoomButtonDraw ( Button *button, bool highlighted, bool 
     //
     // Slider
     
-    glColor3f ( 0.0f, 0.0f, 0.7f );
+    UplinkDraw::color3f ( 0.0f, 0.0f, 0.7f );
     float sliderX = 2 + (button->width-4) * (thisint->zoom - 1.0f) / (MAXZOOM - 1.0f);
     
-    glBegin ( GL_QUADS );
-        glVertex2f ( button->x + sliderX - 1, (float) button->y );    
-        glVertex2f ( button->x + sliderX + 1, (float) button->y );
-        glVertex2f ( button->x + sliderX + 1, (float) ( button->y + button->height ) );
-        glVertex2f ( button->x + sliderX - 1, (float) ( button->y + button->height ) );
-    glEnd ();
+    UplinkDraw::begin ( GL_QUADS );
+        UplinkDraw::vertex2f ( button->x + sliderX - 1, (float) button->y );    
+        UplinkDraw::vertex2f ( button->x + sliderX + 1, (float) button->y );
+        UplinkDraw::vertex2f ( button->x + sliderX + 1, (float) ( button->y + button->height ) );
+        UplinkDraw::vertex2f ( button->x + sliderX - 1, (float) ( button->y + button->height ) );
+    UplinkDraw::end ();
 
 }
 

@@ -1,3 +1,4 @@
+#include "uplink_draw.h"
 // Image.cpp: implementation of the Image class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -76,59 +77,56 @@ static void DrawBrowserImage ( int x, int y, int width, int height,
     if (width <= 0 || height <= 0) return;
     GLint activeTexture, binding, unpackAlignment, textureEnv;
     GLint srcRGB, dstRGB, srcAlpha, dstAlpha;
-    glGetIntegerv(GL_ACTIVE_TEXTURE, &activeTexture);
-    glActiveTexture(GL_TEXTURE0);
-    glGetIntegerv(GL_TEXTURE_BINDING_2D, &binding);
-    glGetIntegerv(GL_UNPACK_ALIGNMENT, &unpackAlignment);
-    glGetTexEnviv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &textureEnv);
-    // Emscripten's glIsEnabled does not expose emulated GL_TEXTURE_2D.
-    // Query the same emulation state used to generate its fixed-function shader.
-    const bool textureEnabled = EM_ASM_INT({
-        return GLImmediate.TexEnvJIT.getTexUnitType(0) === 0x0DE1;
-    }) != 0;
-    const GLboolean blendEnabled = glIsEnabled(GL_BLEND);
-    const GLboolean cullEnabled = glIsEnabled(GL_CULL_FACE);
-    glGetIntegerv(GL_BLEND_SRC_RGB, &srcRGB);
-    glGetIntegerv(GL_BLEND_DST_RGB, &dstRGB);
-    glGetIntegerv(GL_BLEND_SRC_ALPHA, &srcAlpha);
-    glGetIntegerv(GL_BLEND_DST_ALPHA, &dstAlpha);
+    UplinkDraw::getIntegerv(GL_ACTIVE_TEXTURE, &activeTexture);
+    UplinkDraw::activeTexture(GL_TEXTURE0);
+    UplinkDraw::getIntegerv(GL_TEXTURE_BINDING_2D, &binding);
+    UplinkDraw::getIntegerv(GL_UNPACK_ALIGNMENT, &unpackAlignment);
+    UplinkDraw::getTexEnviv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, &textureEnv);
+    // Texture sampling enable is explicit renderer state, not a WebGL capability.
+    const bool textureEnabled = UplinkDraw::isEnabled(GL_TEXTURE_2D) != 0;
+    const GLboolean blendEnabled = UplinkDraw::isEnabled(GL_BLEND);
+    const GLboolean cullEnabled = UplinkDraw::isEnabled(GL_CULL_FACE);
+    UplinkDraw::getIntegerv(GL_BLEND_SRC_RGB, &srcRGB);
+    UplinkDraw::getIntegerv(GL_BLEND_DST_RGB, &dstRGB);
+    UplinkDraw::getIntegerv(GL_BLEND_SRC_ALPHA, &srcAlpha);
+    UplinkDraw::getIntegerv(GL_BLEND_DST_ALPHA, &dstAlpha);
 
     GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
+    UplinkDraw::genTextures(1, &texture);
+    UplinkDraw::bindTexture(GL_TEXTURE_2D, texture);
+    UplinkDraw::pixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    UplinkDraw::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-    glEnable(GL_TEXTURE_2D);
+    UplinkDraw::enable(GL_TEXTURE_2D);
     // REPLACE reproduces glDrawPixels without modifying the current GL color.
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-    glDisable(GL_CULL_FACE);
+    UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    UplinkDraw::disable(GL_CULL_FACE);
     if (blend) {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        UplinkDraw::enable(GL_BLEND);
+        UplinkDraw::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     } else {
-        glDisable(GL_BLEND);
+        UplinkDraw::disable(GL_BLEND);
     }
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 1); glVertex2i(x, y);
-    glTexCoord2f(0, 0); glVertex2i(x, y + height);
-    glTexCoord2f(1, 0); glVertex2i(x + width, y + height);
-    glTexCoord2f(1, 1); glVertex2i(x + width, y);
-    glEnd();
+    UplinkDraw::begin(GL_QUADS);
+    UplinkDraw::texCoord2f(0, 1); UplinkDraw::vertex2i(x, y);
+    UplinkDraw::texCoord2f(0, 0); UplinkDraw::vertex2i(x, y + height);
+    UplinkDraw::texCoord2f(1, 0); UplinkDraw::vertex2i(x + width, y + height);
+    UplinkDraw::texCoord2f(1, 1); UplinkDraw::vertex2i(x + width, y);
+    UplinkDraw::end();
 
-    glBindTexture(GL_TEXTURE_2D, binding);
-    glDeleteTextures(1, &texture);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, unpackAlignment);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, textureEnv);
-    if (!textureEnabled) glDisable(GL_TEXTURE_2D);
-    if (cullEnabled) glEnable(GL_CULL_FACE);
-    glBlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
-    if (blendEnabled) glEnable(GL_BLEND); else glDisable(GL_BLEND);
-    glActiveTexture(activeTexture);
+    UplinkDraw::bindTexture(GL_TEXTURE_2D, binding);
+    UplinkDraw::deleteTextures(1, &texture);
+    UplinkDraw::pixelStorei(GL_UNPACK_ALIGNMENT, unpackAlignment);
+    UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, textureEnv);
+    if (!textureEnabled) UplinkDraw::disable(GL_TEXTURE_2D);
+    if (cullEnabled) UplinkDraw::enable(GL_CULL_FACE);
+    UplinkDraw::blendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
+    if (blendEnabled) UplinkDraw::enable(GL_BLEND); else UplinkDraw::disable(GL_BLEND);
+    UplinkDraw::activeTexture(activeTexture);
 }
 #endif
 
@@ -498,13 +496,13 @@ void Image::Draw ( int x, int y )
 #ifdef __EMSCRIPTEN__
         DrawBrowserImage(x, y, width, height, pixels, false);
 #else
-		glPushAttrib ( GL_ALL_ATTRIB_BITS );
-		glDisable ( GL_BLEND );
+		UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
+		UplinkDraw::disable ( GL_BLEND );
 
 		glRasterPos2i ( x, y + height );
 		glDrawPixels ( width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels );
 
-		glPopAttrib ();
+		UplinkDraw::popAttrib ();
 #endif
 
 	}
@@ -539,15 +537,15 @@ void Image::DrawBlend ( int x, int y )
 #ifdef __EMSCRIPTEN__
         DrawBrowserImage(x, y, width, height, pixels, true);
 #else
-		glPushAttrib ( GL_ALL_ATTRIB_BITS );
+		UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 
-		glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-		glEnable ( GL_BLEND );
+		UplinkDraw::blendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+		UplinkDraw::enable ( GL_BLEND );
 
 		glRasterPos2i ( x, y + height );
 		glDrawPixels ( width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels );
 
-		glPopAttrib ();
+		UplinkDraw::popAttrib ();
 #endif
 
 	}

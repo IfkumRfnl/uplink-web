@@ -31,3 +31,12 @@ p.write_text(s)
 p=p.with_name('FTGLTextureFont.cpp')
 s=p.read_text().replace('int totalMemory = textureWidth * textureHeight;', 'int totalMemory = textureWidth * textureHeight * 4;').replace('memset( textureMemory, 0, totalMemory);', 'for (int i = 0; i < totalMemory; i += 4) { textureMemory[i] = textureMemory[i+1] = textureMemory[i+2] = 255; textureMemory[i+3] = 0; }').replace('GL_ALPHA, textureWidth, textureHeight, 0, GL_ALPHA', 'GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA')
 p.write_text(s)
+
+# Submit glyphs and atlas mutations through the explicit renderer API.
+import re
+for p in (Path(__file__).resolve().parent/'ftgl/src').glob('*.cpp'):
+    text=p.read_text()
+    names=['Begin','End','Vertex2f','TexCoord2f','Translatef','Enable','Disable','IsEnabled','BlendFunc','BlendFuncSeparate','BindTexture','DeleteTextures','TexImage2D','TexSubImage2D','GetIntegerv','GenTextures','TexParameteri','PixelStorei']
+    for name in names:
+        text=re.sub(r'\bgl'+name+r'(?=\s*\()', 'UplinkDraw::'+name[0].lower()+name[1:], text)
+    p.write_text('#include "uplink_draw.h"\n'+text)

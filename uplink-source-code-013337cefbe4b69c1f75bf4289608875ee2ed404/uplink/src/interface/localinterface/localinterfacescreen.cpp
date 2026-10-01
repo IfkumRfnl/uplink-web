@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 // LocalInterfaceScreen.cpp: implementation of the LocalInterfaceScreen class.
 //
 //////////////////////////////////////////////////////////////////////
@@ -34,12 +35,12 @@
 void LocalInterfaceScreen::BackgroundDraw ( Button *button, bool highlighted, bool clicked )
 {
    
-	glBegin ( GL_QUADS );		
-		SetColour ( "PanelBackgroundA" );		glVertex2i ( button->x, button->y + button->height );
-		SetColour ( "PanelBackgroundB" );		glVertex2i ( button->x, button->y );
-		SetColour ( "PanelBackgroundA" );		glVertex2i ( button->x + button->width, button->y );
-		SetColour ( "PanelBackgroundB" );		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );		
+		SetColour ( "PanelBackgroundA" );		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		SetColour ( "PanelBackgroundB" );		UplinkDraw::vertex2i ( button->x, button->y );
+		SetColour ( "PanelBackgroundA" );		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour ( "PanelBackgroundB" );		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour ( "PanelBorder" );
 	border_draw ( button );

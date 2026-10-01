@@ -3,7 +3,7 @@
 This archive contains changes, not original copyrighted source/assets.
 
 1. Obtain the original source archive at https://codeload.github.com/vb6mmorpg/uplink-source-code/zip/013337cefbe4b69c1f75bf4289608875ee2ed404 . Save as source.zip and extract beside port/ into uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404.
-2. Before applying port/uplink-browser.patch, normalize CRLF to LF in the files listed in port/source-changes.json. Apply with `patch -p1` inside the source directory. Preserve the original source ZIP for provenance.
+2. Generate `qa/provenance/uplink-browser.patch` with `python3 port/create-change-bundle.py` from the checked-in adapted source and original source.zip. Before applying that patch to a fresh original tree, normalize CRLF to LF in the files listed in port/source-changes.json. Apply with `patch -p1` inside the source directory. Preserve the original source ZIP for provenance.
 3. Materialize the user's existing Uplink.zip Library item (libfile_0ca815074d5c8191a3e51c3e1ceeaf7a) through the current Library workflow. It contains the Steam assets. Extract its nine .dat files into game-data/ (flat).
 4. Install official Emscripten 6.0.10 under toolchain/emsdk-main using the official emsdk instructions; scripts expect upstream/emscripten/em++. Do not run the old game's installer/build scripts.
 5. Run prototype/prepare_assets.py with the Steam ZIP path. Python Pillow is needed.

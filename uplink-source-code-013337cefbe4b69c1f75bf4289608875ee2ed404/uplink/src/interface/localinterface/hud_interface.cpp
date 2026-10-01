@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -203,7 +204,7 @@ void HUDInterface::ToolbarButtonDraw ( Button *button, bool highlighted, bool cl
 
 //	UplinkAssert ( button );
 
-	glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
 //	GciDrawText ( button->x, button->y + 34, button->caption, HELVETICA_10 );
 
 	imagebutton_draw ( button, highlighted, clicked );

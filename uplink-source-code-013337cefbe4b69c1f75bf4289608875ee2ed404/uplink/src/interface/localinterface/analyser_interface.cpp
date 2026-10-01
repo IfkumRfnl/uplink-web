@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -105,12 +106,12 @@ void AnalyserInterface::ConnectionDraw ( Button *button, bool highlighted, bool 
 	// Draw the standard shaded background
 	//
 
-	glBegin ( GL_QUADS );
-		SetColour("PanelBackgroundA");		glVertex2i ( button->x, button->y + button->height );
-		SetColour("PanelBackgroundB");  	glVertex2i ( button->x, button->y );
-		SetColour("PanelBackgroundA");		glVertex2i ( button->x + button->width, button->y );
-		SetColour("PanelBackgroundB");		glVertex2i ( button->x + button->width, button->y + button->height );
-	glEnd ();
+	UplinkDraw::begin ( GL_QUADS );
+		SetColour("PanelBackgroundA");		UplinkDraw::vertex2i ( button->x, button->y + button->height );
+		SetColour("PanelBackgroundB");  	UplinkDraw::vertex2i ( button->x, button->y );
+		SetColour("PanelBackgroundA");		UplinkDraw::vertex2i ( button->x + button->width, button->y );
+		SetColour("PanelBackgroundB");		UplinkDraw::vertex2i ( button->x + button->width, button->y + button->height );
+	UplinkDraw::end ();
 
 	SetColour("PanelBorder");
 	border_draw ( button );
@@ -121,20 +122,20 @@ void AnalyserInterface::ConnectionDraw ( Button *button, bool highlighted, bool 
 
 	if ( strcmp ( remotehost, IP_LOCALHOST ) != 0 ) {
 
-		glColor4f ( 1.0f, 1.0f, 1.0f, 1.0f );
-		glLineWidth ( 2 );
-		glLineStipple ( 2, moving_stipplepattern );
-		glEnable ( GL_LINE_STIPPLE );
+		UplinkDraw::color4f ( 1.0f, 1.0f, 1.0f, 1.0f );
+		UplinkDraw::lineWidth ( 2 );
+		UplinkDraw::lineStipple ( 2, moving_stipplepattern );
+		UplinkDraw::enable ( GL_LINE_STIPPLE );
 
-		glBegin ( GL_LINE_STRIP );
-			glVertex2i ( screenw - panelwidth + 40, paneltop + 75 );
-			glVertex2i ( screenw - panelwidth + 40, paneltop + 160 );
-			glVertex2i ( screenw - 40, paneltop + 160 );
-			glVertex2i ( screenw - 40, paneltop + 240 );				
-		glEnd ();
+		UplinkDraw::begin ( GL_LINE_STRIP );
+			UplinkDraw::vertex2i ( screenw - panelwidth + 40, paneltop + 75 );
+			UplinkDraw::vertex2i ( screenw - panelwidth + 40, paneltop + 160 );
+			UplinkDraw::vertex2i ( screenw - 40, paneltop + 160 );
+			UplinkDraw::vertex2i ( screenw - 40, paneltop + 240 );				
+		UplinkDraw::end ();
 
-		glLineWidth ( 1 );
-		glDisable ( GL_LINE_STIPPLE );
+		UplinkDraw::lineWidth ( 1 );
+		UplinkDraw::disable ( GL_LINE_STIPPLE );
 
 	}
 
@@ -152,20 +153,20 @@ void AnalyserInterface::ConnectionDraw ( Button *button, bool highlighted, bool 
 
 			Button *b = EclGetButton (name);
 
-			glColor4f ( 1.0f, 0.1f, 0.1f, 1.0f );
-			glLineWidth ( 2 );
-			glLineStipple ( 2, moving_stipplepattern );
-			glEnable ( GL_LINE_STIPPLE );
+			UplinkDraw::color4f ( 1.0f, 0.1f, 0.1f, 1.0f );
+			UplinkDraw::lineWidth ( 2 );
+			UplinkDraw::lineStipple ( 2, moving_stipplepattern );
+			UplinkDraw::enable ( GL_LINE_STIPPLE );
 
-			glBegin ( GL_LINE_LOOP );
-				glVertex2i ( b->x - 10, b->y - 10 );
-				glVertex2i ( b->x + b->width + 10, b->y - 10 );
-				glVertex2i ( b->x + b->width + 10, b->y + b->height + 10 );
-				glVertex2i ( b->x - 10, b->y + b->height + 10 );
-			glEnd ();
+			UplinkDraw::begin ( GL_LINE_LOOP );
+				UplinkDraw::vertex2i ( b->x - 10, b->y - 10 );
+				UplinkDraw::vertex2i ( b->x + b->width + 10, b->y - 10 );
+				UplinkDraw::vertex2i ( b->x + b->width + 10, b->y + b->height + 10 );
+				UplinkDraw::vertex2i ( b->x - 10, b->y + b->height + 10 );
+			UplinkDraw::end ();
 
-			glLineWidth ( 1 );
-			glDisable ( GL_LINE_STIPPLE );
+			UplinkDraw::lineWidth ( 1 );
+			UplinkDraw::disable ( GL_LINE_STIPPLE );
 
 		}
 		

@@ -1,3 +1,4 @@
+#include "../../../../lib/gucci/uplink_draw.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -58,7 +59,7 @@ bool ConsoleScreenInterface::IsVisibleInterface ()
 void ConsoleScreenInterface::BorderDraw ( Button *button, bool highlighted, bool clicked )
 {
 
-	glColor3f ( 1.0f, 1.0f, 1.0f );
+	UplinkDraw::color3f ( 1.0f, 1.0f, 1.0f );
 	border_draw ( button );
 
 }
@@ -68,7 +69,7 @@ void ConsoleScreenInterface::MessageDraw ( Button *button, bool highlighted, boo
 
 	clear_draw ( button->x, button->y, button->width, button->height );
 
-	glColor3f ( 0.6f, 1.0f, 0.6f );
+	UplinkDraw::color3f ( 0.6f, 1.0f, 0.6f );
 	text_draw ( button, highlighted, clicked );
 
 }

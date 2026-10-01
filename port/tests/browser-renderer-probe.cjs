@@ -42,14 +42,14 @@ const fs = require("node:fs"),
     await page.waitForFunction(() => Module.rendererProbeFrames > 5);
     assert.deepEqual(errors, []);
     for (let i = 1; i <= 2; i++) {
-      const previousFrames = await page.evaluate(
-        () => Module.rendererProbeFrames,
-      );
       await page.evaluate(() => {
         window.qaLoss = GLctx.getExtension("WEBGL_lose_context");
         qaLoss.loseContext();
       });
       await page.waitForFunction(() => GLctx.isContextLost());
+      const previousFrames = await page.evaluate(
+        () => Module.rendererProbeFrames,
+      );
       await page.waitForTimeout(100);
       await page.evaluate(() => qaLoss.restoreContext());
       await page.waitForFunction(

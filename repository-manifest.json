@@ -245,7 +245,7 @@
     {
       "path": "port/tests/browser-renderer-probe.cjs",
       "bytes": 2969,
-      "sha256": "f7de76aaeff5fcfefc30a59edb631f66641d48977c9786386bb72c07e4b7bd7e"
+      "sha256": "406feb7bbddac6eb365de97f2c9acd1cd008cdcca3f57028de82437c771a2282"
     },
     {
       "path": "port/tests/browser-renderer.cjs",

@@ -20,7 +20,7 @@ The previous browser's solid rendering of stippled lines is retained. Unused nat
 
 CI runs these and the existing storage/lifecycle/display/Pages-subpath checks. Generated screenshots, results and logs are CI artifacts retained for three days, rather than checked-in output. The full-screen test captures evidence; it is not a completed tutorial/mission or campaign replay.
 
-For baseline comparisons, build main `dbb5cd0` with the same SDK in a detached worktree, then run `bash port/tests/build-game-renderer-qa.sh /path/to/worktree`. That older link script writes its QA variant to `prototype/`; copy those `game.{js,wasm,data}` files to this checkout's `qa/baseline/`; run `QA_RENDERER_PHASE=baseline node port/tests/browser-renderer.cjs`, then the candidate test. `python3 port/tests/compare-renderer.py` (Pillow) writes paired screenshots and comparisons to `qa/renderer-comparison/`.
+For baseline comparisons, build main `dbb5cd0` with the same SDK in a detached worktree, then run `bash port/tests/build-game-renderer-qa.sh /path/to/worktree`. The helper isolates the older link script's QA output too; copy its `qa/renderer/game.{js,wasm,data}` files to this checkout's `qa/baseline/`; run `QA_RENDERER_PHASE=baseline node port/tests/browser-renderer.cjs`, then the candidate test. `python3 port/tests/compare-renderer.py` (Pillow) writes paired screenshots and comparisons to `qa/renderer-comparison/`.
 
 ## Initial migration measurements
 

@@ -134,8 +134,8 @@
     },
     {
       "path": "port/check.sh",
-      "bytes": 1129,
-      "sha256": "d24e015b3c35e91883b0bb122221318feb8d409537a4b73e161210173431af05"
+      "bytes": 1173,
+      "sha256": "a3551019156515b790a90c4db0906723ef65df06ced0fdc326bb654dc8f0c607"
     },
     {
       "path": "port/compile-game.py",
@@ -199,8 +199,8 @@
     },
     {
       "path": "port/renderer-notes.md",
-      "bytes": 4671,
-      "sha256": "4380864f0c7aaf9434aa12b3ba5e8aad624cdffa8d2d2546962c8fb8683954d7"
+      "bytes": 4678,
+      "sha256": "610895d0a37c9b24ff82c134a3d2d97d711ad9295be6d1f6981397cdbf481804"
     },
     {
       "path": "port/runtime-review.md",
@@ -244,8 +244,8 @@
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
-      "bytes": 2969,
-      "sha256": "406feb7bbddac6eb365de97f2c9acd1cd008cdcca3f57028de82437c771a2282"
+      "bytes": 2984,
+      "sha256": "41ac6b3e87650d81f9fe8a428c2721df0363079cb07147d7d1c59c93a1308057"
     },
     {
       "path": "port/tests/browser-renderer.cjs",
@@ -264,8 +264,8 @@
     },
     {
       "path": "port/tests/build-game-renderer-qa.sh",
-      "bytes": 693,
-      "sha256": "d863ad1719030b987a1405bacc3012fb22cffe9933e0253eff42121ee7ba9a7a"
+      "bytes": 1279,
+      "sha256": "63fd937b48d408fa815f120354e498f5ea36ec2ff8ec6959f42be6f768af14e3"
     },
     {
       "path": "port/tests/build-renderer-probe.sh",
@@ -311,6 +311,11 @@
       "path": "port/tests/test-firsttime-save.py",
       "bytes": 1430,
       "sha256": "20e334d79d8f29c4916124e8335d760cff041da289507dfdc94e00cd247d679b"
+    },
+    {
+      "path": "port/tests/test-game-renderer-qa.py",
+      "bytes": 3556,
+      "sha256": "72245ce097918f5d2029d2a658d3673d4351c939340bf0e4e49994b205d67799"
     },
     {
       "path": "port/tests/test-mainloop.py",

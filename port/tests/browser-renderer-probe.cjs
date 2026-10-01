@@ -47,11 +47,12 @@ const fs = require("node:fs"),
         qaLoss.loseContext();
       });
       await page.waitForFunction(() => GLctx.isContextLost());
-      const previousFrames = await page.evaluate(
-        () => Module.rendererProbeFrames,
-      );
       await page.waitForTimeout(100);
-      await page.evaluate(() => qaLoss.restoreContext());
+      const previousFrames = await page.evaluate(() => {
+        const frames = Module.rendererProbeFrames;
+        qaLoss.restoreContext();
+        return frames;
+      });
       await page.waitForFunction(
         (expected) => Module.uplinkRendererRestores === expected,
         i,

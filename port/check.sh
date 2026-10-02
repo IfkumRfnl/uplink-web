@@ -5,6 +5,7 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 python3 port/tests/test-mainloop.py
 node port/tests/test-persistence.js
+node port/tests/test-profile-backups.cjs
 python3 port/tests/test-options-save.py
 python3 port/tests/test-game-autosave.py
 python3 port/tests/test-options-apply.py

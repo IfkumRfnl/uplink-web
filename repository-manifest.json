@@ -4,8 +4,8 @@
   "files": [
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 2035,
-      "sha256": "c661c0b2b7a1a2812735b533cc7ad2ac66e2e9a4d1a273b72a0fb7336adf754b"
+      "bytes": 2075,
+      "sha256": "2569a1f35508f1d3fa4caa570d9676f8a16387152a538ddcb1304cd0fad9d2aa"
     },
     {
       "path": ".gitignore",
@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7151,
-      "sha256": "2aa8fdb6c61cea6d02a3941a99dfa47626fd1c5d45559499475500aa32e61b3c"
+      "bytes": 7384,
+      "sha256": "643238845b494418dff9dc5d2e23575f69f4fdc00c18a7732083f4eb4fbcea17"
     },
     {
       "path": "RIGHTS.md",
@@ -84,8 +84,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1502,
-      "sha256": "5ed05be151f753fba9687f8d60a2d4a1401628f83e073255252a498d33f67427"
+      "bytes": 1571,
+      "sha256": "dec128f6717c1c8937178f576f3ab3a0c4fc93d522c4aa76d509c174b410e424"
     },
     {
       "path": "port/BUILD_STATUS.md",
@@ -134,8 +134,8 @@
     },
     {
       "path": "port/check.sh",
-      "bytes": 1410,
-      "sha256": "3e42761bde024a4b57df93cbefaf3acdb36c168d37da9483835c111461a7557d"
+      "bytes": 1451,
+      "sha256": "51c9597a24580832079b33a19bbd2c15bca9f6874ec87aae8e6339f4f1361f99"
     },
     {
       "path": "port/compile-game.py",
@@ -164,8 +164,8 @@
     },
     {
       "path": "port/link-game.sh",
-      "bytes": 992,
-      "sha256": "345ff590eeeb479a2b6ea085b9a1c8a813bbd47a6c1f427aec342e860794cab5"
+      "bytes": 1132,
+      "sha256": "6e9c754dfb838e06ede14f4bb63d0d81c906a67566afee28dcd92bd1ed4a48f1"
     },
     {
       "path": "port/mainloop-notes.md",
@@ -189,13 +189,23 @@
     },
     {
       "path": "port/persistence.js",
-      "bytes": 3114,
-      "sha256": "a675ceab899f5df44c8892a4abda445702f7313f63f0b0992be6f0e448b5ed10"
+      "bytes": 4023,
+      "sha256": "8608aacc211b36a87105c8510ab7e4bc6dbafd77662097960231dd094f02cc80"
     },
     {
       "path": "port/prepare-pages.py",
-      "bytes": 1949,
-      "sha256": "5a233d60444449c1f2d85b6364cee6e4e25e042871491e5e04b955d47efaccf9"
+      "bytes": 1994,
+      "sha256": "a1d4d59036499b4a5123355a9cf7d5980c26106fe51e2d450ccd2e2464baf66c"
+    },
+    {
+      "path": "port/profile-backups-notes.md",
+      "bytes": 3592,
+      "sha256": "e834888073f967958593221ebc3b7b1bd1e54c7670a1ea6246ceaf30719e8547"
+    },
+    {
+      "path": "port/profile-backups.cpp",
+      "bytes": 746,
+      "sha256": "89cfcd1fd4148b48f54db57538b084e889624126f6251c4069113d4000fcbb95"
     },
     {
       "path": "port/prototype.cpp",
@@ -251,6 +261,11 @@
       "path": "port/tests/browser-performance.cjs",
       "bytes": 19297,
       "sha256": "73a3610bd6f332f31cdf4880ac076aeb8bd499e081c561354897902dc663ff09"
+    },
+    {
+      "path": "port/tests/browser-profiles.cjs",
+      "bytes": 14448,
+      "sha256": "06aaf6673f86ef5bb5069a97c5fb49c1adabd637ecfad918901e89ec297d0d58"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -369,8 +384,13 @@
     },
     {
       "path": "port/tests/test-persistence.js",
-      "bytes": 5015,
-      "sha256": "0b7a8fdbaf5fc143aadd068e2e8fd2c92a818214963cad53c2e7f4f0186a8ae1"
+      "bytes": 6494,
+      "sha256": "cf8f664bae4bb9c0ab4525eaa924db87ffc1906a931ec19160b8162c4c58c375"
+    },
+    {
+      "path": "port/tests/test-profile-backups.cjs",
+      "bytes": 7822,
+      "sha256": "c4e17b29899ddea9fa20c01923ab291350f1c3b2097a3600c8aeff8a3fd17b39"
     },
     {
       "path": "port/tests/test-renderer-link.cjs",
@@ -4994,8 +5014,8 @@
     },
     {
       "path": "prototype/game.html",
-      "bytes": 989,
-      "sha256": "307d104afa722c6dff9b52129d10da91ae70e2af11e391017c2ad3ce62eb6c20"
+      "bytes": 1074,
+      "sha256": "21caa985d602266314de578dd6b67716fdb613b5a8326e2dcf4cdb59b35fa7de"
     },
     {
       "path": "prototype/index.html",
@@ -5011,6 +5031,16 @@
       "path": "prototype/prepare_from_archives.py",
       "bytes": 794,
       "sha256": "9122f2ee4474260ffd1600c7f9326f55f42694547d08a638da7bb048ddd71cfe"
+    },
+    {
+      "path": "prototype/profile-backups.js",
+      "bytes": 8635,
+      "sha256": "54d77dd89926bbf3fb3944f5c8bcac320d10dd06c6782c6759a0701394b05a86"
+    },
+    {
+      "path": "prototype/profile-controls.js",
+      "bytes": 4403,
+      "sha256": "7246b35ed944f42c881304919fb0ad4b8ac373080e7d81a9b7b484ba54cfe7a6"
     },
     {
       "path": "prototype/render_music.py",

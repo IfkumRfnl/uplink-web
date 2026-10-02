@@ -20,16 +20,33 @@
 
   // Call only after C/C++ has closed/copied/encrypted the save file. Resolves
   // after IDBFS finishes its IndexedDB transaction, not just the MEMFS write.
-  Module['uplinkFlushSaves'] = function () {
+  function persist(change, rollback) {
     status.pending++;
     var operation = queue.catch(function () {}).then(function () {
       return ready;
     }).then(function () {
+      if (status.rollbackFailed) throw Error('Save recovery failed. Reload before saving again.');
+      var changed = false;
       return new Promise(function (resolve, reject) {
-        FS.syncfs(false, function (error) {
-          if (error) reject(error);
-          else resolve();
-        });
+        function fail(error) {
+          if (changed && rollback) {
+            try { rollback(); }
+            catch (recoveryError) {
+              status.rollbackFailed = true;
+              error = Error('Save recovery failed. Reload before saving again: ' + recoveryError);
+            }
+          }
+          reject(error);
+        }
+        try {
+          // Include MEMFS mutation and recovery in the same serialized queue as
+          // ordinary saves. Later flushes must never persist a failed import.
+          if (change) { changed = true; change(); }
+          FS.syncfs(false, function (error) {
+            if (error) fail(error);
+            else resolve();
+          });
+        } catch (error) { fail(error); }
       });
     }).then(function () {
       status.lastError = null;
@@ -46,6 +63,10 @@
       status.pending--;
       throw error;
     });
+  }
+  Module['uplinkFlushSaves'] = function () { return persist(); };
+  Module['uplinkPersistSaveChange'] = function (change, rollback) {
+    return persist(change, rollback);
   };
   Module['uplinkSaveCompleted'] = Module['uplinkFlushSaves'];
 

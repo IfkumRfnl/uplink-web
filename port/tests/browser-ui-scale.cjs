@@ -142,10 +142,20 @@ const {requestHandler} = require('./browser-smoke.cjs');
       await snap('memory');
       // Exercise both-axis browser scrolling with the same original game alive.
       await page.locator('#display-control summary').click();
+      assert.equal(await page.locator('#display-control > #profile-control').count(),1);
+      assert.equal(await page.locator('#profile-import').isEnabled(),true);
       await page.selectOption('#display-scale','native');
       await page.getByRole('button',{name:'Apply display'}).click();
       await page.locator('#display-control summary').click();
       await page.setViewportSize({width:390,height:300});
+      await page.locator('#display-control summary').click();
+      await page.locator('#profile-import').scrollIntoViewIfNeeded();
+      const panel = await page.locator('#display-control').evaluate(el => {
+        const box=el.getBoundingClientRect();
+        return {left:box.left,right:box.right,bottom:box.bottom,scrollTop:el.scrollTop};
+      });
+      assert(panel.left>=0 && panel.right<=390 && panel.bottom<=300 && panel.scrollTop>0);
+      await page.locator('#display-control summary').click();
       await page.waitForTimeout(150);
       await page.evaluate(() => {const v=document.querySelector('#display-viewport');v.scrollLeft=63;v.scrollTop=67;});
       await page.waitForTimeout(150);

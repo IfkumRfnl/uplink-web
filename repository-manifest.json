@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7384,
-      "sha256": "643238845b494418dff9dc5d2e23575f69f4fdc00c18a7732083f4eb4fbcea17"
+      "bytes": 7389,
+      "sha256": "03a99d2c03a2bb73b3c7dd32aee6b7a26de9fb58e12f9d6bfcec82f52927a2b4"
     },
     {
       "path": "RIGHTS.md",
@@ -199,8 +199,8 @@
     },
     {
       "path": "port/profile-backups-notes.md",
-      "bytes": 3592,
-      "sha256": "e834888073f967958593221ebc3b7b1bd1e54c7670a1ea6246ceaf30719e8547"
+      "bytes": 3523,
+      "sha256": "5ce3c86ec78f33c69ce7c8ceaf40220b39e50fe213cfd83394de6010ef804902"
     },
     {
       "path": "port/profile-backups.cpp",
@@ -264,8 +264,8 @@
     },
     {
       "path": "port/tests/browser-profiles.cjs",
-      "bytes": 14448,
-      "sha256": "06aaf6673f86ef5bb5069a97c5fb49c1adabd637ecfad918901e89ec297d0d58"
+      "bytes": 17493,
+      "sha256": "01e32cbaa8d549634f1f456e520ad76788e2c806c8e71fc87fa6bebfc6176398"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -289,8 +289,8 @@
     },
     {
       "path": "port/tests/browser-ui-scale.cjs",
-      "bytes": 14188,
-      "sha256": "d4c80d4bc6101f85b953eaad9d223c4e3cf60fe48b7db51fae483f5a3959e4ec"
+      "bytes": 14859,
+      "sha256": "5e9dbc05746d0aeae160f13a9e56437176f310f63a44bb6f128d15d1c6419e57"
     },
     {
       "path": "port/tests/build-game-renderer-qa.sh",
@@ -5009,8 +5009,8 @@
     },
     {
       "path": "prototype/display.js",
-      "bytes": 9159,
-      "sha256": "af4f75cae6676c49ca15f8b32e57f2a3784ab0d14b55c18c73a83f9498ba15b3"
+      "bytes": 9263,
+      "sha256": "82ee0ee55e9a502442975258644fd3a6b8428d97fc3dbce4725926084a427861"
     },
     {
       "path": "prototype/game.html",
@@ -5039,8 +5039,8 @@
     },
     {
       "path": "prototype/profile-controls.js",
-      "bytes": 4403,
-      "sha256": "7246b35ed944f42c881304919fb0ad4b8ac373080e7d81a9b7b484ba54cfe7a6"
+      "bytes": 4391,
+      "sha256": "034c7dca6db5c892788da70997f384de2cf0d461c8be1b69266783bc3bef6fe5"
     },
     {
       "path": "prototype/render_music.py",

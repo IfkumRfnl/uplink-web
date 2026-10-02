@@ -32,8 +32,8 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
       await page.waitForTimeout(delay);
     }
     async function openControls() {
-      if (!await page.locator('#profile-control').evaluate(el=>el.open))
-        await page.locator('#profile-control summary').click();
+      if (!await page.locator('#display-control').evaluate(el=>el.open))
+        await page.locator('#display-control summary').click();
     }
     async function upload(name,buffer) {
       await openControls();
@@ -59,14 +59,52 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
       };
     });
     await page.goto(origin,{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('#profile-control').isVisible(),false,'Backups start collapsed inside Display');
+    assert.equal(await page.locator('details').count(),1,'Display is the only shell disclosure');
+    assert.equal(await page.locator('#display-control > #profile-control').count(),1);
+    assert.equal(await page.locator('header #profile-control, #display-control form #profile-control').count(),0);
     await page.waitForFunction(()=>typeof qaReleaseRestore==='function');
-    await page.locator('#profile-control summary').click();
+    await page.locator('#display-control summary').click();
     assert.equal(await page.locator('#profile-import').isDisabled(),true);
     await page.evaluate(()=>qaReleaseRestore());await ready();
     await page.waitForFunction(()=>!document.querySelector('#profile-import').disabled);
-    assert.equal(await page.locator('#profile-control').evaluate(el=>el.open),true);
-    await page.locator('#profile-control summary').click();
-    console.log('PASS: Saves opened during startup enables automatically after storage restore');
+    assert.equal(await page.locator('#display-control').evaluate(el=>el.open),true);
+    await page.locator('#display-control summary').click();
+    console.log('PASS: Display backups opened during startup enables automatically after storage restore');
+    for(let i=0;i<3;i++){
+      await openControls();
+      assert.equal(await page.locator('#profile-import').isEnabled(),true);
+      await page.locator('#display-control summary').click();
+      assert.equal(await page.locator('#profile-control').isVisible(),false);
+    }
+    await page.setViewportSize({width:240,height:300});await openControls();
+    await page.locator('#profile-import').scrollIntoViewIfNeeded();
+    const compact=await page.evaluate(()=>{
+      const panel=document.querySelector('#display-control'),bounds=panel.getBoundingClientRect();
+      const input=document.querySelector('#profile-import').getBoundingClientRect();
+      const summary=panel.querySelector('summary').getBoundingClientRect();
+      return {left:bounds.left,right:bounds.right,top:bounds.top,bottom:bounds.bottom,
+        scrollTop:panel.scrollTop,scrollHeight:panel.scrollHeight,clientHeight:panel.clientHeight,
+        inputLeft:input.left,inputRight:input.right,inputTop:input.top,inputBottom:input.bottom,
+        summaryTop:summary.top,summaryBottom:summary.bottom,bodyWidth:document.body.scrollWidth};
+    });
+    assert(compact.left>=0 && compact.right<=240 && compact.top>=0 && compact.bottom<=300);
+    assert(compact.scrollHeight>compact.clientHeight && compact.scrollTop>0,'Display owns vertical panel scrolling');
+    assert(compact.inputLeft>=compact.left && compact.inputRight<=compact.right &&
+      compact.inputTop>=compact.top && compact.inputBottom<=compact.bottom,'Backup picker stays reachable within the panel');
+    assert(compact.bodyWidth<=240,'The combined panel must not add horizontal page overflow');
+    assert(compact.summaryTop>=compact.top && compact.summaryBottom<compact.inputTop,
+      'Display can be collapsed while the backup section is scrolled into view');
+    await page.screenshot({path:'qa/profiles/display-small.png',fullPage:true});
+    await page.setViewportSize({width:1200,height:1000});
+    for(const scale of ['fit','sharp']){
+      await page.locator('#display-scale').selectOption(scale);
+      await page.getByRole('button',{name:'Apply display'}).click();
+      assert.equal(await page.locator('#display-message').innerText(),'Display saved.');
+      assert.equal(await page.locator('#profile-import').isEnabled(),true);
+    }
+    await page.locator('#display-control summary').click();
+    console.log('PASS: one collapsed Display panel contains backups; repeated toggles, narrow scrolling and scaling coexist');
     await page.waitForTimeout(18000);
     console.log('Browser ready; creating profile');
     await click(320,380);await click(170,168);await click(320,390);await click(300,150);
@@ -83,6 +121,8 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
     assert.equal(await page.evaluate(()=>Module._uplinkProfilesCanImport()),1);
     console.log('PASS: real game profile created and saved');
     await openControls();await page.locator('#profile-select').selectOption('ProfileQA.usr');
+    await page.locator('#profile-import').scrollIntoViewIfNeeded();
+    await page.screenshot({path:'qa/profiles/display-backups.png',fullPage:true});
     const downloadEvent=page.waitForEvent('download');await page.locator('#profile-export').click();
     const download=await downloadEvent;assert.equal(download.suggestedFilename(),'ProfileQA.uplink-save');
     const contents=fs.readFileSync(await download.path());
@@ -114,7 +154,7 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
     await target.waitForFunction(()=>window.Module?.uplinkPersistence?.ready &&
       typeof MainLoop !== 'undefined' && MainLoop.currentFrameNumber > 10);
     await target.waitForFunction(()=>Module._uplinkProfilesCanImport()===1);
-    await target.locator('#profile-control summary').click();
+    await target.locator('#display-control summary').click();
     await target.locator('#profile-import').setInputFiles({name:download.suggestedFilename(),mimeType:'application/json',buffer:contents});
     await target.waitForFunction(()=>!document.querySelector('#profile-import').disabled);
     assert.match(await target.locator('#profile-message').innerText(),/imported and saved/);

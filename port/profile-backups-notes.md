@@ -1,6 +1,6 @@
 # Browser profile backups
 
-Open **Saves** in the game header, select a profile, and choose **Export backup**.
+Open **Display**, scroll to **Save backups**, select a profile, and choose **Export backup**.
 This exports its last closed save, not unsaved progress in a running game. Keep
 the downloaded `<profile>.uplink-save` filename unchanged. At the original login
 screen, use **Import backup** to restore it or move it to another browser. The
@@ -46,8 +46,7 @@ overwrite/cancellation, invalid inputs, repeated operations,
 aborted IndexedDB transaction, reload/password login, and live-game rejection.
 CI runs both. Browser evidence belongs under ignored `qa/profiles/`.
 
-Merge coordination: `prototype/game.html` only adds two script tags. Other shared
-support edits are `port/link-game.sh`, `port/persistence.js`, Pages asset staging,
-test scripts/workflow, README, and repository inventory. This branch does not edit
-`prototype/display.js`, font/renderer source, or the autosave constructor. Retest
-after the parent serializes the UI-scaling branch merge.
+The controls share Display's collapsed, scrollable panel and sit outside its
+settings form. Opening Display refreshes the profile roster; controls also
+refresh automatically when storage restoration finishes. Moving the controls
+does not change the backup format, persistence queue, or native import guard.

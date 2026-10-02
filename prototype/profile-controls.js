@@ -1,24 +1,24 @@
 'use strict';
 (() => {
-  const control = document.createElement('details');
+  const panel = document.getElementById('display-control');
+  const control = document.createElement('section');
   control.id = 'profile-control';
-  control.innerHTML = `<summary>Saves</summary><div>
+  control.setAttribute('aria-labelledby', 'profile-heading');
+  control.innerHTML = `<h2 id="profile-heading">Save backups</h2>
     <p>Back up a last saved profile. Import a browser-port backup at the login screen; your profile password stays the same.</p>
     <label>Profile <select id="profile-select"></select></label>
     <button id="profile-export" type="button">Export backup</button>
     <label>Import backup <input id="profile-import" type="file" accept=".uplink-save"></label>
-    <p id="profile-message" role="status"></p></div>`;
+    <p id="profile-message" role="status"></p>`;
   const style = document.createElement('style');
-  style.textContent = `#profile-control {display:inline-block;position:relative;margin-left:12px;}
-    #profile-control summary {cursor:pointer;}
-    #profile-control>div {position:fixed;top:56px;left:20px;z-index:21;width:min(240px,calc(100vw - 64px));padding:12px;
-      background:#081726;border:1px solid #527487;display:grid;gap:10px;}
+  style.textContent = `#profile-control {padding:12px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;border-top:1px solid #527487;}
+    #profile-control h2 {margin:0;font-size:13px;}
     #profile-control p {margin:0;font-size:12px;line-height:1.4;}
-    #profile-control label {display:grid;gap:4px;}
-    #profile-control select,#profile-control button,#profile-control input {max-width:100%;font:inherit;
+    #profile-control label {display:grid;gap:4px;min-width:0;}
+    #profile-control select,#profile-control button,#profile-control input {width:100%;min-width:0;max-width:100%;font:inherit;
       color:inherit;background:#163241;border:1px solid #527487;padding:5px;box-sizing:border-box;}`;
   document.head.append(style);
-  document.querySelector('header').append(control);
+  panel.append(control);
   const select = control.querySelector('#profile-select');
   const exportButton = control.querySelector('#profile-export');
   const input = control.querySelector('#profile-import');
@@ -49,7 +49,7 @@
     catch (error) { message.textContent = `Backup failed: ${error.message || error}`; }
     finally { busy = false; input.value = ''; refresh(); }
   }
-  control.addEventListener('toggle', () => { if (control.open) refresh(); });
+  panel.addEventListener('toggle', () => { if (panel.open) refresh(); });
   exportButton.onclick = () => run(async () => {
     const backup = await getService().exportProfile(select.value);
     const url = URL.createObjectURL(new Blob([backup.text], {type:'application/json'}));
@@ -70,7 +70,7 @@
   };
   input.addEventListener('cancel', () => { input.value = ''; message.textContent = 'Import cancelled.'; });
   // The shell loads before game.js creates its restore promise. Once all page
-  // scripts have loaded, subscribe even if Saves is already open.
+  // scripts have loaded, subscribe even if Display is already open.
   window.addEventListener('load', () => {
     window.Module?.uplinkPersistenceReady?.then(refresh, () => {
       refresh();

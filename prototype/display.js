@@ -35,9 +35,9 @@ window.UplinkDisplay = (() => {
     #canvas {max-width:none; image-rendering:pixelated;position:relative;}
     #display-control {position:fixed;right:8px;top:8px;z-index:20;color:#c6e1ec;
       font:13px system-ui;background:#081726eF;border:1px solid #527487;border-radius:4px;
-      max-height:calc(100vh - 16px);overflow:auto;}
-    #display-control summary {cursor:pointer;padding:6px 10px;}
-    #display-control form {padding:8px 12px;display:grid;gap:10px;width:230px;}
+      max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow:auto;}
+    #display-control summary {cursor:pointer;padding:6px 10px;position:sticky;top:0;z-index:1;background:#081726;}
+    #display-control form {padding:8px 12px;display:grid;gap:10px;width:min(230px,calc(100vw - 42px));}
     #display-control label {display:grid;gap:4px;}
     #display-control select,#display-control button {font:inherit;color:inherit;
       background:#163241;border:1px solid #527487;padding:6px;margin:0;}

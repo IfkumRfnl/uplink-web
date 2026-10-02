@@ -12,7 +12,12 @@
   {
     "path": "lib/gucci/image.cpp",
     "original_sha256": "3e87bb47254d05377ab3a28b09569d501083a18885b1044f1156617c5b98ef81",
-    "modified_sha256": "4eb6ba4b8bb194ab6b27292dcf34fd5450b380fb89b8f243b5a7f3f2f7bd8da8"
+    "modified_sha256": "1b4e39a67e1b57e64191068a05f3754d6bcc1b052618ac0daa2a6a8cc06254e8"
+  },
+  {
+    "path": "lib/gucci/image.h",
+    "original_sha256": "781233edcee03ed0adc294036aad6aadcf7ca04da42a2c488018c6fbbbde8cf0",
+    "modified_sha256": "2bdd5383fd81c12d20e97c6303d29ac1c187a633c0bf379b8f94183784b83298"
   },
   {
     "path": "lib/redshirt/redshirt.cpp",

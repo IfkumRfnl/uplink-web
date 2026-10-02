@@ -20,7 +20,8 @@
     "test:pages": "node port/tests/browser-pages.cjs",
     "test:browser-display": "node port/tests/browser-display.cjs",
     "test:browser-renderer-probe": "bash port/tests/build-renderer-probe.sh && node port/tests/browser-renderer-probe.cjs",
-    "test:browser-renderer": "bash port/tests/build-game-renderer-qa.sh && node port/tests/browser-renderer.cjs"
+    "test:browser-renderer": "bash port/tests/build-game-renderer-qa.sh && node port/tests/browser-renderer.cjs",
+    "bench:browser": "node port/tests/browser-performance.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

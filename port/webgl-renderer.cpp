@@ -508,15 +508,30 @@ void texImage2D(GLenum target, GLint level, GLint internal, GLsizei w,
                 const void *pixels) {
   if (!boundTexture || level || border || w < 0 || h < 0)
     abort();
-  flush();
   Texture &tex = textures[boundTexture];
+  int bpp = bytesPerPixel(format, type),
+      stride = (w * bpp + unpack - 1) / unpack * unpack;
+  // Images keep an owned texture. Compare the actual bytes, rather than the
+  // source pointer: Image exposes mutable pixels and callers can edit in place.
+  // Recovery already retains packed pixels, so this needs no additional copy.
+  if (pixels && w > 0 && h > 0 && tex.width == w && tex.height == h &&
+      tex.internal == internal && tex.format == (GLint)format &&
+      tex.type == (GLint)type && tex.pixels.size() == size_t(w * h * bpp)) {
+    bool identical = true;
+    for (int y = 0; y < h && identical; ++y)
+      identical = memcmp(&tex.pixels[y * w * bpp],
+                         (const unsigned char *)pixels + y * stride,
+                         w * bpp) == 0;
+    if (identical)
+      return;
+  }
+  // Pending geometry must use the previous contents before a real mutation.
+  flush();
   tex.width = w;
   tex.height = h;
   tex.internal = internal;
   tex.format = format;
   tex.type = type;
-  int bpp = bytesPerPixel(format, type),
-      stride = (w * bpp + unpack - 1) / unpack * unpack;
   tex.pixels.resize(w * h * bpp);
   for (int y = 0; y < h; ++y) {
     if (pixels)

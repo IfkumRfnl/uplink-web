@@ -83,6 +83,13 @@ static void sample(int x, int y, int r, int g, int b, int tolerance) {
   assert(abs(p[0] - r) <= tolerance && abs(p[1] - g) <= tolerance &&
          abs(p[2] - b) <= tolerance);
 }
+// Submit while WebGL is already lost but before the context-loss event updates
+// the renderer flag. Called immediately after a restoration (program == 0).
+extern "C" EMSCRIPTEN_KEEPALIVE void qaProbeFlushLost() {
+  color3ub(255, 255, 255);
+  quad(0, 0, 1, 1);
+  flush();
+}
 static void render() {
   clearColor(0, 0, 0, 1);
   clear(GL_COLOR_BUFFER_BIT);

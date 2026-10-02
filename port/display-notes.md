@@ -147,10 +147,14 @@ Shorter animation duration is a latency preference, not evidence of an FPS gain.
 functions in browser and native modes. The main-loop test checks actual logical
 mouse/motion/keyboard dispatch. The renderer probe adds fractional clipping and
 attribute restoration pixel checks, repeated after context restores.
+The probe also forces a second loss during the restoration event, submitting
+geometry before the renderer's next loss event arrives. Checking actual WebGL
+loss status prevents shader compilation during that event-delivery gap.
 `npm run test:browser-ui-scale` uses an isolated QA bundle with read-only state
 helpers and actual pointer/keyboard events for original onboarding, registration,
 gateway, desktop, map and Memory Banks at four resolutions and 125/150/200%.
 It checks integer/fractional DPR, scrolling, context recovery and saved UI-size
-restart. Screenshots/results remain under ignored `qa/ui-scale/` and short-lived
+restart, an in-place DPR change and blocked restarts after flush/storage failures.
+Screenshots/results remain under ignored `qa/ui-scale/` and short-lived
 CI artifacts. Full campaign, native compilation and other browsers remain outside
 these checks.

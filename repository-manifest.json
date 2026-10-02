@@ -149,8 +149,8 @@
     },
     {
       "path": "port/display-notes.md",
-      "bytes": 9529,
-      "sha256": "1097a448eb58d34fbd8703e9f31cc065d5e5312681261c1463d21933d71770e6"
+      "bytes": 9830,
+      "sha256": "dc041bc9458aba10a49086c25dc5c94e91db73c02e74ffab49dde51fec465cdb"
     },
     {
       "path": "port/include/world/Player.h",
@@ -204,8 +204,8 @@
     },
     {
       "path": "port/renderer-notes.md",
-      "bytes": 5122,
-      "sha256": "5b20cec23074a22468f0cd9f9bebee427f728e40116dd4b48e92aa9224760bef"
+      "bytes": 5280,
+      "sha256": "e8f0e4dae121466b7562ecda32264ea6c128072585fd6f9921868d0a4311bc61"
     },
     {
       "path": "port/runtime-review.md",
@@ -254,8 +254,8 @@
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
-      "bytes": 2984,
-      "sha256": "41ac6b3e87650d81f9fe8a428c2721df0363079cb07147d7d1c59c93a1308057"
+      "bytes": 4134,
+      "sha256": "f91e8c37c3573ac0530a64268873693e7856340d6902d9a9bea25879f81972b7"
     },
     {
       "path": "port/tests/browser-renderer.cjs",
@@ -279,8 +279,8 @@
     },
     {
       "path": "port/tests/build-game-renderer-qa.sh",
-      "bytes": 1300,
-      "sha256": "48f61fc8ddb7123606dd05ba50ee4d181eed3e9591e8335e5f2b6eb2e460c6ee"
+      "bytes": 1318,
+      "sha256": "2f26b0a580383e0c3ec20f3b8575ddfabe498eb788e958c25e75c7249440b4ab"
     },
     {
       "path": "port/tests/build-renderer-probe.sh",
@@ -304,8 +304,8 @@
     },
     {
       "path": "port/tests/renderer-probe.cpp",
-      "bytes": 6988,
-      "sha256": "1edd6f1067efecc731da0954604799492110f0f1c9bc13cf396c9b6ee08f1a7c"
+      "bytes": 7263,
+      "sha256": "1a768137ce14b0bbca6ffff583e8159661652b24916b3cac3ed638a1490f25c1"
     },
     {
       "path": "port/tests/run-image-tests.sh",
@@ -399,8 +399,8 @@
     },
     {
       "path": "port/webgl-renderer.cpp",
-      "bytes": 20209,
-      "sha256": "162717b168e966bc0045a2f1f8585fa25585d9f0ecd70853376bef38d69409bc"
+      "bytes": 20535,
+      "sha256": "2728d2e378b34c155801f878126877e21677e7c7a419a6bcabb107b4c65fe4ab"
     },
     {
       "path": "prototype/ASSET_PREPARATION.md",

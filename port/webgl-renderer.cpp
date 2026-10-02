@@ -248,7 +248,13 @@ static GLuint nextTexture = 1, boundTexture = 0;
 static GLenum activeUnit = GL_TEXTURE0;
 static GLint unpack = 4, maximumTextureSize = 0;
 static bool lost = false, callbacksInstalled = false;
-static bool contextIsLost() { return lost; }
+static bool contextIsLost() {
+  // loseContext() takes effect before its event is delivered. In particular,
+  // a second loss just after restoration must not compile a shader in a lost
+  // context while our callback flag still says the context is alive.
+  return lost || emscripten_is_webgl_context_lost(
+                     emscripten_webgl_get_current_context());
+}
 static std::map<GLenum, bool> capabilities;
 static GLint sourceRGB = GL_ONE, destRGB = GL_ZERO, sourceAlpha = GL_ONE,
              destAlpha = GL_ZERO, clip[4] = {0, 0, 0, 0};

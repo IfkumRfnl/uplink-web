@@ -5,7 +5,7 @@ const fs = require("node:fs"),
   assert = require("node:assert/strict"),
   { chromium } = require("playwright");
 (async () => {
-  const root = path.resolve("qa/probe");
+  const root = path.resolve(process.env.QA_PROBE_ROOT || "qa/probe");
   const server = http.createServer((req, res) => {
     const file = path.join(root, new URL(req.url, "http://local").pathname);
     fs.readFile(file, (err, data) => {
@@ -64,6 +64,24 @@ const fs = require("node:fs"),
       assert.deepEqual(errors, []);
       assert.equal(await page.evaluate(() => GLctx.getError()), 0);
     }
+    // Force the event-delivery gap deterministically: after the renderer's
+    // restoration callback, lose WebGL again and submit before its loss event.
+    await page.evaluate(() => {
+      canvas.addEventListener('webglcontextrestored', () => {
+        qaLoss.loseContext();
+        Module._qaProbeFlushLost();
+      }, {once:true});
+      qaLoss.loseContext();
+    });
+    await page.waitForFunction(() => GLctx.isContextLost());
+    await page.waitForTimeout(100);
+    await page.evaluate(() => qaLoss.restoreContext());
+    await page.waitForFunction(() => Module.uplinkRendererRestores===3 && GLctx.isContextLost());
+    await page.waitForTimeout(100);
+    const frames = await page.evaluate(() => {const n=Module.rendererProbeFrames;qaLoss.restoreContext();return n;});
+    await page.waitForFunction(n => Module.uplinkRendererRestores===4 && Module.rendererProbeFrames>n,frames);
+    assert.deepEqual(errors,[]);
+    assert.equal(await page.evaluate(() => GLctx.getError()),0);
     await page
       .locator("#canvas")
       .screenshot({ path: path.join(root, "restored.png") });
@@ -73,7 +91,8 @@ const fs = require("node:fs"),
         {
           pixelAssertions:
             "sparse RGBA, quad triangulation, matrices, independent lines, clipping/attribute restoration, image REPLACE and alpha blending",
-          contextRestores: 2,
+          contextRestores: 4,
+          eventGapRegression: 'second loss during restoration, with immediate C++ submission before the loss event',
           errors,
         },
         null,
@@ -81,7 +100,7 @@ const fs = require("node:fs"),
       ),
     );
     console.log(
-      "PASS: actual renderer pixels and two texture/program/buffer context restorations",
+      "PASS: actual renderer pixels, four context restorations and immediate-loss event-gap regression",
     );
   } finally {
     if (browser) await browser.close();

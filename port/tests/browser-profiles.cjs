@@ -14,9 +14,9 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
   try {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH,
-      headless:true, args:['--enable-unsafe-swiftshader']});
+      headless:true, ignoreDefaultArgs:['--hide-scrollbars'], args:['--enable-unsafe-swiftshader']});
     const context = await browser.newContext({viewport:{width:1200,height:1000}, acceptDownloads:true});
-    const page = await context.newPage(), errors = [];
+    const page = await context.newPage(), errors = [], layouts = [];
     page.setDefaultTimeout(45000);
     page.on('pageerror', error=>errors.push(String(error)));
     const origin = `http://127.0.0.1:${server.address().port}/game.html`;
@@ -78,25 +78,32 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
       await page.locator('#display-control summary').click();
       assert.equal(await page.locator('#profile-control').isVisible(),false);
     }
-    await page.setViewportSize({width:240,height:300});await openControls();
-    await page.locator('#profile-import').scrollIntoViewIfNeeded();
-    const compact=await page.evaluate(()=>{
-      const panel=document.querySelector('#display-control'),bounds=panel.getBoundingClientRect();
-      const input=document.querySelector('#profile-import').getBoundingClientRect();
-      const summary=panel.querySelector('summary').getBoundingClientRect();
-      return {left:bounds.left,right:bounds.right,top:bounds.top,bottom:bounds.bottom,
-        scrollTop:panel.scrollTop,scrollHeight:panel.scrollHeight,clientHeight:panel.clientHeight,
-        inputLeft:input.left,inputRight:input.right,inputTop:input.top,inputBottom:input.bottom,
-        summaryTop:summary.top,summaryBottom:summary.bottom,bodyWidth:document.body.scrollWidth};
-    });
-    assert(compact.left>=0 && compact.right<=240 && compact.top>=0 && compact.bottom<=300);
-    assert(compact.scrollHeight>compact.clientHeight && compact.scrollTop>0,'Display owns vertical panel scrolling');
-    assert(compact.inputLeft>=compact.left && compact.inputRight<=compact.right &&
-      compact.inputTop>=compact.top && compact.inputBottom<=compact.bottom,'Backup picker stays reachable within the panel');
-    assert(compact.bodyWidth<=240,'The combined panel must not add horizontal page overflow');
-    assert(compact.summaryTop>=compact.top && compact.summaryBottom<compact.inputTop,
-      'Display can be collapsed while the backup section is scrolled into view');
-    await page.screenshot({path:'qa/profiles/display-small.png',fullPage:true});
+    for(const viewport of [{width:1200,height:300},{width:240,height:300}]){
+      await page.setViewportSize(viewport);await openControls();
+      await page.locator('#profile-import').scrollIntoViewIfNeeded();
+      const compact=await page.evaluate(()=>{
+        const panel=document.querySelector('#display-control'),bounds=panel.getBoundingClientRect();
+        const input=document.querySelector('#profile-import').getBoundingClientRect();
+        const summary=panel.querySelector('summary').getBoundingClientRect();
+        return {left:bounds.left,right:bounds.right,top:bounds.top,bottom:bounds.bottom,
+          scrollTop:panel.scrollTop,scrollHeight:panel.scrollHeight,clientHeight:panel.clientHeight,
+          clientWidth:panel.clientWidth,scrollWidth:panel.scrollWidth,scrollbarWidth:bounds.width-panel.clientWidth,
+          inputLeft:input.left,inputRight:input.right,inputTop:input.top,inputBottom:input.bottom,
+          summaryTop:summary.top,summaryBottom:summary.bottom,bodyWidth:document.body.scrollWidth};
+      });
+      assert(compact.left>=0 && compact.right<=viewport.width && compact.top>=0 && compact.bottom<=viewport.height);
+      assert(compact.scrollHeight>compact.clientHeight && compact.scrollTop>0,'Display owns vertical panel scrolling');
+      assert(compact.scrollbarWidth>2,'Exercise a classic scrollbar that reserves panel width');
+      assert(compact.scrollWidth<=compact.clientWidth,'Display must not scroll horizontally when a vertical scrollbar is present');
+      assert(compact.inputLeft>=compact.left && compact.inputRight<=compact.right &&
+        compact.inputTop>=compact.top && compact.inputBottom<=compact.bottom,'Backup picker stays reachable within the panel');
+      assert(compact.bodyWidth<=viewport.width,'The combined panel must not add horizontal page overflow');
+      assert(compact.summaryTop>=compact.top && compact.summaryBottom<compact.inputTop,
+        'Display can be collapsed while the backup section is scrolled into view');
+      layouts.push({viewport,...compact});
+      console.log('PASS: classic scrollbar geometry',JSON.stringify({viewport,clientWidth:compact.clientWidth,scrollWidth:compact.scrollWidth}));
+      await page.screenshot({path:`qa/profiles/display-scrollbars-${viewport.width}.png`,fullPage:true});
+    }
     await page.setViewportSize({width:1200,height:1000});
     for(const scale of ['fit','sharp']){
       await page.locator('#display-scale').selectOption(scale);
@@ -239,7 +246,7 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
     const state=await page.evaluate(()=>({abort:ABORT,gl:GLctx.getError(),status:Module.uplinkPersistence}));
     assert(!state.abort && !state.gl);assert.deepEqual(errors,[]);
     await page.screenshot({path:'qa/profiles/restored-profile.png',fullPage:true});
-    fs.writeFileSync('qa/profiles/results.json',JSON.stringify({saveBytes:original.length,failure,state,errors},null,2));
+    fs.writeFileSync('qa/profiles/results.json',JSON.stringify({saveBytes:original.length,layouts,failure,state,errors},null,2));
     console.log('PASS: imported profile loads with original password; live export preserves the save and live import is rejected');
   } finally {if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exitCode=1;});

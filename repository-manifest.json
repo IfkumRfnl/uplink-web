@@ -264,8 +264,8 @@
     },
     {
       "path": "port/tests/browser-profiles.cjs",
-      "bytes": 17700,
-      "sha256": "480ee77e69dfc625de18a959df531e5a5eaac4dd87184de4df0101e42da7d0b0"
+      "bytes": 18462,
+      "sha256": "66f1db0fb614a99859949f2c5377c456e20dbe1b6a3b1eae26f678e6f26379ca"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -5009,8 +5009,8 @@
     },
     {
       "path": "prototype/display.js",
-      "bytes": 9329,
-      "sha256": "9ab9b8e92b230f9e50b1ef7e2943beec4637ba9b1968d77d17171346c1530bfa"
+      "bytes": 9293,
+      "sha256": "2e52e036df61fba522a561beaed472f7a148970827d33f7ecac888a79f9414d6"
     },
     {
       "path": "prototype/game.html",

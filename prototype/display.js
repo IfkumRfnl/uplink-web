@@ -38,7 +38,7 @@ window.UplinkDisplay = (() => {
       max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow:auto;}
     #display-control[open] {width:min(254px,calc(100vw - 18px));}
     #display-control summary {cursor:pointer;padding:6px 10px;position:sticky;top:0;z-index:1;background:#081726;}
-    #display-control form {padding:8px 12px;display:grid;gap:10px;width:min(230px,calc(100vw - 42px));}
+    #display-control form {padding:8px 12px;display:grid;gap:10px;}
     #display-control label {display:grid;gap:4px;}
     #display-control select,#display-control button {font:inherit;color:inherit;
       background:#163241;border:1px solid #527487;padding:6px;margin:0;}

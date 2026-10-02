@@ -69,6 +69,7 @@ The browser uses a WebGL 1 shader/buffer renderer without legacy immediate-mode 
 - FTGL texture-font glyph atlases replace unsupported bitmap glyph drawing
 - Original Eclipse buttons and gameplay remain C++
 - Save directories retain original layout under /persistent/.uplink; IDBFS restores before startup, flushes serialized writes after game save/retire and successful options writes
+- Header **Saves** controls export/import checksummed browser-profile backups; import requires the login screen and explicit matching-profile overwrite confirmation. See [backup format and validation](port/profile-backups-notes.md).
 - Original WAV effects use SDL_mixer; six original UN05 tracker modules rendered by bundled MikMod to complete OGG files for browser music. This is original music rendered offline, not browser-native UN05 decoding
 - Existing native TCP/IRC sources compile, but real external networking has not been demonstrated and is not a supported promise of this prototype
 

@@ -68,8 +68,30 @@ async function restoreFailure(options = {}) {
   await assert.rejects(m.uplinkFlushSaves());assert.equal(m.uplinkPersistence.pending,0);
   assert.equal(t.calls.filter(c=>!c.populate).length,0);assert(t.errors.length);assert(t.statuses.length);
 }
+async function transactionalChange() {
+  const t=setup(),m=t.m,events=[];
+  t.complete(0);await m.uplinkPersistenceReady;
+  const failed=m.uplinkPersistSaveChange(()=>events.push('change'),()=>events.push('rollback'));
+  const rejection=assert.rejects(failed,/quota/);
+  const later=m.uplinkFlushSaves();await drain();
+  assert.deepEqual(events,['change']);assert.equal(t.calls.length,2);
+  t.complete(1,Error('quota'));await rejection;await drain();
+  assert.deepEqual(events,['change','rollback']);assert.equal(t.calls.length,3);
+  t.complete(2);await later;assert.equal(m.uplinkPersistence.pending,0);
+  const mutationFailed=m.uplinkPersistSaveChange(()=>{events.push('partial');throw Error('write failure');},()=>events.push('recovered'));
+  await assert.rejects(mutationFailed,/write failure/);
+  assert.deepEqual(events.slice(-2),['partial','recovered']);assert.equal(t.calls.length,3);
+  const committed=m.uplinkPersistSaveChange(()=>events.push('commit'),()=>{throw Error('must not roll back');});
+  await drain();t.complete(3);await committed;
+  const unrecoverable=m.uplinkPersistSaveChange(()=>{throw Error('partial');},()=>{throw Error('rollback failure');});
+  await assert.rejects(unrecoverable,/Save recovery failed/);
+  assert.equal(m.uplinkPersistence.rollbackFailed,true);
+  await assert.rejects(m.uplinkFlushSaves(),/Reload before saving/);
+  assert.equal(t.calls.length,4,'failed rollback must block subsequent persistence');
+}
 (async()=>{
   await successAndRecovery();
+  await transactionalChange();
   await restoreFailure();await restoreFailure({failMount:true});await restoreFailure({failMkdir:true});
   console.log('PASS: restore gating, pending queue states, serialized writes, queued recovery, restore/mount/folder failures');
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -154,9 +154,12 @@ const {requestHandler} = require('./browser-smoke.cjs');
       });
       assert(scroll[0]>0 && scroll[1]>0);
       const box=await page.locator('#canvas').boundingBox();
-      await page.mouse.move(box.x+200*box.width/initial.width,box.y+200*box.height/initial.height);
+      // At 200%/fractional DPR, logical y=200 lies below this short viewport.
+      // Use a visible target so a stale motion cannot stand in for fresh input.
+      await page.mouse.move(box.x+150*box.width/initial.width,box.y+150*box.height/initial.height);
       await page.waitForTimeout(150);
-      assert((await state()).mouse.every(v => Math.abs(v-200)<4));
+      const scrolledPointer=(await state()).mouse;
+      assert(scrolledPointer.every(v => Math.abs(v-150)<4),`Scrolled logical mouse drift: ${scrolledPointer}`);
       await page.setViewportSize({width:1366,height:1000});
       // Changing DPR/zoom while alive must only change presentation, never the
       // logical projection, font density, backing size or pointer conversion.

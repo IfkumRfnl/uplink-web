@@ -274,8 +274,8 @@
     },
     {
       "path": "port/tests/browser-ui-scale.cjs",
-      "bytes": 13932,
-      "sha256": "f3f3b62925b2e49e6418d06770f0b07c9578b5e150a231b28b8650535486b9ac"
+      "bytes": 14188,
+      "sha256": "d4c80d4bc6101f85b953eaad9d223c4e3cf60fe48b7db51fae483f5a3959e4ec"
     },
     {
       "path": "port/tests/build-game-renderer-qa.sh",

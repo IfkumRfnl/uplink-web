@@ -124,7 +124,8 @@
             if (exists(target) || exists(temporary)) {
               if (!await confirmOverwrite(checkFilename(backup.filename))) return false;
             }
-            let previous, previousTemporary, previousTime = 0, touched = false;
+            let previous, previousTemporary, previousTime = 0;
+            let touched = false, promoted = false, removedTemporary = false;
             const stage = directory + '.profile-import-stage';
             await module.uplinkPersistSaveChange(() => {
               // Capture inside the persistence queue, after earlier saves finish.
@@ -135,17 +136,20 @@
               touched = true;
               fs.writeFile(stage, backup.bytes);
               fs.rename(stage, target);
+              promoted = true;
               // IDBFS compares mtimes, not contents. Same-millisecond repeated
               // overwrites must still produce a different persisted revision.
               const stamp = Math.max(Date.now(), previousTime + 1);
               fs.utime(target, stamp, stamp);
-              if (previousTemporary) fs.unlink(temporary);
+              if (previousTemporary) { fs.unlink(temporary); removedTemporary = true; }
             }, () => {
               if (!touched) return;
               if (exists(stage)) fs.unlink(stage);
-              if (previous) fs.writeFile(target, previous);
-              else if (exists(target)) fs.unlink(target);
-              if (previousTemporary) fs.writeFile(temporary, previousTemporary);
+              if (promoted) {
+                if (previous) fs.writeFile(target, previous);
+                else if (exists(target)) fs.unlink(target);
+              }
+              if (removedTemporary) fs.writeFile(temporary, previousTemporary);
             });
             committed = true;
             return true;

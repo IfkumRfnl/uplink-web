@@ -66,6 +66,17 @@ function environment() {
   t.m.failPersist=false;t.m.failRename=true;
   await assert.rejects(service.importProfile(file(newBackup)),/rename/);
   assert(!t.files.has(dir+'New.usr'));assert(!t.files.has(dir+'.profile-import-stage'));
+  t.m.failRename=false;
+  const write=t.m.FS.writeFile;
+  t.m.FS.writeFile=(path,bytes)=>{
+    if(path.endsWith('.profile-import-stage')){write(path,bytes.subarray(0,4));throw Error('partial staging write');}
+    throw Error('Untouched profiles must not be rewritten during staging recovery');
+  };
+  await assert.rejects(service.importProfile(file(backup)),/partial staging write/);
+  assert.deepEqual(t.files.get(dir+'Test_Agent-1.usr'),previous);
+  assert.deepEqual(t.files.get(dir+'Test_Agent-1.tmp'),save(4));
+  assert(!t.files.has(dir+'.profile-import-stage'));
+  t.m.FS.writeFile=write;
   t.m.failRename=false;t.m.canImport=false;
   await assert.rejects(service.importProfile(file(newBackup)),/login screen/);
   assert(!t.files.has(dir+'New.usr'));

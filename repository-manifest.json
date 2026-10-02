@@ -264,8 +264,8 @@
     },
     {
       "path": "port/tests/browser-profiles.cjs",
-      "bytes": 12525,
-      "sha256": "b8423fc9138d2c6d46750abe7c5fb343adc6b6b1b9a19518710efe9e23e93613"
+      "bytes": 13186,
+      "sha256": "4ad1ab6aef0ec547518fed1bec60aa93b2ac43bf3bb5a5302604c3985ee83741"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -389,8 +389,8 @@
     },
     {
       "path": "port/tests/test-profile-backups.cjs",
-      "bytes": 7228,
-      "sha256": "6b952b45a45075ba7ece4916a3278393b32071e37ef306c58c905c394f58b67c"
+      "bytes": 7822,
+      "sha256": "c4e17b29899ddea9fa20c01923ab291350f1c3b2097a3600c8aeff8a3fd17b39"
     },
     {
       "path": "port/tests/test-renderer-link.cjs",
@@ -5034,8 +5034,8 @@
     },
     {
       "path": "prototype/profile-backups.js",
-      "bytes": 8466,
-      "sha256": "529ad33ce031a502a10d5d0b4361ccf3b1a44ebf1a00b44e7d4018647afb4d83"
+      "bytes": 8635,
+      "sha256": "54d77dd89926bbf3fb3944f5c8bcac320d10dd06c6782c6759a0701394b05a86"
     },
     {
       "path": "prototype/profile-controls.js",

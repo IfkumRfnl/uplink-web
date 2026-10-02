@@ -217,7 +217,8 @@ const {requestHandler} = require('./browser-smoke.cjs');
       }
       assert.equal(await page.evaluate(() => GLctx.getError()),0);
       // Restart through the actual Display control; the saved UI size survives.
-      await page.locator('#display-control summary').click();
+      if(!await page.locator('#display-control').evaluate(el => el.open))
+        await page.locator('#display-control summary').click();
       await page.selectOption('#display-ui-size','100');
       await page.getByRole('button',{name:'Apply display'}).click();
       await page.waitForFunction(() => Module?._qaUiSnapshot && Module.uplinkPersistence?.ready &&

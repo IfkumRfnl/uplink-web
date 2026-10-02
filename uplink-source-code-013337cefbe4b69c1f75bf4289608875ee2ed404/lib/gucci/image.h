@@ -15,6 +15,11 @@
 class Image  
 {
 
+private:
+    // Pixel memory and browser texture ownership must never be shallow-copied.
+    // Copy construction is supported; assignment is deliberately unavailable.
+    Image &operator=(const Image &);
+
 protected:
 
 #ifdef __EMSCRIPTEN__

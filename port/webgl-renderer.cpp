@@ -609,3 +609,17 @@ void popAttrib() {
   lineWidth(s.width);
 }
 } // namespace UplinkDraw
+
+#ifdef UPLINK_RENDERER_QA
+// QA-only accounting of retained recovery pixels, not GPU allocation size.
+extern "C" EMSCRIPTEN_KEEPALIVE int qaRendererTextureCount() {
+  return UplinkDraw::textures.size();
+}
+extern "C" EMSCRIPTEN_KEEPALIVE int qaRendererRecoveryBytes() {
+  size_t bytes = 0;
+  for (std::map<GLuint, UplinkDraw::Texture>::const_iterator i =
+           UplinkDraw::textures.begin(); i != UplinkDraw::textures.end(); ++i)
+    bytes += i->second.pixels.size();
+  return bytes;
+}
+#endif

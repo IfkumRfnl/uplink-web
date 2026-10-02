@@ -8,6 +8,11 @@ const crypto = require("node:crypto");
 const { requestHandler } = require("./browser-smoke.cjs");
 const out = path.resolve(process.env.PERF_OUTPUT || "qa/performance/baseline");
 const bundle = path.resolve(process.env.PERF_BUNDLE || "qa/renderer");
+const timingOnly = !!process.env.PERF_TIMING_ONLY;
+assert(
+  !(timingOnly && process.env.PERF_ISOLATE_FINISH),
+  "Finish isolation needs GL instrumentation",
+);
 const duration = Number(process.env.PERF_SECONDS || 6),
   repeats = Number(process.env.PERF_REPEATS || 3);
 const configs = [
@@ -112,7 +117,7 @@ function stats(values) {
           system: await systemSession.send("SystemInfo.getInfo"),
           node: process.version,
           platform: process.platform,
-          config: { duration, repeats },
+          config: { duration, repeats, glInstrumentation: !timingOnly },
           bundle,
           bundleHashes: Object.fromEntries(
             ["game.js", "game.wasm", "game.data"].map((file) => [
@@ -210,7 +215,7 @@ function stats(values) {
         await page.evaluate(() => Module._qaPerformanceButton(3)),
         1,
       );
-      await page.evaluate(() => {
+      await page.evaluate((timingOnly) => {
         const gl = GLctx,
           debug = gl.getExtension("WEBGL_debug_renderer_info");
         window.qaGPU = {
@@ -256,14 +261,16 @@ function stats(values) {
                 .map((e) => ({ start: e.startTime, duration: e.duration })),
             );
         }).observe({ type: "longtask", buffered: false });
-        for (const name of [
-          "drawArrays",
-          "bufferData",
-          "texImage2D",
-          "createTexture",
-          "deleteTexture",
-          "finish",
-        ]) {
+        for (const name of timingOnly
+          ? []
+          : [
+              "drawArrays",
+              "bufferData",
+              "texImage2D",
+              "createTexture",
+              "deleteTexture",
+              "finish",
+            ]) {
           const original = gl[name].bind(gl);
           gl[name] = function (...args) {
             const s = qaSample,
@@ -298,7 +305,7 @@ function stats(values) {
             });
           }
         };
-      });
+      }, timingOnly);
       const session = await context.newCDPSession(page);
       for (const scene of ["desktop", "map", "memory"]) {
         if (scene === "map") {
@@ -345,11 +352,9 @@ function stats(values) {
         }
         await page.mouse.move(10, 10);
         await page.waitForTimeout(1500);
-        await page
-          .locator("#canvas")
-          .screenshot({
-            path: path.join(out, cfg.name + "-" + scene + ".png"),
-          });
+        await page.locator("#canvas").screenshot({
+          path: path.join(out, cfg.name + "-" + scene + ".png"),
+        });
         for (let repeat = 0; repeat < repeats; repeat++) {
           const variants = process.env.PERF_ISOLATE_FINISH
             ? ["normal", "skip-finish"]
@@ -413,9 +418,10 @@ function stats(values) {
               scene,
               repeat,
               variant,
+              glInstrumentation: !timingOnly,
               frameIntervals: stats(intervals),
               callback: stats(raw.frames.map((f) => f.duration)),
-              fps:
+              callbackHz:
                 n /
                 (process.env.PERF_AUTOSAVE && scene === "memory"
                   ? 65
@@ -483,6 +489,60 @@ function stats(values) {
           fs.writeFileSync(
             path.join(out, cfg.name + "-" + scene + "-trace.json"),
             JSON.stringify({ traceEvents: trace }),
+          );
+        }
+      }
+      if (process.env.PERF_MEMORY) {
+        const snapshots = [];
+        await page.evaluate(() => Module._qaPerformanceButton(3));
+        for (let cycle = 0; cycle < 10; cycle++) {
+          for (const [scene, open, close] of [
+            ["map", 0, 1],
+            ["memory", 2, 3],
+          ]) {
+            assert.equal(
+              await page.evaluate(
+                (id) => Module._qaPerformanceButton(id),
+                open,
+              ),
+              1,
+            );
+            await page.waitForTimeout(500);
+            if (scene === "map")
+              await page.evaluate(() => Module._qaFreezeMapLabels());
+            snapshots.push(
+              await page.evaluate(
+                ({ cycle, scene }) => ({
+                  cycle,
+                  scene,
+                  textures: Module._qaRendererTextureCount(),
+                  recoveryPixelBytes: Module._qaRendererRecoveryBytes(),
+                  liveGLTextures: GL.textures.filter(Boolean).length,
+                  handleSlots: GL.textures.length,
+                }),
+                { cycle, scene },
+              ),
+            );
+            assert.equal(
+              await page.evaluate(
+                (id) => Module._qaPerformanceButton(id),
+                close,
+              ),
+              1,
+            );
+          }
+        }
+        fs.writeFileSync(
+          path.join(out, cfg.name + "-texture-memory.json"),
+          JSON.stringify(snapshots, null, 2),
+        );
+        for (const scene of ["map", "memory"]) {
+          const last = snapshots.filter((s) => s.scene === scene).slice(-3);
+          assert.equal(
+            new Set(last.map((s) => s.textures + ":" + s.recoveryPixelBytes))
+              .size,
+            1,
+            "Retained texture count/pixels must stabilize for " + scene,
           );
         }
       }

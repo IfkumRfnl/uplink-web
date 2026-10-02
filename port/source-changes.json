@@ -17,7 +17,7 @@
   {
     "path": "lib/gucci/image.h",
     "original_sha256": "781233edcee03ed0adc294036aad6aadcf7ca04da42a2c488018c6fbbbde8cf0",
-    "modified_sha256": "2bdd5383fd81c12d20e97c6303d29ac1c187a633c0bf379b8f94183784b83298"
+    "modified_sha256": "862284781af90f0d5357e3e69d17c7f4b8defd9607677d50721f3cbfe0d3bb2b"
   },
   {
     "path": "lib/redshirt/redshirt.cpp",

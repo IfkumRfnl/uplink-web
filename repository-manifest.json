@@ -134,8 +134,8 @@
     },
     {
       "path": "port/check.sh",
-      "bytes": 1290,
-      "sha256": "45f7c97a4bc8e8ee92b431584601fef86bf0a2c759099845dc1c4d23cb3e7149"
+      "bytes": 1333,
+      "sha256": "4576ac4b81c660cd4ddec2762df3ae1766a08728062e1bec9a16e6e3bd8e1b14"
     },
     {
       "path": "port/compile-game.py",
@@ -178,6 +178,11 @@
       "sha256": "74ee74cac6523a86b239077b5acc144b68674bf937e1123d4e2eb006ede9129c"
     },
     {
+      "path": "port/performance-notes.md",
+      "bytes": 7881,
+      "sha256": "b358a72fca0d399c89df15dcbb36bcc78ae6a4cb30420a3a40b72c30fa36fa63"
+    },
+    {
       "path": "port/persistence-notes.md",
       "bytes": 4873,
       "sha256": "2dd49e6eb4aaeed246a0db0d91b1118befa8a1611ddb0119c96e29ff5b2304be"
@@ -199,8 +204,8 @@
     },
     {
       "path": "port/renderer-notes.md",
-      "bytes": 4678,
-      "sha256": "610895d0a37c9b24ff82c134a3d2d97d711ad9295be6d1f6981397cdbf481804"
+      "bytes": 5122,
+      "sha256": "5b20cec23074a22468f0cd9f9bebee427f728e40116dd4b48e92aa9224760bef"
     },
     {
       "path": "port/runtime-review.md",
@@ -210,7 +215,7 @@
     {
       "path": "port/source-changes.json",
       "bytes": 22723,
-      "sha256": "65e84912d287e07ac99bc49dc3beedd522dfc98291080ca9a47f8e1b98564890"
+      "sha256": "19defc6b9b47bdee4302e56904a34807d71a0ab6af0ce1b2baca9c56b89cfec9"
     },
     {
       "path": "port/tests/README-image.md",
@@ -244,8 +249,8 @@
     },
     {
       "path": "port/tests/browser-performance.cjs",
-      "bytes": 17129,
-      "sha256": "d23bfef92f1a009c70da3a5087ec5002b36aa569f0db170dc8498112abc6477d"
+      "bytes": 19297,
+      "sha256": "73a3610bd6f332f31cdf4880ac076aeb8bd499e081c561354897902dc663ff09"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -269,8 +274,8 @@
     },
     {
       "path": "port/tests/build-game-renderer-qa.sh",
-      "bytes": 1279,
-      "sha256": "63fd937b48d408fa815f120354e498f5ea36ec2ff8ec6959f42be6f768af14e3"
+      "bytes": 1300,
+      "sha256": "48f61fc8ddb7123606dd05ba50ee4d181eed3e9591e8335e5f2b6eb2e460c6ee"
     },
     {
       "path": "port/tests/build-renderer-probe.sh",
@@ -333,6 +338,11 @@
       "sha256": "72245ce097918f5d2029d2a658d3673d4351c939340bf0e4e49994b205d67799"
     },
     {
+      "path": "port/tests/test-image-ownership.py",
+      "bytes": 1370,
+      "sha256": "2b473a333ed4e425b5e2d0e2be5d9231c80b6eb62d527e8b897c6149537d1d8d"
+    },
+    {
       "path": "port/tests/test-mainloop.py",
       "bytes": 4605,
       "sha256": "f9a4427430302c0388060061d990b37bb952b686718b6ed37a379de39615a9ee"
@@ -374,8 +384,8 @@
     },
     {
       "path": "port/webgl-renderer.cpp",
-      "bytes": 19028,
-      "sha256": "514c422aae8235dbb7d668b851be8e4f8ca8f7ba26843588bbfd7790628927a0"
+      "bytes": 19525,
+      "sha256": "6d1de8bbf75a909dc9fa802c1278f4dd9ab32fba97d8a8a2460d6b321131f771"
     },
     {
       "path": "prototype/ASSET_PREPARATION.md",
@@ -27114,8 +27124,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/image.h",
-      "bytes": 1483,
-      "sha256": "2bdd5383fd81c12d20e97c6303d29ac1c187a633c0bf379b8f94183784b83298"
+      "bytes": 1694,
+      "sha256": "862284781af90f0d5357e3e69d17c7f4b8defd9607677d50721f3cbfe0d3bb2b"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/lib/gucci/makefile",

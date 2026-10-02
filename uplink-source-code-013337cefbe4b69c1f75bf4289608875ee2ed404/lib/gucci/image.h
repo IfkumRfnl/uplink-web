@@ -15,7 +15,16 @@
 class Image  
 {
 
+private:
+    // Pixel memory and browser texture ownership must never be shallow-copied.
+    // Copy construction is supported; assignment is deliberately unavailable.
+    Image &operator=(const Image &);
+
 protected:
+
+#ifdef __EMSCRIPTEN__
+    unsigned int browserTexture;
+#endif
 
 	int width, height;
 	char alpha;
@@ -47,6 +56,11 @@ public:
 	void FlipAroundH ();
 	void Scale ( int newwidth, int newheight );
 	void ScaleToOpenGL ();							// Resizes to valid OGL sizes (powers of 2)
+
+#ifdef __EMSCRIPTEN__
+    // Binds an owned nearest-sampled texture and observes public pixel edits.
+    void BindBrowserTexture();
+#endif
 
 	void Draw ( int x, int y );
 	void DrawBlend ( int x, int y );

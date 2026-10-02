@@ -72,7 +72,7 @@ static FILE *OpenBrowserImageFallback ( const char *filename )
 // WebGL has no glDrawPixels. Keep the source bottom-up and map its last
 // scanline to the top of the game's top-left-origin orthographic viewport.
 static void DrawBrowserImage ( int x, int y, int width, int height,
-                               const unsigned char *pixels, bool blend )
+                               Image *image, bool blend )
 {
     if (width <= 0 || height <= 0) return;
     GLint activeTexture, binding, unpackAlignment, textureEnv;
@@ -91,16 +91,7 @@ static void DrawBrowserImage ( int x, int y, int width, int height,
     UplinkDraw::getIntegerv(GL_BLEND_SRC_ALPHA, &srcAlpha);
     UplinkDraw::getIntegerv(GL_BLEND_DST_ALPHA, &dstAlpha);
 
-    GLuint texture;
-    UplinkDraw::genTextures(1, &texture);
-    UplinkDraw::bindTexture(GL_TEXTURE_2D, texture);
-    UplinkDraw::pixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    UplinkDraw::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-                 GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    image->BindBrowserTexture();
     UplinkDraw::enable(GL_TEXTURE_2D);
     // REPLACE reproduces glDrawPixels without modifying the current GL color.
     UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -119,7 +110,6 @@ static void DrawBrowserImage ( int x, int y, int width, int height,
     UplinkDraw::end();
 
     UplinkDraw::bindTexture(GL_TEXTURE_2D, binding);
-    UplinkDraw::deleteTextures(1, &texture);
     UplinkDraw::pixelStorei(GL_UNPACK_ALIGNMENT, unpackAlignment);
     UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, textureEnv);
     if (!textureEnabled) UplinkDraw::disable(GL_TEXTURE_2D);
@@ -130,6 +120,30 @@ static void DrawBrowserImage ( int x, int y, int width, int height,
 }
 #endif
 
+#ifdef __EMSCRIPTEN__
+void Image::BindBrowserTexture()
+{
+    if (!browserTexture) {
+        UplinkDraw::genTextures(1, &browserTexture);
+        UplinkDraw::bindTexture(GL_TEXTURE_2D, browserTexture);
+        UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        UplinkDraw::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    } else {
+        UplinkDraw::bindTexture(GL_TEXTURE_2D, browserTexture);
+    }
+    GLint unpackAlignment;
+    UplinkDraw::getIntegerv(GL_UNPACK_ALIGNMENT, &unpackAlignment);
+    UplinkDraw::pixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    // The renderer compares against its recovery pixels, so public pixels and
+    // every Image mutator remain observable without a second CPU-side cache.
+    UplinkDraw::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
+                          GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    UplinkDraw::pixelStorei(GL_UNPACK_ALIGNMENT, unpackAlignment);
+}
+#endif
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -137,6 +151,9 @@ static void DrawBrowserImage ( int x, int y, int width, int height,
 Image::Image()
 {
 
+#ifdef __EMSCRIPTEN__
+    browserTexture = 0;
+#endif
 	pixels = NULL;
 	rgb_pixels = NULL;
 
@@ -145,6 +162,9 @@ Image::Image()
 Image::Image( const Image& img )
 {
 
+#ifdef __EMSCRIPTEN__
+    browserTexture = 0;
+#endif
 	width = img.width;
 	height = img.height;
 	alpha = img.alpha;
@@ -165,6 +185,9 @@ Image::Image( const Image& img )
 
 Image::~Image()
 {
+#ifdef __EMSCRIPTEN__
+    if (browserTexture) UplinkDraw::deleteTextures(1, &browserTexture);
+#endif
 
 	if ( pixels )
 		delete [] pixels;
@@ -494,7 +517,7 @@ void Image::Draw ( int x, int y )
 	if ( pixels ) {
 
 #ifdef __EMSCRIPTEN__
-        DrawBrowserImage(x, y, width, height, pixels, false);
+        DrawBrowserImage(x, y, width, height, this, false);
 #else
 		UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 		UplinkDraw::disable ( GL_BLEND );
@@ -535,7 +558,7 @@ void Image::DrawBlend ( int x, int y )
 	if ( pixels ) {
 
 #ifdef __EMSCRIPTEN__
-        DrawBrowserImage(x, y, width, height, pixels, true);
+        DrawBrowserImage(x, y, width, height, this, true);
 #else
 		UplinkDraw::pushAttrib ( GL_ALL_ATTRIB_BITS );
 

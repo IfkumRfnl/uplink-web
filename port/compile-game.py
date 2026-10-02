@@ -17,9 +17,13 @@ files += list((src/'contrib/tcp4u.331/src').glob('*.c'))
 flags=['-std=gnu++98','-fms-extensions','-O1','-w','-DUSE_SDL','-DUSE_FTGL','-DFULLGAME=1','-D_REENTRANT','-sUSE_SDL=1','-sUSE_FREETYPE=1']
 incs=[root/'port/include',src/'contrib',src/'uplink/src',root/'port/ftgl/include',root/'port/ftgl/include/ftgl',src/'contrib/tcp4u.331/Include',src/'contrib/irclib',src/'contrib/irclib/linux',src/'contrib/unrar']+[src/'lib'/v for v in ['eclipse','tosser','soundgarden','vanbakel','gucci','bungle','redshirt','mmgr']]
 flags+=['-I'+str(v) for v in incs]
+# Image's browser texture ownership changes its layout. Rebuild all consumers
+# when this shared header changes, just as for the renderer submission header.
+shared_headers=[src/'lib/gucci/uplink_draw.h',src/'lib/gucci/image.h']
+shared_header_time=max(p.stat().st_mtime for p in shared_headers)
 def compile(p):
  name=str(p.relative_to(src)).replace('/','__'); obj=out/(name+'.o'); log=out/(name+'.log')
- if os.environ.get('UPLINK_REBUILD') != '1' and obj.exists() and obj.stat().st_mtime>max(p.stat().st_mtime, (src/'lib/gucci/uplink_draw.h').stat().st_mtime): return (p,True,'cached')
+ if os.environ.get('UPLINK_REBUILD') != '1' and obj.exists() and obj.stat().st_mtime>max(p.stat().st_mtime, shared_header_time): return (p,True,'cached')
  unitflags=flags if p.suffix=='.cpp' else [v for v in flags if v not in ['-std=gnu++98','-fms-extensions']] + ['-std=gnu89','-DUNIX']
  compiler='em++' if p.suffix=='.cpp' else 'emcc'
  proc=subprocess.run([str(root/'toolchain/emsdk-main/upstream/emscripten'/compiler),*unitflags,'-c',str(p),'-o',str(obj)],capture_output=True,text=True)

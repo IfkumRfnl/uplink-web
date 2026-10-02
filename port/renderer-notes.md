@@ -35,3 +35,7 @@ Emscripten 6.0.10, Chromium 151 on Debian 13 with SwiftShader, matching viewport
 Expanded triangles increase vertex uploads: 66,112→104,384 / 81,952→128,744 / 85,200→134,344 bytes/frame respectively. Production JS shrank 594,637→420,539 bytes (gzip 138,742→107,392); Wasm grew 2,395,842→2,413,470 (gzip 761,267→768,029); 41,256,391 bytes of data were unchanged.
 
 All 16 original comparisons had identical stable pixels, including context recovery. Only changing HUD `[0,0,444,50)` and footer `[0,748,1024,768)` rectangles were excluded; full frames and unmasked difference counts are preserved by the comparison tool. Login, registration, gateway and password-login frames were wholly identical. Firefox/Safari/mobile, hardware GPUs, native compilation and complete campaign replay remain untested.
+
+## Image texture reuse
+
+Direct Image blits now own and reuse a texture. Unchanged pixels skip upload; comparing actual bytes retains public pixel edits and context recovery without a second CPU cache. Image destruction releases the resource, and copies use independent handles. See [measured performance and reproduction](performance-notes.md) for the resource-work improvement, mixed software-GPU pacing results and retained-memory tradeoff.

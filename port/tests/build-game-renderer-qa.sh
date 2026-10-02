@@ -21,4 +21,4 @@ elif [[ $LINK_SCRIPT != *"$QA_OUTPUT" ]]; then
   exit 1
 fi
 UPLINK_GAME_OUTPUT="$TARGET/qa/renderer/game.js" bash -c "$LINK_SCRIPT" \
-  "$TARGET/port/link-game.sh" "$TARGET/qa/renderer/fixture.o"
+  "$TARGET/port/link-game.sh" -DUPLINK_RENDERER_QA "$TARGET/qa/renderer/fixture.o"

@@ -1,10 +1,74 @@
 #include "uplink_draw.h"
+#include "image.h"
 #include <cassert>
+#include <cstdio>
 #include <cstdlib>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 using namespace UplinkDraw;
 static GLuint texture;
+static Image *image;
+static void sample(int x, int y, int r, int g, int b, int tolerance = 2);
+static int uploads() { return EM_ASM_INT({ return Module.probeUploads; }); }
+static void imageCacheProbe() {
+  static bool tested = false;
+  // The persistent mutated image must also survive both context restorations.
+  if (!tested) {
+    tested = true;
+    image->Draw(0, 96);
+    finish();
+    sample(0, 96, 0, 0, 255);
+    const int before = uploads();
+    image->Draw(4, 96);
+    image->DrawBlend(8, 96);
+    finish();
+    assert(uploads() == before);
+    // Public in-place edits and an independent copy must have distinct pixels.
+    image->pixels[8] = 255;
+    image->pixels[9] = image->pixels[10] = 0;
+    image->Draw(12, 96);
+    finish();
+    sample(12, 96, 255, 0, 0);
+    assert(uploads() == before + 1);
+    const int deleted = EM_ASM_INT({ return Module.probeDeletes; });
+    {
+      Image copy(*image);
+      copy.pixels[8] = 0; copy.pixels[9] = 255;
+      copy.Draw(16, 96);
+      image->Draw(20, 96);
+      finish();
+      sample(16, 96, 0, 255, 0);
+      sample(20, 96, 255, 0, 0);
+    }
+    assert(EM_ASM_INT({ return Module.probeDeletes; }) == deleted + 1);
+    image->FlipAroundH();
+    image->Scale(16, 16);
+    image->SetAlpha(0.5);
+    image->DrawBlend(24, 96);
+    finish();
+    sample(24, 96, 128, 0, 0, 3);
+    image->SetAlpha(1);
+    image->Draw(44, 96);
+    finish();
+    sample(44, 96, 255, 0, 0);
+    image->CreateErrorBitmap();
+    image->Draw(64, 96);
+    finish();
+    sample(64, 96, 255, 255, 255);
+    // Reload replaces the old pixels and dimensions on the same texture handle.
+    image->LoadTIF((char *)"/probe");
+    image->SetAlphaBorder(0, 1, 0, 0);
+    image->DrawBlend(8, 120);
+    finish();
+    sample(8, 121, 0, 0, 0);
+  }
+  const int before = uploads();
+  image->Draw(0, 120);
+  image->DrawBlend(4, 120);
+  finish();
+  sample(0, 120, 0, 0, 255);
+  assert(uploads() <= before + 1);
+}
 static void quad(int x, int y, int w, int h) {
   begin(GL_QUADS);
   vertex2i(x, y);
@@ -13,7 +77,7 @@ static void quad(int x, int y, int w, int h) {
   vertex2i(x + w, y);
   end();
 }
-static void sample(int x, int y, int r, int g, int b, int tolerance = 2) {
+static void sample(int x, int y, int r, int g, int b, int tolerance) {
   unsigned char p[4];
   glReadPixels(x, 128 - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, p);
   assert(abs(p[0] - r) <= tolerance && abs(p[1] - g) <= tolerance &&
@@ -92,6 +156,7 @@ static void render() {
   sample(2, 60, 255, 0, 255);
   sample(10, 60, 0, 0, 0);
   sample(100, 10, 50, 100, 25);
+  imageCacheProbe();
   EM_ASM(
       { Module.rendererProbeFrames = (Module.rendererProbeFrames || 0) + 1; });
 }
@@ -108,6 +173,22 @@ int main() {
   emscripten_webgl_make_context_current(context);
   emscripten_set_canvas_element_size("#canvas", 128, 128);
   glViewport(0, 0, 128, 128);
+  EM_ASM({
+    Module.probeUploads = 0;
+    Module.probeDeletes = 0;
+    const upload = GLctx.texImage2D.bind(GLctx);
+    GLctx.texImage2D = (...args) => { ++Module.probeUploads; return upload(...args); };
+    const remove = GLctx.deleteTexture.bind(GLctx);
+    GLctx.deleteTexture = (...args) => { ++Module.probeDeletes; return remove(...args); };
+  });
+  const unsigned char fixture[] = {2,0,0,0,2,0,0,0,
+      255,0,0,255, 0,255,0,255, 0,0,255,255, 255,255,255,255};
+  FILE *file = fopen("/probe.rgba", "wb");
+  assert(file);
+  fwrite(fixture, 1, sizeof(fixture), file);
+  fclose(file);
+  image = new Image;
+  image->LoadTIF((char *)"/probe");
   GLint textureLimit;
   getIntegerv(GL_MAX_TEXTURE_SIZE, &textureLimit);
   assert(textureLimit > 0);

@@ -264,8 +264,8 @@
     },
     {
       "path": "port/tests/browser-profiles.cjs",
-      "bytes": 13186,
-      "sha256": "4ad1ab6aef0ec547518fed1bec60aa93b2ac43bf3bb5a5302604c3985ee83741"
+      "bytes": 14448,
+      "sha256": "06aaf6673f86ef5bb5069a97c5fb49c1adabd637ecfad918901e89ec297d0d58"
     },
     {
       "path": "port/tests/browser-renderer-probe.cjs",
@@ -5039,8 +5039,8 @@
     },
     {
       "path": "prototype/profile-controls.js",
-      "bytes": 4010,
-      "sha256": "655c4c3ce39ca1d7d49d7b749c1658f190556481e4fc9fbf5844628351dd2539"
+      "bytes": 4403,
+      "sha256": "7246b35ed944f42c881304919fb0ad4b8ac373080e7d81a9b7b484ba54cfe7a6"
     },
     {
       "path": "prototype/render_music.py",

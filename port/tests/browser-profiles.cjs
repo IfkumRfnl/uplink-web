@@ -43,7 +43,31 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
     async function profileBytes() {
       return page.evaluate(path=>Array.from(Module.FS.readFile(path)),profilePath);
     }
-    await page.goto(origin);await ready();await page.waitForTimeout(18000);
+    await page.addInitScript(()=>{
+      if(sessionStorage.getItem('qa-restore-gated'))return;
+      sessionStorage.setItem('qa-restore-gated','1');
+      const original=indexedDB.open.bind(indexedDB);
+      indexedDB.open=function(...args){
+        const request=original(...args);
+        if(args[0]==='/persistent')Object.defineProperty(request,'onsuccess',{
+          configurable:true,
+          set(callback){request.addEventListener('success',event=>{
+            window.qaReleaseRestore=()=>{indexedDB.open=original;callback.call(request,event);};
+          },{once:true});}
+        });
+        return request;
+      };
+    });
+    await page.goto(origin,{waitUntil:'domcontentloaded'});
+    await page.waitForFunction(()=>typeof qaReleaseRestore==='function');
+    await page.locator('#profile-control summary').click();
+    assert.equal(await page.locator('#profile-import').isDisabled(),true);
+    await page.evaluate(()=>qaReleaseRestore());await ready();
+    await page.waitForFunction(()=>!document.querySelector('#profile-import').disabled);
+    assert.equal(await page.locator('#profile-control').evaluate(el=>el.open),true);
+    await page.locator('#profile-control summary').click();
+    console.log('PASS: Saves opened during startup enables automatically after storage restore');
+    await page.waitForTimeout(18000);
     console.log('Browser ready; creating profile');
     await click(320,380);await click(170,168);await click(320,390);await click(300,150);
     for(let i=0;i<12;i++)await page.keyboard.press('Backspace');

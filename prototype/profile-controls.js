@@ -69,5 +69,13 @@
     });
   };
   input.addEventListener('cancel', () => { input.value = ''; message.textContent = 'Import cancelled.'; });
+  // The shell loads before game.js creates its restore promise. Once all page
+  // scripts have loaded, subscribe even if Saves is already open.
+  window.addEventListener('load', () => {
+    window.Module?.uplinkPersistenceReady?.then(refresh, () => {
+      refresh();
+      message.textContent = 'Save storage unavailable. Reload after enabling browser storage.';
+    });
+  }, {once:true});
   refresh();
 })();

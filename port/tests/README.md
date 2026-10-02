@@ -20,12 +20,19 @@ Neither suite proves real browser IndexedDB reload persistence, rendering, audio
 
 ## Additional runtime-risk regression checks
 
+- `test-game-autosave.py`: compiles the actual Game constructor, NewGame, Load, Save and Update methods with clock/module doubles in native and browser modes. Poisoned placement storage catches missing initialization; checks retain the strict `> 60` boundary, repeat interval, schedule on new/load reuse, pause/resume and fresh construction after a failed load. Menu/onboarding time still counts toward the wall-clock minute. This isolated check does not run App::LoadGame or browser storage.
 - `test-options-save.py`: compiles the actual Options::Save body in native and browser modes against test doubles, checking that browser flushing happens after file close and encryption, and never after a failed open.
 - `test-audio.js`: extracts the actual four EM_JS music functions, testing autoplay rejection/gesture retry, SDL context resume, volume limits, media errors, release on replacement/stop, and stale promise/event isolation with audio doubles. No real decoder or audible output is exercised.
 - `test-browser-smoke.cjs`: tests the diagnostic runner's launch/page/close failure cleanup and malformed/traversal request rejection using doubles. It does not create sockets or launch Chromium.
 - Main-loop checks also cover a ten-minute tick gap: overdue one-shot timers fire once, with original callback order, without being replayed on the next frame. This does not establish real hidden-tab timing or game-world progression.
 
 The browser smoke runner closes the private server even when Chromium launch fails, rejects uncaught page errors, and exits nonzero on failure. A zero exit only means the limited diagnostic capture completed; no login, gameplay, audio, or storage assertions are implied.
+
+## Autosave timing
+
+The constructor initialization was informed by [arisada/uplink-source-code commit 307c4e56](https://gitlab.com/arisada/uplink-source-code/-/commit/307c4e56ce9c8e3dab71bb5167ecc79ad73943f3), inspected as a diff only. No comparison source was executed, and the repository's existing rights restrictions remain in force. This fixes an uninitialized read, without establishing a general stutter improvement.
+
+`Init_Game` and the failed-load replacement in `App::LoadGame` construct a fresh Game and start its timer at the current wall clock. `Game::NewGame` and successful `Game::Load` reuse the timer, which is not serialized. `App::Update` only calls Game::Update while running; pause, logout and game-over leave the timer in place. On resume, or after menu/onboarding time exceeds the interval, the first running update may save immediately. Each autosave sets the timer to the current wall clock and missed intervals are not replayed. The existing strict `time(NULL) > lastsave + 60` policy is unchanged.
 
 ## New runtime regressions
 

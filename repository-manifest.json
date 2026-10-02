@@ -134,8 +134,8 @@
     },
     {
       "path": "port/check.sh",
-      "bytes": 1333,
-      "sha256": "4576ac4b81c660cd4ddec2762df3ae1766a08728062e1bec9a16e6e3bd8e1b14"
+      "bytes": 1374,
+      "sha256": "5f90fa6d3b5b9e1b12d319fc169f4edc0e0009981723a20239de734c527754df"
     },
     {
       "path": "port/compile-game.py",
@@ -214,8 +214,8 @@
     },
     {
       "path": "port/source-changes.json",
-      "bytes": 22723,
-      "sha256": "19defc6b9b47bdee4302e56904a34807d71a0ab6af0ce1b2baca9c56b89cfec9"
+      "bytes": 23073,
+      "sha256": "bdfb962b85f0424961e61a1b2b4feeedcaee40052606672ad2c4e9cf049ccffe"
     },
     {
       "path": "port/tests/README-image.md",
@@ -224,8 +224,8 @@
     },
     {
       "path": "port/tests/README.md",
-      "bytes": 6261,
-      "sha256": "9a212ba305948cfcc9ace0d7afc7dd76dbd18c440ffafc474347d226b31aab67"
+      "bytes": 7780,
+      "sha256": "d7f5173cb6f45c47a74bc3117f0a98398474dd979743b6a29993ae177e9bed3f"
     },
     {
       "path": "port/tests/browser-display.cjs",
@@ -331,6 +331,11 @@
       "path": "port/tests/test-font-raster.py",
       "bytes": 6670,
       "sha256": "e9f34261f86ff4da20d03c770c60da2f19a2dc01a7a5b332acbe9abc7174288b"
+    },
+    {
+      "path": "port/tests/test-game-autosave.py",
+      "bytes": 6740,
+      "sha256": "0614ee1ee0250c8442b6a3d624b5553d4c825b25978666247c3ccb5ef251e37f"
     },
     {
       "path": "port/tests/test-game-renderer-qa.py",
@@ -28839,8 +28844,8 @@
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/game/game.cpp",
-      "bytes": 13129,
-      "sha256": "4cbe70db53e1d067391cd7a309b3139c6ec66ed188af7bdf6a4bba68e23f095b"
+      "bytes": 13157,
+      "sha256": "f068a57519f20493ac55d2a31d2ce25cc74eaf6e37b7ce9d9990af8fc24e8711"
     },
     {
       "path": "uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/uplink/src/game/game.h",

@@ -60,6 +60,12 @@
     "modified_sha256": "15c1db113c23fbf89c8494d31592b7033508f231e0efab63dfffcd242051f190"
   },
   {
+    "path": "uplink/src/game/game.cpp",
+    "original_sha256": "4cbe70db53e1d067391cd7a309b3139c6ec66ed188af7bdf6a4bba68e23f095b",
+    "modified_sha256": "f068a57519f20493ac55d2a31d2ce25cc74eaf6e37b7ce9d9990af8fc24e8711",
+    "reference_url": "https://gitlab.com/arisada/uplink-source-code/-/commit/307c4e56ce9c8e3dab71bb5167ecc79ad73943f3"
+  },
+  {
     "path": "uplink/src/game/scriptlibrary.cpp",
     "original_sha256": "ccbd94c34fcbcb8cb3291174f9ce191a990d0c4407453f1f79b7e468747aea2f",
     "modified_sha256": "e876bf08ef3b3f5c52d0b435e43bb00f3e47542d304b3662519c4f47f38f3a29"

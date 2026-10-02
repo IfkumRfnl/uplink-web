@@ -43,6 +43,7 @@ Game::Game ()
 	world   = NULL;
 
 	gamespeed = GAMESPEED_PAUSED;
+	lastsave = time ( NULL );
 	gob = NULL;
 
 	loadedSavefileVer = NULL;

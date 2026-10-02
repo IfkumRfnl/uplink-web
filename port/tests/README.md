@@ -46,3 +46,15 @@ After staging with `python3 port/prepare-pages.py`, `npm run test:pages` checks 
 ## Shader/buffer renderer
 
 See [renderer design, regression checks and comparison instructions](../renderer-notes.md). The pixel/context probe and original-game screen/save/audio test run in CI. Their QA bundles and evidence stay under ignored `qa/`; production output is not overwritten.
+
+## Logical UI/font size
+
+`npm run test:browser-ui-scale` builds the isolated renderer QA bundle, then
+checks the original game at 125/150/200% UI size, four backing resolutions and
+integer/fractional DPR. It exercises actual pointer/keyboard events through
+registration, gateway, desktop, map and Memory Banks, browser scrolling, two
+context restores and saved UI-size restart. Read-only QA helpers report logical
+screen/text metrics and existing button bounds. They are absent from production.
+Evidence goes to ignored `qa/ui-scale/`. The font density, inverse glyph size,
+logical metrics and native behavior checks run in `npm test`; fractional clip
+pixels run in the renderer probe. See [implementation/provenance and limits](../display-notes.md#logical-ui-size).

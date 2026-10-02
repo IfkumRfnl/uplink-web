@@ -109,6 +109,22 @@ char *GciInitGraphicsLibrary ( int graphics_flags )
 char *GciInitGraphics( const char *caption, int graphics_flags, int screenWidth, int screenHeight, 
 		      int screenDepth, int screenRefresh, int argc, char *argv[] )
 {
+#ifdef __EMSCRIPTEN__
+  // The browser shell supplies a physical backing size while command-line
+  // options describe the logical UI. Other GUCCI callers retain scale 1.
+  const int logicalWidth = screenWidth, logicalHeight = screenHeight;
+  screenWidth = EM_ASM_INT({
+    return typeof UplinkDisplay === 'undefined' ? $0 : UplinkDisplay.width;
+  }, logicalWidth);
+  screenHeight = EM_ASM_INT({
+    return typeof UplinkDisplay === 'undefined' ? $0 : UplinkDisplay.height;
+  }, logicalHeight);
+  if (logicalWidth < 640 || logicalHeight < 480 ||
+      screenWidth < logicalWidth || screenHeight < logicalHeight ||
+      screenWidth * logicalHeight != screenHeight * logicalWidth)
+    abort();
+  UplinkDraw::setUIScale((float)screenWidth / logicalWidth);
+#endif
   bool debugging = (graphics_flags & GCI_DEBUGSTART) != 0;
   bool runFullScreen = (graphics_flags & GCI_FULLSCREEN) != 0;
 
@@ -261,6 +277,15 @@ GUCCI_FUNC(Reshape);
 GUCCI_FUNC(Mouse);
 GUCCI_FUNC(Special);
 
+// SDL events use backing pixels; all GUCCI callbacks use logical UI pixels.
+static int GciLogicalCoordinate(int physical) {
+#ifdef __EMSCRIPTEN__
+  return (int)(physical / UplinkDraw::uiScale());
+#else
+  return physical;
+#endif
+}
+
 static bool gciRedisplay = true;
 static bool displayDamaged = false;
 static bool finished = false;
@@ -352,6 +377,7 @@ static void GciMainLoopIteration()
       case SDL_KEYDOWN: {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
+        x = GciLogicalCoordinate(x); y = GciLogicalCoordinate(y);
 
 	Uint16 unicode = event.key.keysym.unicode;
 	if ( ( event.key.keysym.mod & KMOD_NUM ) == KMOD_NUM ) {
@@ -387,10 +413,10 @@ static void GciMainLoopIteration()
 	if (gciMotionHandlerP) {
 	  /* I have a feeling we should only call this if 
 	     a mouse button is depressed */
-	  	  (*gciMotionHandlerP)(event.motion.x, event.motion.y);
+          (*gciMotionHandlerP)(GciLogicalCoordinate(event.motion.x), GciLogicalCoordinate(event.motion.y));
 	}
 	if (gciPassiveMotionHandlerP) {
-	  (*gciPassiveMotionHandlerP)(event.motion.x, event.motion.y);
+	  (*gciPassiveMotionHandlerP)(GciLogicalCoordinate(event.motion.x), GciLogicalCoordinate(event.motion.y));
 	}
 	break;
       case SDL_MOUSEBUTTONDOWN:
@@ -398,8 +424,8 @@ static void GciMainLoopIteration()
 	if (gciMouseHandlerP) {
 	  (*gciMouseHandlerP)(sdlButtonToGucci(event.button.button),
 			      sdlMouseEventToGucci(event.button.type),
-			      event.button.x,
-			      event.button.y);
+			      GciLogicalCoordinate(event.button.x),
+			      GciLogicalCoordinate(event.button.y));
 	}
 	break;
       case SDL_QUIT:
@@ -604,6 +630,11 @@ GciScreenMode *GciGetClosestScreenMode ( int width, int height ) {
 	GciScreenMode *newMode = new GciScreenMode;
 	newMode->w = width;
 	newMode->h = height;
+
+#ifdef __EMSCRIPTEN__
+	// The shell selects physical pixels separately; this request is logical.
+	return newMode;
+#endif
 
 	SDL_Rect **modes;
 	/* Get available fullscreen/hardware modes */

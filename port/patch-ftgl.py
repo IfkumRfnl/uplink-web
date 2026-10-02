@@ -12,6 +12,11 @@ s=('#define GL_GLEXT_PROTOTYPES\n' + p.read_text()).replace('FT_LOAD_NO_HINTING'
     glGetIntegerv(GL_BLEND_SRC_RGB, &oldSrcRGB); glGetIntegerv(GL_BLEND_DST_RGB, &oldDstRGB);
     glGetIntegerv(GL_BLEND_SRC_ALPHA, &oldSrcAlpha); glGetIntegerv(GL_BLEND_DST_ALPHA, &oldDstAlpha);''').replace('glPopAttrib();','''glBlendFuncSeparate(oldSrcRGB, oldDstRGB, oldSrcAlpha, oldDstAlpha);
     if (!oldBlend) glDisable(GL_BLEND);''')
+# Hinting can round a scaled glyph beyond the truncated face bounding box.
+# Reserve whole-pixel extents and padding between atlas rows, as between columns.
+s = '#include <cmath>\n' + s
+s = s.replace('static_cast<int>( charSize.Height())', 'static_cast<int>(std::ceil(charSize.Height())) + padding')
+s = s.replace('static_cast<int>( charSize.Width())', 'static_cast<int>(std::ceil(charSize.Width())) + padding')
 p.write_text(s)
 
 # WebGL ALPHA samples have zero RGB; legacy emulation modulates all four

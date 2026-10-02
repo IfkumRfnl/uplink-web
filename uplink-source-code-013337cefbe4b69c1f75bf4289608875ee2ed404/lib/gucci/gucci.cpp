@@ -167,7 +167,8 @@ void GciDrawText ( int x, int y, char *text, int STYLE )
         UplinkDraw::texEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         UplinkDraw::pushMatrix();
         UplinkDraw::translatef(x, y, 0);
-        UplinkDraw::scalef(1, -1, 1);
+        const float inverseScale = 1 / UplinkDraw::uiScale();
+        UplinkDraw::scalef(inverseScale, -inverseScale, 1);
         font->Render(text);
         UplinkDraw::popMatrix();
         UplinkDraw::bindTexture(GL_TEXTURE_2D, oldBinding);
@@ -194,7 +195,11 @@ int GciTextWidth ( char *text, int STYLE )
 #ifdef USE_FTGL
     float llx, lly, llz, urx, ury, urz;
     fonts[STYLE]->BBox( text, llx, lly, llz, urx, ury, urz );
+#ifdef __EMSCRIPTEN__
+    return (int)(fabs(llx - urx) / UplinkDraw::uiScale() + 0.5);
+#else
     return (int)(fabs(llx - urx) + 0.5);
+#endif
 #endif
   }
     else 
@@ -225,7 +230,13 @@ bool GciLoadTrueTypeFont ( int index, char *fontname, char *filename, int size )
         
         FTGLBitmapFont *font = new FTGLBitmapFont(filename);
         //FTGLPixmapFont *font = new FTGLPixmapFont(filename);
-        if (font->Error() != 0 || !font->FaceSize(pointSize, 96)) {
+        unsigned int dpi = 96;
+#ifdef __EMSCRIPTEN__
+        // Keep the original point-size rounding at 100%; rasterize at the
+        // target physical density instead of stretching a cached small glyph.
+        dpi = (unsigned int)(96 * UplinkDraw::uiScale() + 0.5f);
+#endif
+        if (font->Error() != 0 || !font->FaceSize(pointSize, dpi)) {
             delete font;
             return false;
         }

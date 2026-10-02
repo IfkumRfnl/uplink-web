@@ -73,6 +73,7 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
     console.log('PASS: Display backups opened during startup enables automatically after storage restore');
     for(let i=0;i<3;i++){
       await openControls();
+      assert((await page.locator('#display-control').boundingBox()).width<=256,'Open Display keeps its compact desktop width');
       assert.equal(await page.locator('#profile-import').isEnabled(),true);
       await page.locator('#display-control summary').click();
       assert.equal(await page.locator('#profile-control').isVisible(),false);
@@ -121,6 +122,7 @@ const {MAX_BACKUP_BYTES} = require('../../prototype/profile-backups.js');
     assert.equal(await page.evaluate(()=>Module._uplinkProfilesCanImport()),1);
     console.log('PASS: real game profile created and saved');
     await openControls();await page.locator('#profile-select').selectOption('ProfileQA.usr');
+    assert((await page.locator('#display-control').boundingBox()).width<=256);
     await page.locator('#profile-import').scrollIntoViewIfNeeded();
     await page.screenshot({path:'qa/profiles/display-backups.png',fullPage:true});
     const downloadEvent=page.waitForEvent('download');await page.locator('#profile-export').click();

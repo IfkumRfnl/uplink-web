@@ -12,6 +12,14 @@
 #include <map>
 #include <vector>
 namespace UplinkDraw {
+static GLfloat logicalScale = 1;
+GLfloat uiScale() { return logicalScale; }
+void setUIScale(GLfloat scale) {
+  if (!std::isfinite(scale) || scale < 1 || scale > 2.5f)
+    abort();
+  flush();
+  logicalScale = scale;
+}
 struct Matrix {
   float v[16];
   Matrix() { identity(); }
@@ -240,11 +248,26 @@ static GLuint nextTexture = 1, boundTexture = 0;
 static GLenum activeUnit = GL_TEXTURE0;
 static GLint unpack = 4, maximumTextureSize = 0;
 static bool lost = false, callbacksInstalled = false;
-static bool contextIsLost() { return lost; }
+static bool contextIsLost() {
+  // loseContext() takes effect before its event is delivered. In particular,
+  // a second loss just after restoration must not compile a shader in a lost
+  // context while our callback flag still says the context is alive.
+  return lost || emscripten_is_webgl_context_lost(
+                     emscripten_webgl_get_current_context());
+}
 static std::map<GLenum, bool> capabilities;
 static GLint sourceRGB = GL_ONE, destRGB = GL_ZERO, sourceAlpha = GL_ONE,
              destAlpha = GL_ZERO, clip[4] = {0, 0, 0, 0};
 static GLfloat strokeWidth = 1, background[4] = {0, 0, 0, 0};
+// Retain logical edges for attribute restoration, converting them only at the
+// WebGL boundary. Rounding edges rather than widths keeps adjacent clips joined.
+static void applyScissor() {
+  GLint x = (GLint)std::floor(clip[0] * logicalScale + .5f);
+  GLint y = (GLint)std::floor(clip[1] * logicalScale + .5f);
+  GLint right = (GLint)std::floor((clip[0] + clip[2]) * logicalScale + .5f);
+  GLint top = (GLint)std::floor((clip[1] + clip[3]) * logicalScale + .5f);
+  glScissor(x, y, right - x, top - y);
+}
 static bool unused(GLenum cap) {
   return cap == GL_ALPHA_TEST || cap == GL_FOG || cap == GL_LIGHTING ||
          cap == GL_LOGIC_OP || cap == GL_TEXTURE_1D || cap == GL_LINE_STIPPLE;
@@ -287,7 +310,7 @@ static EM_BOOL contextRestored(int, const void *, void *) {
   glBindTexture(GL_TEXTURE_2D, boundTexture ? textures[boundTexture].gpu : 0);
   glPixelStorei(GL_UNPACK_ALIGNMENT, unpack);
   glBlendFuncSeparate(sourceRGB, destRGB, sourceAlpha, destAlpha);
-  glScissor(clip[0], clip[1], clip[2], clip[3]);
+  applyScissor();
   glLineWidth(strokeWidth);
   glClearColor(background[0], background[1], background[2], background[3]);
   for (std::map<GLenum, bool>::iterator i = capabilities.begin();
@@ -456,7 +479,7 @@ void scissor(GLint x, GLint y, GLsizei w, GLsizei h) {
   clip[2] = w;
   clip[3] = h;
   if (!lost)
-    glScissor(x, y, w, h);
+    applyScissor();
 }
 void lineWidth(GLfloat width) {
   if (strokeWidth != width)

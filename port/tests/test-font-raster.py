@@ -26,6 +26,8 @@ with tempfile.TemporaryDirectory(prefix='uplink-font-raster-') as directory:
     assert 'FT_RENDER_MODE_MONO' in (source / 'FTBitmapGlyph.cpp').read_text()
     assert 'GL_TEXTURE_MIN_FILTER, GL_NEAREST' in font
     assert 'GL_TEXTURE_MAG_FILTER, GL_NEAREST' in font
+    assert 'std::ceil(charSize.Height())) + padding' in font
+    assert 'std::ceil(charSize.Width())) + padding' in font
     (build / 'FTTextureGlyph.h').write_text(r"""
 #pragma once
 #include <vector>

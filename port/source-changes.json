@@ -2,12 +2,12 @@
   {
     "path": "lib/gucci/gucci.cpp",
     "original_sha256": "723bb667945096e873aa4f43d206cee4be1a41bedd72b0fd094d80423014747c",
-    "modified_sha256": "9d8d895ce822fe78c280f9c587bff95968095f5120984467e70e325bede23dd4"
+    "modified_sha256": "b2b9cc4de6108a891b0bc8710a1e91b5cee18ca94f987088ffe8df4bacdb0c10"
   },
   {
     "path": "lib/gucci/gucci_sdl.cpp",
     "original_sha256": "e0a7bdd08b43fcf106ddb5ad252ec06d9df66cf14faa56e6f9425ff015799824",
-    "modified_sha256": "c13170e234d4e9d468938fb464b7d89e38a42ba080b4e0f42345ac0db5adc8f3"
+    "modified_sha256": "02f79d5ae55aee0dd93b9030f13e17f5511730a9a1b8ee6adc8948e316788d1e"
   },
   {
     "path": "lib/gucci/image.cpp",
@@ -448,6 +448,6 @@
   {
     "path": "lib/gucci/uplink_draw.h",
     "original_sha256": null,
-    "modified_sha256": "a776943ac0fd08a182b4ba9c66d79c8ca29574a78a735cafccbd3d5eb6c987b4"
+    "modified_sha256": "dc65357fa52068f67b321bdf8b167c0a021f9adb0cb6e9985d49d829a8af2247"
   }
 ]

@@ -15,7 +15,7 @@ The previous browser's solid rendering of stippled lines is retained. Unused nat
 ## Regression checks
 
 - `npm test`: compiled JS/Wasm contain direct WebGL draws and authored shaders, with no legacy bindings or warning text. Image and task-label checks retain their original behavior assertions.
-- `npm run test:browser-renderer-probe`: real pixel readback for sparse gradients, quads/triangles, transforms, clipping/state restoration, textures/blending and independent lines; the same assertions run after each of two forced context restorations.
+- `npm run test:browser-renderer-probe`: real pixel readback for sparse gradients, quads/triangles, transforms, clipping/state restoration, textures/blending and independent lines; the same assertions run after four forced context restorations. A second loss during a restoration event submits geometry before the loss event reaches the renderer, checking the actual WebGL status as well as its callback flag.
 - `npm run test:browser-renderer`: original game login/registration, gateway, desktop/map, Memory Banks, software/File Copier, mission details, all three tutorial screens, audio, context recovery and real profile save/password reload. A QA-only helper fixes random map-label placement. Its bundle and captures stay under ignored `qa/renderer/`; production outputs are untouched.
 
 CI runs these and the existing storage/lifecycle/display/Pages-subpath checks. Generated screenshots, results and logs are CI artifacts retained for three days, rather than checked-in output. The full-screen test captures evidence; it is not a completed tutorial/mission or campaign replay.

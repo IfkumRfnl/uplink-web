@@ -7,6 +7,10 @@
 #include <GL/gl.h>
 namespace UplinkDraw {
 #ifdef __EMSCRIPTEN__
+// One boot-time physical/logical ratio. Atlas pixels are drawn at 1:1 size;
+// Image quads and the UI projection continue using logical coordinates.
+void setUIScale(GLfloat scale);
+GLfloat uiScale();
 void begin(GLenum mode);
 void end();
 void vertex2i(GLint x, GLint y);

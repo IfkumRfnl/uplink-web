@@ -83,6 +83,13 @@ static void sample(int x, int y, int r, int g, int b, int tolerance) {
   assert(abs(p[0] - r) <= tolerance && abs(p[1] - g) <= tolerance &&
          abs(p[2] - b) <= tolerance);
 }
+// Submit while WebGL is already lost but before the context-loss event updates
+// the renderer flag. Called immediately after a restoration (program == 0).
+extern "C" EMSCRIPTEN_KEEPALIVE void qaProbeFlushLost() {
+  color3ub(255, 255, 255);
+  quad(0, 0, 1, 1);
+  flush();
+}
 static void render() {
   clearColor(0, 0, 0, 1);
   clear(GL_COLOR_BUFFER_BIT);
@@ -156,6 +163,26 @@ static void render() {
   sample(2, 60, 255, 0, 255);
   sample(10, 60, 0, 0, 0);
   sample(100, 10, 50, 100, 25);
+  // Logical scissor edges are converted once, including fractional scales and
+  // negative origins. Attribute restoration must never scale a box twice.
+  setUIScale(1.5f);
+  pushAttrib(GL_ALL_ATTRIB_BITS);
+  enable(GL_SCISSOR_TEST);
+  scissor(7, 40, 8, 8);
+  color3ub(255, 255, 255);
+  quad(0, 50, 40, 30);
+  finish();
+  sample(11, 60, 255, 255, 255);
+  sample(22, 60, 255, 255, 255);
+  sample(23, 60, 0, 0, 0);
+  pushAttrib(GL_ALL_ATTRIB_BITS);
+  scissor(-1, 40, 8, 8);
+  popAttrib();
+  GLint box[4];
+  glGetIntegerv(GL_SCISSOR_BOX, box);
+  assert(box[0] == 11 && box[1] == 60 && box[2] == 12 && box[3] == 12);
+  popAttrib();
+  setUIScale(1);
   imageCacheProbe();
   EM_ASM(
       { Module.rendererProbeFrames = (Module.rendererProbeFrames || 0) + 1; });

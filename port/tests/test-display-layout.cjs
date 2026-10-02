@@ -5,6 +5,20 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const source = fs.readFileSync(path.join(__dirname, '../../prototype/display.js'), 'utf8');
+const uiStart = source.indexOf('function logicalSize(');
+const uiEnd = source.indexOf('settings.uiSize = Math.min', uiStart);
+const ui = vm.runInNewContext('const uiSizes=[100,125,150,200];' + source.slice(uiStart,uiEnd) +
+  ';({logicalSize,supportedUiSizes})');
+for (const [w,h] of [[800,600],[1024,768],[1280,960],[1600,1200]]) {
+  for (const size of ui.supportedUiSizes(w,h)) {
+    const [lw,lh] = ui.logicalSize(w,h,size);
+    assert(lw >= 640 && lh >= 480 && lw * 3 === lh * 4);
+    assert(Math.abs(w/lw - size/100) < .01);
+    if (size === 100) assert.deepEqual([lw,lh],[w,h]);
+  }
+}
+assert.deepEqual(Array.from(ui.supportedUiSizes(800,600)),[100,125]);
+assert.deepEqual(Array.from(ui.supportedUiSizes(1024,768)),[100,125,150]);
 const start = source.indexOf('function presentationScale(');
 const end = source.indexOf('function layout()', start);
 assert(start > 0 && end > start);

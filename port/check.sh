@@ -14,6 +14,7 @@ node port/tests/test-audio.js
 node port/tests/test-browser-smoke.cjs
 python3 port/tests/test-game-renderer-qa.py
 python3 port/tests/test-font-raster.py
+python3 port/tests/test-ui-scale.py
 python3 port/tests/test-ui-texture.py
 python3 port/tests/test-image-ownership.py
 node port/tests/test-display-layout.cjs

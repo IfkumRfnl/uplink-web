@@ -41,6 +41,7 @@ jobs:
           npm run test:browser-storage
           npm run test:browser-lifecycle
           npm run test:browser-display
+          npm run test:browser-ui-scale
       - run: npm run prepare:pages
       - name: Test original game under the Pages subpath
         run: npm run test:pages

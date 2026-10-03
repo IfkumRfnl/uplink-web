@@ -1,94 +1,67 @@
-# Uplink private browser port workbench
+# Play Uplink in your browser
 
-Status: original C++ gameplay builds and runs in cloud Chromium. Registration, all three tutorial sections and the test mission, gesture audio and save/options reload have runtime evidence. See `port/CLOUD_RUNTIME_RESULTS.md` for exact checks and remaining gaps. This is a private experimental port, not a finished game.
+**[Play now →](https://ifkumrfnl.github.io/uplink-web/)**
 
-## Inputs and identity
+An experimental browser port of the original C++ Uplink game, with WebGL graphics, mouse and keyboard input, original sound effects and music, and local saves.
 
-- Original source: vb6mmorpg/uplink-source-code, commit 013337cefbe4b69c1f75bf4289608875ee2ed404
-- Game assets: user's Steam Uplink.zip, nine original .dat archives
-- Emscripten 6.0.10; no Rust/Zig gameplay rewrite
-- Original uplink/src/uplink.cpp remains byte-for-byte unchanged, including its existing authentication/integrity paths
-- Windows Steam authentication DLL is not runnable in a browser. This build uses the original non-Windows C++ platform path; it does not emulate a successful Steam authentication result
+## How to play
 
-## Local entry points
+1. Open the link in a desktop browser with WebAssembly and WebGL support. Allow the game bundle to download and wait for the original menu to appear.
+2. Create an agent through the original registration screens, or load an existing browser profile. Start with the in-game tutorial to learn the tools and missions.
+3. Click the game to enable browser audio. Use the original mouse and keyboard controls; right-clicks on the game canvas go to the game.
 
-- prototype/game.html: compiled original game, experimental
-- prototype/index.html: separate, explicitly labeled technical harness for original C++ graphics/input, WAV/music, and IndexedDB probe
-- port/BUILD_STATUS.md: precise successful checks and remaining gaps
+The game autosaves periodically and saves when you log out through its menu. Saves and options stay in this browser on this site's origin; they do not sync across devices. Use one active game tab and export backups before clearing browser data or moving browsers.
 
-Serve the `prototype` directory with a private local HTTP server. Open game.html for the original game or index.html for the isolated platform probe. Do not open through file://; Wasm asset fetching and IndexedDB require a normal origin. Do not publicly host these copyrighted assets/source.
+## Display and save backups
 
-## Reproduce from a fresh clone
+Open **Display** in the top-right corner:
 
-This repository includes the original source tree, all nine Steam `.dat` archives, prepared graphics/fonts/audio, authored port support, and tests. No separate Steam ZIP or source checkout is needed to build. Generated game bundles, SDK binaries, caches and native binary artifacts are excluded. Keep the pinned source directory name unchanged.
+- **UI size** enlarges in-game text and controls: 100%, 125%, 150%, or 200%, subject to the selected resolution.
+- **Sharp** keeps whole-pixel scaling; **Native** uses one device pixel per game pixel. Both allow scrolling when the game is larger than the window. **Fit window** shows the whole game and may reduce detail.
+- **Game resolution** offers 800×600, 1024×768, 1280×960, and 1600×1200. Resolution or UI-size changes restart the game: save your progress first. Scaling changes apply immediately. Fullscreen is available here too.
+- Under **Save backups**, select a profile and choose **Export backup** to download its last saved state. Unsaved progress is not included.
 
-On Linux, install Git, Python 3, GCC/G++, Node.js, and Emscripten **6.0.10** from the official emsdk repository:
+To restore or move a backup, reach the original login screen, open **Display → Save backups**, and choose **Import backup**. Keep the `.uplink-save` filename unchanged. Replacing a matching profile requires confirmation naming that profile; its password stays the same. On a new browser, complete the original first-time registration and log out once before importing. Use backups from your own known-good profiles. See [backup format and safeguards](port/profile-backups-notes.md).
 
-    mkdir -p toolchain
-    git clone https://github.com/emscripten-core/emsdk.git toolchain/emsdk-main
-    toolchain/emsdk-main/emsdk install 6.0.10
-    toolchain/emsdk-main/emsdk activate 6.0.10
-    source toolchain/emsdk-main/emsdk_env.sh
-    bash port/build-ftgl.sh
-    bash port/build-prototype.sh
-    bash port/link-game.sh
+## Known limitations
 
-The build may download Emscripten's SDL, SDL_mixer and FreeType ports on first use. Project source and content are included; external compiler/toolchain installation still requires network access.
+- This is an experimental port. Chromium has runtime coverage; broad gameplay, cross-browser and hardware-GPU fidelity checks remain incomplete.
+- Browser storage can be unavailable or cleared. Saves are local, so keep downloaded backups and allow saves/imports to finish before closing the tab.
+- Steam/native save compatibility has not been verified. Browser backups use this port's supported format.
+- Real TCP/IRC connections are unsupported in ordinary browsers; the game's simulated server connections work.
+- Stippled lines currently render as solid lines. Detailed rendering and test boundaries are in [renderer notes](port/renderer-notes.md) and [runtime results](port/CLOUD_RUNTIME_RESULTS.md).
 
-Then serve privately on your own machine:
+## Build locally
 
-    python3 -m http.server 8000 --bind 127.0.0.1 --directory prototype
+On Linux, install Git, Bash, Python 3, GCC/G++, and Node.js 20 or newer. Setup downloads official Emscripten **6.0.10**; the first build may also download its SDL, SDL_mixer and FreeType ports. Network access and several GB of free disk space are needed. Source and prepared game assets are included; generated game bundles are not committed.
 
-Open `http://127.0.0.1:8000/game.html` for the game or `/index.html` for the platform probe. Both have browser runtime evidence; comprehensive gameplay QA remains open. Do not expose this server publicly.
+```sh
+git clone https://github.com/IfkumRfnl/uplink-web.git
+cd uplink-web
+bash port/bootstrap.sh
+npm run build
+npm run serve
+```
 
-See `CLOUD_SETUP.md` for a compact cloud setup command and a browser QA checklist. `npm run bootstrap`, `npm run build`, and `npm test` are convenience entrypoints.
+Open **http://127.0.0.1:8000/game.html**. Serve over HTTP rather than opening `file://`. `/index.html` is a separate technical harness, not the game landing page.
 
-### Checks
+For checks after building:
 
-    npm test
+```sh
+npm test
+python3 port/verify-inventory.py
+npm ci --ignore-scripts
+npx playwright install chromium
+npm run test:browser-profiles
+npm run test:browser-ui-scale
+npm run prepare:pages
+npm run test:pages
+```
 
-The aggregate command runs main-loop, persistence-queue, options-save, audio-bridge, smoke-runner cleanup, and Image/Redshirt checks, then validates generated JavaScript and Wasm.
+The browser checks require an environment that can launch Chromium and its OS dependencies. `npm run build` and `npm test` do not require npm dependency installation. See [test coverage](port/tests/README.md), [display behavior](port/display-notes.md), and [Pages packaging](port/PAGES.md). Main deploys to GitHub Pages only after CI passes.
 
-Optional browser diagnostic requires Playwright 1.62.1 (`npm install --ignore-scripts`) and an environment that permits launching Chromium (`npx playwright install chromium`); run `npm run smoke:game`. This script captures logs/screenshots, not comprehensive gameplay assertions. Read `port/tests/README.md` and `README-image.md` for coverage boundaries. The updated cloud environment launches Chromium successfully. See the runtime report for original gameplay evidence and `npm run test:browser-harness` for separate browser integration assertions.
+## Rights and provenance
 
-### Asset preparation and provenance
+Uplink is an Introversion Software game. The source basis is `vb6mmorpg/uplink-source-code` at commit `013337cefbe4b69c1f75bf4289608875ee2ed404`; game content comes from the owner's Steam installation. Prepared asset provenance is recorded in [the asset manifest](prototype/assets/manifest.json) and [preparation notes](prototype/ASSET_PREPARATION.md).
 
-Prepared assets are committed so no conversion is needed for normal builds. To recreate extraction from the included archives, run:
-
-    python3 -m pip install -r requirements-assets.txt
-    python3 prototype/prepare_from_archives.py
-
-Full music conversion additionally requires GCC and ffmpeg; see `prototype/ASSET_PREPARATION.md`. Existing complete OGG derivatives are included. Original UN05 tracker files remain included and unmodified.
-
-## Browser adaptations
-
-The browser uses a WebGL 1 shader/buffer renderer without legacy immediate-mode emulation. See [renderer design and validation](port/renderer-notes.md).
-
-- Original GUCCI event iteration scheduled with Emscripten's browser main loop
-- TIFF originals converted to bottom-up RGBA at preparation time; original Image API preserves pixel/alpha/scaling logic and draws texture quads
-- FTGL texture-font glyph atlases replace unsupported bitmap glyph drawing
-- Original Eclipse buttons and gameplay remain C++
-- Save directories retain original layout under /persistent/.uplink; IDBFS restores before startup, flushes serialized writes after game save/retire and successful options writes
-- **Display → Save backups** exports/imports checksummed browser-profile backups; import requires the login screen and explicit matching-profile overwrite confirmation. See [backup format and validation](port/profile-backups-notes.md).
-- Original WAV effects use SDL_mixer; six original UN05 tracker modules rendered by bundled MikMod to complete OGG files for browser music. This is original music rendered offline, not browser-native UN05 decoding
-- Existing native TCP/IRC sources compile, but real external networking has not been demonstrated and is not a supported promise of this prototype
-
-## Remaining limits
-
-- Original registration, login and all three tutorial sections and the test mission pass in cloud Chromium; broad gameplay and Windows comparative fidelity QA remain open
-- Existing Steam save compatibility is not runtime tested
-- Stippled lines retain the previous browser solid rendering; see `port/renderer-notes.md`
-- Shader/buffer rendering, screen comparisons, DPR/resolution/input, context recovery and browser checks are documented in `port/renderer-notes.md`; hardware GPU and cross-browser comparative fidelity remain untested
-- No public hosting; this workbench is intended only for the private personal repository
-
-## Repository inventory
-
-`repository-manifest.json` records paths, byte lengths and SHA-256 values for the staged project files (excluding the manifest itself). Run `python3 port/verify-inventory.py` after restoring the backup or cloning to verify those inputs. Intentional source edits require an updated inventory.
-
-## Review changes
-
-With the optional original `source.zip` download restored, run `python port/create-change-bundle.py` to regenerate the ignored qa/provenance/uplink-browser.patch and the compact port/source-changes.json index against the exact downloaded source archive. This records every modified original source file and hashes; it is separate from authored build/support files. Asset preparation provenance is in prototype/assets/manifest.json and prototype/ASSET_PREPARATION.md.
-
-## GitHub Pages
-
-The owner requested GitHub Pages publication after cloud gameplay QA and Codex review. `.github/workflows/pages.yml` builds the pinned C++ toolchain, runs isolated and browser checks, and deploys the original game as the landing page only after tests pass. See [port/PAGES.md](port/PAGES.md) for packaging, verification and remaining limits. Original licences are unchanged.
+Public repository visibility and a playable browser build do not grant an open-source license or redistribution rights. No blanket MIT or other license is applied. Original copyrights, [developer-license terms](uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/docs/license.html), [EULA](uplink-source-code-013337cefbe4b69c1f75bf4289608875ee2ed404/tools/IntroversionEULA.txt), and third-party notices remain in force. See [rights and provenance](RIGHTS.md).
